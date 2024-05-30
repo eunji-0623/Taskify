@@ -1,14 +1,1 @@
-name: check_pull_request # action 이름
 
-on:
-  pull_request: # action을 발생시킬 이벤트
-    types: [opened, reopened, synchronize] # pr이 open, reopen, synchronize된 경우
-  workflow_dispatch: # action 탭에서 이 워크플로우를 수동으로 실행할 수 있게 해 줌
-
-jobs:
-  lint: # job 이름
-    runs-on: ubuntu-latest # 실행 환경
-    steps: # pr이 (재)오픈, 업데이트 되었을 때 실행할 명령어
-			- uses: actions/checkout@v3
-      - run: npm install # package 설치
-      - run: npm run lint # lint 실행

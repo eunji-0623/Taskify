@@ -1,5 +1,7 @@
 import styles from './Search.module.scss';
 
+/* 대시보드 검색을 위한 input */
+
 function Search() {
   return (
     <div className={styles.container}>

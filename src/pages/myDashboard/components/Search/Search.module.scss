@@ -1,7 +1,7 @@
 @use '/src/styles/global.scss' as colors;
 
 .container {
-  width: 1024px;
+  width: 966px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -19,5 +19,21 @@
 
   &:focus {
     outline: none;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 448px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 228px;
+  }
+
+  .searchInput {
+    width: 178px;
   }
 }

@@ -1,0 +1,23 @@
+@use '/src/styles/global.scss' as colors;
+
+.table {
+  width: 966px;
+}
+
+.head {
+  color: colors.$gray_9FA6B2;
+
+  tr {
+    height: 25px;
+  }
+}
+
+.body {
+  tr {
+    height: 60px;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+}

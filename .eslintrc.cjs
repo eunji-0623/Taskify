@@ -20,6 +20,7 @@ module.exports = {
         '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
         'linebreak-style': 0,
         'react/react-in-jsx-scope': 'off',
+        'react/jsx-props-no-spreading': 'off',
       },
     },
   ],

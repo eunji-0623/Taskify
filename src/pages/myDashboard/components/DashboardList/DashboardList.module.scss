@@ -1,0 +1,18 @@
+.container {
+  width: 1024px;
+}
+
+.dashboardList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 70px 70px;
+  gap: 13px;
+}
+
+.pagination {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 13px;
+}

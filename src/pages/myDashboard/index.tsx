@@ -1,3 +1,4 @@
+import DashboardList from './components/DashboardList/DashboardList';
 import styles from './index.module.scss';
 
 /*  나의 대시보드 페이지
@@ -10,7 +11,7 @@ function MyDashboard() {
       <div>
         <div>header</div>
         <div>
-          <div>dashboard list</div>
+          <DashboardList />
           <div>invited dashboard</div>
         </div>
       </div>

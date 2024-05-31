@@ -1,0 +1,121 @@
+::placeholder {
+  color: $gray_9FA6B2;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LogoImage {
+  display: flex;
+  width: 200px;
+  height: 279px;
+  padding: 0px 0px 3.947px 1.14px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 30.071px;
+  flex-shrink: 0;
+}
+
+.HelloText {
+  color: $black_333236;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.emailContainer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 38px;
+
+  .emailInputSection {
+    display: flex;
+    width: 520px;
+    height: 50px;
+    padding: 15px 16px;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 8px;
+    border: 1px solid $violet_5534DA;
+    background: $white_FFFFFF;
+  }
+}
+
+.nameContainer {
+  margin-top: 16px;
+}
+
+.passwordContainer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.passwordInputContainer {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .passwordInputSection {
+    display: flex;
+    width: 520px;
+    height: 50px;
+    padding: 12px 16px;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 8px;
+    border: 1px solid $gray_D9D9D9;
+    background: $white_FFFFFF;
+  }
+
+  .toggleButton {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+}
+
+.inputText {
+  color: $black_333236;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.signUpButton {
+  margin-top: 20px;
+}
+
+.loginTextContainer {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 24px;
+
+  .loginText {
+    color: $black_333236;
+    text-align: center;
+  }
+  .loginLink {
+    color: $violet_5534DA;
+    text-decoration-line: underline;
+  }
+}

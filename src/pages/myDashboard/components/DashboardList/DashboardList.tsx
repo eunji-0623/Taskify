@@ -1,7 +1,7 @@
 import styles from './DashboardList.module.scss';
 
 /*  대시보드 목록을 보여주는 컴포넌트입니다.
-    - 대시보드 목록을 보여주는 ul 부분과  
+    - 대시보드 목록을 보여주는 ul 부분과
     - 다음 목록을 불러오기 위한 부분으로 나뉩니다  */
 
 function DashboardList() {

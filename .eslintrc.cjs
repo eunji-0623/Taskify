@@ -17,8 +17,9 @@ module.exports = {
       },
       rules: {
         // 추가적인 규칙 설정
-        '@typescript-eslint/comma-dangle': ['error', 'never'],
+        '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
         'linebreak-style': 0,
+        'react/react-in-jsx-scope': 'off',
       },
     },
   ],

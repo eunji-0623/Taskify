@@ -9,16 +9,19 @@ module.exports = {
         'plugin:jsx-a11y/recommended',
         'airbnb', // Airbnb 스타일 가이드 사용
         'airbnb/hooks',
-        'airbnb-typescript',
+        'airbnb-typescript'
       ],
       plugins: ['@typescript-eslint'],
       parserOptions: {
-        project: './tsconfig.json',
+        project: './tsconfig.json'
       },
       rules: {
         // 추가적인 규칙 설정
         '@typescript-eslint/comma-dangle': ['error', 'never'],
-      },
-    },
-  ],
+        'linebreak-style': 0,
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-props-no-spreading': 'off'
+      }
+    }
+  ]
 };

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
+import styles from './ModalContainer.module.scss';
 
-export default function ModalContainer({ isOpen, setIsOpen, children }) {
+function ModalContainer({ isOpen, setIsOpen, children }) {
   const modalRef = useRef(null);
 
   // 모달 영역 밖 클릭 시 닫기
@@ -19,9 +20,12 @@ export default function ModalContainer({ isOpen, setIsOpen, children }) {
   }, [isOpen, setIsOpen, modalRef]);
 
   return (
-    // 테스트 확인 후 style 삭제 하기
-    <div style={{ width: '200px' }} ref={modalRef}>
-      {children}
+    <div className={styles.container}>
+      <div className={styles.content} ref={modalRef}>
+        {children}
+      </div>
     </div>
   );
 }
+
+export default ModalContainer;

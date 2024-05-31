@@ -9,12 +9,10 @@ function App() {
   // 모달 테스트 나중에 삭제하기
   return (
     <div>
-      <button onClick={open}>테스트 버튼</button>
+      <button onClick={open}>모달 테스트 버튼</button>
       <Modal>
         <p>비밀번호가 일치하지 않습니다.</p>
-        <div>
-          <button onClick={close}>확인</button>
-        </div>
+        <button onClick={close}>확인</button>
       </Modal>
     </div>
   );

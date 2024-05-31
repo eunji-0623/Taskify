@@ -1,9 +1,12 @@
 import ModalContainer from '../ModalContainer/ModalContainer';
+import styles from './AlertModal.module.scss';
 
-export default function AlertModal({ isOpen, setIsOpen, children }) {
+function AlertModal({ isOpen, setIsOpen, children }) {
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
-      <div>{children}</div>
+      <div className={styles.modalTest}>{children}</div>
     </ModalContainer>
   );
 }
+
+export default AlertModal;

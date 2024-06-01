@@ -15,12 +15,12 @@ function useAlertModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   // 모달 열기
-  const open = useCallback(() => {
+  const openAlert = useCallback(() => {
     setIsOpen(true);
   }, []);
 
   // 모달 닫기
-  const close = useCallback(() => {
+  const closeAlert = useCallback(() => {
     setIsOpen(false);
   }, []);
 
@@ -32,8 +32,8 @@ function useAlertModal() {
         </AlertModal>
       )
       : () => null,
-    open,
-    close,
+    openAlert,
+    closeAlert,
     isOpen,
   };
 }

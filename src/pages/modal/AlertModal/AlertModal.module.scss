@@ -1,4 +1,5 @@
 @import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
 
 .container {
   position: relative;
@@ -8,10 +9,9 @@
   display: flex;
   justify-content: center;
   padding: 6.75rem 0 7.56rem;
-
   background-color: $white_FFFFFF;
 
-  @media screen and (max-width: 768px) {
+  @include mobile{
     width: 20.4375rem;
     height: 13.75rem;
     padding: 5rem 0 7.5rem;

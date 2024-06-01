@@ -1,5 +1,4 @@
 import ModalContainer from '../ModalContainer/ModalContainer';
-import styles from './AlertModal.module.scss';
 
 /* 
   대시보드 생성하는 모달입니다.

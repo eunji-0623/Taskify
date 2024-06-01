@@ -26,7 +26,7 @@ function Main() {
           <h1 className={styles.title_h}>
             새로운 일정 관리
           </h1>
-          <span className={styles.title_span}>Taskify</span>
+          <span className={styles.titleSpan}>Taskify</span>
         </div>
         <p className={styles.title_p}>서비스의 메인 설명 들어갑니다.</p>
         <Link to="/login">

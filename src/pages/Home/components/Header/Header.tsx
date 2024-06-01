@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '/public/icon/logo_large_dark.svg';
+import LogoMobile from '/public/icon/logo_small_dark.svg';
 import styles from './Header.module.scss';
 
 /*
@@ -10,7 +11,8 @@ function HomeHeader() {
   return (
     <header className={styles.HomeHeader}>
       <Link to="/" className={styles.LogoConatiner}>
-        <img src={Logo} alt="로고이미지" width={120} height={40} />
+        <img src={Logo} alt="로고 이미지" width={120} height={40} className={styles.Logo} />
+        <img src={LogoMobile} alt="로고 이미지" width={24} height={28} className={styles.LogoMobile} />
       </Link>
       <div className={styles.signContainer}>
         <Link to="/login">

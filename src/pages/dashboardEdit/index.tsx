@@ -6,20 +6,24 @@ import styles from './index.module.scss';
 /*  대시보드 수정 페이지
     - 전체적인 레이아웃  */
 
-function MyDashboard() {
+function DashboardEdit() {
   return (
     <div className={styles.container}>
       <div>sidemenu</div>
       <div>
         <div>header</div>
         <div>
+          <div>돌아가기</div>
           <NameEdit />
           <MemberEdit />
           <EmailEdit />
+          <button className={styles.removeButton} type="button">
+            대시보드 삭제하기
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default MyDashboard;
+export default DashboardEdit;

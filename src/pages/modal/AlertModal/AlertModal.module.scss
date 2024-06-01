@@ -9,7 +9,7 @@
   justify-content: center;
   padding: 6.75rem 0 7.56rem;
 
-  background-color: white;
+  background-color: $white_FFFFFF;
 
   @media screen and (max-width: 768px) {
     width: 20.4375rem;
@@ -19,12 +19,13 @@
 
   p {
     // 폰트 추가
-    color: #333236;
+    color: $black_333236;
     font-size: 1.125rem;
     font-weight: 500;
   }
 
   button {
+    // 폰트 추가
     position: absolute;
     right: 1.75rem;
     bottom: 1.75rem;
@@ -32,18 +33,14 @@
     height: 3rem;
     border-radius: 0.5rem;
     border: 0;
-    background: #5534da;
-
-    // 변경
-    color: #fff;
+    background: $violet_5534DA;
+    color: $white_FFFFFF;
     font-size: 1rem;
     font-weight: 500;
 
     &:hover {
       cursor: pointer;
-
-      // 변경
-      background-color: #3810db;
+      background-color: $purple_760DDE;
     }
 
     @media screen and (max-width: 768px) {

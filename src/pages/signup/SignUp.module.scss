@@ -9,18 +9,32 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 170px 0;
+
+  @media screen and (max-width: 1024px) {
+    padding: 290px 110px;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 105px 12px;
+  }
 }
 
 .LogoImage {
   display: flex;
   width: 200px;
   height: 279px;
-  padding: 0px 0px 3.947px 1.14px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  gap: 30.071px;
   flex-shrink: 0;
+
+  @media screen and (max-width: 768px) {
+    width: 140px;
+    height: 195px;
+  }
 }
 
 .HelloText {

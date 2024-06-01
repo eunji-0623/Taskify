@@ -1,3 +1,4 @@
+import EmailEdit from './MemberEdit/EmailEdit';
 import MemberEdit from './MemberEdit/MemberEdit';
 import NameEdit from './NameEdit/NameEdit';
 import styles from './index.module.scss';
@@ -14,6 +15,7 @@ function MyDashboard() {
         <div>
           <NameEdit />
           <MemberEdit />
+          <EmailEdit />
         </div>
       </div>
     </div>

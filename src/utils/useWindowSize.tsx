@@ -4,13 +4,13 @@ const useWindowSize = () => {
   // windowSize는 화면의 가로, 세로 크기를 객체로 갖습니다.
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
   });
 
   const handleResize = () => {
     setWindowSize({
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
     });
   };
 

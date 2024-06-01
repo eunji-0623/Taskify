@@ -9,7 +9,7 @@ interface ColorDotProps {
 function ColorDot({ color }: ColorDotProps) {
   const colorCircleProps = {
     color,
-    diameter: 8
+    diameter: 8,
   };
 
   return <ColorCircle {...colorCircleProps} />;

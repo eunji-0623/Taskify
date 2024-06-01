@@ -9,11 +9,11 @@ function Info() {
       <div className={styles.present}>
         <h3 className={styles.name}>현재 대시보드 이름</h3>
         <div className={styles.chips}>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
+          <button type="button">1</button>
+          <button type="button">2</button>
+          <button type="button">3</button>
+          <button type="button">4</button>
+          <button type="button">5</button>
         </div>
       </div>
       <div className={styles.new}>
@@ -22,7 +22,9 @@ function Info() {
           className={styles.newNameInput}
           placeholder="변경할 이름을 입력해주세요"
         />
-        <button className={styles.submitButton}>변경</button>
+        <button className={styles.submitButton} type="button">
+          변경
+        </button>
       </div>
     </div>
   );

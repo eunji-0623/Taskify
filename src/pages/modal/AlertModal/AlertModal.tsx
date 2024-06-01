@@ -1,10 +1,18 @@
+import { ReactNode } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import styles from './AlertModal.module.scss';
 
-function AlertModal({ isOpen, setIsOpen, children }) {
+interface ModalProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  children: ReactNode;
+}
+
+/** */
+function AlertModal({ isOpen, setIsOpen, children }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
-      <div className={styles.modalTest}>{children}</div>
+      <div className={styles.container}>{children}</div>
     </ModalContainer>
   );
 }

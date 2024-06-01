@@ -1,12 +1,19 @@
 import React from 'react';
-import useModal from './utils/useAlertModal';
+import useAlertModal from './hooks/useAlertModal';
 
 function App() {
-  const { Modal, open, close } = useModal();
-
   // return <>프로젝트 초기설정</>;
 
-  // 모달 테스트 나중에 삭제하기
+  // 테스트 삭제하기
+  const { Modal, open, close } = useAlertModal();
+  // const test = 1;
+
+  // function testFunction() {
+  //   if (test === 1) {
+  //     open();
+  //   }
+  // }
+
   return (
     <div>
       <button onClick={open}>모달 테스트 버튼</button>

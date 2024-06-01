@@ -1,3 +1,4 @@
+import NameEdit from './NameEdit/NameEdit';
 import styles from './index.module.scss';
 
 /*  대시보드 수정 페이지
@@ -9,7 +10,9 @@ function MyDashboard() {
       <div>sidemenu</div>
       <div>
         <div>header</div>
-        <div>contents</div>
+        <div>
+          <NameEdit />
+        </div>
       </div>
     </div>
   );

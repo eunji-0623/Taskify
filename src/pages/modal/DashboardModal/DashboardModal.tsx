@@ -12,6 +12,14 @@
 //   setIsOpen: (isOpen: boolean) => void;
 // }
 
+// const colors = [
+//   {
+//     id: 1,
+//     image: '주소',
+//     text: '색 이름',
+//   }
+// ]
+
 // function DashboardModal({ isOpen, setIsOpen }: ModalProps) {
 //   // 모달 닫기
 //   const close = useCallback(() => {

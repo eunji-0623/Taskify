@@ -11,7 +11,7 @@
 //   const [isOpen, setIsOpen] = useState(false);
 
 //   // 모달 열기
-//   const open = useCallback(() => {
+//   const openDashboard = useCallback(() => {
 //     setIsOpen(true);
 //   }, []);
 
@@ -19,7 +19,7 @@
 //     DashboardModal: isOpen
 //       ? () => <DashboardModal isOpen={isOpen} setIsOpen={setIsOpen} />
 //       : () => null,
-//     open,
+//     openDashboard,
 //     isOpen,
 //   };
 // }

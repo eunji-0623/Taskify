@@ -1,7 +1,7 @@
 import TableBody from './TableBody';
 import TableHeader from './TableHeader';
 import styles from './Table.module.scss';
-import TableMobile from './TableMobile';
+// import TableMobile from './TableMobile';
 
 function Table() {
   return (

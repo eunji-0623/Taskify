@@ -1,0 +1,40 @@
+// 장치별 사이즈 정의
+$size-mobile: 767px;
+$size-tablet: 768px;
+$size-tablet-max: 1023px;
+$size-desktop: 1024px;
+
+// [모바일]가로 767px 이하일 때
+@mixin mobile {
+  @media (max-width: $size-mobile) {
+    @content;
+  }
+}
+
+// [태블릿]가로 768px 이상, 1023px이하
+@mixin tablet {
+  @media (min-width: $size-tablet) and (max-width: $size-tablet-max) {
+    @content;
+  }
+}
+
+// [데스크탑]가로 1024px 이상
+@mixin desktop {
+  @media (min-width: $size-desktop) {
+    @content;
+  }
+}
+
+// 사용 예시
+// @include mobile{
+//   /*브라우저 사이즈767px이하일때*/
+//     background: black;
+//   }
+//   @include tablet{
+//   /*브라우저 사이즈1023px이하일때*/
+//     background: white;
+//   }
+//   @include desktop{
+//   /*브라우저 사이즈1024px이상일때*/
+//     background: gray;
+//   }

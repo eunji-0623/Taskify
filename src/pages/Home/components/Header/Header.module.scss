@@ -1,6 +1,6 @@
 @import "../../../../styles/global.scss";
 
-.Home_Header {
+.HomeHeader {
   
   height: 70px;
   position: sticky;
@@ -14,14 +14,14 @@
   z-index: 1;
 }
 
-.sign__container {
+.signContainer {
   display: flex;
   align-items: center;
   gap: 36px;
 }
 
-.Header_login,
-.Header_signup {
+.HeaderLogin,
+.HeaderSignup {
   color: var(--white-white_FFFFFF, #fff);
   font-family: Pretendard;
   font-size: 16px;

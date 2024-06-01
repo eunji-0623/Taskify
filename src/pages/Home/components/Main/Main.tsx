@@ -1,28 +1,28 @@
 import { Link } from 'react-router-dom';
 import styles from './Main.module.scss';
-import titleImage from '../../../../../public/img/desktop.png';
+import titleImage from '/public/img/desktop.png';
 import Card from '../Card/Card';
-import DashBoard from '../../../../../public/img/DashBoardSetting.png';
-import Invite from '../../../../../public/img/Invite.png';
-import Members from '../../../../../public/img/Members.png';
-import Point1 from '../../../../../public/img/Point1.png';
-import Point2 from '../../../../../public/img/Point2.png';
+import DashBoard from '/public/img/DashBoardSetting.png';
+import Invite from '/public/img/Invite.png';
+import Members from '/public/img/Members.png';
+import Point1 from '/public/img/Point1.png';
+import Point2 from '/public/img/Point2.png';
 /*
 랜더링 페이지의 Main 부분을 담당합니다.
 */
 
 function Main() {
   return (
-    <main className={styles.Home__Main}>
-      <div className={styles.Main__title}>
-        <div className={styles.Image__Container}>
+    <main className={styles.HomeMain}>
+      <div className={styles.MainTitle}>
+        <div className={styles.ImageContainer}>
           <img
             src={titleImage}
             alt="타이틀이미지"
             className={styles.titleImage}
           />
         </div>
-        <div className={styles.title_Texts}>
+        <div className={styles.titleTexts}>
           <h1 className={styles.title_h}>
             새로운 일정 관리
           </h1>
@@ -30,11 +30,11 @@ function Main() {
         </div>
         <p className={styles.title_p}>서비스의 메인 설명 들어갑니다.</p>
         <Link to="/login">
-          <button className={styles.Main_LoginBtn} type="button">로그인하기</button>
+          <button className={styles.MainLoginBtn} type="button">로그인하기</button>
         </Link>
       </div>
-      <section className={styles.Main_Point1}>
-        <span className={styles.Point1_text}>Point1</span>
+      <section className={styles.MainPoint1}>
+        <span className={styles.Point1Text}>Point1</span>
         <h2 className={styles.Point1_h2}>
           일의 우선순위를
           <br />
@@ -43,11 +43,11 @@ function Main() {
         <img
           src={Point1}
           alt="일 우선순위 관리 소개 이미지"
-          className={styles.Point1_img}
+          className={styles.Point1Img}
         />
       </section>
-      <section className={styles.Main_Point2}>
-        <span className={styles.Point2_text}>Point2</span>
+      <section className={styles.MainPoint2}>
+        <span className={styles.Point2Text}>Point2</span>
         <h2 className={styles.Point2_h2}>
           해야 할 일을
           <br />
@@ -56,10 +56,10 @@ function Main() {
         <img
           src={Point2}
           alt="일 등록 소개 이미지"
-          className={styles.Point2_img}
+          className={styles.Point2Img}
         />
       </section>
-      <section className={styles.Main_PlusInfo}>
+      <section className={styles.MainPlusInfo}>
         <h2 className={styles.PlusInfo_h}>생산성을 높이는 다양한 설정⚡</h2>
         <div className={styles.InfoCards}>
           <Card

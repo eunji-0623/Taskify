@@ -1,11 +1,11 @@
-.Home__Main {
+.HomeMain {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.Main__title {
+.MainTitle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +13,7 @@
   margin-bottom: 184px;
 }
 
-.Image__Container {
+.ImageContainer {
   margin-top: 94px;
   position: relative;
   display: flex;
@@ -26,7 +26,7 @@
   height: 422px;
 }
 
-.title_Texts {
+.titleTexts {
   display: flex;
   gap:28px;
   align-items: center;
@@ -43,7 +43,7 @@
   line-height: 100px; /* 131.579% */
   letter-spacing: -2px;
 }
-.title_span {
+.titleSpan {
   color: var(--violet-violet_5534DA, #5534da);
   text-align: bottom;
   font-family: Montserrat;
@@ -64,7 +64,7 @@
   letter-spacing: -1px;
   margin-bottom: 66px;
 }
-.Main_LoginBtn {
+.MainLoginBtn {
   width: 280px;
   padding: 15px 0px 14px 0px;
   border-radius: 8px;
@@ -80,8 +80,8 @@
   cursor: pointer;
 }
 
-.Main_Point1,
-.Main_Point2 {
+.MainPoint1,
+.MainPoint2 {
   width: 1200px;
   height: 600px;
   flex-shrink: 0;
@@ -91,7 +91,7 @@
   position: relative;
 }
 
-.Point1_text {
+.Point1Text {
   position: absolute;
   left: 60px;
   top: 124px;
@@ -116,7 +116,7 @@
   line-height: 64px; /* 133.333% */
 }
 
-.Point1_img {
+.Point1Img {
   position: absolute;
   right: 0px;
   bottom: 0px;
@@ -127,7 +127,7 @@
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
 }
 
-.Point2_text {
+.Point2Text {
   position: absolute;
   left: 644px;
   top: 124px;
@@ -152,7 +152,7 @@
   line-height: 64px; /* 133.333% */
 }
 
-.Point2_img {
+.Point2Img {
   position: absolute;
   left: 108px;
   bottom: 0px;
@@ -163,7 +163,7 @@
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
 }
 
-.Main_PlusInfo {
+.MainPlusInfo {
   width: 1200px;
   height: 454px;
   margin-bottom: 160px;

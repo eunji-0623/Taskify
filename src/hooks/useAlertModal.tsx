@@ -1,12 +1,16 @@
 import { useCallback, useState, ReactNode } from 'react';
-import Modal from '../pages/modal/AlertModal/AlertModal';
+import AlertModal from '../pages/modal/AlertModal/AlertModal';
+
+/* 
+  모달의 렌더링 여부가 결정되는 state 생략을 위한 hook입니다.
+  Modal, open, close 가 리턴되어 사용할 수 있습니다.
+  const { Modal, open, close } = useAlertModal();
+*/
 
 interface ModalProps {
   children: ReactNode;
 }
 
-/** 추가
- */
 function useAlertModal() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,9 +27,9 @@ function useAlertModal() {
   return {
     Modal: isOpen
       ? ({ children }: ModalProps) => (
-          <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+          <AlertModal isOpen={isOpen} setIsOpen={setIsOpen}>
             {children}
-          </Modal>
+          </AlertModal>
         )
       : () => null,
     open,

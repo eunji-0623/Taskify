@@ -1,4 +1,3 @@
-import React from 'react';
 import useAlertModal from './hooks/useAlertModal';
 
 function App() {
@@ -11,7 +10,7 @@ function App() {
   // function testFunction() {
   //   if (test === 1) {
   //     open();
-  //   }
+  //   }=
   // }
 
   return (

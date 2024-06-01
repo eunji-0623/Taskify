@@ -6,18 +6,26 @@
 
 .head {
   color: colors.$gray_9FA6B2;
-
-  tr {
-    height: 25px;
-  }
+  height: 30px;
 }
 
 .body {
-  tr {
-    height: 60px;
-  }
+  height: 60px;
+  border-bottom: 1px solid colors.$gray_EEEEEE;
 
   td {
     vertical-align: middle;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .table {
+    width: 448px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .table {
+    width: 228px;
   }
 }

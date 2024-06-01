@@ -8,7 +8,7 @@ interface CircleProps {
 // 색상코드는 가능하면 #이 붙는 RGB로, 지름은 숫자만 쓰면 px단위로 지정됩니다.
 // 내부요소는 필수가 아니며, 있을 시 중앙정렬됩니다.
 function ColorCircle({ color, diameter, children }: CircleProps) {
-  const circleStyle = {
+  const circleStyle: React.CSSProperties = {
     backgroundColor: color,
     width: `${diameter}px`,
     height: `${diameter}px`,
@@ -18,7 +18,7 @@ function ColorCircle({ color, diameter, children }: CircleProps) {
     justifyContent: 'center',
     color: '#fff',
     textAlign: 'center',
-  } as React.CSSProperties;
+  };
 
   return <div style={circleStyle}>{children}</div>;
 }

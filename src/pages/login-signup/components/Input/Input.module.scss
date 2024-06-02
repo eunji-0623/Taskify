@@ -1,0 +1,71 @@
+// 공통 스타일
+::placeholder {
+  color: $gray_9FA6B2;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.inputText {
+  color: $black_333236;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+// InputEmail styles
+.emailInputSection {
+  display: flex;
+  width: 520px;
+  height: 50px;
+  padding: 15px 16px;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 8px;
+  border: 1px solid $violet_5534DA;
+  background: $white_FFFFFF;
+
+  @media screen and (max-width: 768px) {
+    width: 350px;
+  }
+}
+
+// InputName styles
+.nameContainer {
+  margin-top: 16px;
+}
+
+// InputPassword styles
+.passwordInputContainer {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .passwordInputSection {
+    display: flex;
+    width: 520px;
+    height: 50px;
+    padding: 12px 16px;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 8px;
+    border: 1px solid $gray_D9D9D9;
+    background: $white_FFFFFF;
+
+    @media screen and (max-width: 768px) {
+      width: 350px;
+    }
+  }
+
+  .toggleButton {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+}

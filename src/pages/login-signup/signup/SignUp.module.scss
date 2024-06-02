@@ -1,0 +1,41 @@
+.Layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 170px 0;
+
+  @media screen and (max-width: 1024px) {
+    padding: 290px 110px;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 105px 12px;
+  }
+}
+
+.emailContainer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 38px;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 50px;
+  }
+}
+
+.passwordContainer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.signUpButton {
+  margin-top: 20px;
+}

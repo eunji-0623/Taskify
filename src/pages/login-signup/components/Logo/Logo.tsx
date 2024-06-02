@@ -7,10 +7,10 @@ type HelloText = {
 
 function Logo({ Text }: HelloText) {
   return (
-    <>
+    <a href="/">
       <img src={LogoImage} className={styles.LogoImage} alt="LogoImage" />
       <span className={styles.HelloText}>{Text}</span>
-    </>
+    </a>
   );
 }
 

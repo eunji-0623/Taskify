@@ -9,6 +9,7 @@ type InputPasswordProps = {
   name: string;
   type: string;
   placeholder: string;
+  errorText: string;
 };
 
 function InputPassword({
@@ -16,7 +17,8 @@ function InputPassword({
   id,
   name,
   type,
-  placeholder
+  placeholder,
+  errorText
 }: InputPasswordProps) {
   const [toggleVisible, setToggleVisible] = useState(false);
 
@@ -46,6 +48,7 @@ function InputPassword({
           onClick={toggleButton}
         />
       </div>
+      <span className="errorText">{errorText}</span>
     </>
   );
 }

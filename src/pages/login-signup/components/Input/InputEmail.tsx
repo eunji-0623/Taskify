@@ -6,6 +6,7 @@ type InputEmailProps = {
   name: string;
   type: string;
   placeholder: string;
+  errorText: string;
 };
 
 function InputEmail({
@@ -13,7 +14,8 @@ function InputEmail({
   id,
   name,
   type,
-  placeholder
+  placeholder,
+  errorText
 }: InputEmailProps) {
   return (
     <>
@@ -25,6 +27,7 @@ function InputEmail({
         type={type}
         placeholder={placeholder}
       />
+      <span className="errorText">{errorText}</span>
     </>
   );
 }

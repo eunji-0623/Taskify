@@ -15,7 +15,8 @@ function Login() {
             id="signUp-email"
             name="signUp-email"
             type="email"
-            placeholder="이메일을 입력해 주세요"
+            placeholder="이메일을 입력해 주세요."
+            errorText="이메일 형식으로 작성해 주세요."
           />
         </div>
         <div className={styles.passwordContainer}>
@@ -24,7 +25,8 @@ function Login() {
             id="login-password"
             name="login-password"
             type="password"
-            placeholder="비밀번호를 입력해 주세요"
+            placeholder="비밀번호를 입력해 주세요."
+            errorText="8자 이상 작성해 주세요."
           />
         </div>
         <button className={styles.loginButton}>로그인</button>

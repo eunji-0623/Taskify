@@ -2,6 +2,10 @@ import { useCallback } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import styles from './NewColumnModal.module.scss';
 
+/*
+  컬럼을 생성하는 모달입니다.
+*/
+
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;

@@ -3,6 +3,7 @@ import ModalContainer from '../ModalContainer/ModalContainer';
 import styles from './DeleteColumnModal.module.scss';
 
 /*
+  컬럼 삭제할 수 있는 모달입니다.
 */
 
 interface ModalProps {

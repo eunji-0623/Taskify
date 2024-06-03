@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import NewDashModal from '../pages/modal/NewDashModal/NewDashModal';
 
 /*
-  모달의 렌더링 여부가 결정되는 state 생략을 위한 Dashboard hook입니다.
+  모달의 렌더링 여부가 결정되는 state 생략을 위한 NewDashModal hook입니다.
   DashboardModal, open, close 가 리턴되어 사용할 수 있습니다.
   const { NewDashModal, openDash } = useNewDashModal();
 */

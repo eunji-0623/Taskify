@@ -2,11 +2,16 @@ import { useCallback } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import styles from './EditColumnModal.module.scss';
 
+/*
+  컬럼을 수정하는 모달입니다.
+*/
+
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
 
+// 컬럼 데이터가 필요
 function EditColumnModal({ isOpen, setIsOpen }: ModalProps) {
   // 모달 닫기
   const close = useCallback(() => {

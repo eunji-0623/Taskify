@@ -2,8 +2,6 @@ import styles from './Column.module.scss';
 import Card from '../ColumnCard/ColumnCard';
 import ColumnHeader from '../ColumnHeader/ColumnHeader';
 
-interface ColumnProps {}
-
 function Column() {
   const CardProps = {
     assignee: 'unknown',

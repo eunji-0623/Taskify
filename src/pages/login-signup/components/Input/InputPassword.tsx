@@ -18,7 +18,7 @@ function InputPassword({
   name,
   type,
   placeholder,
-  errorText
+  errorText,
 }: InputPasswordProps) {
   const [toggleVisible, setToggleVisible] = useState(false);
 

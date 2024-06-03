@@ -15,7 +15,7 @@ function InputEmail({
   name,
   type,
   placeholder,
-  errorText
+  errorText,
 }: InputEmailProps) {
   return (
     <>

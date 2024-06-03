@@ -13,7 +13,7 @@ function InputLayout({
   name,
   type,
   labelText,
-  placeholder
+  placeholder,
 }: InputLayoutProps) {
   return (
     <div className={styles.inputContainer}>

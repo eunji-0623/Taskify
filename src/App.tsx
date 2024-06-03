@@ -2,6 +2,8 @@ import './styles/global.scss';
 import './styles/reset.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
+import MyDashboard from './pages/myDashboard';
+import DashboardEdit from './pages/dashboardEdit';
 
 /*
 페이지 라우팅 분리,
@@ -12,6 +14,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
+        <Route path="/mydashboard" element={<MyDashboard />} />
+        <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
       </Routes>
     </BrowserRouter>
   );

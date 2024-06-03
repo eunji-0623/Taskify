@@ -21,7 +21,9 @@ function Checkbox({ Label }: CheckboxProps) {
         className={styles.checkbox}
         id="checkbox"
       />
-      <label className={styles.checkboxLabel}>{Label}</label>
+      <label htmlFor="checkbox" className={styles.checkboxLabel}>
+        {Label}
+      </label>
     </div>
   );
 }

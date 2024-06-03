@@ -33,7 +33,9 @@ function InputPassword({
 
   return (
     <>
-      <label className={styles.inputText}>{inputText}</label>
+      <label htmlFor={id} className={styles.inputText}>
+        {inputText}
+      </label>
       <div className={styles.passwordInputContainer}>
         <input
           className={styles.passwordInputSection}
@@ -42,11 +44,17 @@ function InputPassword({
           type={type}
           placeholder={placeholder}
         />
-        <img
-          src={toggleVisible ? EyeOff : EyeOn}
+        <button
           className={styles.toggleButton}
+          type="button"
           onClick={toggleButton}
-        />
+        >
+          <img
+            src={toggleVisible ? EyeOff : EyeOn}
+            className={styles.toggleButtonImage}
+            alt="눈 모양 버튼 이미지"
+          />
+        </button>
       </div>
       <span className="errorText">{errorText}</span>
     </>

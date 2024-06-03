@@ -11,20 +11,15 @@ function MyPage() {
       <div className={styles.navBar} />
       <div className={styles.sideBar} />
       <div className={styles.backContainer}>
-        <img className={styles.backIcon} src={ArrowIcon} />
+        <img
+          className={styles.backIcon}
+          src={ArrowIcon}
+          alt="왼쪽 바라보는 화살표 이미지"
+        />
         <span className={styles.backText}>돌아가기</span>
       </div>
-      <ProfileEdit
-        id="myPage-name"
-        name="myPage-name"
-        type="text"
-        placeholder="닉네임을 입력해 주세요."
-      />
-      <PasswordEdit
-        id="myPage-password-check"
-        name="myPage-password-check"
-        type="text"
-      />
+      <ProfileEdit />
+      <PasswordEdit />
     </div>
   );
 }

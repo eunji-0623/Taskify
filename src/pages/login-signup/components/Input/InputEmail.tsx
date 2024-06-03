@@ -19,7 +19,9 @@ function InputEmail({
 }: InputEmailProps) {
   return (
     <>
-      <label className={styles.inputText}>{inputText}</label>
+      <label htmlFor={id} className={styles.inputText}>
+        {inputText}
+      </label>
       <input
         className={styles.emailInputSection}
         id={id}

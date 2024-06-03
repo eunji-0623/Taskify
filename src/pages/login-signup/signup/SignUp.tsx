@@ -39,9 +39,15 @@ function SignUp() {
           <InputPasswordCheck />
         </div>
         <Checkbox Label="이용약관에 동의합니다." />
-        <button className={styles.signUpButton}>가입하기</button>
+        <button className={styles.signUpButton} type="submit">
+          가입하기
+        </button>
       </form>
-      <LInkText Text="이미 가입하셨나요?" Link="/login" LinkText="로그인하기" />
+      <LInkText
+        Text="이미 가입하셨나요?"
+        Link="/login"
+        TextForLink="로그인하기"
+      />
     </div>
   );
 }

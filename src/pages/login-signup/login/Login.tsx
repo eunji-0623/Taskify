@@ -31,12 +31,14 @@ function Login() {
             errorText="8자 이상 작성해 주세요."
           />
         </div>
-        <button className={styles.loginButton}>로그인</button>
+        <button className={styles.loginButton} type="submit">
+          로그인
+        </button>
       </form>
       <LInkText
         Text="회원이 아니신가요?"
         Link="/signup"
-        LinkText="회원가입하기"
+        TextForLink="회원가입하기"
       />
     </div>
   );

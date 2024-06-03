@@ -3,19 +3,17 @@ import styles from './LinkText.module.scss';
 type LinkTextProps = {
   Text: string;
   Link: string;
-  LinkText: string;
+  TextForLink: string;
 };
 
-function LinkText({ Text, Link, LinkText }: LinkTextProps) {
+function LinkText({ Text, Link, TextForLink }: LinkTextProps) {
   return (
-    <>
-      <div className={styles.LinkTextContainer}>
-        <span className={styles.LinkText}>{Text}</span>
-        <a href={Link} className={styles.Link}>
-          {LinkText}
-        </a>
-      </div>
-    </>
+    <div className={styles.LinkTextContainer}>
+      <span className={styles.LinkText}>{Text}</span>
+      <a href={Link} className={styles.Link}>
+        {TextForLink}
+      </a>
+    </div>
   );
 }
 

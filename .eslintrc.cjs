@@ -23,7 +23,8 @@ module.exports = {
         ],
         'linebreak-style': 0,
         'react/react-in-jsx-scope': 'off',
-        'react/jsx-props-no-spreading': 'off'
+        'react/jsx-props-no-spreacleading': 'off',
+        'import/no-absolute-path': 'off',
       }
     }
   ]

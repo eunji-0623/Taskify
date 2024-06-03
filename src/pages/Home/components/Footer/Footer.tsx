@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.scss';
-import MailImg from '/public/icon/email_icon.svg';
-import FacebookImg from '/public/icon/facebook_logo.svg';
+import MailImg from '/icon/email_icon.svg';
+import FacebookImg from '/icon/facebook_logo.svg';
 import InstagramImg from '/public/icon/instagram_logo.svg';
 
 /*
-랜더링 페이지의 Footer 입니다.
+랜딩 페이지의 Footer 입니다.
 */
 
 function Footer() {

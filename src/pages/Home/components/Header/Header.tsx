@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import Logo from '/public/icon/logo_large_dark.svg';
-import LogoMobile from '/public/icon/logo_small_dark.svg';
+import Logo from '/icon/logo_large_dark.svg';
+import LogoMobile from '/icon/logo_small_dark.svg';
 import styles from './Header.module.scss';
 
 /*
-랜더링 홈페이지의 header 컴포넌트입니다.
+랜딩 홈페이지의 header 컴포넌트입니다.
 */
 
 function HomeHeader() {

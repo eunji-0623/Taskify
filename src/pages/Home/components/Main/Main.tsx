@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import styles from './Main.module.scss';
-import titleImage from '/public/img/desktop.png';
+import titleImage from '/img/desktop.png';
 import Card from '../Card/Card';
-import DashBoard from '/public/img/DashBoardSetting.png';
-import Invite from '/public/img/Invite.png';
-import Members from '/public/img/Members.png';
-import Point1 from '/public/img/Point1.png';
-import Point2 from '/public/img/Point2.png';
+import DashBoard from '/img/DashBoardSetting.png';
+import Invite from '/img/Invite.png';
+import Members from '/img/Members.png';
+import Point1 from '/img/Point1.png';
+import Point2 from '/img/Point2.png';
 /*
-랜더링 페이지의 Main 부분을 담당합니다.
+랜딩 페이지의 Main 부분을 담당합니다.
 */
 
 function Main() {
@@ -28,7 +28,13 @@ function Main() {
           </h1>
           <span className={styles.titleSpan}>Taskify</span>
         </div>
-        <p className={styles.title_p}>서비스의 메인 설명 들어갑니다.</p>
+        <p className={styles.title_p}>
+          Taskify는 일의 우선순위를 정해
+          <br />
+          효율적으로 관리할 수 있도록 도와주는 일정 관리 서비스 입니다.
+          <br />
+          팀원들과 함께 지금 당장 Taskify를 이용해보세요!
+        </p>
         <Link to="/login">
           <button className={styles.MainLoginBtn} type="button">로그인하기</button>
         </Link>

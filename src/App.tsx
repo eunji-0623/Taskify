@@ -12,7 +12,7 @@ import ColumnCard from './pages/dashboard.{dashboardid}/components/ColumnCard/Co
 
 function App() {
   const cardProps = {
-    imageUrl: '/img/test_img.png',
+    imageUrl: '/img/test_img_card_with_people1.png',
     assignee: 'unknwon',
     title: '새로운 일정 관리 Taskify',
     dueDate: new Date('2022-03-13 15:23:37'),

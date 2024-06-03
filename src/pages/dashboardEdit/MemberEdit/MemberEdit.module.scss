@@ -1,0 +1,91 @@
+@use '/src/styles/global.scss' as colors;
+@use '/src/styles/media.scss' as *;
+
+.container {
+  width: 620px;
+  height: 404px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    color: colors.$black_333236;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.table_head {
+  color: colors.$gray_9FA6B2;
+  height: 30px;
+
+  td {
+    width: 50px;
+  }
+}
+
+.table_row {
+  width: 564px;
+  height: 54px;
+  border-bottom: 1px solid colors.$gray_EEEEEE;
+
+  td {
+    vertical-align: middle;
+  }
+
+  .profile {
+    width: 38px;
+    height: 38px;
+    margin-right: 12px;
+  }
+
+  .email {
+    width: 480px;
+  }
+
+  .removeButton {
+    width: 84px;
+    height: 32px;
+  }
+}
+
+@include tablet {
+  .container {
+    width: 544px;
+  }
+}
+
+@include mobile {
+  .container {
+    width: 284px;
+    padding: 20px;
+  }
+
+  .header {
+    .title {
+      font-size: 20px;
+    }
+    .pagination p {
+      font-size: 12px;
+    }
+  }
+
+  .table_row {
+    .email,
+    .name {
+      width: 200px;
+    }
+  }
+}

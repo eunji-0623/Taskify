@@ -1,0 +1,35 @@
+@use '/src/styles/global.scss' as colors;
+
+.container {
+  width: 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.title {
+  width: 966px;
+  font-size: 24px;
+  color: colors.$black_333236;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 504px;
+  }
+
+  .title {
+    width: 448px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 260px;
+  }
+
+  .title {
+    width: 228px;
+  }
+}

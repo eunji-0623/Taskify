@@ -1,0 +1,85 @@
+@use '/src/styles/global.scss' as colors;
+@use '/src/styles/media.scss' as *;
+
+.container {
+  position: relative;
+  width: 620px;
+  height: 256px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  border-radius: 8px;
+  background-color: colors.$white_FFFFFF;
+  padding: 28px;
+}
+
+.present {
+  display: flex;
+  justify-content: space-between;
+
+  .name {
+    font-size: 20px;
+    color: colors.$black_333236;
+  }
+
+  .chips {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.new {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .description {
+    color: colors.$black_333236;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .newNameInput {
+    width: 564px;
+    height: 48px;
+    border-radius: 6px;
+    border: 1px solid colors.$gray_D9D9D9;
+    padding-left: 10px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .submitButton {
+    position: absolute;
+    width: 84px;
+    right: 28px;
+    bottom: 28px;
+  }
+}
+
+@include tablet {
+  .container {
+    width: 544px;
+  }
+
+  .new {
+    .newNameInput {
+      width: 488px;
+    }
+  }
+}
+
+@include mobile {
+  .container {
+    width: 284px;
+  }
+
+  .new {
+    .newNameInput {
+      width: 244px;
+      height: 42px;
+    }
+  }
+}

@@ -1,3 +1,5 @@
+@use '/src/styles/global.scss' as colors;
+
 .LogoImage {
   display: flex;
   width: 200px;
@@ -14,7 +16,7 @@
 }
 
 .HelloText {
-  color: $black_333236;
+  color: colors.$black_333236;
   text-align: center;
   font-size: 20px;
   font-weight: 500;

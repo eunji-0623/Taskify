@@ -16,8 +16,13 @@
   }
 }
 
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .emailContainer {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
@@ -29,7 +34,7 @@
 }
 
 .passwordContainer {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;

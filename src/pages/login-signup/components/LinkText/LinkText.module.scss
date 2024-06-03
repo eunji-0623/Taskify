@@ -1,14 +1,16 @@
+@use '/src/styles/global.scss' as colors;
+
 .LinkTextContainer {
   font-size: 16px;
   font-weight: 400;
   margin-top: 24px;
 
   .LinkText {
-    color: $black_333236;
+    color: colors.$black_333236;
     text-align: center;
   }
   .Link {
-    color: $violet_5534DA;
+    color: colors.$violet_5534DA;
     text-decoration-line: underline;
   }
 }

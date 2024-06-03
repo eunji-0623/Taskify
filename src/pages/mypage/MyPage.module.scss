@@ -1,8 +1,12 @@
+@use '/src/styles/global.scss' as colors;
+
 .myPageLayout {
-  background: $gray_FAFAFA;
+  background: colors.$gray_FAFAFA;
 }
 
 .backContainer {
+  display: flex;
+  align-items: flex-start;
   gap: 6px;
 }
 
@@ -13,7 +17,7 @@
 }
 
 .backText {
-  color: $black_333236;
-  font-size: 16px;
+  color: colors.$black_333236;
+  font-size: 20px;
   font-weight: 500;
 }

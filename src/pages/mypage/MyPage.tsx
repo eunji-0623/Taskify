@@ -3,6 +3,8 @@ import ProfileEdit from './components/ProfileEdit/ProfileEdit';
 import PasswordEdit from './components/PasswordEdit/PasswordEdit';
 import ArrowIcon from '../../../public/icon/arrow_forward.svg';
 
+// navBar, sideBar 부분은 컴포넌트로 추가할 예정입니다.
+
 function MyPage() {
   return (
     <div className={styles.myPageLayout}>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './Input.module.scss';
-import EyeOn from '../../../public/icon/eye_on.svg';
-import EyeOff from '../../../public/icon/eye_off.svg';
+import EyeOn from '../../../../../public/icon/eye_on.svg';
+import EyeOff from '../../../../../public/icon/eye_off.svg';
 
 type InputPasswordProps = {
   inputText: string;

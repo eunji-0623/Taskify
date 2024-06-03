@@ -1,5 +1,5 @@
 import styles from './Logo.module.scss';
-import LogoImage from '../../../public/icon/logo_main.svg';
+import LogoImage from '../../../../../public/icon/logo_main.svg';
 
 type HelloText = {
   Text: string;
@@ -7,10 +7,12 @@ type HelloText = {
 
 function Logo({ Text }: HelloText) {
   return (
-    <a href="/">
-      <img src={LogoImage} className={styles.LogoImage} alt="LogoImage" />
+    <>
+      <a href="/">
+        <img src={LogoImage} className={styles.LogoImage} alt="LogoImage" />
+      </a>
       <span className={styles.HelloText}>{Text}</span>
-    </a>
+    </>
   );
 }
 

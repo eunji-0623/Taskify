@@ -4,11 +4,13 @@ import InputEmail from '../components/Input/InputEmail';
 import InputPassword from '../components/Input/InputPassword';
 import LInkText from '../components/LinkText/LinkText';
 
+// 에러 및 세부적인 스타일, 기능 추후 추가 예정
+
 function Login() {
   return (
     <div className={styles.Layout}>
       <Logo Text="오늘도 만나서 반가워요!" />
-      <form>
+      <form className={styles.formContainer}>
         <div className={styles.emailContainer}>
           <InputEmail
             inputText="이메일"

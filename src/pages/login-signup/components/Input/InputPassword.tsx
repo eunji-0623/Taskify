@@ -24,9 +24,7 @@ function InputPassword({
 
   // 눈 모양 아이콘 토글 함수
   const toggleButton = () => {
-    const toggleIcon = document.getElementById(
-      'login-password'
-    ) as HTMLInputElement;
+    const toggleIcon = document.getElementById(id) as HTMLInputElement;
     setToggleVisible(!toggleVisible);
     toggleIcon.type = toggleVisible ? 'password' : 'text';
   };

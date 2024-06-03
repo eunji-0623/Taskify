@@ -1,0 +1,19 @@
+.myPageLayout {
+  background: $gray_FAFAFA;
+}
+
+.backContainer {
+  gap: 6px;
+}
+
+.backIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.backText {
+  color: $black_333236;
+  font-size: 16px;
+  font-weight: 500;
+}

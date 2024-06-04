@@ -1,12 +1,13 @@
 import styles from './DashboardList.module.scss';
 import usePagination from '../../../../hooks/usePagination';
 import { PagenationBtn } from '../../../../components/Btn/Btn';
+import Dashboard from './Dashboard';
 
 /*  대시보드 목록을 보여주는 컴포넌트입니다.
     - 대시보드 목록을 보여주는 ul 부분과
     - 다음 목록을 불러오기 위한 부분으로 나뉩니다  */
 
-interface Dashboard {
+interface DashboardApi {
   id: number;
   title: string;
   color: string;
@@ -16,7 +17,7 @@ interface Dashboard {
   userId: number;
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 5;
 
 const fetchDashboards = async (page: number) => {
   // mockData 사용. 추후 변경 필요
@@ -37,7 +38,7 @@ function DashboardList() {
     totalPages,
     handlePrevClick,
     handleNextClick,
-  } = usePagination<Dashboard>({
+  } = usePagination<DashboardApi>({
     fetchData: fetchDashboards,
     itemsPerPage: ITEMS_PER_PAGE,
   });
@@ -45,8 +46,15 @@ function DashboardList() {
   return (
     <div className={styles.container}>
       <ul className={styles.dashboardList}>
+        <li>새로운 대시보드</li>
         {currentItems.map((dashboard) => (
-          <li key={dashboard.id}>{dashboard.title}</li>
+          <li key={dashboard.id}>
+            <Dashboard
+              color={dashboard.color}
+              title={dashboard.title}
+              isOwner={dashboard.createdByMe}
+            />
+          </li>
         ))}
       </ul>
       <div className={styles.pagination}>

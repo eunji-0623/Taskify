@@ -1,0 +1,23 @@
+@use '/src/styles/global.scss' as colors;
+
+.myPageLayout {
+  background: colors.$gray_FAFAFA;
+}
+
+.backContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.backIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.backText {
+  color: colors.$black_333236;
+  font-size: 20px;
+  font-weight: 500;
+}

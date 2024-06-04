@@ -1,11 +1,10 @@
 @use '/src/styles/global.scss' as *;
 @use '/src/styles/media.scss' as *;
 
-.dashboard {
+@mixin dashboard {
   width: 332px;
   height: 70px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 25px 20px;
   background-color: $white_FFFFFF;
@@ -14,6 +13,11 @@
   color: $black_333236;
   font-weight: 600;
   cursor: pointer;
+}
+
+.dashboard {
+  @include dashboard();
+  justify-content: space-between;
 
   .description {
     display: flex;
@@ -23,15 +27,22 @@
   }
 }
 
+.addDashboard {
+  @include dashboard();
+  justify-content: center;
+}
+
 @include tablet {
-  .dashboard {
+  .dashboard,
+  .addDashboard {
     width: 247px;
     height: 68px;
   }
 }
 
 @include mobile {
-  .dashboard {
+  .dashboard,
+  .addDashboard {
     width: 260px;
     height: 58px;
   }

@@ -7,8 +7,18 @@ interface DashboardButtonProps {
   isOwner: boolean;
 }
 
-// 각각의 대시보드로 이동하기 위한 버튼 컴포넌트
-function Dashboard({ color, title, isOwner }: DashboardButtonProps) {
+/*  새로운 대시보드 추가를 위한 버튼  */
+export function AddDashboard() {
+  return (
+    <button type="button" className={styles.addDashboard}>
+      <p>새로운 대시보드</p>
+      {/* + chip 추가 필요 */}
+    </button>
+  );
+}
+
+/*  각각의 대시보드로 이동하기 위한 버튼  */
+export function Dashboard({ color, title, isOwner }: DashboardButtonProps) {
   return (
     <button type="button" className={styles.dashboard}>
       <div className={styles.description}>
@@ -22,5 +32,3 @@ function Dashboard({ color, title, isOwner }: DashboardButtonProps) {
     </button>
   );
 }
-
-export default Dashboard;

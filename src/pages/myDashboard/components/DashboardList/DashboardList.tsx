@@ -1,7 +1,7 @@
 import styles from './DashboardList.module.scss';
 import usePagination from '../../../../hooks/usePagination';
 import { PagenationBtn } from '../../../../components/Btn/Btn';
-import Dashboard from './Dashboard';
+import { AddDashboard, Dashboard } from './Dashboard';
 
 /*  대시보드 목록을 보여주는 컴포넌트입니다.
     - 대시보드 목록을 보여주는 ul 부분과
@@ -46,7 +46,9 @@ function DashboardList() {
   return (
     <div className={styles.container}>
       <ul className={styles.dashboardList}>
-        <li>새로운 대시보드</li>
+        <li>
+          <AddDashboard />
+        </li>
         {currentItems.map((dashboard) => (
           <li key={dashboard.id}>
             <Dashboard

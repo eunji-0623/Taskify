@@ -1,3 +1,5 @@
+@import '/src/styles/media.scss';
+
 .Footer {
   width: 100%;
   height: 100px;
@@ -5,13 +7,26 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 140px 0 140px;
+
+  @include tablet {
+    padding: 0 40px 0 40px;
+  }
+  @include mobile {
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+  }
 }
 .Links {
   display: flex;
   gap: 32px;
+  
+  @include mobile {
+    margin-bottom: 40px;
+  }
 }
 
-.Footer_text {
+.FooterText {
   color: var(--gray-gray_9FA6B2, #9fa6b2);
   font-family: Pretendard;
   font-size: 16px;
@@ -21,7 +36,12 @@
   text-decoration: none;
 }
 
-.Footer_imgs {
+.FooterImgs {
   display: flex;
   gap: 14px;
+  
+  @include mobile {
+    margin-bottom: 90px;
+    gap :20px;
+  }
 }

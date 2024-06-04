@@ -14,15 +14,15 @@ interface CardProps {
 function Card({ ImgSrc, Title, Text }: CardProps) {
   return (
     <div className={styles.Card}>
-      <div className={styles.Image__Container}>
+      <div className={styles.ImageContainer}>
         <img
           src={ImgSrc}
           alt={`${ImgSrc} 이미지`}
-          className={styles.Info_Img}
+          className={styles.InfoImg}
         />
       </div>
-      <div className={styles.Text__Container}>
-        <span className={styles.Text_title}>{Title}</span>
+      <div className={styles.TextContainer}>
+        <span className={styles.TextTitle}>{Title}</span>
         <span className={styles.Text}>{Text}</span>
       </div>
     </div>

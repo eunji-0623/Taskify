@@ -1,0 +1,97 @@
+@use '/src/styles/global.scss' as colors;
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  width: 620px;
+  height: 355px;
+  flex-shrink: 0;
+
+  border-radius: 8px;
+  background: colors.$white_FFFFFF;
+
+  margin-top: 25px;
+  padding: 30px;
+}
+
+.profileText {
+  color: colors.$black_333236;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  margin-top: 30px;
+  gap: 16px;
+}
+
+.imageAddButton {
+  position: relative;
+  display: flex;
+  width: 182px;
+  height: 182px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 6px;
+  background: #f5f5f5;
+}
+
+.plusImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.inputLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputLabel {
+  color: colors.$black_333236;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.inputSection {
+  width: 366px;
+  height: 48px;
+  flex-shrink: 0;
+
+  border-radius: 6px;
+  border: 1px solid colors.$gray_D9D9D9;
+  background: colors.$white_FFFFFF;
+
+  &:focus {
+    border: 1px solid colors.$violet_5534DA;
+  }
+}
+
+.doneButton {
+  width: 85px;
+  height: 35px;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  background: colors.$violet_5534DA;
+
+  margin-top: 24px;
+}

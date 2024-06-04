@@ -42,7 +42,7 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  // 새로운 할 일 생성 동작
+  // 할 일 수정 버튼 클릭 시 동작
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -117,7 +117,7 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
 
           <div className={styles.buttonBlock}>
             <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
-            <button className={styles.createButton} type="submit">생성</button>
+            <button className={styles.createButton} type="submit">수정</button>
           </div>
         </form>
       </div>

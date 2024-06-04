@@ -17,7 +17,7 @@ function InviteModal({ isOpen, setIsOpen }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  // 새로운 컬럼 생성 동작
+  // 초대 버튼 클릭 시 동작
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

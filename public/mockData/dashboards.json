@@ -5,7 +5,7 @@
     {
       "id": 1,
       "title": "Dashboard 1",
-      "color": "red",
+      "color": "#FFA500",
       "createdAt": "2024-06-01T00:00:00.000Z",
       "updatedAt": "2024-06-01T00:00:00.000Z",
       "createdByMe": true,
@@ -14,7 +14,7 @@
     {
       "id": 2,
       "title": "Dashboard 2",
-      "color": "blue",
+      "color": "#76A5EA",
       "createdAt": "2024-06-02T00:00:00.000Z",
       "updatedAt": "2024-06-02T00:00:00.000Z",
       "createdByMe": false,
@@ -23,7 +23,7 @@
     {
       "id": 3,
       "title": "Dashboard 3",
-      "color": "green",
+      "color": "#7AC555",
       "createdAt": "2024-06-03T00:00:00.000Z",
       "updatedAt": "2024-06-03T00:00:00.000Z",
       "createdByMe": true,
@@ -32,7 +32,7 @@
     {
       "id": 4,
       "title": "Dashboard 4",
-      "color": "yellow",
+      "color": "#FFA500",
       "createdAt": "2024-06-04T00:00:00.000Z",
       "updatedAt": "2024-06-04T00:00:00.000Z",
       "createdByMe": false,
@@ -41,7 +41,7 @@
     {
       "id": 5,
       "title": "Dashboard 5",
-      "color": "orange",
+      "color": "#FFA500",
       "createdAt": "2024-06-05T00:00:00.000Z",
       "updatedAt": "2024-06-05T00:00:00.000Z",
       "createdByMe": true,
@@ -50,7 +50,7 @@
     {
       "id": 6,
       "title": "Dashboard 6",
-      "color": "purple",
+      "color": "#7AC555",
       "createdAt": "2024-06-06T00:00:00.000Z",
       "updatedAt": "2024-06-06T00:00:00.000Z",
       "createdByMe": false,
@@ -59,7 +59,7 @@
     {
       "id": 7,
       "title": "Dashboard 7",
-      "color": "pink",
+      "color": "#760DDE",
       "createdAt": "2024-06-07T00:00:00.000Z",
       "updatedAt": "2024-06-07T00:00:00.000Z",
       "createdByMe": true,
@@ -68,7 +68,7 @@
     {
       "id": 8,
       "title": "Dashboard 8",
-      "color": "brown",
+      "color": "#E876EA",
       "createdAt": "2024-06-08T00:00:00.000Z",
       "updatedAt": "2024-06-08T00:00:00.000Z",
       "createdByMe": false,
@@ -77,7 +77,7 @@
     {
       "id": 9,
       "title": "Dashboard 9",
-      "color": "cyan",
+      "color": "#7AC555",
       "createdAt": "2024-06-09T00:00:00.000Z",
       "updatedAt": "2024-06-09T00:00:00.000Z",
       "createdByMe": true,
@@ -86,7 +86,7 @@
     {
       "id": 10,
       "title": "Dashboard 10",
-      "color": "magenta",
+      "color": "#760DDE",
       "createdAt": "2024-06-10T00:00:00.000Z",
       "updatedAt": "2024-06-10T00:00:00.000Z",
       "createdByMe": false,
@@ -95,7 +95,7 @@
     {
       "id": 11,
       "title": "Dashboard 11",
-      "color": "teal",
+      "color": "#76A5EA",
       "createdAt": "2024-06-11T00:00:00.000Z",
       "updatedAt": "2024-06-11T00:00:00.000Z",
       "createdByMe": true,
@@ -104,7 +104,7 @@
     {
       "id": 12,
       "title": "Dashboard 12",
-      "color": "lime",
+      "color": "#E876EA",
       "createdAt": "2024-06-12T00:00:00.000Z",
       "updatedAt": "2024-06-12T00:00:00.000Z",
       "createdByMe": false,
@@ -113,7 +113,7 @@
     {
       "id": 13,
       "title": "Dashboard 13",
-      "color": "gold",
+      "color": "#76A5EA",
       "createdAt": "2024-06-13T00:00:00.000Z",
       "updatedAt": "2024-06-13T00:00:00.000Z",
       "createdByMe": true,
@@ -122,7 +122,7 @@
     {
       "id": 14,
       "title": "Dashboard 14",
-      "color": "silver",
+      "color": "#E876EA",
       "createdAt": "2024-06-14T00:00:00.000Z",
       "updatedAt": "2024-06-14T00:00:00.000Z",
       "createdByMe": false,
@@ -131,7 +131,7 @@
     {
       "id": 15,
       "title": "Dashboard 15",
-      "color": "violet",
+      "color": "#76A5EA",
       "createdAt": "2024-06-15T00:00:00.000Z",
       "updatedAt": "2024-06-15T00:00:00.000Z",
       "createdByMe": true,
@@ -140,7 +140,7 @@
     {
       "id": 16,
       "title": "Dashboard 16",
-      "color": "maroon",
+      "color": "#760DDE",
       "createdAt": "2024-06-16T00:00:00.000Z",
       "updatedAt": "2024-06-16T00:00:00.000Z",
       "createdByMe": false,
@@ -149,7 +149,7 @@
     {
       "id": 17,
       "title": "Dashboard 17",
-      "color": "navy",
+      "color": "#7AC555",
       "createdAt": "2024-06-17T00:00:00.000Z",
       "updatedAt": "2024-06-17T00:00:00.000Z",
       "createdByMe": true,
@@ -158,7 +158,7 @@
     {
       "id": 18,
       "title": "Dashboard 18",
-      "color": "olive",
+      "color": "#760DDE",
       "createdAt": "2024-06-18T00:00:00.000Z",
       "updatedAt": "2024-06-18T00:00:00.000Z",
       "createdByMe": false,
@@ -167,7 +167,7 @@
     {
       "id": 19,
       "title": "Dashboard 19",
-      "color": "coral",
+      "color": "#E876EA",
       "createdAt": "2024-06-19T00:00:00.000Z",
       "updatedAt": "2024-06-19T00:00:00.000Z",
       "createdByMe": true,
@@ -176,7 +176,7 @@
     {
       "id": 20,
       "title": "Dashboard 20",
-      "color": "skyblue",
+      "color": "#76A5EA",
       "createdAt": "2024-06-20T00:00:00.000Z",
       "updatedAt": "2024-06-20T00:00:00.000Z",
       "createdByMe": false,

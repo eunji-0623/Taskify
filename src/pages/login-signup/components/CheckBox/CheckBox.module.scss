@@ -1,0 +1,23 @@
+@use '/src/styles/global.scss' as colors;
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  border: 1px solid colors.$gray_D9D9D9;
+  background: colors.$white_FFFFFF;
+}
+
+.checkboxLabel {
+  color: colors.$black_333236;
+  font-size: 16px;
+  font-weight: 400;
+}

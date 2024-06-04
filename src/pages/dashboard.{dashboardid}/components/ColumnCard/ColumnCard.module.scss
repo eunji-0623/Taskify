@@ -1,0 +1,98 @@
+@import '../../../../styles/utils.scss';
+.card {
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  border-radius: 0.375rem;
+  background-color: var(--white-white_FFFFFF, #fff);
+  padding: 1.25rem;
+  display: grid;
+  grid-template-areas:
+    'img    img'
+    'title  title'
+    'tag    tag'
+    'date   avatar';
+  gap: 0.625rem;
+  margin-right: 1.25rem;
+
+  @include desktop {
+    margin: 1.25rem;
+    max-width: 19.813rem;
+    padding-top: 0.625rem;
+  }
+
+  @include tablet {
+    height: 5.813rem;
+    width: 100%;
+    padding-left: 0;
+    margin: 1.25rem;
+    grid-template-areas:
+      'img  title title title'
+      'img  tag   date  avatar';
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-rows: auto;
+    column-gap: 16px;
+    row-gap: 10px;
+  }
+
+  @include mobile {
+    width: 100%;
+    margin: 0.75rem;
+    padding: 0.75rem;
+    padding-top: 0.125rem;
+  }
+}
+
+.img {
+  grid-area: img;
+  border-radius: 0.375rem;
+  margin-bottom: 0.125rem;
+
+  img {
+    max-width: 17.125rem;
+  }
+
+  @include desktop {
+    margin-top: 0.625rem;
+  }
+
+  @include tablet {
+    border-radius: 0.25rem;
+    margin-bottom: 0;
+
+    img {
+      max-width: 5.75rem;
+      max-height: 3.313rem;
+      margin-left: 1.25rem;
+    }
+  }
+
+  @include mobile {
+    margin-top: 0.625rem;
+  }
+}
+
+.title {
+  grid-area: title;
+}
+
+.tag {
+  grid-area: tag;
+}
+
+.date {
+  grid-area: date;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  img {
+    height: 1.125rem;
+    margin-right: 0.313rem;
+  }
+}
+
+.avatar {
+  grid-area: avatar;
+  margin-left: auto;
+}

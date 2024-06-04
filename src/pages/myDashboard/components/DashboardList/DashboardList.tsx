@@ -22,7 +22,7 @@ const ITEMS_PER_PAGE = 5;
 const fetchDashboards = async (page: number) => {
   // mockData 사용. 추후 변경 필요
   const response = await fetch(
-    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`
+    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
   );
   const data = await response.json();
   return {
@@ -61,7 +61,9 @@ function DashboardList() {
       </ul>
       <div className={styles.pagination}>
         <p>
-          {totalPages} 페이지 중 {currentPage}
+          {totalPages}
+          페이지 중
+          {currentPage}
         </p>
         <PagenationBtn
           handlePrev={handlePrevClick}

@@ -5,7 +5,7 @@ interface UsePaginationProps<T> {
   itemsPerPage: number;
 }
 
-interface usePaginationResult<T> {
+interface UsePaginationResult<T> {
   currentItems: T[];
   currentPage: number;
   totalPages: number;
@@ -22,7 +22,7 @@ interface usePaginationResult<T> {
 function usePagination<T>({
   fetchData,
   itemsPerPage,
-}: UsePaginationProps<T>): usePaginationResult<T> {
+}: UsePaginationProps<T>): UsePaginationResult<T> {
   const [items, setItems] = useState<T[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);

@@ -1,11 +1,14 @@
-.Home__Main {
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.HomeMain {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.Main__title {
+.MainTitle {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,9 +16,8 @@
   margin-bottom: 184px;
 }
 
-.Image__Container {
+.ImageContainer {
   margin-top: 94px;
-  position: relative;
   display: flex;
   justify-content: center;
   margin-bottom: 56px;
@@ -24,13 +26,29 @@
 .titleImage {
   width: 722px;
   height: 422px;
+
+  @include tablet {
+    width: 538px;
+    height: 314px;
+  }
+  @include mobile {
+    width: 287px;
+    height: 168px;
+  }
 }
 
-.title_Texts {
+.titleTexts {
   display: flex;
-  gap:28px;
+  gap: 28px;
   align-items: center;
+  justify-content: center;
   margin-bottom: 24px;
+
+  @include mobile {
+    flex-direction: column;
+    margin-bottom: 18px;
+    gap: 0px;
+  }
 }
 
 .title_h {
@@ -42,8 +60,16 @@
   font-weight: 700;
   line-height: 100px; /* 131.579% */
   letter-spacing: -2px;
+
+  @include tablet {
+    font-size: 56px;
+  }
+  @include mobile {
+    font-size: 40px;
+    line-height: 50px;
+  }
 }
-.title_span {
+.titleSpan {
   color: var(--violet-violet_5534DA, #5534da);
   text-align: bottom;
   font-family: Montserrat;
@@ -52,6 +78,13 @@
   font-weight: 700;
   line-height: 65px; /* 72.222% */
   letter-spacing: -1px;
+
+  @include tablet {
+    font-size: 70px;
+  }
+  @include mobile {
+    font-size: 42px;
+  }
 }
 .title_p {
   color: var(--white-white_FFFFFF, #fff);
@@ -63,8 +96,14 @@
   line-height: normal;
   letter-spacing: -1px;
   margin-bottom: 66px;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include mobile {
+    font-size: 12px;
+  }
 }
-.Main_LoginBtn {
+.MainLoginBtn {
   width: 280px;
   padding: 15px 0px 14px 0px;
   border-radius: 8px;
@@ -80,8 +119,8 @@
   cursor: pointer;
 }
 
-.Main_Point1,
-.Main_Point2 {
+.MainPoint1,
+.MainPoint2 {
   width: 1200px;
   height: 600px;
   flex-shrink: 0;
@@ -89,34 +128,64 @@
   background: var(--black-black_171717, #171717);
   margin-bottom: 90px;
   position: relative;
+
+  @include tablet {
+    width: 664px;
+    height: 972px;
+  }
+
+  @include mobile {
+    width: 344px;
+    height: 586px;
+  }
 }
 
-.Point1_text {
+.Point1Text {
   position: absolute;
   left: 60px;
   top: 124px;
   color: var(--gray-gray_9FA6B2, #9fa6b2);
-  font-feature-settings: "clig" off, "liga" off;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Pretendard;
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @include tablet {
+    top: 64px;
+  }
+  @include mobile {
+    top: 60px;
+    left: 144px;
+    font-size: 18px;
+  }
 }
 .Point1_h2 {
   position: absolute;
   left: 60px;
   top: 250px;
   color: var(--white-white_FFFFFF, #fff);
-  font-feature-settings: "clig" off, "liga" off;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Pretendard;
   font-size: 48px;
   font-style: normal;
   font-weight: 700;
   line-height: 64px; /* 133.333% */
+  @include tablet {
+    top: 190px;
+  }
+  @include mobile {
+    top: 143px;
+    left: 58px;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 36px;
+  }
 }
 
-.Point1_img {
+.Point1Img {
   position: absolute;
   right: 0px;
   bottom: 0px;
@@ -125,52 +194,105 @@
   flex-shrink: 0;
   border-radius: 8px 0px;
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
+
+  @include tablet {
+    width: 520px;
+    height: 434px;
+  }
+  @include mobile {
+    width: 296.112px;
+    height: 248px;
+  }
 }
 
-.Point2_text {
+.Point2Text {
   position: absolute;
   left: 644px;
   top: 124px;
   color: var(--gray-gray_9FA6B2, #9fa6b2);
-  font-feature-settings: "clig" off, "liga" off;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Pretendard;
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @include tablet {
+    top: 64px;
+    left: 60px;
+  }
+  @include mobile {
+    top: 60px;
+    left: 144px;
+    font-size: 18px;
+  }
 }
 .Point2_h2 {
   position: absolute;
   left: 644px;
   top: 250px;
   color: var(--white-white_FFFFFF, #fff);
-  font-feature-settings: "clig" off, "liga" off;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Pretendard;
   font-size: 48px;
   font-style: normal;
   font-weight: 700;
   line-height: 64px; /* 133.333% */
+
+  @include tablet {
+    left: 60px;
+    top: 190px;
+  }
+  @include mobile {
+    top: 143px;
+    left: 85px;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 36px;
+  }
 }
 
-.Point2_img {
+.Point2Img {
   position: absolute;
   left: 108px;
   bottom: 0px;
   width: 436px;
   height: 502px;
   flex-shrink: 0;
-  border-radius: 8px 0px;
+  border-radius: 8px 8px 0px 0px;
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
+
+  @include tablet {
+    width: 360px;
+    height: 416px;
+    left: 152px;
+  }
+  @include mobile {
+    width: 218px;
+    height: 250px;
+    left: 62.5px;
+  }
 }
 
-.Main_PlusInfo {
+.MainPlusInfo {
+  
+  display: flex;
+  flex-direction: column;
   width: 1200px;
-  height: 454px;
+  height: auto;
   margin-bottom: 160px;
+
+  @include tablet {
+    align-items: center;
+  }
+  @include mobile {
+    align-items: center;
+  }
 }
 .PlusInfo_h {
   color: var(--white-white_FFFFFF, #fff);
-  font-feature-settings: "clig" off, "liga" off;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Pretendard;
   font-size: 28px;
   font-style: normal;
@@ -184,4 +306,11 @@
   align-items: center;
   justify-content: center;
   gap: 33px;
+
+  @include tablet {
+    flex-direction: column;
+  }
+  @include mobile {
+    flex-direction: column;
+  }
 }

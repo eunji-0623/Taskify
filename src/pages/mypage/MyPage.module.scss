@@ -1,7 +1,7 @@
-@use '/src/styles/global.scss' as colors;
+@import '/src/styles/global.scss';
 
 .myPageLayout {
-  background: colors.$gray_FAFAFA;
+  background: $gray_FAFAFA;
 }
 
 .backContainer {
@@ -17,7 +17,7 @@
 }
 
 .backText {
-  color: colors.$black_333236;
+  color: $black_333236;
   font-size: 20px;
   font-weight: 500;
 }

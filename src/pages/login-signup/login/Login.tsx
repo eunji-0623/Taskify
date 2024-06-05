@@ -37,7 +37,7 @@ function Login() {
       </form>
       <LInkText
         Text="회원이 아니신가요?"
-        Link="/signup"
+        LinkRouter="/signup"
         TextForLink="회원가입하기"
       />
     </div>

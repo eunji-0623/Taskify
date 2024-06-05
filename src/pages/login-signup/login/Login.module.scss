@@ -1,3 +1,6 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
 .Layout {
   display: flex;
   flex-direction: column;
@@ -7,11 +10,11 @@
   margin-left: auto;
   padding: 220px 0;
 
-  @media screen and (max-width: 1024px) {
+  @include tablet {
     padding: 240px 110px;
   }
 
-  @media screen and (max-width: 768px) {
+  @include mobile {
     padding: 145px 12px;
   }
 }
@@ -28,7 +31,7 @@
   gap: 8px;
   margin-top: 38px;
 
-  @media screen and (max-width: 768px) {
+  @include mobile {
     margin-top: 40px;
   }
 }

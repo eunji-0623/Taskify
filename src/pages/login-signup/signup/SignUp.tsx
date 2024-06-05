@@ -45,7 +45,7 @@ function SignUp() {
       </form>
       <LInkText
         Text="이미 가입하셨나요?"
-        Link="/login"
+        LinkRouter="/login"
         TextForLink="로그인하기"
       />
     </div>

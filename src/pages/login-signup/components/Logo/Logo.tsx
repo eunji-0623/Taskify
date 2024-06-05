@@ -1,4 +1,5 @@
 import styles from './Logo.module.scss';
+import { Link } from 'react-router-dom';
 import LogoImage from '../../../../../public/icon/logo_main.svg';
 
 type HelloText = {
@@ -8,9 +9,9 @@ type HelloText = {
 function Logo({ Text }: HelloText) {
   return (
     <>
-      <a href="/">
+      <Link to="/">
         <img src={LogoImage} className={styles.LogoImage} alt="LogoImage" />
-      </a>
+      </Link>
       <span className={styles.HelloText}>{Text}</span>
     </>
   );

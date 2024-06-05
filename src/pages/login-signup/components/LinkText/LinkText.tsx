@@ -1,18 +1,19 @@
 import styles from './LinkText.module.scss';
+import { Link } from 'react-router-dom';
 
 type LinkTextProps = {
   Text: string;
-  Link: string;
+  LinkRouter: string;
   TextForLink: string;
 };
 
-function LinkText({ Text, Link, TextForLink }: LinkTextProps) {
+function LinkText({ Text, LinkRouter, TextForLink }: LinkTextProps) {
   return (
     <div className={styles.LinkTextContainer}>
       <span className={styles.LinkText}>{Text}</span>
-      <a href={Link} className={styles.Link}>
+      <Link to={LinkRouter} className={styles.Link}>
         {TextForLink}
-      </a>
+      </Link>
     </div>
   );
 }

@@ -20,7 +20,7 @@ module.exports = {
         '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
         'linebreak-style': 0,
         'react/react-in-jsx-scope': 'off',
-        'react/jsx-props-no-spreacleading': 'off',
+        'react/jsx-props-no-spreading': 'off',
         'import/no-absolute-path': 'off',
 
         // jsx-a11y label-has-associated-control 규칙 설정

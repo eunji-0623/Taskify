@@ -22,7 +22,12 @@ module.exports = {
         'react/react-in-jsx-scope': 'off',
         'react/jsx-props-no-spreading': 'off',
         'import/no-absolute-path': 'off',
+
+        // jsx-a11y label-has-associated-control 규칙 설정
+        "jsx-a11y/label-has-associated-control": [ 2, {
+          "some": [ "nesting", "id" ]
+        }],
       }
     }
   ]
-};
+}

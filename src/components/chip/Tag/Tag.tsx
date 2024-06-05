@@ -16,19 +16,18 @@ function Tag({ tagName }: TagProps) {
     color: `${theme[1]}`,
     borderRadius: '4px',
     display: 'inline-block',
-    height: '22px',
+    height: '1.375rem',
     lineHeight: '115%',
-    fontSize: '12px',
+    fontSize: '0.75rem',
     margin: '0 3px',
-    padding: '4px',
+    padding: '0.25rem',
     textAlign: 'center',
   };
 
-  // 높이조절
+  // 모바일
   if (width < 768) {
-    // 모바일
-    TagStyle.height = '20px';
-    TagStyle.fontSize = '10px';
+    TagStyle.height = '1.25rem';
+    TagStyle.fontSize = '0.625rem';
   }
 
   return <div style={TagStyle}>{tagName}</div>;

@@ -2,19 +2,19 @@
 @import '/src/styles/media.scss';
 
 .container {
-  position: relative;
   width: 33.75rem;
   height: 15.625rem;
-  border-radius: 0.5rem;
   display: flex;
-  justify-content: center;
-  padding: 6.75rem 0 7.56rem;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  padding: 1.75rem;
   background-color: $white_FFFFFF;
 
   @include mobile{
     width: 20.4375rem;
     height: 13.75rem;
-    padding: 5rem 0 7.5rem;
+    padding: 1.75rem 1.35rem;
   }
 
   p {
@@ -22,33 +22,35 @@
     color: $black_333236;
     font-size: 1.125rem;
     font-weight: 500;
+    margin: 4.4rem auto 0;
 
     @include mobile{
       font-size: 1rem;
+      margin-top: 3.2rem;
     }
+  }
+}
+
+.buttonBlock {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  @include mobile {
   }
 
   button {
-    // 폰트 추가
-    position: absolute;
-    right: 1.75rem;
-    bottom: 1.75rem;
     width: 7.5rem;
     height: 3rem;
     border-radius: 0.5rem;
-    border: 0;
-    background: $violet_5534DA;
-    color: $white_FFFFFF;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
 
-    @media screen and (max-width: 768px) {
+    @include mobile{
       width: 8.625rem;
       height: 2.625rem;
       font-size: 0.875rem;
-      left: 50%;
-      transform: translate(-50%);
     }
   }
 }

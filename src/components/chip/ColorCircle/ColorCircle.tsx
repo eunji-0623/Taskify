@@ -10,8 +10,8 @@ interface CircleProps {
 function ColorCircle({ color, diameter, children }: CircleProps) {
   const circleStyle: React.CSSProperties = {
     backgroundColor: color,
-    width: `${diameter}px`,
-    height: `${diameter}px`,
+    width: `${diameter / 16}rem`,
+    height: `${diameter / 16}rem`,
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',

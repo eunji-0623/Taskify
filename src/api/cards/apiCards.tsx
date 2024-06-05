@@ -44,6 +44,7 @@ interface CardResponse {
   status: number;
   message?: string;
   data: Card;
+
 }
 
 interface GetCardListResponse {
@@ -68,6 +69,7 @@ export async function apiCreateCard(
   body: CreateCardBody,
 ): Promise<CardResponse> {
   const res = await instance.post<CardResponse>('/cards', body);
+
   return handleResponse(res);
 }
 
@@ -83,6 +85,7 @@ export async function apiGetCardList(
       size,
       cursorId,
       columnId,
+
     },
   });
   return handleResponse(res);

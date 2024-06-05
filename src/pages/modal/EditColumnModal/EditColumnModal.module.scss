@@ -1,0 +1,131 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.container {
+  position: relative;
+  width: 33.75rem;
+  height: 17.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  padding: 2rem 1.75rem 1.75rem;
+  background-color: $white_FFFFFF;
+
+  @include mobile{
+    width: 20.4375rem;
+    height: 17.125rem;
+    padding: 1.75rem 1.25rem;
+  }
+
+  h1 {
+    color: $black_333236;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    @include mobile{
+      font-size: 1.25rem;
+    }
+  }
+
+  label {
+    color: $black_333236;
+    font-size: 1.125rem;
+    font-weight: 500;
+
+    @include mobile{
+      font-size: 1rem;
+    }
+  }
+
+  input {
+    width: 100%;
+    height: 3rem;
+    padding: 1rem;
+    color: $black_333236;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 0.375rem;
+    border: 1px solid $gray_D9D9D9;
+    background: $white_FFFFFF;
+
+    &:focus {
+      // 클릭 시 생기는 기본 테두리 변경
+      outline: none; 
+      border: 1px solid $violet_5534DA
+    }
+
+    @include mobile{
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.62rem;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.colorList {
+  height: 1.875rem;
+
+  @include mobile{
+    height: 1.75rem;
+  }
+}
+
+.buttonBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include mobile{
+    right: 1.25rem;
+    bottom: 1.25rem;
+  }
+
+  button {
+    width: 7.5rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    @include mobile{
+      width: 8.625rem;
+      height: 2.625rem;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.78rem;
+
+  @include mobile {
+    justify-content: space-between;
+  }
+}
+
+.delete {
+  position: absolute;
+  left: 1.75rem;
+  bottom: 1.75rem;
+  color: var(--gray-gray_9FA6B2, #9FA6B2);
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration-line: underline;
+  border: 0;
+  cursor: pointer;
+
+  @include mobile {
+    position: static;
+  }
+}

@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './ModalDropdown.module.scss';
+import ArrowDropDown from '/icon/arrow_drop_down.svg';
+import checked from '/icon/checked_gray.svg';
 
 /*
   모달 드롭다운 메뉴바
@@ -21,6 +23,22 @@ function ModalDropdown({
   data,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // 영역 밖 클릭 시 닫기
+  useEffect(() => {
+    const handleModal = (event: MouseEvent) => {
+      if (isOpen && !modalRef.current?.contains?.(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleModal);
+
+    return () => {
+      document.removeEventListener('mousedown', handleModal);
+    };
+  }, [isOpen, setIsOpen, modalRef]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -32,17 +50,17 @@ function ModalDropdown({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={modalRef}>
       <button
         type="button"
-        className={styles.dropdownBlock}
+        className={styles.dropdownButton}
         onClick={toggleDropdown}
       >
         <ul>{value}</ul>
-        {/* <img src={isOpen ? ARROW_UP : ARROW_DOWN} alt="화살표 이미지" /> */}
+        <img src={ArrowDropDown} alt="드롭다운" />
       </button>
 
-      <div>
+      <div className={styles.dropdownBlock}>
         {isOpen && (
           <ul className={styles.items}>
             {data.map((item) => (
@@ -50,8 +68,10 @@ function ModalDropdown({
                 <button
                   className={styles.item}
                   type="button"
+                  style={{ borderRadius: '0.375rem' }}
                   onClick={() => handleItemClick(item.text)}
                 >
+                  <img src={checked} alt="드롭다운" />
                   {item.text}
                 </button>
               </li>

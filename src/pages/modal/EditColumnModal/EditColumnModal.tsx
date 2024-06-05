@@ -21,9 +21,6 @@ function EditColumnModal({ isOpen, setIsOpen }: ModalProps) {
   // 컬럼 변경 버튼 클릭 시 동작
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    // submit 테스트
-    console.log('submit');
   }
 
   return (

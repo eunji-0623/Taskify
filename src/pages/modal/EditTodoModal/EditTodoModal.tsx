@@ -16,6 +16,10 @@ interface ModalProps {
 function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
   const [condition, setCondition] = useState('test');
   const [manager, setManager] = useState('test');
+  const [name, setName] = useState('test');
+  const [description, setDescription] = useState('test');
+  const [deadline, setDeadline] = useState('test');
+  const [tags, setTags] = useState('test');
 
   // 테스트 데이터
   const data = [
@@ -45,9 +49,6 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
   // 할 일 수정 버튼 클릭 시 동작
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    // submit 테스트
-    console.log('submit');
   }
 
   return (
@@ -82,7 +83,16 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
                 제목
                 <span className={styles.contentSpan}> *</span>
               </label>
-              <input value="test" className={styles.contentInput} type="text" id="name" name="name" placeholder="제목을 입력해 주세요" required />
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={styles.contentInput}
+                type="text"
+                id="name"
+                name="name"
+                placeholder="제목을 입력해 주세요"
+                required
+              />
             </div>
 
             <div className={styles.contentBlock}>
@@ -90,27 +100,48 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
                 설명
                 <span className={styles.contentSpan}> *</span>
               </label>
-              <input value="test" className={`${styles.contentText} ${styles.contentInput}`} type="text" id="text" name="text" placeholder="설명을 입력해 주세요" required />
+              <input
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className={`${styles.contentText} ${styles.contentInput}`}
+                type="text"
+                id="text"
+                name="text"
+                placeholder="설명을 입력해 주세요"
+                required
+              />
             </div>
 
             <div className={styles.contentBlock}>
-              <label htmlFor="name">마감일</label>
-
-              {/* 날짜 입력 라이브러리 추가 */}
-              <input value="test" className={styles.contentInput} type="text" id="name" name="name" placeholder="날짜를 입력해 주세요" required />
+              <label htmlFor="deadline">마감일</label>
+              <input
+                value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+                className={styles.contentInput}
+                type="text"
+                id="deadline"
+                name="deadline"
+                placeholder="날짜를 입력해 주세요"
+                required
+              />
             </div>
 
             <div className={styles.contentBlock}>
-              <label htmlFor="name">태그</label>
-
-              {/* 태그 컴포넌트 추가 */}
-              <input value="test" className={styles.contentInput} type="text" id="name" name="name" placeholder="입력 후 Enter" required />
+              <label htmlFor="tags">태그</label>
+              <input
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+                className={styles.contentInput}
+                type="text"
+                id="tags"
+                name="tags"
+                placeholder="입력 후 Enter"
+                required
+              />
             </div>
 
             <div className={styles.contentBlock}>
               <h3>이미지</h3>
-
-              {/* 이미지 추가 */}
               <div className={styles.contentImage}>이미지 추가+</div>
             </div>
           </div>

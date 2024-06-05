@@ -26,7 +26,7 @@ export const handleResponse = (response: AxiosResponse) => {
     const errorMessage = extractErrorMessage(response);
     return Promise.reject(errorMessage);
   }
-  if (response.status == 204 && !response.data) {
+  if (response.status === 204 && !response.data) {
     return Promise.resolve('204NoData');
   }
   return Promise.resolve(response.data);

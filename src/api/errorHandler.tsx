@@ -24,7 +24,10 @@ export const extractErrorMessage = (response: AxiosResponse): string => {
 export const handleResponse = (response: AxiosResponse) => {
   if (response.status < 200 || response.status >= 300) {
     const errorMessage = extractErrorMessage(response);
-    throw new Error(errorMessage);
+    return Promise.reject(errorMessage);
   }
-  return response.data;
+  if (response.status == 204 && !response.data) {
+    return Promise.resolve('204NoData');
+  }
+  return Promise.resolve(response.data);
 };

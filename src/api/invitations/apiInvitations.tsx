@@ -44,10 +44,10 @@ interface InvitationsListResponse {
 
 // 내가 받은 초대 목록 조회 api
 export async function apiMyInvitationsList(
-  query: InvitationsQuery = { cursorId: undefined, size: 10, title: '' }
+  query: InvitationsQuery = { cursorId: undefined, size: 10, title: '' },
 ): Promise<InvitationsListResponse> {
   const res = await instance.get<InvitationsListResponse>(
-    `/invitations?cursorId=${query.cursorId}&size=${query.size}&title=${query.title}`
+    `/invitations?cursorId=${query.cursorId}&size=${query.size}&title=${query.title}`,
   );
   return handleResponse(res);
 }
@@ -55,11 +55,11 @@ export async function apiMyInvitationsList(
 // 초대 응답 api
 export async function apiInvitationAccept(
   path: InvitationId,
-  body: InvitationAcceptBody
+  body: InvitationAcceptBody,
 ): Promise<InvitationResponse> {
   const res = await instance.put<InvitationResponse>(
     `/invitations/${path.invitationId}`,
-    body
+    body,
   );
   return handleResponse(res);
 }

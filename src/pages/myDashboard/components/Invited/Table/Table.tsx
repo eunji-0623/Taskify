@@ -24,14 +24,14 @@ function Table({ invitations, hasNext, setElement }: TableProps) {
     <table className={styles.table}>
       <TableHeader />
       <tbody>
-        {invitations.map((invitation, index) => (
+        {invitations.map((invitation) => (
           <TableBody
-            key={`${invitation.id}-${index}`}
+            key={invitation.id}
             title={invitation.dashboard.title}
             name={invitation.inviter.nickname}
           />
         ))}
-        {hasNext && <tr ref={setElement} style={{ height: '20px' }}></tr>}
+        {hasNext && <tr ref={setElement} style={{ height: '20px' }} />}
       </tbody>
     </table>
   );

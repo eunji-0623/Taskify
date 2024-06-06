@@ -25,7 +25,7 @@ interface MemberListResponse {
       createdAt: string;
       updatedAt: string;
       isOwner: boolean;
-    }
+    },
   ];
   totalCount: number;
 }
@@ -33,10 +33,10 @@ interface MemberListResponse {
 // 대시보드 멤버 목록 조회 api
 export async function apiMemberList(
   queryId: DashboardId,
-  query: MemberQuery = { size: 10, page: 1 }
+  query: MemberQuery = { size: 10, page: 1 },
 ): Promise<MemberListResponse> {
   const res = await instance.get<MemberListResponse>(
-    `/members?dashboardId=${queryId.dashboardId}&size=${query.size}&page=${query.page}`
+    `/members?dashboardId=${queryId.dashboardId}&size=${query.size}&page=${query.page}`,
   );
   return handleResponse(res);
 }

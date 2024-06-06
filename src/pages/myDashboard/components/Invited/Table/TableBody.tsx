@@ -15,7 +15,7 @@ function TableBody({ title, name }: Props) {
     <tr className={styles.body}>
       <td className={styles.title}>{title}</td>
       <td className={styles.name}>{name}</td>
-      <td className={styles.button}>
+      <td className={styles.btton} aria-label="수락 거절 버튼">
         <AcceptAndRejectBtn
           handleAccept={handleAccept}
           handdleReject={handdleReject}

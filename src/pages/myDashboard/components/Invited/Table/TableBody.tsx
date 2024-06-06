@@ -1,6 +1,8 @@
 import { AcceptAndRejectBtn } from '../../../../../components/Btn/Btn';
 import styles from './Table.module.scss';
 
+/* Table의 각 요소들입니다. */
+
 interface Props {
   title: string;
   name: string;

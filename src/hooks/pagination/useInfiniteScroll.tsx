@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 
+/*  무한스크롤을 위한 hook입니다
+    intersectionObserver를 사용했습니다
+    사용 예시는 Invited.tsx와 Table.tsx를 참고해주세요 */
+
 interface InfiniteScrollOptions {
   root?: HTMLElement | null;
   rootMargin?: string;
@@ -8,7 +12,7 @@ interface InfiniteScrollOptions {
 
 const useInfiniteScroll = (
   callback: () => void,
-  options: InfiniteScrollOptions,
+  options: InfiniteScrollOptions
 ) => {
   const observer = useRef<IntersectionObserver | null>(null);
   const [element, setElement] = useState<HTMLElement | null>(null);

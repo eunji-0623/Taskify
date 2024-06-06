@@ -3,6 +3,8 @@ import TableHeader from './TableHeader';
 import styles from './Table.module.scss';
 // import TableMobile from './TableMobile';
 
+/*  Invited 컴포넌트에서 받아온 데이터로 테이블을 그립니다  */
+
 interface Invitation {
   id: number;
   inviter: {

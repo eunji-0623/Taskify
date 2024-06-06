@@ -3,7 +3,11 @@ import Search from './Search/Search';
 import Table from './Table/Table';
 import Empty from './Empty/Empty';
 import styles from './Invited.module.scss';
-import useInfiniteScroll from '../../../../hooks/useInfiniteScroll';
+import useInfiniteScroll from '../../../../hooks/pagination/useInfiniteScroll';
+
+/*  초대받은 대시보드 목록을 보여주기 위한 컴포넌트 입니다
+    API 호출을 통해 데이터를 불러온 뒤,
+    Table 컴포넌트로 데이터를 전달합니다.  */
 
 interface Invitation {
   id: number;

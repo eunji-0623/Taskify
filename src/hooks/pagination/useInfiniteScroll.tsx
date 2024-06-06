@@ -12,7 +12,7 @@ interface InfiniteScrollOptions {
 
 const useInfiniteScroll = (
   callback: () => void,
-  options: InfiniteScrollOptions
+  options: InfiniteScrollOptions,
 ) => {
   const observer = useRef<IntersectionObserver | null>(null);
   const [element, setElement] = useState<HTMLElement | null>(null);

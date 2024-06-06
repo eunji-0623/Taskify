@@ -1,0 +1,31 @@
+.SideDashBoard {
+  display: flex;
+  justify-content: flex-start;
+  width: 276px;
+  height: 45px;
+  align-items: center;
+  padding-left: 12px;
+  margin-left: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  &.selected {
+    background: var(--violet-violet-8, #F1EFFD);
+  }
+}
+
+.Title {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 16px;
+  margin-right: 6px;
+}
+
+.CrownImg {
+  width: 18px;
+  height: 14px;
+  flex-shrink: 0;
+}

@@ -1,3 +1,5 @@
+import SideBar from '../../components/sidebar/sidebar';
+import { DashboardProvider } from '../../contexts/DashboardContext';
 import DashboardList from './components/DashboardList/DashboardList';
 import Invited from './components/Invited/Invited';
 import styles from './index.module.scss';
@@ -7,16 +9,18 @@ import styles from './index.module.scss';
 
 function MyDashboard() {
   return (
-    <div className={styles.container}>
-      <div>sidemenu</div>
-      <div>
-        <div>header</div>
+    <DashboardProvider>
+      <div className={styles.container}>
+        <SideBar />
         <div>
-          <DashboardList />
-          <Invited />
+          <div>header</div>
+          <div>
+            <DashboardList />
+            <Invited />
+          </div>
         </div>
       </div>
-    </div>
+    </DashboardProvider>
   );
 }
 

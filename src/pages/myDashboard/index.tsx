@@ -1,6 +1,7 @@
 import SideBar from '../../components/sidebar/sidebar';
 import { DashboardProvider } from '../../contexts/DashboardContext';
 import DashboardList from './components/DashboardList/DashboardList';
+import MyDashboardHeader from './components/Header/Header';
 import Invited from './components/Invited/Invited';
 import styles from './index.module.scss';
 
@@ -13,7 +14,7 @@ function MyDashboard() {
       <div className={styles.container}>
         <SideBar />
         <div>
-          <div>header</div>
+          <MyDashboardHeader />
           <div>
             <DashboardList />
             <Invited />

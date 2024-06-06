@@ -88,7 +88,6 @@ function SideBar() {
           handleNext={handleNextClick}
         />
       </div>
-      <div>{activeDashboard}</div>
     </div>
   );
 }

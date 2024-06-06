@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './Input.module.scss';
+import classNames from 'classnames';
 import EyeOn from '../../../../../public/icon/eye_on.svg';
 import EyeOff from '../../../../../public/icon/eye_off.svg';
 
@@ -29,6 +30,14 @@ function InputPassword({
     toggleIcon.type = toggleVisible ? 'password' : 'text';
   };
 
+  // 에러 스타일 선언
+  const errorInputClass = classNames(styles.emailInputSection, {
+    [styles.errorInput]: type === 'error',
+  });
+  const errorTextClass = classNames(styles.errorText, {
+    [styles.hide]: type !== 'error',
+  });
+
   return (
     <>
       <label htmlFor={id} className={styles.inputText}>
@@ -36,7 +45,7 @@ function InputPassword({
       </label>
       <div className={styles.passwordInputContainer}>
         <input
-          className={styles.passwordInputSection}
+          className={errorInputClass}
           id={id}
           name={name}
           type={type}
@@ -54,7 +63,7 @@ function InputPassword({
           />
         </button>
       </div>
-      <span className="errorText">{errorText}</span>
+      <span className={errorTextClass}>{errorText}</span>
     </>
   );
 }

@@ -1,7 +1,8 @@
 import styles from './DashboardList.module.scss';
-import usePagination from '../../../../hooks/usePagination';
+import usePagination from '../../../../hooks/pagination/usePagination';
 import { PagenationBtn } from '../../../../components/Btn/Btn';
 import { AddDashboard, Dashboard } from './Dashboard';
+// import { apiDashboardsList, apiLoginRequest } from '../../../../api/apiModule';
 
 /*  대시보드 목록을 보여주는 컴포넌트입니다.
     - 대시보드 목록을 보여주는 ul 부분과
@@ -25,6 +26,15 @@ const fetchDashboards = async (page: number) => {
     `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
   );
   const data = await response.json();
+
+  // 로그인 테스트
+  // const response = await apiLoginRequest({
+  //   email: 'test@codeit.com',
+  //   password: 'testpassword',
+  // });
+
+  // 토큰테스트
+  // const response = await apiDashboardsList({ navigationMethod: 'pagination' });
   return {
     items: data.dashboards,
     totalCount: data.totalCount,

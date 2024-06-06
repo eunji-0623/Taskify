@@ -24,6 +24,7 @@ interface ChangePasswordResponse {
 // 로그인 요청 api
 export async function apiLoginRequest(body: LoginBody): Promise<LoginResponse> {
   const res = await instance.post<LoginResponse>('/auth/login', body);
+  localStorage.setItem('Token', handleResponse(res).accessToken);
   return handleResponse(res);
 }
 
@@ -31,6 +32,9 @@ export async function apiLoginRequest(body: LoginBody): Promise<LoginResponse> {
 export async function apiChangePassword(
   body: ChangePasswordBody,
 ): Promise<string | ChangePasswordResponse> {
-  const res = await instance.put<ChangePasswordResponse>('/auth/login', body);
+  const res = await instance.put<ChangePasswordResponse>(
+    '/auth/password',
+    body,
+  );
   return handleResponse(res);
 }

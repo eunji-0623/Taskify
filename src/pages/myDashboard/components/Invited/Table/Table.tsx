@@ -31,7 +31,7 @@ function Table({ invitations, hasNext, setElement }: TableProps) {
             name={invitation.inviter.nickname}
           />
         ))}
-        {hasNext && <div ref={setElement} style={{ height: '20px' }}></div>}
+        {hasNext && <tr ref={setElement} style={{ height: '20px' }}></tr>}
       </tbody>
     </table>
   );

@@ -21,7 +21,6 @@ const fetchInvitations = async (cursor: number): Promise<Invitation[]> => {
   // mockData 사용. 추후 변경 필요
   const response = await fetch(`/mockData/invitation.json`);
   const data = await response.json();
-  console.log(`cursor: ${cursor}`);
   const testData = data.invitations.slice(cursor, cursor + PAGE_SIZE);
   return testData;
 };
@@ -56,11 +55,13 @@ function Invited() {
     <div className={styles.container}>
       <h2 className={styles.title}>초대받은 대시보드</h2>
       <Search />
-      <Table
-        invitations={invitations}
-        hasNext={hasNext}
-        setElement={setElement}
-      />
+      <div className={styles.tableContainer}>
+        <Table
+          invitations={invitations}
+          hasNext={hasNext}
+          setElement={setElement}
+        />
+      </div>
       {/* <Empty /> */}
     </div>
   );

@@ -4,19 +4,14 @@ import { AxiosResponse } from 'axios';
 export const extractErrorMessage = (response: AxiosResponse): string => {
   let errorMessage = 'extractErrorMessage 함수 에러';
 
-  try {
-    // 에러 타입이 JSON일경우
-    if (response.headers['content-type']?.includes('application/json')) {
-      const errorData = response.data;
-      errorMessage = errorData.message || JSON.stringify(errorData);
-      // 에러 타입이 문자열일 경우
-    } else {
-      errorMessage = response.statusText || '알 수 없는 오류가 발생했습니다.';
-    }
-  } catch (error) {
-    errorMessage = '오류 응답을 파싱 중 에러.';
+  // 에러 타입이 JSON일경우
+  if (response.headers['content-type']?.includes('application/json')) {
+    const errorData = response.data;
+    errorMessage = errorData.message || JSON.stringify(errorData);
+    // 에러 타입이 문자열일 경우
+  } else {
+    errorMessage = response.statusText || '알 수 없는 오류가 발생했습니다.';
   }
-
   return errorMessage;
 };
 

@@ -21,11 +21,13 @@ export const extractErrorMessage = (response: AxiosResponse): string => {
 };
 
 // 응답이 정상인지 검사하고, 정상이면 응답 데이터를, 에러가 발생하면 에러 메세지를 문자열로 리턴합니다.
+// catch문에서 (err)로 errorMessage에 접근할 수 있습니다.
 export const handleResponse = (response: AxiosResponse) => {
   if (response.status < 200 || response.status >= 300) {
     const errorMessage = extractErrorMessage(response);
     return Promise.reject(errorMessage);
   }
+  // 성공 204코드는 데이터가 없습니다.
   if (response.status === 204 && !response.data) {
     return Promise.resolve('204NoData');
   }

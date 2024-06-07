@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './sidebar.module.scss';
 import Logo from '/icon/logo_large.svg';
 import AddBox from '/icon/add_box.svg';
@@ -7,6 +8,13 @@ import { PagenationBtn } from '../Btn/Btn';
 import usePagination from '../../hooks/pagination/usePagination';
 import { DashboardContext } from '../../contexts/DashboardContext';
 import { Link } from 'react-router-dom';
+
+/*
+사이드 바 컴포넌트 입니다.
+우선 기본적으로 대시보드를 15개씩 보이도록 하고,
+스크롤은 따로 적용되도록 하였습니다.
+대시보드 클릭 시, /dashboard/{dashboardId}로 이동합니다.
+*/
 
 const ITEMS_PER_PAGE = 15;
 
@@ -34,14 +42,14 @@ const fetchDashboards = async (page: number) => {
 };
 
 function SideBar() {
-  const [selectedDashboardId, setSelectedDashboardId] = useState<number>();
 
   const context = useContext(DashboardContext);
-
+  
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
   const { setActiveDashboard } = context;
+  const navigate = useNavigate();
 
   const { currentItems, handlePrevClick, handleNextClick } =
     usePagination<DashboardApi>({
@@ -50,8 +58,8 @@ function SideBar() {
     });
 
   const ClickDashboard = (id: number) => {
-    setSelectedDashboardId(id);
     setActiveDashboard(id);
+    navigate(`/dashboard/${id}`);
   };
 
   return (
@@ -77,7 +85,7 @@ function SideBar() {
             color={dashboard.color}
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
-            isSelected={selectedDashboardId === dashboard.id}
+            selectedId={dashboard.id}
             onClick={() => ClickDashboard(dashboard.id)}
           />
         ))}

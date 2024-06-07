@@ -2,7 +2,7 @@ import { createContext, useState, ReactNode, FC } from 'react';
 
 /*
 사이드 바 대시보드 클릭에 따라
-다른 컴포넌트 내용을 변경하기 위한 상태관리 Context 입니다.
+데이터를 옮기고 Navigate 하기 위한 상태관리 Context 입니다.
 */
 
 interface DashboardContextProps {

@@ -48,7 +48,7 @@ function SideBar() {
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { setActiveDashboard } = context;
+  const { setActiveDashboard , setIsCreateByMe } = context;
   const navigate = useNavigate();
 
   const { currentItems, handlePrevClick, handleNextClick } =
@@ -57,8 +57,9 @@ function SideBar() {
       itemsPerPage: ITEMS_PER_PAGE,
     });
 
-  const ClickDashboard = (id: number) => {
+  const ClickDashboard = (id: number, createdByMe : boolean) => {
     setActiveDashboard(id);
+    setIsCreateByMe(createdByMe);
     navigate(`/dashboard/${id}`);
   };
 
@@ -86,7 +87,7 @@ function SideBar() {
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() => ClickDashboard(dashboard.id)}
+            onClick={() => ClickDashboard(dashboard.id, dashboard.createdByMe)}
           />
         ))}
       </div>

@@ -8,6 +8,8 @@ import { createContext, useState, ReactNode, FC } from 'react';
 interface DashboardContextProps {
   activeDashboard: number | undefined;
   setActiveDashboard: (dashboard: number) => void;
+  isCreatreByMe : boolean | undefined;
+  setIsCreateByMe : (dashboard : boolean) => void;
 }
 
 export const DashboardContext = createContext<DashboardContextProps | null>(null);
@@ -18,9 +20,10 @@ interface DashboardProviderProps {
 
 export const DashboardProvider: FC<DashboardProviderProps> = ({ children }) => {
   const [activeDashboard, setActiveDashboard] = useState<number | undefined>(undefined);
+  const [isCreatreByMe, setIsCreateByMe] = useState<boolean | undefined>(undefined);
 
   return (
-    <DashboardContext.Provider value={{ activeDashboard, setActiveDashboard }}>
+    <DashboardContext.Provider value={{ activeDashboard, setActiveDashboard, isCreatreByMe, setIsCreateByMe }}>
       {children}
     </DashboardContext.Provider>
   );

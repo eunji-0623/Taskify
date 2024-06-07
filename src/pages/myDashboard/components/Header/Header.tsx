@@ -1,6 +1,7 @@
 import styles from './Header.module.scss';
 import { DashboardContext } from '../../../../contexts/DashboardContext';
 import { useContext } from 'react';
+import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 
 function MyDashboardHeader() {
   const context = useContext(DashboardContext);
@@ -14,11 +15,9 @@ function MyDashboardHeader() {
         내 대시보드
       </div>
       <div className={styles.DashboardUserInfo}>
-        <div className={styles.userImage}>
-          프로필 이미지
-        </div>
+        <UserProfileImg isImg = {false} profileImageUrl='#A3C4A2' nickname='Test'/>
         <div className={styles.userName}>
-          유저 이름
+          Test
         </div>
       </div>
     </header>

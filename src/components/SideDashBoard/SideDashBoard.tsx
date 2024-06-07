@@ -20,13 +20,18 @@ interface SideDashBoardProps {
   onClick: () => void;
 }
 
-function SideDashBoard({ color, title, createdByMe, selectedId, onClick }: SideDashBoardProps) {
-
+function SideDashBoard({
+  color,
+  title,
+  createdByMe,
+  selectedId,
+  onClick,
+}: SideDashBoardProps) {
   const context = useContext(DashboardContext);
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const {activeDashboard} = context;
+  const { activeDashboard } = context;
   const Selected = selectedId === activeDashboard;
   return (
     <div
@@ -35,7 +40,13 @@ function SideDashBoard({ color, title, createdByMe, selectedId, onClick }: SideD
     >
       <ColorDot color={color} />
       <span className={styles.Title}>{title}</span>
-      {createdByMe && <img src={CrownImg} alt="관리자 표시 이미지" className={styles.CrownImg} />}
+      {createdByMe && (
+        <img
+          src={CrownImg}
+          alt="관리자 표시 이미지"
+          className={styles.CrownImg}
+        />
+      )}
     </div>
   );
 }

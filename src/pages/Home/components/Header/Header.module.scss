@@ -1,27 +1,47 @@
-@import "../../../../styles/global.scss";
+@import "/src/styles/global.scss";
+@import "/src/styles/media.scss";
 
-.Home_Header {
-  
+.HomeHeader {
   height: 70px;
   position: sticky;
   top: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 16px;
-  margin-right: 80px;
+  padding-left: 16px;
+  padding-right: 80px;
   background-color: $black_000000;
   z-index: 1;
+  @include tablet {
+    padding-right: 40px;
+  }
+  @include mobile {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+.Logo {
+  @include mobile {
+    display: none;
+  }
+  
 }
 
-.sign__container {
+.LogoMobile {
+  display: none;
+  @include mobile {
+    display: block;
+  }
+}
+
+.signContainer {
   display: flex;
   align-items: center;
   gap: 36px;
 }
 
-.Header_login,
-.Header_signup {
+.HeaderLogin,
+.HeaderSignup {
   color: var(--white-white_FFFFFF, #fff);
   font-family: Pretendard;
   font-size: 16px;

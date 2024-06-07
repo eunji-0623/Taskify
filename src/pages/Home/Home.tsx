@@ -4,7 +4,7 @@ import HomeHeader from './components/Header/Header';
 import Main from './components/Main/Main';
 
 /*
-초기 랜더링 페이지 최상단 입니다.
+초기 랜딩 페이지 최상단 입니다.
 */
 
 function Home() {

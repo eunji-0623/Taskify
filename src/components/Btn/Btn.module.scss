@@ -1,0 +1,180 @@
+@import '../../styles/media.scss';
+@import '../../styles//global.scss';
+
+@mixin Btn {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--black-black_333236, #333236);
+  cursor: pointer;
+}
+
+.AcceptAndRejectBtn {
+  display: flex;
+  gap: 10px;
+}
+.AcceptBtn,
+.RejectBtn {
+  @include Btn;
+  //display: flex;
+  width: 84px;
+  height: 32px;
+  gap: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+
+  @include tablet {
+    width: 72px;
+    height: 30px;
+  }
+  @include mobile {
+    width: 109px;
+    font-size: 12px;
+  }
+}
+
+.AcceptBtn {
+  background: var(--violet-violet_5534DA, #5534da);
+  border: 0px;
+  color: $white_FFFFFF;
+}
+.RejectBtn {
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+  color: #5534da;
+}
+
+.DeleteBtn {
+  @include Btn;
+  width: 84px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+  font-size: 14px;
+  color: var(--violet-violet_5534DA, #5534da);
+
+  @include mobile {
+    width: 52px;
+    font-size: 12px;
+  }
+}
+
+.ChangeAndSaveBtn {
+  @include Btn;
+  width: 84px;
+  height: 32px;
+  background: var(--violet-violet_5534DA, #5534da);
+  border-radius: 4px;
+  border: 0px;
+  color: $white_FFFFFF;
+  font-size: 14px;
+
+  @include mobile {
+    height: 28px;
+    font-size: 12px;
+  }
+}
+
+.AddNewTask {
+  @include Btn;
+  width: 314px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+
+  @include tablet {
+    width: 544px;
+  }
+  @include mobile {
+    width: 284px;
+    height: 32px;
+  }
+}
+.AddTaskImg {
+  width: 22px;
+  height: 22px;
+  @include mobile {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.AddNewColumn {
+  @include Btn;
+  width: 354px;
+  height: 70px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+
+  @include tablet {
+    width: 544px;
+  }
+  @include mobile {
+    width: 284px;
+    height: 60px;
+  }
+}
+
+.AddNewColumnContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.AddNewColumnText {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+.DeleteDashBoardBtn {
+  @include Btn;
+  width: 320px;
+  height: 62px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--gray-gray_FAFAFA, #fafafa);
+  font-size: 18px;
+
+  @include mobile {
+    width: 284px;
+    height: 52px;
+  }
+}
+
+.PagenationBtn {
+  display: flex;
+  gap: 0px;
+}
+
+.PrevBtn {
+  @include Btn;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px 0px 0px 4px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+}
+.NextBtn {
+  @include Btn;
+  width: 40px;
+  height: 40px;
+  border-radius: 0px 4px 4px 0px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+}

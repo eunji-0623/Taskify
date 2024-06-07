@@ -9,6 +9,8 @@ interface UsePaginationResult<T> {
   items: T[];
   currentPage: number;
   totalPages: number;
+  isFirstPage: boolean;
+  isLastPage: boolean;
   handlePrevClick: () => void;
   handleNextClick: () => void;
 }
@@ -26,12 +28,18 @@ function usePagination<T>({
   const [items, setItems] = useState<T[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPage] = useState(1);
+  const [isFirstPage, setIsFirstPage] = useState(true);
+  const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
     async function loadItems() {
       const result = await fetchData(currentPage);
       setItems(result.items);
       setTotalPage(Math.ceil(result.totalCount / itemsPerPage));
+      setIsFirstPage(currentPage === 1);
+      setIsLastPage(
+        currentPage === Math.ceil(result.totalCount / itemsPerPage),
+      );
     }
     loadItems();
   }, [currentPage, fetchData, itemsPerPage]);
@@ -48,6 +56,8 @@ function usePagination<T>({
     items,
     currentPage,
     totalPages,
+    isFirstPage,
+    isLastPage,
     handlePrevClick,
     handleNextClick,
   };

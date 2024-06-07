@@ -36,7 +36,13 @@ const fetchDashboards = async (
 
 function DashboardList() {
   const {
-    items, currentPage, totalPages, handlePrevClick, handleNextClick,
+    items,
+    currentPage,
+    totalPages,
+    isFirstPage,
+    isLastPage,
+    handlePrevClick,
+    handleNextClick,
   } = usePagination<DashboardDetail>({
     fetchData: fetchDashboards,
     itemsPerPage: ITEMS_PER_PAGE,
@@ -67,6 +73,8 @@ function DashboardList() {
         <PagenationBtn
           handlePrev={handlePrevClick}
           handleNext={handleNextClick}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
         />
       </div>
     </div>

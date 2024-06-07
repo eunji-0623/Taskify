@@ -41,7 +41,7 @@ function SideBar() {
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { activeDashboard, setActiveDashboard } = context;
+  const { setActiveDashboard } = context;
 
   const { currentItems, handlePrevClick, handleNextClick } =
     usePagination<DashboardApi>({

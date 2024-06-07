@@ -7,12 +7,11 @@ function MyDashboardHeader() {
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { activeDashboard } = context;
 
   return(
     <header className={styles.MyDashboardHeader}>
       <div className={styles.DashboardTitle}>
-        대시보드 {activeDashboard}
+        내 대시보드
       </div>
       <div className={styles.DashboardUserInfo}>
         <div className={styles.userImage}>

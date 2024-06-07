@@ -13,7 +13,7 @@ function MyDashboard() {
     <DashboardProvider>
       <div className={styles.container}>
         <SideBar />
-        <div>
+        <div className={styles.main}>
           <MyDashboardHeader />
           <div>
             <DashboardList />

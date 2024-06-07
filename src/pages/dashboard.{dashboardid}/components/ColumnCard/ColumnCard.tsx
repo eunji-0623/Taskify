@@ -12,7 +12,7 @@ interface CardProps {
 // 일정을 카드 모양으로 보여주는 컴포넌트입니다.
 // 사진, 제목, 태그, 기한, 작성자이미지를 prop으로 받습니다.
 // 현재 작성자 이미지 대신 이름만 보여지게 처리했습니다. 수정 필요합니다.
-function Card({
+function ColumnCard({
   assignee,
   title,
   dueDate,
@@ -47,7 +47,7 @@ function Card({
   );
 }
 
-Card.defaultProps = {
+ColumnCard.defaultProps = {
   imageUrl: undefined,
 };
-export default Card;
+export default ColumnCard;

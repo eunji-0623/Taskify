@@ -1,6 +1,5 @@
 // **************** 머지 후 파일 삭제 ****************
-import axios from 'axios';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const BASE_URL = 'https://sp-taskify-api.vercel.app';
 const TEAM_ID = '5-8';

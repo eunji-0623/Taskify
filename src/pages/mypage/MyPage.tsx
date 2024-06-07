@@ -8,8 +8,8 @@ import ArrowIcon from '../../../public/icon/arrow_forward.svg';
 function MyPage() {
   return (
     <div className={styles.myPageLayout}>
-      <div className={styles.navBar}></div>
-      <div className={styles.sideBar}></div>
+      <div className={styles.navBar} />
+      <div className={styles.sideBar} />
       <div className={styles.backContainer}>
         <img
           className={styles.backIcon}

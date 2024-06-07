@@ -60,7 +60,7 @@ function LoginForm() {
     try {
       const response = await apiLoginRequest({ email, password });
       setUser(response.user);
-      console.log('환영합니다,', response.user, '님!');
+      // api 확인 용 console.log('환영합니다,', response.user, '님!');
       navigate('/mydashboard');
     } catch (error) {
       setError('로그인에 실패했습니다. 다시 시도해주세요.');

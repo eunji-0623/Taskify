@@ -1,5 +1,5 @@
-import styles from './Logo.module.scss';
 import { Link } from 'react-router-dom';
+import styles from './Logo.module.scss';
 import LogoImage from '../../../../../public/icon/logo_main.svg';
 
 type HelloText = {

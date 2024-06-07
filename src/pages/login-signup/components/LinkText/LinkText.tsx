@@ -1,5 +1,5 @@
-import styles from './LinkText.module.scss';
 import { Link } from 'react-router-dom';
+import styles from './LinkText.module.scss';
 
 type LinkTextProps = {
   Text: string;

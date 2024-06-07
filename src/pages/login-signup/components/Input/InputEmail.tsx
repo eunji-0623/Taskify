@@ -1,5 +1,5 @@
-import styles from './Input.module.scss';
 import classNames from 'classnames';
+import styles from './Input.module.scss';
 
 interface InputEmailProps {
   inputText: string;

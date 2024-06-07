@@ -20,9 +20,6 @@ function NewColumnModal({ isOpen, setIsOpen }: ModalProps) {
   // 새로운 컬럼 생성 동작
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    // submit 테스트
-    console.log('submit');
   }
 
   return (

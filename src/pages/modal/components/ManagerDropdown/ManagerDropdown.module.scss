@@ -4,6 +4,7 @@
 .container {
   position: relative;
   display: flex;
+  margin-top: 0.63rem;
   flex-direction: column;
   align-items: flex-start;
 
@@ -46,6 +47,20 @@
   }
 }
 
+.profileImg,
+.dropdownprofile {
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: 999px;
+}
+
+.dropdownItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.37rem;
+}
+
 .dropdownBlock {
   z-index: 1;
   position: absolute;
@@ -58,6 +73,7 @@
 }
 
 .items {
+  position: relative;
   width: 100%;
   margin-top: 0.12rem;
   display: flex;
@@ -70,26 +86,78 @@
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
 }
 
-.item {
+.itemBlock {
   width: 100%;
   display: flex;
-  border-radius: 0.375rem;
   align-items: center;
   gap: 0.37rem;
   padding: 0.6rem;
   background-color: $white_FFFFFF;
   text-align: start;
   border: 1px solid transparent;
-
+  border-radius: 0.375rem;
   font-size: 0.8rem;
-  
   font-weight: 400;
   cursor: pointer;
+}
 
-  &:hover {
-    border-radius: 0.375rem;
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.37rem;
+  font-size: 0.8rem;
+  margin-left: 1.8rem;
+}
 
-    // 나중에 삭제
+.checkedImg {
+  position: absolute;
+}
+
+.searchBlock {
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  border: 1px solid #d9d9d9;
+
+  &:focus {
+    // 클릭 시 생기는 기본 테두리 변경
+    outline: none; 
     border: 1px solid $violet_5534DA;
+  }
+}
+
+.searchCenter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.8rem;
+  background-color: white;
+  border-radius: 0.375rem;
+  border: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 1rem;
+  font-size: 0.8rem;
+  border: none;
+  background-color: none;
+  border-radius: 0.375rem;
+
+  &::placeholder {
+    font-size: 0.8rem;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @include mobile {
+    height: 2rem;
   }
 }

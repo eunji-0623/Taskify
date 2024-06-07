@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import styles from './ModalDropdown.module.scss';
+import styles from './DropdownMenu.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
 
 /*
-  모달 드롭다운 메뉴바
+  드롭다운 메뉴바
   value, setValue, data를 prop로 받습니다.
 */
 
@@ -17,12 +17,13 @@ interface DropdownProps {
   }[];
 }
 
-function ModalDropdown({
+function DropdownMenu({
   value,
   setValue,
   data,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState<string | null>('');
   const modalRef = useRef<HTMLDivElement>(null);
 
   // 영역 밖 클릭 시 닫기
@@ -47,6 +48,7 @@ function ModalDropdown({
   const handleItemClick = (choice: string) => {
     setValue(choice);
     setIsOpen(false);
+    setSelected(choice);
   };
 
   return (
@@ -66,13 +68,17 @@ function ModalDropdown({
             {data.map((item) => (
               <li key={item.id}>
                 <button
-                  className={styles.item}
+                  className={styles.itemBlock}
                   type="button"
                   style={{ borderRadius: '0.375rem' }}
                   onClick={() => handleItemClick(item.text)}
                 >
-                  <img src={checked} alt="드롭다운" />
-                  {item.text}
+                  {selected === item.text && (
+                    <img className={styles.checkedImg} src={checked} alt="체크 아이콘" />
+                  )}
+                  <div className={styles.item}>
+                    {item.text}
+                  </div>
                 </button>
               </li>
             ))}
@@ -83,4 +89,4 @@ function ModalDropdown({
   );
 }
 
-export default ModalDropdown;
+export default DropdownMenu;

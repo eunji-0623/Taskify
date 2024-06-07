@@ -12,13 +12,22 @@ interface ChangePasswordBody {
 }
 
 interface LoginResponse {
-  user: string;
-  accessToken: string;
+  status: number;
+  message?: string;
+  user?: {
+    id: number;
+    email: string;
+    nickname: string;
+    profileImageUrl?: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  accessToken?: string;
 }
 
 interface ChangePasswordResponse {
   status: number;
-  message: string;
+  message?: string;
 }
 
 // 로그인 요청 api

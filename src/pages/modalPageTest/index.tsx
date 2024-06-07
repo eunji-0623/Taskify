@@ -1,24 +1,24 @@
 import { useState } from 'react';
-import useNewTodoModal from '../../hooks/useNewTodoModal';
+import useNewTodoModal from '../../hooks/modal/useNewTodoModal';
 import EditTodoModal from '../modal/EditTodoModal/EditTodoModal';
 import EditColumnModal from '../modal/EditColumnModal/EditColumnModal';
 import TodoCardModal from '../modal/TodoCardModal/TodoCardModal';
-import useAlertModal from '../../hooks/useAlertModal';
-import useDeleteColumnModal from '../../hooks/useDeleteColumnModal';
-import useInviteModal from '../../hooks/useInviteModal';
-import useNewColumnModal from '../../hooks/useNewColumnModal';
-import useNewDashModal from '../../hooks/useNewDashModal';
+import useAlertModal from '../../hooks/modal/useAlertModal';
+import useDeleteColumnModal from '../../hooks/modal/useDeleteColumnModal';
+import useInviteModal from '../../hooks/modal/useInviteModal';
+import useNewColumnModal from '../../hooks/modal/useNewColumnModal';
+import useNewDashModal from '../../hooks/modal/useNewDashModal';
 
 function ModalPageTest() {
   const { NewTodoModal, openTodo } = useNewTodoModal();
-  const [todoTest, setTodoTest] = useState(false);
-  const [cardTest, setCardTest] = useState(false);
-  const [columnTest, setColumnTest] = useState(false);
-  const { AlertModal, openAlert, closeAlert } = useAlertModal();
+  const { AlertModal, openAlert } = useAlertModal();
   const { NewDashModal, openDash } = useNewDashModal();
   const { NewColumnModal, openNewColumn } = useNewColumnModal();
   const { DeleteColumnModal, openDeleteColumn } = useDeleteColumnModal();
   const { InviteModal, openInvite } = useInviteModal();
+  const [todoTest, setTodoTest] = useState(false);
+  const [cardTest, setCardTest] = useState(false);
+  const [columnTest, setColumnTest] = useState(false);
 
   function handleTodoClick() {
     setTodoTest(!todoTest);
@@ -34,6 +34,9 @@ function ModalPageTest() {
 
   return (
     <div>
+      <button type="button" onClick={openAlert}>Alert 모달 테스트 버튼</button>
+      <AlertModal modalText="이미 사용 중인 이메일입니다." buttonText="확인" />
+
       <button type="button" onClick={openTodo}>할 일 생성 버튼</button>
       <NewTodoModal />
 
@@ -45,12 +48,6 @@ function ModalPageTest() {
 
       <button type="button" onClick={handleCardClick}>할 일 카드 확인 버튼</button>
       {cardTest ? <TodoCardModal isOpen={cardTest} setIsOpen={setCardTest} /> : null}
-
-      <button type="button" onClick={openAlert}>Alert 모달 테스트 버튼</button>
-      <AlertModal>
-        <p>이미 사용 중인 이메일입니다.</p>
-        <button type="button" onClick={closeAlert}>확인</button>
-      </AlertModal>
 
       <button type="button" onClick={openDash}>+ 버튼 대시보드 추가</button>
       <NewDashModal />

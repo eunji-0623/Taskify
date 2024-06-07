@@ -19,8 +19,8 @@ interface ModalProps {
 
 // 할 일 데이터가 필요
 function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
-  const [condition, setCondition] = useState('test');
-  const [manager, setManager] = useState('test');
+  const [condition, setCondition] = useState('test1');
+  const [manager, setManager] = useState('test1');
   const [profile, setProfile] = useState(TestImg);
   const [title, setTitle] = useState('test');
   const [contents, setContents] = useState('test');

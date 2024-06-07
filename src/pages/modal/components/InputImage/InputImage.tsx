@@ -5,11 +5,14 @@ import PencilIcon from '/icon/pencil.svg';
 interface InputImageProps {
   uploadImgUrl: string;
   setUploadImgUrl: (url: string) => void;
+  // eslint-disable-next-line react/require-default-props
+  text?: string;
 }
 
 function InputImage({
   uploadImgUrl,
   setUploadImgUrl,
+  text = '',
 }: InputImageProps) {
   const uploadImageRef = useRef<HTMLInputElement>(null);
 
@@ -37,17 +40,20 @@ function InputImage({
     <div className={styles.contentBlock}>
       <label htmlFor="image">이미지</label>
       <button className={styles.imageBlock} onClick={onClickImage} type="button">
-        <img
-          className={styles.contentImage}
-          src={uploadImgUrl}
-          alt="img"
-          style={{ filter: 'brightness(50%)' }}
-        />
-        <img
-          className={styles.pencilIcon}
-          src={PencilIcon}
-          alt="img"
-        />
+        {text !== 'new' ? (
+          <>
+            <img
+              className={styles.contentImage}
+              src={uploadImgUrl}
+              alt="img"
+            />
+            <img
+              className={styles.pencilIcon}
+              src={PencilIcon}
+              alt="img"
+            />
+          </>
+        ) : <img className={styles.contentImageBasic} src={uploadImgUrl} alt="img" />}
       </button>
 
       <input

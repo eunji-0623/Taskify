@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import NewColumnModal from '../pages/modal/NewColumnModal/NewColumnModal';
+import NewColumnModal from '../../pages/modal/NewColumnModal/NewColumnModal';
 
 /*
   모달의 렌더링 여부가 결정되는 state 생략을 위한 NewColumnModal hook입니다.

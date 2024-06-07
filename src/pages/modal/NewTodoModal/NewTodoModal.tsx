@@ -4,6 +4,7 @@ import ManagerDropdown from '../components/ManagerDropdown/ManagerDropdown';
 import Calendar from '../components/Calendar/Calendar';
 import InputTag from '../components/InputTag/InputTag';
 import InputImage from '../components/InputImage/InputImage';
+// import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './NewTodoModal.module.scss';
 import AddIcon from '/icon/add_image_box.svg';
 import TestImg from '/img/test_img.png';
@@ -69,7 +70,7 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>
-        <h1>할 일 수정</h1>
+        <h1>할 일 생성</h1>
 
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
@@ -125,7 +126,7 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <InputImage uploadImgUrl={uploadImgUrl} setUploadImgUrl={setUploadImgUrl} />
+            <InputImage uploadImgUrl={uploadImgUrl} setUploadImgUrl={setUploadImgUrl} text="new" />
           </div>
 
           <div className={styles.buttonBlock}>

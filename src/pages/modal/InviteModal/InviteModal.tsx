@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
+import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
 
 /*
@@ -33,8 +34,8 @@ function InviteModal({ isOpen, setIsOpen }: ModalProps) {
           </div>
 
           <div className={styles.buttonBlock}>
-            <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
-            <button className={styles.createButton} type="submit">초대</button>
+            <DeleteBtn BtnText="삭제" handleBtn={close} />
+            <ChangeAndSaveBtn BtnText="초대" handleBtn={close} />
           </div>
         </form>
       </div>

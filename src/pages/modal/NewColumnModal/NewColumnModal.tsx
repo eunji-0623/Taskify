@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
+import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './NewColumnModal.module.scss';
 
 /*
@@ -34,8 +35,9 @@ function NewColumnModal({ isOpen, setIsOpen }: ModalProps) {
           </div>
 
           <div className={styles.buttonBlock}>
-            <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
-            <button className={styles.createButton} type="submit">생성</button>
+            <DeleteBtn BtnText="취소" handleBtn={close} />
+            <ChangeAndSaveBtn BtnText="생성" handleBtn={close} />
+
           </div>
         </form>
       </div>

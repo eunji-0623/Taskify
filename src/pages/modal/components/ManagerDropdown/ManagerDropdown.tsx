@@ -29,7 +29,7 @@ function ManagerDropdown({
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(value);
   const modalRef = useRef<HTMLDivElement>(null);
 
   // 영역 밖 클릭 시 닫기
@@ -86,18 +86,6 @@ function ManagerDropdown({
           />
         </div>
       </button>
-
-      {/* <button
-        type="button"
-        className={styles.dropdownButton}
-        onClick={toggleDropdown}
-      >
-        <ul className={styles.dropdownItem}>
-          <img className={styles.dropdownprofile} src={profile} alt="프로필 이미지" />
-          {value}
-        </ul>
-        <img src={ArrowDropDown} alt="드롭다운 아이콘" />
-      </button> */}
 
       {isOpen && (
         <div className={styles.dropdownBlock}>

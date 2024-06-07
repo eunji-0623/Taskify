@@ -62,11 +62,19 @@
 }
 
 .content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.title {
   display: flex;
   flex-direction: column;
   gap: 0.62rem;
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .colorList {
@@ -116,16 +124,15 @@
 
 .delete {
   position: absolute;
-  left: 1.75rem;
-  bottom: 1.75rem;
+  bottom: 3.5rem;
+  width: 3.4rem;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
   color: var(--gray-gray_9FA6B2, #9FA6B2);
   font-size: 0.875rem;
   font-weight: 400;
   text-decoration-line: underline;
-  border: 0;
   cursor: pointer;
-
-  @include mobile {
-    position: static;
-  }
 }

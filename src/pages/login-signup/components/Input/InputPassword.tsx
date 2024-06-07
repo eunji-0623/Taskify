@@ -4,14 +4,18 @@ import classNames from 'classnames';
 import EyeOn from '../../../../../public/icon/eye_on.svg';
 import EyeOff from '../../../../../public/icon/eye_off.svg';
 
-type InputPasswordProps = {
+interface InputPasswordProps {
   inputText: string;
   id: string;
   name: string;
   type: string;
   placeholder: string;
   errorText: string;
-};
+  value: string;
+  error: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 function InputPassword({
   inputText,
@@ -20,22 +24,23 @@ function InputPassword({
   type,
   placeholder,
   errorText,
+  value,
+  error,
+  onChange,
+  onBlur,
 }: InputPasswordProps) {
   const [toggleVisible, setToggleVisible] = useState(false);
 
-  // 눈 모양 아이콘 토글 함수
   const toggleButton = () => {
-    const toggleIcon = document.getElementById(id) as HTMLInputElement;
     setToggleVisible(!toggleVisible);
-    toggleIcon.type = toggleVisible ? 'password' : 'text';
   };
 
-  // 에러 스타일 선언
-  const errorInputClass = classNames(styles.emailInputSection, {
-    [styles.errorInput]: type === 'error',
+  const errorInputClass = classNames(styles.passwordInputSection, {
+    [styles.errorInput]: error,
   });
+
   const errorTextClass = classNames(styles.errorText, {
-    [styles.hide]: type !== 'error',
+    [styles.hide]: !error,
   });
 
   return (
@@ -48,8 +53,11 @@ function InputPassword({
           className={errorInputClass}
           id={id}
           name={name}
-          type={type}
+          type={toggleVisible ? 'text' : type}
           placeholder={placeholder}
+          value={value}
+          onBlur={onBlur}
+          onChange={onChange}
         />
         <button
           className={styles.toggleButton}

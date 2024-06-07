@@ -6,7 +6,7 @@ interface UsePaginationProps<T> {
 }
 
 interface UsePaginationResult<T> {
-  currentItems: T[];
+  items: T[];
   currentPage: number;
   totalPages: number;
   handlePrevClick: () => void;
@@ -14,7 +14,7 @@ interface UsePaginationResult<T> {
 }
 
 /*  좌우 버튼을 통해 페이지네이션을 하는 경우 사용
-    (예시) const = {currentItems, handlePrevClick, handleNextClick} = usePagination<Dashboard>({
+    (예시) const = {items, handlePrevClick, handleNextClick} = usePagination<Dashboard>({
       fetchData: fetchDashboards,
       itemsPerPage: ITEMS_PER_PAGE,
     }); */
@@ -44,13 +44,8 @@ function usePagination<T>({
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
 
-  // mockdata에서 page, limit 적용을 위해 사용. 추후 변경 예정!!!!
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = items.slice(startIndex, endIndex);
-
   return {
-    currentItems,
+    items,
     currentPage,
     totalPages,
     handlePrevClick,

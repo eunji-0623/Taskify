@@ -1,11 +1,21 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-// 머지 후 api 주소 수정
-import { apiLoginRequest } from '../../utils/util';
+import { apiLoginRequest } from '../../../../api/apiModule';
 import styles from './LoginForm.module.scss';
+import AlertModal from '../../../modal/AlertModal/AlertModal';
 import InputEmail from '../Input/InputEmail';
 import InputPassword from '../Input/InputPassword';
 import Button from '../Button/Button';
+
+// User 타입 선언 => useUser에 타입 적용 => API요청 setUser(response.user ?? null)
+type User = {
+  id: number;
+  email: string;
+  nickname: string;
+  profileImageUrl?: string | undefined;
+  createdAt: string;
+  updatedAt: string;
+};
 
 function LoginForm() {
   // 값 관리
@@ -15,11 +25,12 @@ function LoginForm() {
   const [passwordError, setPasswordError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [, /* error */ setError] = useState<string | null>(null); // 값 사용 X
-  const [, /* user */ setUser] = useState<string | null>(null); // 값 사용 X
+  const [, /* user */ setUser] = useState<User | null>(null); // 값 사용 X
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Input 값이 변경될 때마다 버튼 상태 업데이트(활성화, 비활성화)
+  // Input 값이 변경될 때마다 버튼 상태 업데이트(isDisabled)
   useEffect(() => {
     setIsButtonDisabled(email.trim() === '' || password.trim() === '');
   }, [email, password]);
@@ -50,6 +61,11 @@ function LoginForm() {
     setPasswordError(e.target.value.length < 8);
   };
 
+  // 모달 닫기 함수
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   // 로그인 폼 작동 함수
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,53 +75,59 @@ function LoginForm() {
     // API 요청
     try {
       const response = await apiLoginRequest({ email, password });
-      setUser(response.user);
-      // api 확인 용 console.log('환영합니다,', response.user, '님!');
+      setUser(response.user ?? null);
       navigate('/mydashboard');
     } catch (error) {
-      setError('로그인에 실패했습니다. 다시 시도해주세요.');
-      // 모달 창 추가
+      setIsModalOpen(true); // 에러가 발생했을 때 모달을 엽니다.
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form className={styles.formContainer} onSubmit={handleLogin}>
-      <div className={styles.emailContainer}>
-        <InputEmail
-          inputText="이메일"
-          id="login-email"
-          name="login-email"
-          type="email"
-          placeholder="이메일을 입력해 주세요."
-          errorText="이메일 형식으로 작성해 주세요."
-          value={email}
-          onChange={handleEmailChange}
-          onBlur={handleEmailBlur}
-          error={emailError}
+    <>
+      <form className={styles.formContainer} onSubmit={handleLogin}>
+        <div className={styles.emailContainer}>
+          <InputEmail
+            inputText="이메일"
+            id="login-email"
+            name="login-email"
+            type="email"
+            placeholder="이메일을 입력해 주세요."
+            errorText="이메일 형식으로 작성해 주세요."
+            value={email}
+            onChange={handleEmailChange}
+            onBlur={handleEmailBlur}
+            error={emailError}
+          />
+        </div>
+        <div className={styles.passwordContainer}>
+          <InputPassword
+            inputText="비밀번호"
+            id="login-password"
+            name="login-password"
+            type="password"
+            placeholder="비밀번호를 입력해 주세요."
+            errorText="8자 이상 작성해 주세요."
+            value={password}
+            onChange={handlePasswordChange}
+            onBlur={handlePasswordBlur}
+            error={passwordError}
+          />
+        </div>
+        <Button
+          pageName="login"
+          buttonText={loading ? '로그인 중...' : '로그인'}
+          isDisabled={isButtonDisabled || loading}
         />
-      </div>
-      <div className={styles.passwordContainer}>
-        <InputPassword
-          inputText="비밀번호"
-          id="login-password"
-          name="login-password"
-          type="password"
-          placeholder="비밀번호를 입력해 주세요."
-          errorText="8자 이상 작성해 주세요."
-          value={password}
-          onChange={handlePasswordChange}
-          onBlur={handlePasswordBlur}
-          error={passwordError}
-        />
-      </div>
-      <Button
-        pageName="login"
-        buttonText={loading ? '로그인 중...' : '로그인'}
-        isDisabled={isButtonDisabled || loading}
-      />
-    </form>
+      </form>
+      {isModalOpen && (
+        <AlertModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
+          <p>비밀번호가 일치하지 않습니다.</p>
+          <button onClick={closeModal}>확인</button>
+        </AlertModal>
+      )}
+    </>
   );
 }
 

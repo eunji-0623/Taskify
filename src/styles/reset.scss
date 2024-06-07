@@ -91,7 +91,15 @@ video {
   border: 0;
   vertical-align: baseline;
 }
-
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+}
 /* HTML5 display-role reset for older browsers */
 article,
 aside,

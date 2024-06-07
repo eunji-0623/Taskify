@@ -1,23 +1,84 @@
 import styles from './DashboardList.module.scss';
+import usePagination from '../../../../hooks/pagination/usePagination';
+import { PagenationBtn } from '../../../../components/Btn/Btn';
+import { AddDashboard, Dashboard } from './Dashboard';
+// import { apiDashboardsList, apiLoginRequest } from '../../../../api/apiModule';
 
 /*  대시보드 목록을 보여주는 컴포넌트입니다.
     - 대시보드 목록을 보여주는 ul 부분과
     - 다음 목록을 불러오기 위한 부분으로 나뉩니다  */
 
+interface DashboardApi {
+  id: number;
+  title: string;
+  color: string;
+  createdAt: string;
+  updatedAt: string;
+  createdByMe: boolean;
+  userId: number;
+}
+
+const ITEMS_PER_PAGE = 5;
+
+const fetchDashboards = async (page: number) => {
+  // mockData 사용. 추후 변경 필요
+  const response = await fetch(
+    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
+  );
+  const data = await response.json();
+
+  // 로그인 테스트
+  // const response = await apiLoginRequest({
+  //   email: 'test@codeit.com',
+  //   password: 'testpassword',
+  // });
+
+  // 토큰테스트
+  // const response = await apiDashboardsList({ navigationMethod: 'pagination' });
+  return {
+    items: data.dashboards,
+    totalCount: data.totalCount,
+  };
+};
+
 function DashboardList() {
+  const {
+    currentItems,
+    currentPage,
+    totalPages,
+    handlePrevClick,
+    handleNextClick,
+  } = usePagination<DashboardApi>({
+    fetchData: fetchDashboards,
+    itemsPerPage: ITEMS_PER_PAGE,
+  });
+
   return (
     <div className={styles.container}>
       <ul className={styles.dashboardList}>
-        <li>새로운 대시보드</li>
-        <li>코드잇</li>
-        <li>3분기 계획</li>
-        <li>회의록</li>
-        <li>중요 문서함</li>
-        <li>테스트 123</li>
+        <li>
+          <AddDashboard />
+        </li>
+        {currentItems.map((dashboard) => (
+          <li key={dashboard.id}>
+            <Dashboard
+              color={dashboard.color}
+              title={dashboard.title}
+              isOwner={dashboard.createdByMe}
+            />
+          </li>
+        ))}
       </ul>
       <div className={styles.pagination}>
-        <p>1페이지 중 1</p>
-        <div>페이지 이동 버튼</div>
+        <p>
+          {totalPages}
+          페이지 중
+          {currentPage}
+        </p>
+        <PagenationBtn
+          handlePrev={handlePrevClick}
+          handleNext={handleNextClick}
+        />
       </div>
     </div>
   );

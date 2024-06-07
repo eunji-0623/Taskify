@@ -1,0 +1,49 @@
+@use '/src/styles/global.scss' as *;
+@use '/src/styles/media.scss' as *;
+
+@mixin dashboard {
+  width: 332px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 25px 20px;
+  background-color: $white_FFFFFF;
+  border-radius: 8px;
+  border: 1px solid $gray_D9D9D9;
+  color: $black_333236;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dashboard {
+  @include dashboard();
+  justify-content: space-between;
+
+  .description {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.addDashboard {
+  @include dashboard();
+  justify-content: center;
+}
+
+@include tablet {
+  .dashboard,
+  .addDashboard {
+    width: 247px;
+    height: 68px;
+  }
+}
+
+@include mobile {
+  .dashboard,
+  .addDashboard {
+    width: 260px;
+    height: 58px;
+  }
+}

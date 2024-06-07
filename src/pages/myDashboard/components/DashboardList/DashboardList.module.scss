@@ -1,3 +1,6 @@
+@use '/src/styles/global.scss' as *;
+@use '/src/styles/media.scss' as *;
+
 .container {
   width: 1024px;
 }
@@ -15,9 +18,10 @@
   justify-content: flex-end;
   align-items: center;
   gap: 13px;
+  margin-top: 13px;
 }
 
-@media screen and (max-width: 1024px) {
+@include tablet {
   .container {
     width: 504px;
   }
@@ -29,7 +33,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@include mobile {
   .container {
     width: 260px;
   }

@@ -142,13 +142,18 @@ export function DeleteDashBoardBtn({ handleBtn }: OnlyHandleProps) {
 //  페이지네이션 버튼입니다.
 //  기능 추후 추가 예정입니다.
 
-export function PagenationBtn() {
+interface PagenationBtnProps {
+  handlePrev: () => void;
+  handleNext: () => void;
+}
+
+export function PagenationBtn({ handlePrev, handleNext }: PagenationBtnProps) {
   return (
     <div className={styles.PagenationBtn}>
-      <button className={styles.PrevBtn} type="button">
+      <button className={styles.PrevBtn} type="button" onClick={handlePrev}>
         <img src={ArrowLeft} alt="이전 페이지 화살표" width={16} height={16} />
       </button>
-      <button className={styles.NextBtn} type="button">
+      <button className={styles.NextBtn} type="button" onClick={handleNext}>
         <img src={ArrowRight} alt="다음 페이지 화살표" width={16} height={16} />
       </button>
     </div>

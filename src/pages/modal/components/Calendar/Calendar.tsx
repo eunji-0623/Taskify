@@ -5,6 +5,10 @@ import CalendarIcon from '/icon/calendar.svg';
 import { Locale } from 'date-fns';
 import styles from './Calendar.module.scss';
 
+/*
+  할 일 모달에서 사용하며 마감일(날짜와 시간)을 선택할 수 있습니다.
+*/
+
 const koreanLocale = ko as unknown as Locale;
 
 registerLocale('ko', koreanLocale);

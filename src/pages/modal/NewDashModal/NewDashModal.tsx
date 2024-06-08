@@ -8,6 +8,7 @@ import styles from './NewDashModal.module.scss';
 
 /*
   대시보드 생성하는 모달입니다.
+
   사용자가 대시보드 이름과 색을 선택할 수 있습니다.
 */
 

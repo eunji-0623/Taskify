@@ -5,6 +5,8 @@ import styles from './EditColumnModal.module.scss';
 
 /*
   컬럼을 수정하는 모달입니다.
+
+  컬럼 수정 모달에서 "삭제하기" 버튼으로 컬럼 삭제 모달을 볼 수 있습니다. (추가하겠습니다.)
 */
 
 interface ModalProps {

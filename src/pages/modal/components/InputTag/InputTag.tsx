@@ -4,7 +4,7 @@ import CloseIcon from '/icon/close.svg';
 import styles from './InputTag.module.scss';
 
 /*
-  input태그에서 enter키를 누르게 될 경우 지금까지 입력된 단어를 태그로 변경
+  Tag를 사용해서 enter를 누르면 태그로 바꿔주기 위한 컴포넌트입니다.
 */
 
 interface InputProps {

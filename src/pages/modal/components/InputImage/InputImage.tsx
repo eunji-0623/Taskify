@@ -2,6 +2,12 @@ import { ChangeEvent, useRef } from 'react';
 import styles from './InputImage.module.scss';
 import PencilIcon from '/icon/pencil.svg';
 
+/*
+  할 일 모달에서 이미지를 첨부할 수 있습니다.
+
+  prop으로 이미지url을 받습니다.
+*/
+
 interface InputImageProps {
   uploadImgUrl: string;
   setUploadImgUrl: (url: string) => void;

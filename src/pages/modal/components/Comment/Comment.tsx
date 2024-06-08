@@ -1,6 +1,12 @@
 import styles from './Comment.module.scss';
 import TestImg from '/img/test_img.png';
 
+/*
+  댓글 컴포넌트입니다.
+
+  기능 추가를 하겠습니다.
+*/
+
 function Comment() {
   return (
     <div className={styles.container}>

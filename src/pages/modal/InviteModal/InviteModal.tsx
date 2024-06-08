@@ -4,7 +4,7 @@ import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
 
 /*
-  이메일로 초대하는 모달입니다.
+  이메일로 사용자를 초대하는 모달입니다.
 */
 
 interface ModalProps {

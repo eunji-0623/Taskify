@@ -34,7 +34,7 @@ function ColumnCard({
         <div className={styles.title}>{title}</div>
         <div className={styles.tag}>
           {tags.map((tag) => (
-            <Tag tagName={tag} />
+            <Tag tagName={tag} key={tag} />
           ))}
         </div>
         <div className={styles.date}>

@@ -33,7 +33,8 @@ interface ChangePasswordResponse {
 // 로그인 요청 api
 export async function apiLoginRequest(body: LoginBody): Promise<LoginResponse> {
   const res = await instance.post<LoginResponse>('/auth/login', body);
-  localStorage.setItem('Token', handleResponse(res).accessToken);
+  const responseData = await handleResponse(res);
+  localStorage.setItem('Token', responseData.accessToken);
   return handleResponse(res);
 }
 

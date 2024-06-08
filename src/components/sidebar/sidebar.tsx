@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import styles from './sidebar.module.scss';
 import Logo from '/icon/logo_large.svg';
 import AddBox from '/icon/add_box.svg';
@@ -7,7 +7,6 @@ import SideDashBoard from '../SideDashBoard/SideDashBoard';
 import { PagenationBtn } from '../Btn/Btn';
 import usePagination from '../../hooks/pagination/usePagination';
 import { DashboardContext } from '../../contexts/DashboardContext';
-import { Link } from 'react-router-dom';
 
 /*
 사이드 바 컴포넌트 입니다.
@@ -31,7 +30,7 @@ interface DashboardApi {
 const fetchDashboards = async (page: number) => {
   // mockData 사용. 추후 변경 필요
   const response = await fetch(
-    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`
+    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
   );
   const data = await response.json();
 
@@ -42,22 +41,24 @@ const fetchDashboards = async (page: number) => {
 };
 
 function SideBar() {
-
   const context = useContext(DashboardContext);
-  
+
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { setActiveDashboard , setIsCreateByMe } = context;
+  const { setActiveDashboard, setIsCreateByMe } = context;
   const navigate = useNavigate();
 
-  const { currentItems, handlePrevClick, handleNextClick } =
-    usePagination<DashboardApi>({
-      fetchData: fetchDashboards,
-      itemsPerPage: ITEMS_PER_PAGE,
-    });
+  const {
+    currentItems,
+    handlePrevClick,
+    handleNextClick,
+  } = usePagination<DashboardApi>({
+    fetchData: fetchDashboards,
+    itemsPerPage: ITEMS_PER_PAGE,
+  });
 
-  const ClickDashboard = (id: number, createdByMe : boolean) => {
+  const ClickDashboard = (id: number, createdByMe: boolean) => {
     setActiveDashboard(id);
     setIsCreateByMe(createdByMe);
     navigate(`/dashboard/${id}`);
@@ -65,7 +66,7 @@ function SideBar() {
 
   return (
     <div className={styles.SideBar}>
-      <Link to='/'>
+      <Link to="/">
         <img src={Logo} alt="로고 이미지" className={styles.LogoImg} />
       </Link>
       <div className={styles.SideBarHeader}>
@@ -74,9 +75,6 @@ function SideBar() {
           src={AddBox}
           alt="대시 보드 추가 버튼 이미지"
           className={styles.AddBox}
-          onClick={() => {
-            /* 대시보드 생성 모달 로직 */
-          }}
         />
       </div>
       <div className={styles.DashboardsList}>

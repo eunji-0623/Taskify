@@ -1,8 +1,8 @@
+import { useContext } from 'react';
 import styles from './SideDashBoard.module.scss';
 import ColorDot from '../chip/ColorCircle/ColorDot';
 import CrownImg from '/icon/crown.svg';
 import { DashboardContext } from '../../contexts/DashboardContext';
-import { useContext } from 'react';
 
 /*
 사이드 바에 대시보드 컴포넌트입니다.
@@ -33,10 +33,20 @@ function SideDashBoard({
   }
   const { activeDashboard } = context;
   const Selected = selectedId === activeDashboard;
+  const handleKeyDown = (event : React.KeyboardEvent<HTMLDivElement>) => {
+    // 키보드 이벤트가 엔터 키인지 확인
+    if (event.key === 'Enter') {
+      // 클릭 이벤트 호출
+      onClick();
+    }
+  };
   return (
     <div
       className={`${styles.SideDashBoard} ${Selected ? styles.selected : ''}`}
       onClick={onClick}
+      role="button"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
     >
       <ColorDot color={color} />
       <span className={styles.Title}>{title}</span>

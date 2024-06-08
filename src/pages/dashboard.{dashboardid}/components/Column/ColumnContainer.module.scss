@@ -1,19 +1,14 @@
-.common {
+.desktop {
   display: flex;
   flex-flow: row;
-  border-collapse: collapse;
-}
-
-.desktop {
-  @extend .common;
 }
 
 .tablet {
-  @extend .common;
+  display: flex;
   flex-flow: column;
 }
 
 .mobile {
-  @extend .common;
+  display: flex;
   flex-flow: column;
 }

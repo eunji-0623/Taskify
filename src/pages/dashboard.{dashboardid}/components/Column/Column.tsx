@@ -1,9 +1,11 @@
 import styles from './Column.module.scss';
 import ColumnCard from '../ColumnCard/ColumnCard';
 import ColumnHeader from '../ColumnHeader/ColumnHeader';
-import ColumnContainer from './ColumnContainer';
+import { AddNewTaskBtn } from '../../../../components/Btn/Btn';
 
 function Column() {
+  const handleAddTaskBtn = () => {};
+
   const CardProps = {
     assignee: 'unknown',
     title: 'title',
@@ -21,6 +23,9 @@ function Column() {
   return (
     <div className={styles.container}>
       <ColumnHeader name="할 일" />
+      <div className={styles.addTaskButtonContainer}>
+        <AddNewTaskBtn handleBtn={handleAddTaskBtn} />
+      </div>
       <ColumnCard {...CardProps} />
       <ColumnCard {...CardProps2} />
       <ColumnCard {...CardProps} />

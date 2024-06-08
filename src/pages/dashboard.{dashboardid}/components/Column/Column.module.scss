@@ -6,4 +6,14 @@
   flex-flow: column;
   border: 1px solid #eee;
   height: 100%;
+  flex-shrink: 0;
+}
+
+.addTaskButtonContainer {
+  margin: 0;
+  padding: 0 1.25rem;
+
+  @include mobile {
+    padding: 0 0.75rem;
+  }
 }

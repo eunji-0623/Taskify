@@ -1,5 +1,7 @@
+@import '../../styles/utils.scss';
 .container {
   display: grid;
+
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
 
@@ -16,5 +18,14 @@
   .columns {
     grid-row: 2 / span 1;
     grid-column: 2 / span 2;
+
+    .addColumnButtonContainer {
+      width: auto;
+      background-color: var(--gray-gray_FAFAFA, #fafafa);
+      @include desktop {
+        padding-top: 4.25rem;
+        padding-left: 1.25rem;
+      }
+    }
   }
 }

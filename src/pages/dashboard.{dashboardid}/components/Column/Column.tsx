@@ -1,28 +1,29 @@
 import styles from './Column.module.scss';
-import Card from '../ColumnCard/ColumnCard';
+import ColumnCard from '../ColumnCard/ColumnCard';
 import ColumnHeader from '../ColumnHeader/ColumnHeader';
+import ColumnContainer from './ColumnContainer';
 
 function Column() {
   const CardProps = {
     assignee: 'unknown',
     title: 'title',
     dueDate: new Date('1915-08-15 19:20:30'),
-    tags: ['프론트'],
+    tags: ['프론트', '프로젝트', '월요일', '좋아'],
   };
   const CardProps2 = {
     assignee: 'unknown',
     title: 'title',
     dueDate: new Date('1915-08-15 19:20:30'),
-    tags: ['프론트'],
+    tags: ['프론트', '백엔드', '프로젝트', '월요일', '좋아'],
     imageUrl: '/img/test_img.png',
   };
 
   return (
-    <div className={styles.column}>
+    <div className={styles.container}>
       <ColumnHeader name="할 일" />
-      <Card {...CardProps} />
-      <Card {...CardProps2} />
-      <Card {...CardProps} />
+      <ColumnCard {...CardProps} />
+      <ColumnCard {...CardProps2} />
+      <ColumnCard {...CardProps} />
     </div>
   );
 }

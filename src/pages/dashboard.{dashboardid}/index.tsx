@@ -1,18 +1,17 @@
 import styles from './index.module.scss';
 import Column from './components/Column/Column';
-import ProgressState from '../../components/chip/ProgressState/ProgressState';
+import ColumnContainer from './components/Column/ColumnContainer';
 
 function DashboardMain() {
   return (
     <div className={styles.container}>
-      <div>sidemenu</div>
-      <div>
-        <div>gnbheader</div>
-        <div className={styles.contents}>
+      <div className={styles.sideMenu}>sidemenu</div>
+      <div className={styles.gnbHeader}>gnbHeader</div>
+      <div className={styles.columns}>
+        <ColumnContainer>
           <Column />
           <Column />
-          <ProgressState content="Done" />
-        </div>
+        </ColumnContainer>
       </div>
     </div>
   );

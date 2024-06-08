@@ -1,0 +1,19 @@
+.common {
+  display: flex;
+  flex-flow: row;
+  border-collapse: collapse;
+}
+
+.desktop {
+  @extend .common;
+}
+
+.tablet {
+  @extend .common;
+  flex-flow: column;
+}
+
+.mobile {
+  @extend .common;
+  flex-flow: column;
+}

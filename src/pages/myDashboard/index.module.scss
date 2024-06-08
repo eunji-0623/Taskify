@@ -3,5 +3,6 @@
 .container {
   display: flex;
   height: 100vh;
+  overflow: scroll;
   background-color: $gray_FAFAFA;
 }

@@ -11,7 +11,7 @@ function MyDashboard() {
       <div>sidemenu</div>
       <div>
         <div>header</div>
-        <div>
+        <div className={styles.mainContents}>
           <DashboardList />
           <Invited />
         </div>

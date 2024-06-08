@@ -1,5 +1,6 @@
 import styles from './index.module.scss';
 import Column from './components/Column/Column';
+import ProgressState from '../../components/chip/ProgressState/ProgressState';
 
 function DashboardMain() {
   return (
@@ -10,6 +11,7 @@ function DashboardMain() {
         <div className={styles.contents}>
           <Column />
           <Column />
+          <ProgressState content="Done" />
         </div>
       </div>
     </div>

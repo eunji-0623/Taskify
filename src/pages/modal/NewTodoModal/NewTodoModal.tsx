@@ -27,8 +27,6 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
   const [tags, setTags] = useState<string[]>([]);
   const [uploadImgUrl, setUploadImgUrl] = useState(AddIcon);
 
-  // -------------------------------------------------------------
-
   // 테스트 데이터
   const data = [
     {
@@ -53,8 +51,6 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
     },
   ];
 
-  // -----------------------------------------------------------------
-
   // 모달 닫기
   const close = useCallback(() => {
     setIsOpen(false);
@@ -64,8 +60,6 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
-
-  // ------------------------------------------------------------------
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>

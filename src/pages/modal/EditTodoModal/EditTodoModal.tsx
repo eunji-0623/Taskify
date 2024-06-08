@@ -28,8 +28,6 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
   const [tags, setTags] = useState(['테스트1', '태스트2', '테스트태그']);
   const [uploadImgUrl, setUploadImgUrl] = useState(TestImg);
 
-  // -------------------------------------------------------------
-
   // 테스트 데이터
   const data = [
     {
@@ -54,8 +52,6 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
     },
   ];
 
-  // ------------------------------------------------------------------
-
   // 모달 닫기
   const close = useCallback(() => {
     setIsOpen(false);
@@ -65,8 +61,6 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
-
-  // ------------------------------------------------------------------
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>

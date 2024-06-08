@@ -3,10 +3,17 @@
 .container {
   background-color: var(--gray-gray_FAFAFA, #fafafa);
   display: flex;
+  position: relative;
   flex-flow: column;
   border: 1px solid #eee;
-  height: 100%;
+  height: 100vh;
   flex-shrink: 0;
+  overflow: scroll;
+}
+
+.columnHeaderContainer {
+  position: sticky;
+  top: 0;
 }
 
 .addTaskButtonContainer {

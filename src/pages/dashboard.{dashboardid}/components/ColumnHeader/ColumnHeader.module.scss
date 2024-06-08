@@ -6,6 +6,10 @@
   height: 4.25rem;
   align-items: center;
   background-color: var(--gray-gray_FAFAFA, #fafafa);
+
+  @include desktop {
+    width: 22.125rem;
+  }
   @include mobile {
     height: 3.375rem;
     padding: 0.75rem;

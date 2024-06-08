@@ -22,11 +22,20 @@ function Column() {
 
   return (
     <div className={styles.container}>
-      <ColumnHeader name="할 일" />
+      <div className={styles.columnHeaderContainer}>
+        <ColumnHeader name="할 일" />
+      </div>
       <div className={styles.addTaskButtonContainer}>
         <AddNewTaskBtn handleBtn={handleAddTaskBtn} />
       </div>
       <ColumnCard {...CardProps} />
+      <ColumnCard {...CardProps2} />
+      <ColumnCard {...CardProps} />
+      <ColumnCard {...CardProps} />
+      <ColumnCard {...CardProps2} />
+      <ColumnCard {...CardProps} />
+      <ColumnCard {...CardProps} />
+      <ColumnCard {...CardProps2} />
       <ColumnCard {...CardProps2} />
       <ColumnCard {...CardProps} />
     </div>

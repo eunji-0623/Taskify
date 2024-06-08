@@ -67,8 +67,7 @@ function Invited() {
     try {
       const newInvitations = await fetchInvitations(cursor, title);
       setInvitations((prev) => [...prev, ...newInvitations.invitations]);
-      setCursor((prev) => prev + PAGE_SIZE);
-      console.log(cursor);
+      setCursor(newInvitations.cursorId);
       if (hasNext && newInvitations.invitations.length === 0) {
         setEmpty(true);
       }

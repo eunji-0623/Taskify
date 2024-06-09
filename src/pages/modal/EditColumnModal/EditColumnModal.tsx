@@ -1,29 +1,34 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './EditColumnModal.module.scss';
 
 /*
-  컬럼을 수정하는 모달입니다.
+  컬럼 관리하는 모달입니다.
 
-  컬럼 수정 모달에서 "삭제하기" 버튼으로 컬럼 삭제 모달을 볼 수 있습니다. (추가하겠습니다.)
+  삭제하기 모달과 연결을 위해 직접 사용하는 것이 아닌 EditColumnManagement로 사용합니다.
 */
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  openDeleteModal: () => void;
 }
 
-function EditColumnModal({ isOpen, setIsOpen }: ModalProps) {
-  // 모달 닫기
+function EditColumnModal({ isOpen, setIsOpen, openDeleteModal }: ModalProps) {
+  // 취소 버튼을 클릭하면 모달을 닫습니다.
   const close = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  // 컬럼 변경 버튼 클릭 동작
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  }
+  };
+
+  // 삭제하기 버튼을 클릭하면 컬럼 삭제 모달이 열립니다.
+  const handleDelete = () => {
+    openDeleteModal();
+  };
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -35,7 +40,7 @@ function EditColumnModal({ isOpen, setIsOpen }: ModalProps) {
             <input className={styles.inputText} type="text" id="name" name="name" required />
           </div>
 
-          <button className={styles.delete} type="button" onClick={close}>삭제하기</button>
+          <button className={styles.delete} type="button" onClick={handleDelete}>삭제하기</button>
 
           <div className={styles.buttonBlock}>
             <div className={styles.buttons}>

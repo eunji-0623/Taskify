@@ -22,7 +22,7 @@ interface UpdateCardBody {
   imageUrl?: string;
 }
 
-interface Card {
+interface CardOverAll {
   id: number;
   title: string;
   description: string;
@@ -36,28 +36,25 @@ interface Card {
   imageUrl?: string;
   teamId: string;
   columnId: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface CardResponse {
+interface CardOverAllResponse {
   status: number;
-  message?: string;
-  data: Card;
-
+  data: CardOverAll;
 }
 
 interface GetCardListResponse {
   status: number;
-  message?: string;
   data: {
     cursorId: number;
     totalCount: number;
-    cards: Card[];
+    cards: CardOverAll[];
   };
 }
 
-interface CardDeletePesponse {
+interface DeleteCardResponse {
   status: number;
   message?: string;
 }
@@ -67,9 +64,8 @@ interface CardDeletePesponse {
 // 카드 생성 api
 export async function apiCreateCard(
   body: CreateCardBody,
-): Promise<CardResponse> {
-  const res = await instance.post<CardResponse>('/cards', body);
-
+): Promise<CardOverAllResponse> {
+  const res = await instance.post<CardOverAllResponse>('/cards', body);
   return handleResponse(res);
 }
 
@@ -85,7 +81,6 @@ export async function apiGetCardList(
       size,
       cursorId,
       columnId,
-
     },
   });
   return handleResponse(res);
@@ -96,15 +91,15 @@ export async function apiGetCardList(
 export async function apiUpdateCard(
   body: UpdateCardBody,
   cardId: number,
-): Promise<CardResponse> {
-  const res = await instance.put<CardResponse>(`/cards/${cardId}`, body);
+): Promise<CardOverAllResponse> {
+  const res = await instance.put<CardOverAllResponse>(`/cards/${cardId}`, body);
   return handleResponse(res);
 }
 
 // 카드 조회 api
 // cardId를 파라미터로 받습니다.
-export async function apiCardDetails(cardId: number): Promise<CardResponse> {
-  const res = await instance.get<CardResponse>(`/cards/${cardId}`);
+export async function apiCardDetails(cardId: number): Promise<CardOverAllResponse> {
+  const res = await instance.get<CardOverAllResponse>(`/cards/${cardId}`);
   return handleResponse(res);
 }
 
@@ -112,7 +107,7 @@ export async function apiCardDetails(cardId: number): Promise<CardResponse> {
 // cardId를 파라미터로 받습니다.
 export async function apiDeleteCard(
   cardId: number,
-): Promise<CardDeletePesponse> {
-  const res = await instance.delete<CardDeletePesponse>(`/cards/${cardId}`);
+): Promise<DeleteCardResponse> {
+  const res = await instance.delete<DeleteCardResponse>(`/cards/${cardId}`);
   return handleResponse(res);
 }

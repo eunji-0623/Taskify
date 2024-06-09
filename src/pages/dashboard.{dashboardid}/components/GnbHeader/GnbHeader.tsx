@@ -14,14 +14,13 @@ function GnbHeader() {
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { activeDashboard, isCreateByMe } = context;
+  const { activeTitle, isCreateByMe } = context;
 
   return (
     <header className={styles.GnbHeader}>
       <div className={styles.TitleContainer}>
         <div className={styles.DashboardTitle}>
-          {'Dashboard '}
-          {activeDashboard}
+          {activeTitle}
         </div>
         {isCreateByMe && (
           <img src={CrownImg} alt="관리자 이미지" width={20} height={16} />

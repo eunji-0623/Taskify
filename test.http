@@ -1,0 +1,83 @@
+# 사용자 생성 (test4404)
+POST https://sp-taskify-api.vercel.app/5-8/users
+Content-Type: application/json
+
+{
+  "email": "test4404@naver.com",
+  "nickname": "테스트4404",
+  "password": "test4404"
+}
+
+###
+
+# 사용자 생성 (test22)
+POST https://sp-taskify-api.vercel.app/5-8/users
+Content-Type: application/json
+
+{
+  "email": "test22@naver.com",
+  "nickname": "테스트22",
+  "password": "test2200"
+}
+
+###
+
+# 로그인 (test4404)
+POST https://sp-taskify-api.vercel.app/5-8/auth/login
+Content-Type: application/json
+
+{
+  "email": "test4404@naver.com",
+  "password": "test4404"
+}
+
+###
+
+# 로그인 (test22)
+POST https://sp-taskify-api.vercel.app/5-8/auth/login
+Content-Type: application/json
+
+{
+  "email": "test22@naver.com",
+  "password": "test2200"
+}
+
+####
+
+# 대시보드 생성 (token22 사용)
+POST https://sp-taskify-api.vercel.app/5-8/dashboards
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
+
+{
+  "title": "22로 로그인함",
+  "color": "#760DDE"
+}
+
+
+####
+
+# 대시보드 조회 (token22 사용)
+GET https://sp-taskify-api.vercel.app/5-8/dashboards
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
+
+###
+
+# 4404 초대
+
+POST https://sp-taskify-api.vercel.app/5-8/dashboards/8832/invitations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
+
+{
+  "email": "test4404@naver.com"
+}
+
+###
+
+
+GET https://sp-taskify-api.vercel.app/5-8/invitations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNCwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MzUyLCJpc3MiOiJzcC10YXNraWZ5In0.Zcf6hguL8iFbSR2Pt5bt_9l2Y2flE-obe36fSIZvTxc
+

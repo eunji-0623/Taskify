@@ -1,10 +1,14 @@
+@import '../../styles/media.scss';
+@import '../../styles//global.scss';
+
 .SideBar {
   width: 300px;
   height: 100vh;
+  min-width: 300px;
   justify-content: center;
   align-items: center;
   position: relative;
-  background: var(--white-white_FFFFFF, #FFF);
+  background: var(--white-white_FFFFFF, #fff);
   border-right: 1px solid #d9d9d9e0;
   overflow-y: auto;
   overflow-x: hidden;
@@ -25,12 +29,36 @@
   &::-webkit-scrollbar-thumb:hover {
     background: #555; /* 마우스 호버시 스크롤바 색상 */
   }
+
+  @include tablet {
+    width: 160px;
+    min-width: 160px;
+  }
+  @include mobile {
+    width: 67px;
+    min-width: 67px;
+  }
 }
 
 .LogoImg {
   position: absolute;
   top: 20px;
   left: 24px;
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.LogoImgMobile {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 22px;
+
+  @include mobile {
+    display: block;
+  }
 }
 
 .SideBarHeader {
@@ -39,6 +67,19 @@
   padding: 0 24px 0 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.Title {
+  color: var(--gray-gray_787486, #787486);
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .AddBox {
@@ -58,4 +99,3 @@
   left: 20px;
   opacity: 70%;
 }
-

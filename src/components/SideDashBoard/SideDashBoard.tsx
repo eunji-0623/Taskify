@@ -40,6 +40,11 @@ function SideDashBoard({
       onClick();
     }
   };
+
+  const makeTabletTitle = (title: string): string => {
+    return title.length > 4 ? title.substring(0, 4) + '...' : title;
+  };
+  
   return (
     <div
       className={`${styles.SideDashBoard} ${Selected ? styles.selected : ''}`}
@@ -50,6 +55,7 @@ function SideDashBoard({
     >
       <ColorDot color={color} />
       <span className={styles.Title}>{title}</span>
+      <span className={styles.TitleTablet}>{makeTabletTitle(title)}</span>
       {createdByMe && (
         <img
           src={CrownImg}

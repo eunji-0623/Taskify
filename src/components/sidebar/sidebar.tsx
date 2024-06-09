@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import styles from './sidebar.module.scss';
 import Logo from '/icon/logo_large.svg';
 import AddBox from '/icon/add_box.svg';
+import LogoMobile from '/icon/logo_small.svg';
 import SideDashBoard from '../SideDashBoard/SideDashBoard';
 import { PagenationBtn } from '../Btn/Btn';
 import usePagination from '../../hooks/pagination/usePagination';
@@ -68,6 +69,7 @@ function SideBar() {
     <div className={styles.SideBar}>
       <Link to="/">
         <img src={Logo} alt="로고 이미지" className={styles.LogoImg} />
+        <img src={LogoMobile} alt="로고 이미지" className={styles.LogoImgMobile} />
       </Link>
       <div className={styles.SideBarHeader}>
         <span className={styles.Title}>Dash Board</span>

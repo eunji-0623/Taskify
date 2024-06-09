@@ -1,5 +1,4 @@
 import styles from './UserProfileImg.module.scss';
-
 /*
 유저의 프로필 이미지 컴포넌트입니다.
 프로필 이미지를 설정하지 않은 유저는 프로필 이미지가 없으므로,
@@ -33,5 +32,21 @@ function UserProfileImg({
     </div>
   );
 }
+
+/*
+svg 생성기가 있으면, 사용할 프로필 이미지 컴포넌트
+우선 만들어 보았습니다. 추후 위 컴포넌트 대체 예정
+props로 url 하나만 받아옵니다.
+*/
+interface UserProfileImg_Props {
+  profileImageUrl : string;
+}
+
+export function UserProfileImg_ ({profileImageUrl} : UserProfileImg_Props) {
+  return (
+    <img src={profileImageUrl} alt="프로필 이미지" className={styles.UserProfileImg_}/>
+  )
+}
+
 
 export default UserProfileImg;

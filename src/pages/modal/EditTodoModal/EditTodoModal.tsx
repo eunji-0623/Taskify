@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import DropdownMenu from '../components/DropdownMenu/DropdownMenu';
-import ManagerDropdown from '../components/ManagerDropdown/ManagerDropdown';
+import DropdownManagement from '../components/DropdownManagement/DropdownManagement';
+import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
+import TodoContent from '../components/TodoContent/TodoContent';
 import InputTag from '../components/InputTag/InputTag';
 import InputImage from '../components/InputImage/InputImage';
 import styles from './EditTodoModal.module.scss';
@@ -18,18 +18,57 @@ interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   openTodoModal: () => void;
+  cardData: {
+    cardState: string;
+    manager: string;
+    managerImg: string;
+    title: string;
+    description: string;
+    dueDate: string;
+    tags: string[];
+    imageUrl: string;
+  };
+  cardSetData: {
+    setCardState: React.Dispatch<React.SetStateAction<string>>;
+    setManager: React.Dispatch<React.SetStateAction<string>>;
+    setManagerImg: React.Dispatch<React.SetStateAction<string>>;
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
+    setDescription: React.Dispatch<React.SetStateAction<string>>;
+    setDueDate: React.Dispatch<React.SetStateAction<string>>;
+    setTags: React.Dispatch<React.SetStateAction<string[]>>;
+    setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  };
 }
 
 // 할 일 데이터가 필요
-function EditTodoModal({ isOpen, setIsOpen, openTodoModal }: ModalProps) {
-  const [condition, setCondition] = useState('test1');
-  const [manager, setManager] = useState('test1');
-  const [profile, setProfile] = useState(TestImg);
-  const [title, setTitle] = useState('test');
-  const [contents, setContents] = useState('test');
-  const [deadline, setDeadline] = useState<Date | null>(new Date());
-  const [tags, setTags] = useState(['테스트1', '태스트2', '테스트태그']);
-  const [uploadImgUrl, setUploadImgUrl] = useState(TestImg);
+function EditTodoModal({
+  isOpen,
+  setIsOpen,
+  openTodoModal,
+  cardData,
+  cardSetData,
+}: ModalProps) {
+  const {
+    cardState,
+    manager,
+    managerImg,
+    title,
+    description,
+    dueDate,
+    tags,
+    imageUrl,
+  } = cardData;
+
+  const {
+    setCardState,
+    setManager,
+    setManagerImg,
+    setTitle,
+    setDescription,
+    setDueDate,
+    setTags,
+    setImageUrl,
+  } = cardSetData;
 
   // 테스트 데이터
   const data = [
@@ -41,16 +80,6 @@ function EditTodoModal({ isOpen, setIsOpen, openTodoModal }: ModalProps) {
     {
       id: 2,
       text: 'test2',
-      profile: TestImg,
-    },
-    {
-      id: 3,
-      text: '3333',
-      profile: TestImg,
-    },
-    {
-      id: 4,
-      text: '4444',
       profile: TestImg,
     },
   ];
@@ -77,67 +106,26 @@ function EditTodoModal({ isOpen, setIsOpen, openTodoModal }: ModalProps) {
 
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
-            <div className={styles.contentDropdown}>
-              <div className={styles.contentBlock}>
-                <h3>상태</h3>
-                <DropdownMenu
-                  value={condition}
-                  setValue={setCondition}
-                  data={data}
-                />
-              </div>
-              <div className={styles.contentBlock}>
-                <h3>담당자</h3>
-                <ManagerDropdown
-                  value={manager}
-                  setValue={setManager}
-                  data={data}
-                  profile={profile}
-                  setProfile={setProfile}
-                />
-              </div>
-            </div>
+            <DropdownManagement
+              cardState={cardState}
+              setCardState={setCardState}
+              manager={manager}
+              setManager={setManager}
+              data={data}
+              managerImg={managerImg}
+              setManagerImg={setManagerImg}
+              text=""
+            />
 
-            <div className={styles.contentBlock}>
-              <label htmlFor="title">
-                제목
-                <span className={styles.contentSpan}> *</span>
-              </label>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className={`${styles.contentInput} ${styles.inputTop}`}
-                type="text"
-                id="title"
-                name="title"
-                placeholder="제목을 입력해 주세요"
-                required
-              />
-            </div>
+            <Title title={title} setTitle={setTitle} />
 
-            <div className={styles.contentBlock}>
-              <label htmlFor="content">
-                설명
-                <span className={styles.contentSpan}> *</span>
-              </label>
-              <textarea
-                value={contents}
-                onChange={(e) => setContents(e.target.value)}
-                className={styles.textarea}
-                id="content"
-                name="content"
-                placeholder="설명을 입력해 주세요"
-              />
-            </div>
+            <TodoContent description={description} setDescription={setDescription} />
 
-            <div className={styles.contentBlock}>
-              <h3>마감일</h3>
-              <Calendar deadline={deadline} setDeadline={setDeadline} />
-            </div>
+            <Calendar dueDate={dueDate} setDueDate={setDueDate} />
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <InputImage uploadImgUrl={uploadImgUrl} setUploadImgUrl={setUploadImgUrl} />
+            <InputImage imageUrl={imageUrl} setImageUrl={setImageUrl} text="" />
           </div>
 
           <div className={styles.buttonBlock}>

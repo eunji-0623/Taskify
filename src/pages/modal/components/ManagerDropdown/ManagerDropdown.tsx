@@ -28,7 +28,6 @@ function ManagerDropdown({
   setProfile,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState(value);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +53,6 @@ function ManagerDropdown({
   const handleItemClick = (choice: string, profileImg: string) => {
     setValue(choice);
     setIsOpen(false);
-    setSelected(choice);
     setSearchTerm(choice);
     setProfile(profileImg);
   };
@@ -98,7 +96,7 @@ function ManagerDropdown({
                     type="button"
                     onClick={() => handleItemClick(item.text, item.profile)}
                   >
-                    {selected === item.text && (
+                    {value === item.text && (
                       <img
                         className={styles.checkedImg}
                         src={checked}

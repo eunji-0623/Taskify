@@ -14,6 +14,7 @@ interface ModalProps {
   setIsOpen: (isOpen: boolean) => void;
 }
 
+// 컬럼 데이터 추가 필요 useState로 관리
 function EditColumnManagement({ isOpen, setIsOpen }: ModalProps) {
   const [editModalOpen, setEditModalOpen] = useState(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);

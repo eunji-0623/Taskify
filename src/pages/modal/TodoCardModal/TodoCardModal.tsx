@@ -7,11 +7,10 @@ import {
 import ModalContainer from '../ModalContainer/ModalContainer';
 import Tag from '../../../components/chip/Tag/Tag';
 import Comment from '../components/Comment/Comment';
+import ProgressState from '../../../components/chip/ProgressState/ProgressState';
 import styles from './TodoCardModal.module.scss';
 import CloseIcon from '/icon/close.svg';
 import KebabIcon from '/icon/kebab.svg';
-import TestCard from '/img/test_img_card_with_people1.png';
-import TestImg from '/img/test_img.png';
 
 /*
   만들어진 할 일 카드 정보를 모달로 보여줍니다.
@@ -23,12 +22,36 @@ interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   openEditModal: () => void;
+  cardData: {
+    cardState: string;
+    manager: string;
+    managerImg: string;
+    title: string;
+    description: string;
+    dueDate: string;
+    tags: string[];
+    imageUrl?: string;
+  };
 }
 
-// 카드 데이터가 필요
-function TodoCardModal({ isOpen, setIsOpen, openEditModal }: ModalProps) {
+function TodoCardModal({
+  isOpen,
+  setIsOpen,
+  openEditModal,
+  cardData,
+}: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
   const kebabRef = useRef<HTMLDivElement>(null);
+  const {
+    cardState,
+    manager,
+    managerImg,
+    title,
+    description,
+    dueDate,
+    tags,
+    imageUrl,
+  } = cardData;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,14 +72,14 @@ function TodoCardModal({ isOpen, setIsOpen, openEditModal }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  function handleOpen() {
+  const handleOpen = () => {
     setKebabOpen(!kebabOpen);
-  }
+  };
 
   // 댓글을 처리하는 동작 추가
-  function handleSubmit(event: React.FormEvent) {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-  }
+  };
 
   // 수정하기 버튼을 클릭하면 할 일 수정 모달이 열립니다.
   const handleEditOpen = () => {
@@ -66,7 +89,7 @@ function TodoCardModal({ isOpen, setIsOpen, openEditModal }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>
-        <h1>새로운 일정 관리</h1>
+        <h1>{title}</h1>
         <div className={styles.block}>
           <div className={styles.buttonBlock}>
             <button className={styles.kebabButton} type="button" onClick={handleOpen}>
@@ -88,33 +111,33 @@ function TodoCardModal({ isOpen, setIsOpen, openEditModal }: ModalProps) {
             <div className={styles.managerBlock}>
               <h3>담당자</h3>
               <div className={styles.profileBlock}>
-                <img className={styles.profile} src={TestImg} alt="테스트 이미지" />
-                프로필
+                <img className={styles.profile} src={managerImg} alt="테스트 이미지" />
+                <span>{manager}</span>
               </div>
             </div>
             <div className={styles.dateBlock}>
               <h3>마감일</h3>
-              <p>마감일</p>
+              <span>{dueDate}</span>
             </div>
           </div>
 
           <div className={styles.topBlock}>
-            <span className={styles.condition}>상태</span>
+            <span className={styles.condition}><ProgressState content={cardState} /></span>
             <div className={styles.tagBlock}>
-              <Tag tagName="태그1" />
-              <Tag tagName="태그2" />
+              {tags.map((item) => (
+                <span key={item}>
+                  <Tag tagName={item} />
+                </span>
+              ))}
             </div>
           </div>
 
           <div className={styles.contentBlock}>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum finibus nibh arcu, quis consequat ante cursus eget.
-              Cras mattis, nulla non laoreet porttitor, diam justo laoreet eros,
-              vel aliquet diam elit at leo.
+              {description}
             </p>
             <div className={styles.contentImageBlock}>
-              <img className={styles.contentImage} src={TestCard} alt="카드 이미지" />
+              <img className={styles.contentImage} src={imageUrl} alt="카드 이미지" />
             </div>
           </div>
 
@@ -133,6 +156,9 @@ function TodoCardModal({ isOpen, setIsOpen, openEditModal }: ModalProps) {
             </form>
 
             <div className={styles.comments}>
+              <Comment />
+              <Comment />
+              <Comment />
               <Comment />
             </div>
           </div>

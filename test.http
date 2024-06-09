@@ -76,8 +76,39 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhb
 
 ###
 
-
-GET https://sp-taskify-api.vercel.app/5-8/invitations
+// 컬럼 생성
+POST https://sp-taskify-api.vercel.app/5-8/columns
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNCwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MzUyLCJpc3MiOiJzcC10YXNraWZ5In0.Zcf6hguL8iFbSR2Pt5bt_9l2Y2flE-obe36fSIZvTxc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
+
+{
+  "title": "string123",
+  "dashboardId": 8855
+}
+###
+
+// 카드 생성
+POST https://sp-taskify-api.vercel.app/5-8/cards
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
+
+{
+  "assigneeUserId": 3635,
+  "dashboardId": 8855,
+  "columnId": 29765,
+  "title": "Task Title",
+  "description": "This is a description of the task.",
+  "dueDate": "2024-07-04 04:04",
+  "tags": [
+    "urgent",
+    "important"
+  ]
+}
+
+###
+
+// 카드 조회
+GET https://sp-taskify-api.vercel.app/5-8/cards
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
 

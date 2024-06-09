@@ -3,6 +3,12 @@ import ModalContainer from '../ModalContainer/ModalContainer';
 import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './DeleteColumnModal.module.scss';
 
+/*
+  컬럼의 모든 카드를 삭제하는 모달입니다.
+
+  컬럼 관리 모달과 연결을 위해 직접 사용하는 것이 아닌 EditColumnManagement를 통해 사용합니다.
+*/
+
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -10,7 +16,7 @@ interface ModalProps {
 }
 
 function DeleteColumnModal({ isOpen, setIsOpen, openEditModal }: ModalProps) {
-  // 컬럼의 모든 카드를 삭제하는 동작으로 변경하기
+  // + 컬럼의 모든 카드를 삭제하는 동작으로 변경하기
   const close = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);

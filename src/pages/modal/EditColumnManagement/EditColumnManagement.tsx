@@ -6,7 +6,7 @@ import DeleteColumnModal from '../DeleteColumnModal/DeleteColumnModal';
   컬럼 수정 모달과 삭제하기 모달을 관리합니다.
 
   EditColumnModal에서 "삭제하기" 버튼을 클릭하면
-  EditColumnModal는 닫고 DeleteColumnModal가 열립니다.
+  EditColumnModal은 닫고 DeleteColumnModal이 열립니다.
 */
 
 interface ModalProps {

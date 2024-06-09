@@ -15,15 +15,18 @@ import TestImg from '/img/test_img.png';
 
 /*
   만들어진 할 일 카드 정보를 모달로 보여줍니다.
+
+  수정하기 모달과 연결을 위해 직접 사용하는 것이 아닌 TodoCardManagement를 통해 사용합니다.
 */
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  openEditModal: () => void;
 }
 
 // 카드 데이터가 필요
-function TodoCardModal({ isOpen, setIsOpen }: ModalProps) {
+function TodoCardModal({ isOpen, setIsOpen, openEditModal }: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
   const kebabRef = useRef<HTMLDivElement>(null);
 
@@ -55,6 +58,11 @@ function TodoCardModal({ isOpen, setIsOpen }: ModalProps) {
     event.preventDefault();
   }
 
+  // 수정하기 버튼을 클릭하면 할 일 수정 모달이 열립니다.
+  const handleEditOpen = () => {
+    openEditModal();
+  };
+
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>
@@ -67,7 +75,7 @@ function TodoCardModal({ isOpen, setIsOpen }: ModalProps) {
             {kebabOpen
               ? (
                 <div className={styles.kebabButtons} ref={kebabRef}>
-                  <button className={styles.kebabItem} type="button">수정하기</button>
+                  <button className={styles.kebabItem} type="button" onClick={handleEditOpen}>수정하기</button>
                   <button className={styles.kebabItem} type="button">삭제하기</button>
                 </div>
               ) : null}

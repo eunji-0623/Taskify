@@ -6,7 +6,7 @@ import styles from './EditColumnModal.module.scss';
 /*
   컬럼 관리하는 모달입니다.
 
-  삭제하기 모달과 연결을 위해 직접 사용하는 것이 아닌 EditColumnManagement로 사용합니다.
+  삭제하기 모달과 연결을 위해 직접 사용하는 것이 아닌 EditColumnManagement를 통해 사용합니다.
 */
 
 interface ModalProps {
@@ -21,6 +21,7 @@ function EditColumnModal({ isOpen, setIsOpen, openDeleteModal }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
+  // + 변경 버튼을 클릭하면 컬럼 이름 변경 동작을 추가하기
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import DropdownMenu from '../components/DropdownMenu/DropdownMenu';
 import ManagerDropdown from '../components/ManagerDropdown/ManagerDropdown';
@@ -10,15 +10,18 @@ import TestImg from '/img/test_img.png';
 
 /*
   할 일 수정을 위한 모달입니다.
+
+  할 일 카드 모달과 연결을 위해 직접 사용하는 것이 아닌 TodoCardManagement를 통해 사용합니다.
 */
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  openTodoModal: () => void;
 }
 
 // 할 일 데이터가 필요
-function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
+function EditTodoModal({ isOpen, setIsOpen, openTodoModal }: ModalProps) {
   const [condition, setCondition] = useState('test1');
   const [manager, setManager] = useState('test1');
   const [profile, setProfile] = useState(TestImg);
@@ -53,14 +56,19 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
   ];
 
   // 모달 닫기
-  const close = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
+  // const close = useCallback(() => {
+  //   setIsOpen(false);
+  // }, [setIsOpen]);
 
-  // 할 일 수정 버튼 클릭 시 동작
+  // + 할 일 수정 버튼 클릭 시 동작 추가
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
   }
+
+  // 취소 버튼을 클릭하면 할 일 카드 모달로 돌아갑니다.
+  const handleTodoOpen = () => {
+    openTodoModal();
+  };
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -133,7 +141,7 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
           </div>
 
           <div className={styles.buttonBlock}>
-            <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
+            <button className={styles.cancelButton} type="button" onClick={handleTodoOpen}>취소</button>
             <button className={styles.createButton} type="submit">수정</button>
           </div>
         </form>

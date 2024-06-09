@@ -1,29 +1,21 @@
 import { useState } from 'react';
-import useNewTodoModal from '../../hooks/modal/useNewTodoModal';
-import EditTodoModal from '../modal/EditTodoModal/EditTodoModal';
-// import EditColumnModal from '../modal/EditColumnModal/EditColumnModal';
-import TodoCardModal from '../modal/TodoCardModal/TodoCardModal';
 import useAlertModal from '../../hooks/modal/useAlertModal';
-// import useDeleteColumnModal from '../../hooks/modal/useDeleteColumnModal';
+import useNewTodoModal from '../../hooks/modal/useNewTodoModal';
 import useInviteModal from '../../hooks/modal/useInviteModal';
 import useNewColumnModal from '../../hooks/modal/useNewColumnModal';
 import useNewDashModal from '../../hooks/modal/useNewDashModal';
 import EditColumnManagement from '../modal/EditColumnManagement/EditColumnManagement';
+import TodoCardManagement from '../modal/TodoCardManagement/TodoCardManagement';
 
 function ModalPageTest() {
   const { NewTodoModal, openTodo } = useNewTodoModal();
   const { AlertModal, openAlert } = useAlertModal();
   const { NewDashModal, openDash } = useNewDashModal();
   const { NewColumnModal, openNewColumn } = useNewColumnModal();
-  // const { DeleteColumnModal, openDeleteColumn } = useDeleteColumnModal();
   const { InviteModal, openInvite } = useInviteModal();
-  const [todoTest, setTodoTest] = useState(false);
-  const [cardTest, setCardTest] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  function handleTodoClick() {
-    setTodoTest(!todoTest);
-  }
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [cardTest, setCardTest] = useState(false);
 
   function handleCardClick() {
     setCardTest(!cardTest);
@@ -40,17 +32,22 @@ function ModalPageTest() {
         ? <EditColumnManagement isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
         : null}
 
+      <button type="button" onClick={handleCardClick}>할 일 카드 모달 | </button>
+      {cardTest
+        ? <TodoCardManagement isOpen={cardTest} setIsOpen={setCardTest} />
+        : null}
+
       <button type="button" onClick={openAlert}>Alert 모달 테스트 버튼 | </button>
       <AlertModal modalText="이미 사용 중인 이메일입니다." buttonText="확인" />
 
       <button type="button" onClick={openTodo}>할 일 생성 버튼 | </button>
       <NewTodoModal />
 
-      <button type="button" onClick={handleTodoClick}>할 일 수정 버튼 | </button>
-      {todoTest ? <EditTodoModal isOpen={todoTest} setIsOpen={setTodoTest} /> : null}
+      {/* <button type="button" onClick={handleTodoClick}>할 일 수정 버튼 | </button>
+      {todoTest ? <EditTodoModal isOpen={todoTest} setIsOpen={setTodoTest} /> : null} */}
 
-      <button type="button" onClick={handleCardClick}>할 일 카드 확인 버튼 | </button>
-      {cardTest ? <TodoCardModal isOpen={cardTest} setIsOpen={setCardTest} /> : null}
+      {/* <button type="button" onClick={handleCardClick}>할 일 카드 확인 버튼 | </button>
+      {cardTest ? <TodoCardModal isOpen={cardTest} setIsOpen={setCardTest} /> : null} */}
 
       <button type="button" onClick={openDash}>+ 버튼 대시보드 추가 | </button>
       <NewDashModal />

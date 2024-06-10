@@ -33,6 +33,25 @@ function UserProfileImg({
   );
 }
 
+export function MembersProfileImg({
+  isImg,
+  profileImageUrl,
+  nickname,
+}: UserProfileImgProps) {
+  return (
+    <div
+      className={styles.MembersProfileImg}
+      style={!isImg ? { backgroundColor: profileImageUrl } : {}}
+    >
+      {isImg ? (
+        <img src={profileImageUrl} alt="프로필 이미지" className={styles.Img} />
+      ) : (
+        <div className={styles.FirstName}>{nickname[0]}</div>
+      )}
+    </div>
+  );
+}
+
 /*
 svg 생성기가 있으면, 사용할 프로필 이미지 컴포넌트
 우선 만들어 보았습니다. 추후 위 컴포넌트 대체 예정

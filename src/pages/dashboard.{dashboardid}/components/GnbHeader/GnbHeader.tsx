@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 import CrownImg from '/icon/crown.svg';
 import { InviteBtn, SettingBtn } from '../Btn/Btn';
+import Members from '../Members/Members';
 
 /*
 /dashboard/{dashboardId} 페이지에 해당하는 헤더 컴포넌트입니다.
@@ -32,7 +33,7 @@ function GnbHeader() {
           <SettingBtn />
           <InviteBtn />
         </div>
-        <div>members</div>
+        <Members />
         <div className={styles.VerticalLine} />
         <UserProfileImg
           isImg={false}

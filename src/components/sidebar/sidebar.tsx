@@ -8,6 +8,7 @@ import SideDashBoard from '../SideDashBoard/SideDashBoard';
 import { PagenationBtn } from '../Btn/Btn';
 import usePagination from '../../hooks/pagination/usePagination';
 import { DashboardContext } from '../../contexts/DashboardContext';
+import useNewDashModal from '../../hooks/modal/useNewDashModal';
 
 /*
 사이드 바 컴포넌트 입니다.
@@ -31,7 +32,7 @@ interface DashboardApi {
 const fetchDashboards = async (page: number) => {
   // mockData 사용. 추후 변경 필요
   const response = await fetch(
-    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
+    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`
   );
   const data = await response.json();
 
@@ -42,6 +43,7 @@ const fetchDashboards = async (page: number) => {
 };
 
 function SideBar() {
+  const { NewDashModal, openDash } = useNewDashModal();
   const context = useContext(DashboardContext);
 
   if (!context) {
@@ -50,18 +52,13 @@ function SideBar() {
   const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = context;
   const navigate = useNavigate();
 
-  const {
-    items,
-    currentPage,
-    totalPages,
-    handlePrevClick,
-    handleNextClick,
-  } = usePagination<DashboardApi>({
-    fetchData: fetchDashboards,
-    itemsPerPage: ITEMS_PER_PAGE,
-  });
+  const { items, currentPage, totalPages, handlePrevClick, handleNextClick } =
+    usePagination<DashboardApi>({
+      fetchData: fetchDashboards,
+      itemsPerPage: ITEMS_PER_PAGE,
+    });
 
-  const ClickDashboard = (id: number, createdByMe: boolean, title : string) => {
+  const ClickDashboard = (id: number, createdByMe: boolean, title: string) => {
     setActiveDashboard(id);
     setIsCreateByMe(createdByMe);
     setActiveTitle(title);
@@ -72,7 +69,11 @@ function SideBar() {
     <div className={styles.SideBar}>
       <Link to="/">
         <img src={Logo} alt="로고 이미지" className={styles.LogoImg} />
-        <img src={LogoMobile} alt="로고 이미지" className={styles.LogoImgMobile} />
+        <img
+          src={LogoMobile}
+          alt="로고 이미지"
+          className={styles.LogoImgMobile}
+        />
       </Link>
       <div className={styles.SideBarHeader}>
         <span className={styles.Title}>Dash Board</span>
@@ -80,7 +81,9 @@ function SideBar() {
           src={AddBox}
           alt="대시 보드 추가 버튼 이미지"
           className={styles.AddBox}
+          onClick={openDash}
         />
+        <NewDashModal />
       </div>
       <div className={styles.DashboardsList}>
         {items.map((dashboard) => (
@@ -90,7 +93,13 @@ function SideBar() {
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() => ClickDashboard(dashboard.id, dashboard.createdByMe, dashboard.title)}
+            onClick={() =>
+              ClickDashboard(
+                dashboard.id,
+                dashboard.createdByMe,
+                dashboard.title
+              )
+            }
           />
         ))}
       </div>

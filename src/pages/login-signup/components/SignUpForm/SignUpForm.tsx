@@ -45,16 +45,15 @@ function SignUpForm() {
   const { isCheckboxAgreed, handleCheckboxChange } = useCheckBox(); // 체크박스 상태 관리 함수
 
   // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화(setIsButtonDisabled)
-  const setIsButtonDisabled = () =>
-    email.trim() === '' ||
-    name.trim() === '' ||
-    password.trim() === '' ||
-    passwordCheck.trim() === '' ||
-    emailError ||
-    nameError ||
-    passwordError ||
-    passwordCheckError ||
-    !isCheckboxAgreed;
+  const setIsButtonDisabled = () => email.trim() === ''
+    || name.trim() === ''
+    || password.trim() === ''
+    || passwordCheck.trim() === ''
+    || emailError
+    || nameError
+    || passwordError
+    || passwordCheckError
+    || !isCheckboxAgreed;
 
   return (
     <>
@@ -66,7 +65,7 @@ function SignUpForm() {
             name="login-email"
             type={InputType.Email}
             placeholder="이메일을 입력해 주세요."
-            errorText={'이메일 형식으로 작성해 주세요.'}
+            errorText="이메일 형식으로 작성해 주세요."
             error={emailError}
             value={email}
             onChange={handleEmailChange}
@@ -94,7 +93,7 @@ function SignUpForm() {
             name="login-password"
             type={InputType.Password}
             placeholder="비밀번호를 입력해 주세요."
-            errorText={'8자 이상 작성해 주세요.'}
+            errorText="8자 이상 작성해 주세요."
             error={passwordError}
             value={password}
             onChange={handlePasswordChange}
@@ -129,21 +128,27 @@ function SignUpForm() {
       {isModalOpen && (
         <AlertModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
           <p>가입이 완료되었습니다!</p>
-          <button onClick={closeModal}>확인</button>
+          <button type="button" onClick={closeModal}>
+            확인
+          </button>
         </AlertModal>
       )}
       {/* 중복된 이메일 모달 */}
       {isErrorModalOpen && (
         <AlertModal isOpen={isErrorModalOpen} setIsOpen={setIsErrorModalOpen}>
           <p>이미 사용 중인 이메일입니다.</p>
-          <button onClick={closeModal}>확인</button>
+          <button type="button" onClick={closeModal}>
+            확인
+          </button>
         </AlertModal>
       )}
       {/* 그 밖의 에러 모달 */}
       {isWhatModalOpen && (
         <AlertModal isOpen={isWhatModalOpen} setIsOpen={setIsWhatModalOpen}>
           <p>에러가 발생했습니다.</p>
-          <button onClick={closeModal}>확인</button>
+          <button type="button" onClick={closeModal}>
+            확인
+          </button>
         </AlertModal>
       )}
     </>

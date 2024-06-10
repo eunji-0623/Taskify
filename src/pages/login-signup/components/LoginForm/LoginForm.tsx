@@ -22,18 +22,19 @@ function LoginForm() {
     handlePasswordBlur,
   } = useInputHandlers(); // 인풋 에러 관리 함수
 
-  const { loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen } =
-    useLoginForm(); // 폼 제출 함수
+  const {
+    loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen,
+  } = useLoginForm(); // 폼 제출 함수
 
   // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화(setIsButtonDisabled)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     setIsButtonDisabled(
-      email.trim() === '' ||
-        password.trim() === '' ||
-        emailError ||
-        passwordError
+      email.trim() === ''
+        || password.trim() === ''
+        || emailError
+        || passwordError,
     );
   }, [email, password, emailError, passwordError]);
 
@@ -77,7 +78,9 @@ function LoginForm() {
       {isModalOpen && (
         <AlertModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
           <p>비밀번호가 일치하지 않습니다.</p>
-          <button onClick={closeModal}>확인</button>
+          <button type="button" onClick={closeModal}>
+            확인
+          </button>
         </AlertModal>
       )}
     </>

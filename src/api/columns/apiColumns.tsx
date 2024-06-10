@@ -1,23 +1,23 @@
 import instance from '../axiosInstance';
 import { handleResponse } from '../errorHandler';
 
-interface ColumnOverAll {
-  id: 0;
+export interface ColumnOverAll {
+  id: number;
   title: string;
   createdAt: string;
   updatedAt: string;
 }
 
-interface CreateColumnBody {
+export interface CreateColumnBody {
   title: string;
   dashboardId: number;
 }
 
-interface UpdateColumnBody {
+export interface UpdateColumnBody {
   title: string;
 }
 
-interface UploadCardImageBody {
+export interface UploadCardImageBody {
   image: string;
 }
 
@@ -29,7 +29,11 @@ interface ColumnOverAllResponse {
 interface GetColumnResponse {
   status: number;
   result?: 'SUCCESS';
-  data?: ColumnOverAll[];
+  data: {
+    cursorId: number;
+    totalCount: number;
+    dashboards: ColumnOverAll[];
+  };
 }
 
 interface DeleteColumnResponse {
@@ -71,7 +75,10 @@ export async function apiUpdateColumn(
   body: UpdateColumnBody,
   columnId: number,
 ): Promise<ColumnOverAllResponse> {
-  const res = await instance.put<ColumnOverAllResponse>(`/cards/${columnId}`, body);
+  const res = await instance.put<ColumnOverAllResponse>(
+    `/cards/${columnId}`,
+    body,
+  );
   return handleResponse(res);
 }
 

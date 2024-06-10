@@ -44,11 +44,11 @@ interface InvitationsListResponse {
 
 // 내가 받은 초대 목록 조회 api
 export async function apiMyInvitationsList(
-  query: InvitationsQuery = { cursorId: undefined, size: 10, title: '' },
+  query: InvitationsQuery = { size: 10 },
 ): Promise<InvitationsListResponse> {
-  const res = await instance.get<InvitationsListResponse>(
-    `/invitations?cursorId=${query.cursorId}&size=${query.size}&title=${query.title}`,
-  );
+  const res = await instance.get<InvitationsListResponse>('/invitations', {
+    params: query,
+  });
   return handleResponse(res);
 }
 

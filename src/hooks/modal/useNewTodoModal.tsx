@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import NewTodoModal from '../pages/modal/NewTodoModal/NewTodoModal';
+import NewTodoModal from '../../pages/modal/NewTodoModal/NewTodoModal';
 
 /*
   모달의 렌더링 여부가 결정되는 state 생략을 위한 NewTodoModal hook입니다.

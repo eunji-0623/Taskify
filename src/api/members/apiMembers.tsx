@@ -1,15 +1,12 @@
 import instance from '../axiosInstance';
 import { handleResponse } from '../errorHandler';
 
-interface DashboardId {
-  dashboardId: number;
-}
-
 interface MemberId {
   memberId: number;
 }
 
 interface MemberQuery {
+  dashboardId: number;
   page?: number;
   size?: number;
 }
@@ -32,12 +29,11 @@ interface MemberListResponse {
 
 // 대시보드 멤버 목록 조회 api
 export async function apiMemberList(
-  queryId: DashboardId,
-  query: MemberQuery = { size: 10, page: 1 },
+  query: MemberQuery,
 ): Promise<MemberListResponse> {
-  const res = await instance.get<MemberListResponse>(
-    `/members?dashboardId=${queryId.dashboardId}&size=${query.size}&page=${query.page}`,
-  );
+  const res = await instance.get<MemberListResponse>('/members', {
+    params: query,
+  });
   return handleResponse(res);
 }
 

@@ -1,14 +1,19 @@
-import { useCallback, useState, ReactNode } from 'react';
-import AlertModal from '../pages/modal/AlertModal/AlertModal';
+import { useCallback, useState } from 'react';
+import AlertModal from '../../pages/modal/AlertModal/AlertModal';
 
 /*
   모달의 렌더링 여부가 결정되는 state 생략을 위한 AlertModal hook입니다.
-  AlertModal, openAlert, closeAlert 가 리턴되어 사용할 수 있습니다.
-  const { AlertModal, openAlert, closeAlert } = useAlertModal();
+  AlertModal, openAlert 가 리턴되어 사용할 수 있습니다.
+
+  const { AlertModal, openAlert } = useAlertModal();
+
+  <button type="button" onClick={openAlert}>버튼</button>
+  <AlertModal modalText="이미 사용 중인 이메일입니다." buttonText="확인" />
 */
 
 interface ModalProps {
-  children: ReactNode;
+  modalText: string;
+  buttonText: string;
 }
 
 function useAlertModal() {
@@ -26,14 +31,14 @@ function useAlertModal() {
 
   return {
     AlertModal: isOpen
-      ? ({ children }: ModalProps) => (
+      ? ({ modalText, buttonText }: ModalProps) => (
         <AlertModal isOpen={isOpen} setIsOpen={setIsOpen}>
-          {children}
+          <p>{modalText}</p>
+          <button type="button" onClick={closeAlert}>{buttonText}</button>
         </AlertModal>
       )
       : () => null,
     openAlert,
-    closeAlert,
     isOpen,
   };
 }

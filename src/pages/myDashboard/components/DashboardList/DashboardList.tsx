@@ -2,13 +2,13 @@ import styles from './DashboardList.module.scss';
 import usePagination from '../../../../hooks/pagination/usePagination';
 import { PagenationBtn } from '../../../../components/Btn/Btn';
 import { AddDashboard, Dashboard } from './Dashboard';
-// import { apiDashboardsList, apiLoginRequest } from '../../../../api/apiModule';
+import { apiDashboardsList } from '../../../../api/apiModule';
 
 /*  대시보드 목록을 보여주는 컴포넌트입니다.
     - 대시보드 목록을 보여주는 ul 부분과
     - 다음 목록을 불러오기 위한 부분으로 나뉩니다  */
 
-interface DashboardApi {
+interface DashboardDetail {
   id: number;
   title: string;
   color: string;
@@ -20,35 +20,30 @@ interface DashboardApi {
 
 const ITEMS_PER_PAGE = 5;
 
-const fetchDashboards = async (page: number) => {
-  // mockData 사용. 추후 변경 필요
-  const response = await fetch(
-    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
-  );
-  const data = await response.json();
-
-  // 로그인 테스트
-  // const response = await apiLoginRequest({
-  //   email: 'test@codeit.com',
-  //   password: 'testpassword',
-  // });
-
-  // 토큰테스트
-  // const response = await apiDashboardsList({ navigationMethod: 'pagination' });
+const fetchDashboards = async (
+  page: number,
+): Promise<{ items: DashboardDetail[]; totalCount: number }> => {
+  const data = await apiDashboardsList({
+    navigationMethod: 'pagination',
+    page,
+    size: ITEMS_PER_PAGE,
+  });
   return {
-    items: data.dashboards,
+    items: Object.values(data.dashboards),
     totalCount: data.totalCount,
   };
 };
 
 function DashboardList() {
   const {
-    currentItems,
+    items,
     currentPage,
     totalPages,
+    isFirstPage,
+    isLastPage,
     handlePrevClick,
     handleNextClick,
-  } = usePagination<DashboardApi>({
+  } = usePagination<DashboardDetail>({
     fetchData: fetchDashboards,
     itemsPerPage: ITEMS_PER_PAGE,
   });
@@ -59,7 +54,7 @@ function DashboardList() {
         <li>
           <AddDashboard />
         </li>
-        {currentItems.map((dashboard) => (
+        {items.map((dashboard) => (
           <li key={dashboard.id}>
             <Dashboard
               color={dashboard.color}
@@ -78,6 +73,8 @@ function DashboardList() {
         <PagenationBtn
           handlePrev={handlePrevClick}
           handleNext={handleNextClick}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
         />
       </div>
     </div>

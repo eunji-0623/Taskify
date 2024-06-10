@@ -1,5 +1,7 @@
 export * from './authorization/apiAuth';
 export * from './cards/apiCards';
+export * from './columns/apiColumns';
+export * from './comments/apiComments';
 export * from './dashboards/apiDashboards';
 export * from './invitations/apiInvitations';
 export * from './members/apiMembers';

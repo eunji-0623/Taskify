@@ -1,0 +1,61 @@
+.SideBar {
+  width: 300px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: var(--white-white_FFFFFF, #FFF);
+  border-right: 1px solid #d9d9d9e0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 4px; /* 스크롤바 너비 */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 스크롤바 트랙 색상 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888888de; /* 스크롤바 색상 */
+    border-radius: 4px; /* 스크롤바 모양 */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 마우스 호버시 스크롤바 색상 */
+  }
+}
+
+.LogoImg {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+}
+
+.SideBarHeader {
+  width: 100%;
+  margin-top: 110px;
+  padding: 0 24px 0 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.AddBox {
+  cursor: pointer;
+}
+
+.DashboardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 18px;
+}
+
+.PagenationBtn {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  opacity: 70%;
+}
+

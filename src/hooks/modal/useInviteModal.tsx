@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import InviteModal from '../pages/modal/InviteModal/InviteModal';
+import InviteModal from '../../pages/modal/InviteModal/InviteModal';
 
 /*
   모달의 렌더링 여부가 결정되는 state 생략을 위한 InviteModal hook입니다.

@@ -14,15 +14,17 @@ interface ChangePasswordBody {
 interface LoginResponse {
   status: number;
   message?: string;
-  user?: {
-    id: number;
-    email: string;
-    nickname: string;
-    profileImageUrl?: string;
-    createdAt: string;
-    updatedAt: string;
+  data?: {
+    user: {
+      id: number;
+      email: string;
+      nickname: string;
+      profileImageUrl?: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    accessToken?: string;
   };
-  accessToken?: string;
 }
 
 interface ChangePasswordResponse {
@@ -35,7 +37,7 @@ export async function apiLoginRequest(body: LoginBody): Promise<LoginResponse> {
   const res = await instance.post<LoginResponse>('/auth/login', body);
   const responseData = await handleResponse(res);
   localStorage.setItem('Token', responseData.accessToken);
-  return handleResponse(res);
+  return responseData;
 }
 
 // 비밀번호 변경 요청 api

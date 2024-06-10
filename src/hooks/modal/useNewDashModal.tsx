@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import NewDashModal from '../pages/modal/NewDashModal/NewDashModal';
+import NewDashModal from '../../pages/modal/NewDashModal/NewDashModal';
 
 /*
   모달의 렌더링 여부가 결정되는 state 생략을 위한 NewDashModal hook입니다.

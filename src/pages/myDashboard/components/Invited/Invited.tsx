@@ -41,7 +41,7 @@ const PAGE_SIZE = 6;
 
 const fetchInvitations = async (
   cursor: number,
-  title: string,
+  title: string
 ): Promise<InvitationsListResponse> => {
   const data = await apiMyInvitationsList({
     size: PAGE_SIZE,
@@ -103,7 +103,7 @@ function Invited() {
     setInvitations([]);
     setHasNext(true);
     loadMoreInvitations();
-  }, [title, loadMoreInvitations]);
+  }, [title]);
 
   return (
     <div className={styles.container}>

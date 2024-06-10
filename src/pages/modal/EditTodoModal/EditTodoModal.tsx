@@ -1,7 +1,12 @@
 import { useCallback, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import ModalDropdown from '../../../components/ModalDropdown/ModalDropdown';
+import DropdownMenu from '../components/DropdownMenu/DropdownMenu';
+import ManagerDropdown from '../components/ManagerDropdown/ManagerDropdown';
+import Calendar from '../components/Calendar/Calendar';
+import InputTag from '../components/InputTag/InputTag';
+import InputImage from '../components/InputImage/InputImage';
 import styles from './EditTodoModal.module.scss';
+import TestImg from '/img/test_img.png';
 
 /*
   할 일 수정을 위한 모달입니다.
@@ -14,26 +19,36 @@ interface ModalProps {
 
 // 할 일 데이터가 필요
 function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
-  const [condition, setCondition] = useState('test');
-  const [manager, setManager] = useState('test');
+  const [condition, setCondition] = useState('test1');
+  const [manager, setManager] = useState('test1');
+  const [profile, setProfile] = useState(TestImg);
+  const [title, setTitle] = useState('test');
+  const [contents, setContents] = useState('test');
+  const [deadline, setDeadline] = useState<Date | null>(new Date());
+  const [tags, setTags] = useState(['테스트1', '태스트2', '테스트태그']);
+  const [uploadImgUrl, setUploadImgUrl] = useState(TestImg);
 
   // 테스트 데이터
   const data = [
     {
       id: 1,
       text: 'test1',
+      profile: TestImg,
     },
     {
       id: 2,
       text: 'test2',
+      profile: TestImg,
     },
     {
       id: 3,
-      text: 'test3',
+      text: '3333',
+      profile: TestImg,
     },
     {
       id: 4,
-      text: 'test4',
+      text: '4444',
+      profile: TestImg,
     },
   ];
 
@@ -45,9 +60,6 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
   // 할 일 수정 버튼 클릭 시 동작
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    // submit 테스트
-    console.log('submit');
   }
 
   return (
@@ -60,59 +72,64 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
             <div className={styles.contentDropdown}>
               <div className={styles.contentBlock}>
                 <h3>상태</h3>
-                <ModalDropdown
+                <DropdownMenu
                   value={condition}
                   setValue={setCondition}
                   data={data}
                 />
               </div>
-
               <div className={styles.contentBlock}>
                 <h3>담당자</h3>
-                <ModalDropdown
+                <ManagerDropdown
                   value={manager}
                   setValue={setManager}
                   data={data}
+                  profile={profile}
+                  setProfile={setProfile}
                 />
               </div>
             </div>
 
             <div className={styles.contentBlock}>
-              <label htmlFor="name">
+              <label htmlFor="title">
                 제목
                 <span className={styles.contentSpan}> *</span>
               </label>
-              <input value="test" className={styles.contentInput} type="text" id="name" name="name" placeholder="제목을 입력해 주세요" required />
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className={`${styles.contentInput} ${styles.inputTop}`}
+                type="text"
+                id="title"
+                name="title"
+                placeholder="제목을 입력해 주세요"
+                required
+              />
             </div>
 
             <div className={styles.contentBlock}>
-              <label htmlFor="text">
+              <label htmlFor="content">
                 설명
                 <span className={styles.contentSpan}> *</span>
               </label>
-              <input value="test" className={`${styles.contentText} ${styles.contentInput}`} type="text" id="text" name="text" placeholder="설명을 입력해 주세요" required />
+              <textarea
+                value={contents}
+                onChange={(e) => setContents(e.target.value)}
+                className={styles.textarea}
+                id="content"
+                name="content"
+                placeholder="설명을 입력해 주세요"
+              />
             </div>
 
             <div className={styles.contentBlock}>
-              <label htmlFor="name">마감일</label>
-
-              {/* 날짜 입력 라이브러리 추가 */}
-              <input value="test" className={styles.contentInput} type="text" id="name" name="name" placeholder="날짜를 입력해 주세요" required />
+              <h3>마감일</h3>
+              <Calendar deadline={deadline} setDeadline={setDeadline} />
             </div>
 
-            <div className={styles.contentBlock}>
-              <label htmlFor="name">태그</label>
+            <InputTag tags={tags} setTags={setTags} />
 
-              {/* 태그 컴포넌트 추가 */}
-              <input value="test" className={styles.contentInput} type="text" id="name" name="name" placeholder="입력 후 Enter" required />
-            </div>
-
-            <div className={styles.contentBlock}>
-              <h3>이미지</h3>
-
-              {/* 이미지 추가 */}
-              <div className={styles.contentImage}>이미지 추가+</div>
-            </div>
+            <InputImage uploadImgUrl={uploadImgUrl} setUploadImgUrl={setUploadImgUrl} />
           </div>
 
           <div className={styles.buttonBlock}>

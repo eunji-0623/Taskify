@@ -1,4 +1,6 @@
+import SideBar from '../../components/sidebar/sidebar';
 import DashboardList from './components/DashboardList/DashboardList';
+import MyDashboardHeader from './components/Header/Header';
 import Invited from './components/Invited/Invited';
 import styles from './index.module.scss';
 
@@ -8,9 +10,9 @@ import styles from './index.module.scss';
 function MyDashboard() {
   return (
     <div className={styles.container}>
-      <div>sidemenu</div>
-      <div>
-        <div>header</div>
+      <SideBar />
+      <div className={styles.main}>
+        <MyDashboardHeader />
         <div className={styles.mainContents}>
           <DashboardList />
           <Invited />

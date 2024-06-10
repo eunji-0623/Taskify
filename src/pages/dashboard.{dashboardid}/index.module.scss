@@ -1,19 +1,36 @@
-.container {
-  display: flex;
-}
-//서브 헤더 넓이와 contents 넓이 분리하기 위함.
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.contents {
-  display: flex;
-  flex-direction: row;
+@import '../../styles/utils.scss';
 
-  .column {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+.container {
+  display: grid;
+  height: 100vh;
+
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+
+  .sideMenu {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 1;
+  }
+
+  .gnbHeader {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 2;
+  }
+
+  .columns {
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 2;
+    overflow-y: auto;
+    background-color: var(--gray-gray_FAFAFA, #fafafa);
+    overflow: hidden;
+
+    .addColumnButtonContainer {
+      width: auto;
+      @include desktop {
+        padding-top: 4.25rem;
+        padding-left: 1.25rem;
+        padding-right: 3rem;
+      }
+    }
   }
 }

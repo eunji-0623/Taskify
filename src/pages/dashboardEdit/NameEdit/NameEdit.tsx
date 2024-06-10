@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import ColorCircle from '../../../components/chip/ColorCircle/ColorCircle';
 import styles from './NameEdit.module.scss';
 import { ChangeAndSaveBtn } from '../../../components/Btn/Btn';
+import { apiEditDashboards } from '../../../api/apiModule';
 
 /*  대시보드 수정 페이지 중
     이름과 색상을 바꾸기 위한 부분입니다.  */
@@ -9,18 +10,33 @@ import { ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 interface Props {
   name: string;
   color: string;
+  dashboardId: string | undefined;
+  handleChange: Dispatch<SetStateAction<string>>;
 }
 
 const COLORS = ['#7AC555', '#760DDE', '#FFA500', '#76A5EA', '#E876EA'];
 
-function Info({ name, color }: Props) {
+function Info({ name, color, dashboardId, handleChange }: Props) {
+  const [newName, setNewName] = useState('');
   const [selectedColor, setSelectedColor] = useState(color);
 
   const handleClickChips = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedColor(event.target.value);
   };
 
-  const handleSubmitButton = () => {};
+  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewName(event.target.value);
+  };
+
+  const handleSubmitButton = async () => {
+    if (!dashboardId) return;
+
+    handleChange(newName);
+    await apiEditDashboards(
+      { title: newName, color: selectedColor },
+      { dashboardId: +dashboardId }
+    );
+  };
 
   useEffect(() => {
     setSelectedColor(color);
@@ -103,6 +119,7 @@ function Info({ name, color }: Props) {
         <input
           className={styles.newNameInput}
           placeholder="변경할 이름을 입력해주세요"
+          onChange={handleChangeName}
         />
         <div className={styles.submitButton}>
           <ChangeAndSaveBtn BtnText="변경" handleBtn={handleSubmitButton} />

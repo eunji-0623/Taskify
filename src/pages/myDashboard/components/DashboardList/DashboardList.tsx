@@ -21,7 +21,7 @@ interface DashboardDetail {
 const ITEMS_PER_PAGE = 5;
 
 const fetchDashboards = async (
-  page: number,
+  page: number
 ): Promise<{ items: DashboardDetail[]; totalCount: number }> => {
   const data = await apiDashboardsList({
     navigationMethod: 'pagination',
@@ -67,8 +67,7 @@ function DashboardList() {
       <div className={styles.pagination}>
         <p>
           {totalPages}
-          페이지 중
-          {currentPage}
+          페이지 중{currentPage}
         </p>
         <PagenationBtn
           handlePrev={handlePrevClick}

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Search from './Search/Search';
 import Table from './Table/Table';
 import Empty from './Empty/Empty';
@@ -66,7 +66,12 @@ function Invited() {
 
     try {
       const newInvitations = await fetchInvitations(cursor, title);
-      setInvitations((prev) => [...prev, ...newInvitations.invitations]);
+      if (cursor === 0) {
+        // 검색어가 변경되어 초기 로드일 경우
+        setInvitations(newInvitations.invitations);
+      } else {
+        setInvitations((prev) => [...prev, ...newInvitations.invitations]);
+      }
       setCursor(newInvitations.cursorId);
       if (hasNext && newInvitations.invitations.length === 0) {
         setEmpty(true);
@@ -77,13 +82,28 @@ function Invited() {
     } catch (error) {
       setEmpty(true);
     }
-  }, [cursor, hasNext]);
+  }, [cursor, hasNext, title]);
 
   const setElement = useInfiniteScroll(loadMoreInvitations, {
     root: null,
     rootMargin: '20px',
     threshold: 1.0,
   });
+
+  const handleSearch = useCallback((searchWord: string) => {
+    setTitle(searchWord);
+    setCursor(0);
+    setInvitations([]);
+    setHasNext(true);
+    setEmpty(false);
+  }, []);
+
+  useEffect(() => {
+    setCursor(0);
+    setInvitations([]);
+    setHasNext(true);
+    loadMoreInvitations();
+  }, [title]);
 
   return (
     <div className={styles.container}>
@@ -92,7 +112,7 @@ function Invited() {
       ) : (
         <>
           <h2 className={styles.title}>초대받은 대시보드</h2>
-          <Search />
+          <Search searchingWord={handleSearch} />
           <div className={styles.tableContainer}>
             <Table
               invitations={invitations}

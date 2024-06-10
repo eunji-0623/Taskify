@@ -23,8 +23,18 @@
   }
 
   .chips {
+    position: relative;
     display: flex;
     gap: 10px;
+
+    label {
+      cursor: pointer;
+    }
+
+    input {
+      position: absolute;
+      visibility: hidden;
+    }
   }
 }
 

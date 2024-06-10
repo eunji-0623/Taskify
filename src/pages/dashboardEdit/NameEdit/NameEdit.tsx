@@ -1,19 +1,101 @@
+import { useState, useEffect } from 'react';
+import ColorCircle from '../../../components/chip/ColorCircle/ColorCircle';
 import styles from './NameEdit.module.scss';
+import { ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 
 /*  대시보드 수정 페이지 중
     이름과 색상을 바꾸기 위한 부분입니다.  */
 
-function Info() {
+interface Props {
+  name: string;
+  color: string;
+}
+
+const COLORS = ['#7AC555', '#760DDE', '#FFA500', '#76A5EA', '#E876EA'];
+
+function Info({ name, color }: Props) {
+  const [selectedColor, setSelectedColor] = useState(color);
+
+  const handleClickChips = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedColor(event.target.value);
+  };
+
+  const handleSubmitButton = () => {};
+
+  useEffect(() => {
+    setSelectedColor(color);
+  }, [color]);
+
   return (
     <div className={styles.container}>
       <div className={styles.present}>
-        <h3 className={styles.name}>현재 대시보드 이름</h3>
+        <h3 className={styles.name}>{name}</h3>
         <div className={styles.chips}>
-          <button type="button">1</button>
-          <button type="button">2</button>
-          <button type="button">3</button>
-          <button type="button">4</button>
-          <button type="button">5</button>
+          <label>
+            <input
+              type="radio"
+              value={COLORS[0]}
+              checked={selectedColor === COLORS[0]}
+              onChange={handleClickChips}
+            />
+            <ColorCircle color={COLORS[0]} diameter={30}>
+              {selectedColor === COLORS[0] ? (
+                <img src="/icon/checked.svg" />
+              ) : null}
+            </ColorCircle>
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={COLORS[1]}
+              checked={selectedColor === COLORS[1]}
+              onChange={handleClickChips}
+            />
+            <ColorCircle color={COLORS[1]} diameter={30}>
+              {selectedColor === COLORS[1] ? (
+                <img src="/icon/checked.svg" />
+              ) : null}
+            </ColorCircle>
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={COLORS[2]}
+              checked={selectedColor === COLORS[2]}
+              onChange={handleClickChips}
+            />
+            <ColorCircle color={COLORS[2]} diameter={30}>
+              {selectedColor === COLORS[2] ? (
+                <img src="/icon/checked.svg" />
+              ) : null}
+            </ColorCircle>
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={COLORS[3]}
+              checked={selectedColor === COLORS[3]}
+              onChange={handleClickChips}
+            />
+            <ColorCircle color={COLORS[3]} diameter={30}>
+              {selectedColor === COLORS[3] ? (
+                <img src="/icon/checked.svg" />
+              ) : null}
+            </ColorCircle>
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={COLORS[4]}
+              checked={selectedColor === COLORS[4]}
+              onChange={handleClickChips}
+            />
+            <ColorCircle color={COLORS[4]} diameter={30}>
+              {selectedColor === COLORS[4] ? (
+                <img src="/icon/checked.svg" />
+              ) : null}
+            </ColorCircle>
+          </label>
         </div>
       </div>
       <div className={styles.new}>
@@ -22,9 +104,9 @@ function Info() {
           className={styles.newNameInput}
           placeholder="변경할 이름을 입력해주세요"
         />
-        <button className={styles.submitButton} type="button">
-          변경
-        </button>
+        <div className={styles.submitButton}>
+          <ChangeAndSaveBtn BtnText="변경" handleBtn={handleSubmitButton} />
+        </div>
       </div>
     </div>
   );

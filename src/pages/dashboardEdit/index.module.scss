@@ -1,8 +1,10 @@
-@use '/src/styles/global.scss' as colors;
+@use '/src/styles/global.scss' as *;
 @use '/src/styles/media.scss' as *;
 
 .container {
   display: flex;
+  overflow: scroll;
+  background-color: $gray_FAFAFA;
 }
 
 .main {
@@ -22,7 +24,7 @@
   padding: 20px 90px;
   font-size: 18px;
   font-weight: 500;
-  color: colors.$black_333236;
+  color: $black_333236;
 }
 
 @include mobile {

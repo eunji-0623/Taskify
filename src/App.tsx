@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/mydashboard" element={<MyDashboard />} />
-          <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
+          <Route path="/dashboard/:id/edit" element={<DashboardEdit />} />
           <Route path="/dashboard/:id" element={<DashboardForId />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

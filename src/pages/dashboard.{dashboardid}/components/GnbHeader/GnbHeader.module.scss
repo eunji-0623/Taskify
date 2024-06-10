@@ -43,6 +43,10 @@
 .BtnContainer {
   display: flex;
   gap: 16px;
+
+  @include mobile {
+    gap: 6px;
+  }
 }
 .HandleAndProfile {
   display: flex;

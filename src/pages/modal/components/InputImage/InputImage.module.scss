@@ -1,0 +1,54 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.contentBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageBlock {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  margin-top: 0.63rem;
+  border: 0;
+  padding: 0;
+  background-color: white;
+  z-index: 1;
+
+  @include mobile {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.contentImageBasic,
+.contentImage {
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid $gray_D9D9D9;
+  border-radius: 0.375rem;
+  cursor: pointer;
+
+  @include mobile {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.contentImage {
+  filter: brightness(50%);
+}
+
+.pencilIcon {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  cursor: pointer;
+
+  @include mobile {
+    top: 0.8rem;
+    left: 0.8rem;
+  }
+}

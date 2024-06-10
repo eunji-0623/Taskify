@@ -3,6 +3,7 @@ import styles from './ModalContainer.module.scss';
 
 /*
   모달 영역 밖 클릭 시 닫는 Modal을 감싸는 컴포넌트입니다.
+
   isOpen, setIsOpen, children을 props로 받습니다.
 */
 

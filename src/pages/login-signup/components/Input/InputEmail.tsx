@@ -1,17 +1,18 @@
 import classNames from 'classnames';
 import styles from './Input.module.scss';
+import { InputType } from '../utils/constants';
 
 interface InputEmailProps {
   inputText: string;
   id: string;
   name: string;
-  type: string;
+  type: InputType;
   placeholder: string;
   errorText: string;
   value: string;
   error: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: () => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function InputEmail({

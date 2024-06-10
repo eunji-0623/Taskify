@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import styles from './CheckBox.module.scss';
 
-type CheckboxProps = {
+interface CheckboxProps {
   Label: string;
-};
+  onChange: (isChecked: boolean) => void;
+}
 
-function Checkbox({ Label }: CheckboxProps) {
+function Checkbox({ Label, onChange }: CheckboxProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+    const newCheckedState = !isChecked;
+    setIsChecked(newCheckedState);
+
+    // 변경된 상태를 부모 컴포넌트로 전달
+    onChange(newCheckedState);
   };
 
   return (

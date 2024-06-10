@@ -18,33 +18,3 @@
     padding: 105px 12px;
   }
 }
-
-.formContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-@mixin ContainerStyles {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.emailContainer {
-  @include ContainerStyles;
-  margin-top: 38px;
-
-  @include mobile {
-    margin-top: 50px;
-  }
-}
-
-.passwordContainer {
-  @include ContainerStyles;
-  margin-top: 16px;
-}
-
-.signUpButton {
-  margin-top: 20px;
-}

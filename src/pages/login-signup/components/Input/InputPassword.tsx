@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './Input.module.scss';
+import { InputType } from '../utils/constants';
 import EyeOn from '../../../../../public/icon/eye_on.svg';
 import EyeOff from '../../../../../public/icon/eye_off.svg';
 
@@ -8,7 +9,7 @@ interface InputPasswordProps {
   inputText: string;
   id: string;
   name: string;
-  type: string;
+  type: InputType;
   placeholder: string;
   errorText: string;
   value: string;
@@ -53,7 +54,7 @@ function InputPassword({
           className={errorInputClass}
           id={id}
           name={name}
-          type={toggleVisible ? 'text' : type}
+          type={type === InputType.Password && toggleVisible ? 'text' : type}
           placeholder={placeholder}
           value={value}
           onBlur={onBlur}

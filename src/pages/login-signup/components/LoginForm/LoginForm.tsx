@@ -1,104 +1,57 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { apiLoginRequest } from '../../../../api/apiModule';
+import { useEffect, useState } from 'react';
 import styles from './LoginForm.module.scss';
+import useLoginForm from '../utils/useLoginFrom';
+import useInputHandlers from '../utils/useInputHandlers';
 import AlertModal from '../../../modal/AlertModal/AlertModal';
+import { InputType } from '../utils/constants';
 import InputEmail from '../Input/InputEmail';
 import InputPassword from '../Input/InputPassword';
 import Button from '../Button/Button';
 
-// User 타입 선언 => useUser에 타입 적용 => API요청 setUser(response.user ?? null)
-type User = {
-  id: number;
-  email: string;
-  nickname: string;
-  profileImageUrl?: string | undefined;
-  createdAt: string;
-  updatedAt: string;
-};
-
+// 로그인 화면의 기능을 수행하는 함수를 불러오고 페이지를 리턴해주는 컴포넌트 입니다.
 function LoginForm() {
-  // 값 관리
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [, /* error */ setError] = useState<string | null>(null); // 값 사용 X
-  const [, /* user */ setUser] = useState<User | null>(null); // 값 사용 X
+  // 작동 함수 불러오기
+  const {
+    email,
+    password,
+    emailError,
+    passwordError,
+    handleEmailChange,
+    handleEmailBlur,
+    handlePasswordChange,
+    handlePasswordBlur,
+  } = useInputHandlers(); // 인풋 에러 관리 함수
+
+  const { loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen } =
+    useLoginForm(); // 폼 제출 함수
+
+  // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화(setIsButtonDisabled)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
 
-  // Input 값이 변경될 때마다 버튼 상태 업데이트(isDisabled)
   useEffect(() => {
-    setIsButtonDisabled(email.trim() === '' || password.trim() === '');
-  }, [email, password]);
-
-  // 이메일 값 에러 검증
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    if (emailError) {
-      setEmailError(false);
-    }
-  };
-
-  // 이메일 형식인지 검증
-  const handleEmailBlur = () => {
-    setEmailError(!/\S+@\S+\.\S+/.test(email));
-  };
-
-  // 패스워드 값 에러 검증
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (passwordError) {
-      setPasswordError(false);
-    }
-  };
-
-  // 패스워드 8자 넘는지 검증
-  const handlePasswordBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    setPasswordError(e.target.value.length < 8);
-  };
-
-  // 모달 닫기 함수
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // 로그인 폼 작동 함수
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    // API 요청
-    try {
-      const response = await apiLoginRequest({ email, password });
-      setUser(response.user ?? null);
-      navigate('/mydashboard');
-    } catch (error) {
-      setIsModalOpen(true); // 에러가 발생했을 때 모달을 엽니다.
-    } finally {
-      setLoading(false);
-    }
-  };
+    setIsButtonDisabled(
+      email.trim() === '' ||
+        password.trim() === '' ||
+        emailError ||
+        passwordError
+    );
+  }, [email, password, emailError, passwordError]);
 
   return (
     <>
-      <form className={styles.formContainer} onSubmit={handleLogin}>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
         <div className={styles.emailContainer}>
           <InputEmail
             inputText="이메일"
             id="login-email"
             name="login-email"
-            type="email"
+            type={InputType.Email}
             placeholder="이메일을 입력해 주세요."
             errorText="이메일 형식으로 작성해 주세요."
+            error={emailError}
             value={email}
             onChange={handleEmailChange}
             onBlur={handleEmailBlur}
-            error={emailError}
           />
         </div>
         <div className={styles.passwordContainer}>
@@ -106,13 +59,13 @@ function LoginForm() {
             inputText="비밀번호"
             id="login-password"
             name="login-password"
-            type="password"
+            type={InputType.Password}
             placeholder="비밀번호를 입력해 주세요."
             errorText="8자 이상 작성해 주세요."
+            error={passwordError}
             value={password}
             onChange={handlePasswordChange}
             onBlur={handlePasswordBlur}
-            error={passwordError}
           />
         </div>
         <Button

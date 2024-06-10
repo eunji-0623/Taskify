@@ -21,9 +21,7 @@ function GnbHeader() {
   return (
     <header className={styles.GnbHeader}>
       <div className={styles.TitleContainer}>
-        <div className={styles.DashboardTitle}>
-          {activeTitle}
-        </div>
+        <div className={styles.DashboardTitle}>{activeTitle}</div>
         {isCreateByMe && (
           <img src={CrownImg} alt="관리자 이미지" width={20} height={16} />
         )}
@@ -33,14 +31,16 @@ function GnbHeader() {
           <SettingBtn />
           <InviteBtn />
         </div>
-        <Members />
-        <div className={styles.VerticalLine} />
-        <UserProfileImg
-          isImg={false}
-          profileImageUrl="#A3C4A2"
-          nickname="Test"
-        />
-        <div>Test</div>
+        <div className={styles.MembersAndProfile}>
+          <Members />
+          <div className={styles.VerticalLine} />
+          <UserProfileImg
+            isImg={false}
+            profileImageUrl="#A3C4A2"
+            nickname="Test"
+          />
+          <div>Test</div>
+        </div>
       </div>
     </header>
   );

@@ -11,8 +11,10 @@
   
   @include tablet {
     padding: 0 40px 0 68px;
+    justify-content: center;
   }
   @include mobile {
+    padding: 0 12px 0 8px;
     height: 60px;
   }
 }
@@ -47,6 +49,29 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+
+  @include tablet {
+    justify-content: space-between;
+    width: 100%;
+  }
+  @include mobile {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.MembersAndProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+
+  @include tablet {
+    gap: 24px;
+  }
+  @include mobile {
+    gap: 12px;
+  }
 }
 
 .VerticalLine {

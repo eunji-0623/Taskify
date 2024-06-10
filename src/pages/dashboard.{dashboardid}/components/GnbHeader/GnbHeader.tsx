@@ -3,6 +3,7 @@ import { DashboardContext } from '../../../../contexts/DashboardContext';
 import { useContext } from 'react';
 import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 import CrownImg from '/icon/crown.svg';
+import { InviteBtn, SettingBtn } from '../Btn/Btn';
 
 /*
 /dashboard/{dashboardId} 페이지에 해당하는 헤더 컴포넌트입니다.
@@ -28,8 +29,8 @@ function GnbHeader() {
       </div>
       <div className={styles.HandleAndProfile}>
         <div className={styles.BtnContainer}>
-          <button type="button">관리</button>
-          <button type="button">초대하기</button>
+          <SettingBtn />
+          <InviteBtn />
         </div>
         <div>members</div>
         <div className={styles.VerticalLine} />

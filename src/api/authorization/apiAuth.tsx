@@ -14,7 +14,7 @@ interface ChangePasswordBody {
 interface LoginResponse {
   status: number;
   message?: string;
-  data?: {
+  data: {
     user: {
       id: number;
       email: string;
@@ -23,7 +23,7 @@ interface LoginResponse {
       createdAt: string;
       updatedAt: string;
     };
-    accessToken?: string;
+    accessToken: string;
   };
 }
 
@@ -36,7 +36,10 @@ interface ChangePasswordResponse {
 export async function apiLoginRequest(body: LoginBody): Promise<LoginResponse> {
   const res = await instance.post<LoginResponse>('/auth/login', body);
   const responseData = await handleResponse(res);
-  localStorage.setItem('Token', responseData.accessToken);
+  const token = responseData.data.accessToken;
+  if (token) {
+    localStorage.setItem('Token', token);
+  }
   return responseData;
 }
 

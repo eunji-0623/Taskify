@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
+import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './DeleteColumnModal.module.scss';
 
 /*
@@ -22,8 +23,8 @@ function DeleteColumnModal({ isOpen, setIsOpen }: ModalProps) {
       <div className={styles.container}>
         <p>컬럼의 모든 카드가 삭제됩니다.</p>
         <div className={styles.buttonBlock}>
-          <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
-          <button className={styles.deleteButton} type="submit">삭제</button>
+          <DeleteBtn BtnText="취소" handleBtn={close} />
+          <ChangeAndSaveBtn BtnText="삭제" handleBtn={close} />
         </div>
       </div>
     </ModalContainer>

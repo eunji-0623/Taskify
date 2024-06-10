@@ -2,7 +2,7 @@
 @use '/src/styles/media.scss' as *;
 
 .table {
-  width: 966px;
+  width: 935px;
 }
 
 .head {
@@ -46,5 +46,10 @@
 @include mobile {
   .table {
     width: 228px;
+  }
+
+  .head {
+    width: 75px;
+    height: 35px;
   }
 }

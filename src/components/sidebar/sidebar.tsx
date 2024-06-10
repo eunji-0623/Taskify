@@ -51,7 +51,9 @@ function SideBar() {
   const navigate = useNavigate();
 
   const {
-    currentItems,
+    items,
+    currentPage,
+    totalPages,
     handlePrevClick,
     handleNextClick,
   } = usePagination<DashboardApi>({
@@ -81,7 +83,7 @@ function SideBar() {
         />
       </div>
       <div className={styles.DashboardsList}>
-        {currentItems.map((dashboard) => (
+        {items.map((dashboard) => (
           <SideDashBoard
             key={dashboard.id}
             color={dashboard.color}
@@ -96,6 +98,8 @@ function SideBar() {
         <PagenationBtn
           handlePrev={handlePrevClick}
           handleNext={handleNextClick}
+          isFirstPage={currentPage === 1}
+          isLastPage={currentPage === totalPages}
         />
       </div>
     </div>

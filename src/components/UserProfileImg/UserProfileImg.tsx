@@ -38,15 +38,14 @@ svg 생성기가 있으면, 사용할 프로필 이미지 컴포넌트
 우선 만들어 보았습니다. 추후 위 컴포넌트 대체 예정
 props로 url 하나만 받아옵니다.
 */
-interface UserProfileImg_Props {
-  profileImageUrl : string;
+interface UserProfileImgSvgProps {
+  profileImageUrl: string;
 }
 
-export function UserProfileImg_ ({profileImageUrl} : UserProfileImg_Props) {
+export function UserProfileImgSvg({ profileImageUrl }: UserProfileImgSvgProps) {
   return (
-    <img src={profileImageUrl} alt="프로필 이미지" className={styles.UserProfileImg_}/>
-  )
+    <img src={profileImageUrl} alt="프로필 이미지" className={styles.UserProfileImgSvg} />
+  );
 }
-
 
 export default UserProfileImg;

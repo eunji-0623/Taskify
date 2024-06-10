@@ -32,15 +32,24 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
   );
   const [activeTitle, setActiveTitle] = useState<string | undefined>(undefined);
 
-  const contextValue = useMemo(() => ({
-    activeDashboard,
-    setActiveDashboard,
-    isCreateByMe,
-    setIsCreateByMe,
-    activeTitle,
-    setActiveTitle,
-  }), [activeDashboard, setActiveDashboard, isCreateByMe, setIsCreateByMe, activeTitle, setActiveTitle]);
-
+  const contextValue = useMemo(
+    () => ({
+      activeDashboard,
+      setActiveDashboard,
+      isCreateByMe,
+      setIsCreateByMe,
+      activeTitle,
+      setActiveTitle,
+    }),
+    [
+      activeDashboard,
+      setActiveDashboard,
+      isCreateByMe,
+      setIsCreateByMe,
+      activeTitle,
+      setActiveTitle,
+    ],
+  );
   return (
     <DashboardContext.Provider value={contextValue}>
       {children}

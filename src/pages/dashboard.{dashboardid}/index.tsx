@@ -1,18 +1,28 @@
 import styles from './index.module.scss';
 import Column from './components/Column/Column';
-import ProgressState from '../../components/chip/ProgressState/ProgressState';
+import ColumnContainer from './components/Column/ColumnContainer';
+import { AddNewColumnBtn } from '../../components/Btn/Btn';
+import SideBar from '../../components/sidebar/sidebar';
+import GnbHeader from './components/GnbHeader/GnbHeader';
 
 function DashboardMain() {
+  const handleAddNewColumn = () => {};
   return (
     <div className={styles.container}>
-      <div>sidemenu</div>
-      <div>
-        <div>gnbheader</div>
-        <div className={styles.contents}>
+      <div className={styles.sideMenu}>
+        <SideBar />
+      </div>
+      <div className={styles.gnbHeader}>
+        <GnbHeader />
+      </div>
+      <div className={styles.columns}>
+        <ColumnContainer>
           <Column />
           <Column />
-          <ProgressState content="Done" />
-        </div>
+          <div className={styles.addColumnButtonContainer}>
+            <AddNewColumnBtn handleBtn={handleAddNewColumn} />
+          </div>
+        </ColumnContainer>
       </div>
     </div>
   );

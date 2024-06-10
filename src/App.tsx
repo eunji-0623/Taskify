@@ -8,6 +8,7 @@ import DashboardForId from './pages/dashboard.{dashboardid}';
 import Login from './pages/login-signup/login/Login';
 import SignUp from './pages/login-signup/signup/SignUp';
 import MyPage from './pages/mypage/MyPage';
+import { DashboardProvider } from './contexts/DashboardContext';
 
 import ModalPageTest from './pages/modalPageTest';
 
@@ -17,18 +18,17 @@ import ModalPageTest from './pages/modalPageTest';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/mydashboard" element={<MyDashboard />} />
-        <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
-        <Route path="/dashboard/1" element={<DashboardForId />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/mypage" element={<MyPage />} />
-
-        {/* 삭제하기 */}
-        <Route path="/modal" element={<ModalPageTest />} />
-      </Routes>
+      <DashboardProvider>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/mydashboard" element={<MyDashboard />} />
+          <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
+          <Route path="/dashboard/:id" element={<DashboardForId />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/mypage" element={<MyPage />} />
+        </Routes>
+      </DashboardProvider>
     </BrowserRouter>
   );
 }

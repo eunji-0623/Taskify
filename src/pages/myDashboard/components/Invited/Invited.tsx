@@ -87,7 +87,7 @@ function Invited() {
   const setElement = useInfiniteScroll(loadMoreInvitations, {
     root: null,
     rootMargin: '20px',
-    threshold: 1.0,
+    threshold: 0.5,
   });
 
   const handleSearch = useCallback((searchWord: string) => {
@@ -107,20 +107,18 @@ function Invited() {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>초대받은 대시보드</h2>
+      <Search searchingWord={handleSearch} />
       {empty ? (
         <Empty />
       ) : (
-        <>
-          <h2 className={styles.title}>초대받은 대시보드</h2>
-          <Search searchingWord={handleSearch} />
-          <div className={styles.tableContainer}>
-            <Table
-              invitations={invitations}
-              hasNext={hasNext}
-              setElement={setElement}
-            />
-          </div>
-        </>
+        <div className={styles.tableContainer}>
+          <Table
+            invitations={invitations}
+            hasNext={hasNext}
+            setElement={setElement}
+          />
+        </div>
       )}
     </div>
   );

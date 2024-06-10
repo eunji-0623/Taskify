@@ -1,3 +1,5 @@
+import SideBar from '../../components/sidebar/sidebar';
+import GnbHeader from '../dashboard.{dashboardid}/components/GnbHeader/GnbHeader';
 import EmailEdit from './MemberEdit/EmailEdit';
 import MemberEdit from './MemberEdit/MemberEdit';
 import NameEdit from './NameEdit/NameEdit';
@@ -9,9 +11,9 @@ import styles from './index.module.scss';
 function DashboardEdit() {
   return (
     <div className={styles.container}>
-      <div>sidemenu</div>
-      <div>
-        <div>header</div>
+      <SideBar />
+      <div className={styles.main}>
+        <GnbHeader />
         <div className={styles.mainContents}>
           <div>돌아가기</div>
           <NameEdit />

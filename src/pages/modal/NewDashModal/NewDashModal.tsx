@@ -1,15 +1,14 @@
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import ColorCircle from '../../../components/chip/ColorCircle/ColorCircle';
+import { apiCreateDashboards } from '../../../api/apiModule';
 import CheckedIcon from '/icon/checked.svg';
-
 import styles from './NewDashModal.module.scss';
 
 /*
-  대시보드 생성하는 모달입니다.
-
-  사용자가 대시보드 이름과 색을 선택할 수 있습니다.
+  대시보드 이름, 색을 선택해서 생성 버튼을 클릭하면 `/dashboard/${id}` 페이지로 이동합니다.
 */
 
 interface ModalProps {
@@ -20,21 +19,48 @@ interface ModalProps {
 const colors = ['#7AC555', '#760DDE', '#FFA500', '#76A5EA', '#E876EA'];
 
 function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
+  const navigate = useNavigate();
   const [colorId, setColorId] = useState<number | null>(null);
+  const [colorValue, setColorValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  // const [dashboardId, setDashboardId] = useState<string | null>(null);
 
-  // 모달 닫기
+  const goDashboard = (id) => {
+    navigate(`/dashboard/${id}`);
+  };
+
   const close = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  // 새로운 대시보드 생성 동작
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  }
+    const newDashboard = {
+      title: inputValue,
+      color: colorValue,
+    };
 
-  function handleClick(i: number) {
+    try {
+      const response = await apiCreateDashboards(newDashboard);
+      const { id } = response;
+      // setDashboardId(id);
+
+      if (id) {
+        goDashboard(id);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleClick = (i: number) => {
     setColorId(i);
-  }
+    setColorValue(colors[i]);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -43,7 +69,14 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
         <form onSubmit={handleSubmit} className={styles.content}>
           <div className={styles.title}>
             <label htmlFor="name">대시보드 이름</label>
-            <input type="text" id="name" name="name" placeholder="이름을 입력해 주세요" required />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="이름을 입력해 주세요"
+              required
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.colorList}>
@@ -56,16 +89,20 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
                 onClick={() => handleClick(i)}
               >
                 <ColorCircle color={item} diameter={30} />
-                {
-                  colorId === i ? <img className={styles.CheckedIcon} src={CheckedIcon} alt="Checked Icon" /> : null
-                }
+                {colorId === i && <img className={styles.CheckedIcon} src={CheckedIcon} alt="Checked Icon" />}
               </button>
             ))}
           </div>
 
           <div className={styles.buttonBlock}>
             <DeleteBtn BtnText="취소" handleBtn={close} />
-            <ChangeAndSaveBtn BtnText="생성" handleBtn={close} />
+            {inputValue.length !== 0 && colorId ? (
+              <ChangeAndSaveBtn BtnText="생성" handleBtn={handleSubmit} />
+            ) : (
+              <button className={styles.inactiveButton} type="button" disabled>
+                생성
+              </button>
+            )}
           </div>
         </form>
       </div>

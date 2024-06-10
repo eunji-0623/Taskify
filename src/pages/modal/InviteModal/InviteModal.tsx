@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
@@ -13,6 +13,8 @@ interface ModalProps {
 }
 
 function InviteModal({ isOpen, setIsOpen }: ModalProps) {
+  const [inputValue, setInputValue] = useState('');
+
   // 모달 닫기
   const close = useCallback(() => {
     setIsOpen(false);
@@ -23,6 +25,10 @@ function InviteModal({ isOpen, setIsOpen }: ModalProps) {
     event.preventDefault();
   }
 
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>
@@ -30,12 +36,29 @@ function InviteModal({ isOpen, setIsOpen }: ModalProps) {
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
             <label htmlFor="email">이메일</label>
-            <input className={styles.inputText} type="text" id="email" name="email" placeholder="이름을 입력해 주세요" required />
+            <input
+              className={styles.inputText}
+              type="text"
+              id="email"
+              name="email"
+              placeholder="이름을 입력해 주세요"
+              required
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.buttonBlock}>
             <DeleteBtn BtnText="삭제" handleBtn={close} />
-            <ChangeAndSaveBtn BtnText="초대" handleBtn={close} />
+            {
+                inputValue.length !== 0 ? (
+                  <ChangeAndSaveBtn
+                    BtnText="초대"
+                    handleBtn={close}
+                  />
+                ) : (
+                  <button className={styles.inactiveButton} type="button" disabled>변경</button>
+                )
+              }
           </div>
         </form>
       </div>

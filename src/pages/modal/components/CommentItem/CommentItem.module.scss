@@ -1,0 +1,83 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.container {
+  position: relative;
+  padding-left: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.image {
+  position: absolute;
+  left: 0rem;
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: 999px;
+}
+
+.titleBlock {
+  display: flex;
+  gap: 0.38rem;
+}
+
+.name {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.date {
+  color: var(--gray-gray_9FA6B2, #9FA6B2);
+  font-family: Pretendard;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.commentBlock {
+  width: 28.125rem;
+  margin-top: 0.1em;
+
+  h2 {
+    color: $black_333236;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.comment {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.buttonBlock {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button {
+  padding: 0;
+  color: var(--gray-gray_9FA6B2, #9FA6B2);
+  font-family: Pretendard;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  background-color: transparent;
+  border: 0;
+}

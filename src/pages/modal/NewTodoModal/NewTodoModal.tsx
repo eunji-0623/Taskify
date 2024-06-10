@@ -28,6 +28,13 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
   const [tags, setTags] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState(AddIcon);
 
+  const test11 = manager.length !== 0
+    && title.length !== 0
+    && description.length !== 0
+    && dueDate.length !== 0
+    && tags.length !== 0
+    && imageUrl !== AddIcon;
+
   // 테스트 데이터
   const data = [
     {
@@ -83,7 +90,7 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
 
           <div className={styles.buttonBlock}>
             <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
-            <button className={styles.createButton} type="submit">수정</button>
+            <button className={test11 ? styles.createButton : styles.inactiveButton} type="submit">수정</button>
           </div>
         </form>
       </div>

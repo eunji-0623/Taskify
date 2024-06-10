@@ -1,28 +1,58 @@
+import React, { useState } from 'react';
 import styles from './Comment.module.scss';
-import TestImg from '/img/test_img.png';
-
+import CommentItem from '../CommentItem/CommentItem';
+import { apiCreateComments } from '../../../../api/apiModule';
 /*
   댓글 컴포넌트입니다.
-
-  기능 추가를 하겠습니다.
 */
 
 function Comment() {
+  const [comment, setComment] = useState('');
+
+  const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(event.target.value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const newComment = {
+      content: comment,
+      cardId: 7687,
+      columnId: 29765,
+      dashboardId: 8855,
+    };
+
+    try {
+      const response = await apiCreateComments(newComment);
+      console.log('test', response);
+
+      setComment('');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className={styles.container}>
-      <img className={styles.image} src={TestImg} alt="테스트 이미지" />
-      <div className={styles.titleBlock}>
-        <span className={styles.name}>이름</span>
-        <span className={styles.date}>2022.12.27 14:00</span>
-      </div>
+    <div className={styles.commentBlock}>
+      <h2>댓글</h2>
+      <form onSubmit={handleSubmit} className={styles.formBlock}>
+        <textarea
+          className={styles.textareaBlock}
+          id="content"
+          name="content"
+          placeholder="댓글 작성하기"
+          value={comment}
+          onChange={handleCommentChange}
+        />
+        <button className={styles.formButton} type="submit">입력</button>
+      </form>
 
-      <div className={styles.commentBlock}>
-        <p className={styles.comment}>오늘안에 CCC 까지 만들 수 있을까요?</p>
-      </div>
-
-      <div className={styles.buttonBlock}>
-        <button className={styles.button} type="button">수정</button>
-        <button className={styles.button} type="button">삭제</button>
+      <div className={styles.comments}>
+        <CommentItem />
+        <CommentItem />
+        <CommentItem />
+        <CommentItem />
       </div>
     </div>
   );

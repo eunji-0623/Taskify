@@ -101,7 +101,6 @@
     border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 500;
-    cursor: pointer;
 
     @include mobile{
       width: 8.625rem;
@@ -135,4 +134,17 @@
   font-weight: 400;
   text-decoration-line: underline;
   cursor: pointer;
+}
+
+.inactiveButton {
+  background: var(--gray-gray_9FA6B2, #9FA6B2);
+  color: var(--white, #FFF);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: not-allowed;
+  pointer-events: none;
 }

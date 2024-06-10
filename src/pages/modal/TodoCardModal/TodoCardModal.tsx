@@ -11,6 +11,8 @@ import ProgressState from '../../../components/chip/ProgressState/ProgressState'
 import styles from './TodoCardModal.module.scss';
 import CloseIcon from '/icon/close.svg';
 import KebabIcon from '/icon/kebab.svg';
+import CardSideContent from '../components/CardSideContent/CardSideContent';
+import CardContent from '../components/CardContent/CardContent';
 
 /*
   만들어진 할 일 카드 정보를 모달로 보여줍니다.
@@ -76,11 +78,6 @@ function TodoCardModal({
     setKebabOpen(!kebabOpen);
   };
 
-  // 댓글을 처리하는 동작 추가
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-  };
-
   // 수정하기 버튼을 클릭하면 할 일 수정 모달이 열립니다.
   const handleEditOpen = () => {
     openEditModal();
@@ -107,22 +104,12 @@ function TodoCardModal({
             </button>
           </div>
 
-          <div className={styles.rightContent}>
-            <div className={styles.managerBlock}>
-              <h3>담당자</h3>
-              <div className={styles.profileBlock}>
-                <img className={styles.profile} src={managerImg} alt="테스트 이미지" />
-                <span>{manager}</span>
-              </div>
-            </div>
-            <div className={styles.dateBlock}>
-              <h3>마감일</h3>
-              <span>{dueDate}</span>
-            </div>
-          </div>
+          <CardSideContent managerImg={managerImg} manager={manager} dueDate={dueDate} />
 
           <div className={styles.topBlock}>
-            <span className={styles.condition}><ProgressState content={cardState} /></span>
+            <span className={styles.condition}>
+              <ProgressState content={cardState} />
+            </span>
             <div className={styles.tagBlock}>
               {tags.map((item) => (
                 <span key={item}>
@@ -132,36 +119,9 @@ function TodoCardModal({
             </div>
           </div>
 
-          <div className={styles.contentBlock}>
-            <p>
-              {description}
-            </p>
-            <div className={styles.contentImageBlock}>
-              <img className={styles.contentImage} src={imageUrl} alt="카드 이미지" />
-            </div>
-          </div>
+          <CardContent description={description} imageUrl={imageUrl} />
 
-          <div className={styles.commentBlock}>
-            <h2>댓글</h2>
-            <form onSubmit={handleSubmit} className={styles.formBlock}>
-              <textarea
-                className={styles.textareaBlock}
-                id="content"
-                name="content"
-                placeholder="댓글 작성하기"
-                // value={comment}
-                // onChange={handleCommentChange}
-              />
-              <button className={styles.formButton} type="submit">입력</button>
-            </form>
-
-            <div className={styles.comments}>
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-            </div>
-          </div>
+          <Comment />
         </div>
       </div>
     </ModalContainer>

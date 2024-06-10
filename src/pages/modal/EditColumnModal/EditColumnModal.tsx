@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './EditColumnModal.module.scss';
@@ -16,6 +16,8 @@ interface ModalProps {
 }
 
 function EditColumnModal({ isOpen, setIsOpen, openDeleteModal }: ModalProps) {
+  const [inputValue, setInputValue] = useState('');
+
   // 취소 버튼을 클릭하면 모달을 닫습니다.
   const close = useCallback(() => {
     setIsOpen(false);
@@ -31,6 +33,10 @@ function EditColumnModal({ isOpen, setIsOpen, openDeleteModal }: ModalProps) {
     openDeleteModal();
   };
 
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>
@@ -38,7 +44,14 @@ function EditColumnModal({ isOpen, setIsOpen, openDeleteModal }: ModalProps) {
         <form className={styles.content} onSubmit={handleSubmit}>
           <div className={styles.title}>
             <label htmlFor="name">이름</label>
-            <input className={styles.inputText} type="text" id="name" name="name" required />
+            <input
+              className={styles.inputText}
+              type="text"
+              id="name"
+              name="name"
+              required
+              onChange={handleChange}
+            />
           </div>
 
           <button className={styles.delete} type="button" onClick={handleDelete}>삭제하기</button>
@@ -46,7 +59,16 @@ function EditColumnModal({ isOpen, setIsOpen, openDeleteModal }: ModalProps) {
           <div className={styles.buttonBlock}>
             <div className={styles.buttons}>
               <DeleteBtn BtnText="취소" handleBtn={close} />
-              <ChangeAndSaveBtn BtnText="변경" handleBtn={close} />
+              {
+                inputValue.length !== 0 ? (
+                  <ChangeAndSaveBtn
+                    BtnText="변경"
+                    handleBtn={close}
+                  />
+                ) : (
+                  <button className={styles.inactiveButton} type="button" disabled>변경</button>
+                )
+              }
             </div>
           </div>
         </form>

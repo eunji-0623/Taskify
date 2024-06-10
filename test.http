@@ -54,14 +54,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhb
   "color": "#760DDE"
 }
 
-
-####
-
-# 대시보드 조회 (token22 사용)
-GET https://sp-taskify-api.vercel.app/5-8/dashboards
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
-
 ###
 
 # 4404 초대
@@ -83,7 +75,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhb
 
 {
   "title": "string123",
-  "dashboardId": 8855
+  "dashboardId": 8866
 }
 ###
 
@@ -94,8 +86,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhb
 
 {
   "assigneeUserId": 3635,
-  "dashboardId": 8855,
-  "columnId": 29765,
+  "dashboardId": 8866,
+  "columnId": 29818,
   "title": "Task Title",
   "description": "This is a description of the task.",
   "dueDate": "2024-07-04 04:04",
@@ -107,8 +99,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhb
 
 ###
 
-// 카드 조회
-GET https://sp-taskify-api.vercel.app/5-8/cards
+// 댓글 생성
+POST https://sp-taskify-api.vercel.app/5-8/comments
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
 
+{
+  "content": "테스트",
+  "cardId": 7692,
+  "columnId": 29765,
+  "dashboardId": 8855
+}

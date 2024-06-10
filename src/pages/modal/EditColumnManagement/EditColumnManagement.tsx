@@ -50,25 +50,3 @@ function EditColumnManagement({ isOpen, setIsOpen }: ModalProps) {
 }
 
 export default EditColumnManagement;
-
-/*
-  사용방법
-  function ModalPageTest() {
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-    function handleColumnClick() {
-      setIsEditModalOpen(!isEditModalOpen);
-    }
-
-    return (
-      <div>
-        <button type="button" onClick={handleColumnClick}>버튼</button>
-        {isEditModalOpen
-          ? <EditColumnManagement isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen} />
-          : null}
-      </div>
-    );
-  }
-
-  export default ModalPageTest;
-*/

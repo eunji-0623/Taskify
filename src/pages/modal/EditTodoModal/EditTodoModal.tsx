@@ -70,6 +70,8 @@ function EditTodoModal({
     setImageUrl,
   } = cardSetData;
 
+  const test11 = cardState.length !== 0 && title.length !== 0 && description.length !== 0;
+
   // 테스트 데이터
   const data = [
     {
@@ -130,7 +132,7 @@ function EditTodoModal({
 
           <div className={styles.buttonBlock}>
             <button className={styles.cancelButton} type="button" onClick={handleTodoOpen}>취소</button>
-            <button className={styles.createButton} type="submit">수정</button>
+            <button className={test11 ? styles.createButton : styles.inactiveButton} type="submit">수정</button>
           </div>
         </form>
       </div>

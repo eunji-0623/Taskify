@@ -103,3 +103,19 @@
   font-size: 0.875rem;
   font-weight: 400;
 }
+
+.inactiveButton {
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: var(--gray-gray_9FA6B2, #9FA6B2);
+  color: var(--white, #FFF);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: not-allowed;
+  pointer-events: none;
+}

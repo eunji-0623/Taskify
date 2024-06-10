@@ -36,11 +36,6 @@ interface GetColumnResponse {
   };
 }
 
-interface DeleteColumnResponse {
-  status: number;
-  message?: string;
-}
-
 interface UploadCardImageResponse {
   status: number;
   imageUrl: string;
@@ -84,10 +79,8 @@ export async function apiUpdateColumn(
 
 // 컬럼 삭제
 // columnId를 파라미터로 받습니다.
-export async function apiDeleteColumn(
-  columnId: number,
-): Promise<DeleteColumnResponse> {
-  const res = await instance.delete<DeleteColumnResponse>(`/cards/${columnId}`);
+export async function apiDeleteColumn(columnId: number) {
+  const res = await instance.delete(`/cards/${columnId}`);
   return handleResponse(res);
 }
 

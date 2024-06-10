@@ -50,7 +50,7 @@ interface Params {
 
 // 내가 받은 초대 목록 조회 api
 export async function apiMyInvitationsList(
-  query: InvitationsQuery
+  query: InvitationsQuery,
 ): Promise<InvitationsListResponse> {
   const { title, cursorId, size } = query;
   const params: Params = {};
@@ -74,11 +74,11 @@ export async function apiMyInvitationsList(
 // 초대 응답 api
 export async function apiInvitationAccept(
   path: InvitationId,
-  body: InvitationAcceptBody
+  body: InvitationAcceptBody,
 ): Promise<InvitationResponse> {
   const res = await instance.put<InvitationResponse>(
     `/invitations/${path.invitationId}`,
-    body
+    body,
   );
   return handleResponse(res);
 }

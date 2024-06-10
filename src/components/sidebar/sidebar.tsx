@@ -87,6 +87,8 @@ function SideBar() {
       </div>
       <div className={styles.PagenationBtn}>
         <PagenationBtn
+          isFirstPage={false}
+          isLastPage={false}
           handlePrev={handlePrevClick}
           handleNext={handleNextClick}
         />

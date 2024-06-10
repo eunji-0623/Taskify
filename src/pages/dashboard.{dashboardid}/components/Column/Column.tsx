@@ -3,7 +3,11 @@ import ColumnCard from '../ColumnCard/ColumnCard';
 import ColumnHeader from '../ColumnHeader/ColumnHeader';
 import { AddNewTaskBtn } from '../../../../components/Btn/Btn';
 
-function Column(title: string) {
+interface ColumnProps {
+  title: string;
+}
+
+function Column({ title }: ColumnProps) {
   const handleAddTaskBtn = () => {};
 
   const CardProps = {

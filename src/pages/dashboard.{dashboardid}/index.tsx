@@ -4,7 +4,6 @@ import ColumnContainer from './components/Column/ColumnContainer';
 import { AddNewColumnBtn } from '../../components/Btn/Btn';
 import SideBar from '../../components/sidebar/sidebar';
 import GnbHeader from './components/GnbHeader/GnbHeader';
-import ProgressState from '../../components/chip/ProgressState/ProgressState';
 
 function DashboardMain() {
   const handleAddNewColumn = () => {};

@@ -1,52 +1,41 @@
 import instance from '../axiosInstance';
 import { handleResponse } from '../errorHandler';
 
-interface LoginBody {
+export interface LoginBody {
   email: string;
   password: string;
 }
 
-interface ChangePasswordBody {
+export interface ChangePasswordBody {
   password: string;
   newPassword: string;
 }
 
-interface LoginResponse {
-  status: number;
-  message?: string;
-  data?: {
-    user: {
-      id: number;
-      email: string;
-      nickname: string;
-      profileImageUrl?: string;
-      createdAt: string;
-      updatedAt: string;
-    };
-    accessToken?: string;
+export interface LoginResponse {
+  user: {
+    id: number;
+    email: string;
+    nickname: string;
+    profileImageUrl?: string;
+    createdAt: string;
+    updatedAt: string;
   };
-}
-
-interface ChangePasswordResponse {
-  status: number;
-  message?: string;
+  accessToken: string;
 }
 
 // 로그인 요청 api
 export async function apiLoginRequest(body: LoginBody): Promise<LoginResponse> {
   const res = await instance.post<LoginResponse>('/auth/login', body);
   const responseData = await handleResponse(res);
-  localStorage.setItem('Token', responseData.accessToken);
+  const token = responseData.accessToken;
+  if (token) {
+    localStorage.setItem('Token', token);
+  }
   return responseData;
 }
 
 // 비밀번호 변경 요청 api
-export async function apiChangePassword(
-  body: ChangePasswordBody,
-): Promise<string | ChangePasswordResponse> {
-  const res = await instance.put<ChangePasswordResponse>(
-    '/auth/password',
-    body,
-  );
+export async function apiChangePassword(body: ChangePasswordBody) {
+  const res = await instance.put('/auth/password', body);
   return handleResponse(res);
 }

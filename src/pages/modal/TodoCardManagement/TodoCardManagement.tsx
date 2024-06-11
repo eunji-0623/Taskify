@@ -1,15 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import TodoCardModal from '../TodoCardModal/TodoCardModal';
 import EditTodoModal from '../EditTodoModal/EditTodoModal';
-import { apiCardDetails } from '../../../api/apiModule';
-// import TestImg from '/img/test_img.png';
-
-/*
-  할 일 카드 정보를 보여주는 모달과 할 일 수정 모달을 관리합니다.
-
-  TodoCardModal에서 수정하기 버튼을 클릭하면
-  TodoCardModal은 닫고 EditTodoModal이 열립니다.
-*/
+import { apiCardDetails, CardOverAll } from '../../../api/apiModule'; // CardOverAll 인터페이스를 가져옵니다
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,30 +10,6 @@ interface ModalProps {
   userId: number;
   columnId: number;
 }
-
-interface CardOverAll {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  dueDate: string;
-  assignee: {
-    profileImageUrl?: string;
-    nickname: string;
-    id: number;
-  };
-  imageUrl?: string;
-  teamId: string;
-  columnId: number;
-  dashboardId: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
-// interface CardOverAllResponse {
-//   status: number;
-//   data: CardOverAll;
-// }
 
 function TodoCardManagement({
   isOpen,

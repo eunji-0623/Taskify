@@ -24,12 +24,10 @@ function Comment() {
     };
 
     try {
-      const response = await apiCreateComments(newComment);
-      console.log('test', response);
-
+      await apiCreateComments(newComment);
       setComment('');
     } catch (error) {
-      console.error(error);
+      throw new Error('error');
     }
   };
 

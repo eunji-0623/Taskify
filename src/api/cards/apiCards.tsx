@@ -38,6 +38,7 @@ export interface CardOverAll {
   dashboardId: number;
   createdAt: string;
   updatedAt: string;
+  teamId: string;
 }
 
 export interface GetCardListResponse {

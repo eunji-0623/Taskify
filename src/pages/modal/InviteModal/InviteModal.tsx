@@ -22,7 +22,10 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
 
     try {
       const emailObj = { email };
-      await apiInviteDashboards(emailObj, { dashboardId });
+      const response = await apiInviteDashboards(emailObj, { dashboardId });
+      if (response) {
+        setIsOpen(false);
+      }
     } catch (error) {
       throw new Error('error');
     }
@@ -52,7 +55,7 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
           </div>
 
           <div className={styles.buttonBlock}>
-            <DeleteBtn BtnText="삭제" handleBtn={close} />
+            <DeleteBtn BtnText="취소" handleBtn={close} />
             {email.length !== 0 ? (
               <button className={styles.activeButton} type="submit">초대</button>
             ) : (

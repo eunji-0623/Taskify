@@ -44,6 +44,10 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
       const response = await apiCreateDashboards(newDashboard);
       const { id } = response;
 
+      if (response) {
+        setIsOpen(false);
+      }
+
       if (id) {
         goDashboard(id);
       }

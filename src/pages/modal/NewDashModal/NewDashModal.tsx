@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
+import { DeleteBtn } from '../../../components/Btn/Btn';
 import ColorCircle from '../../../components/chip/ColorCircle/ColorCircle';
 import { apiCreateDashboards } from '../../../api/apiModule';
 import CheckedIcon from '/icon/checked.svg';
@@ -23,9 +23,9 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
   const [colorId, setColorId] = useState<number | null>(null);
   const [colorValue, setColorValue] = useState('');
   const [inputValue, setInputValue] = useState('');
-  // const [dashboardId, setDashboardId] = useState<string | null>(null);
 
-  const goDashboard = (id) => {
+  // /dashboard/{dashboardid}로 이동
+  const goDashboard = (id: number) => {
     navigate(`/dashboard/${id}`);
   };
 
@@ -43,13 +43,12 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
     try {
       const response = await apiCreateDashboards(newDashboard);
       const { id } = response;
-      // setDashboardId(id);
 
       if (id) {
         goDashboard(id);
       }
     } catch (error) {
-      console.error(error);
+      throw new Error('error');
     }
   };
 
@@ -96,8 +95,10 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
 
           <div className={styles.buttonBlock}>
             <DeleteBtn BtnText="취소" handleBtn={close} />
-            {inputValue.length !== 0 && colorId ? (
-              <ChangeAndSaveBtn BtnText="생성" handleBtn={handleSubmit} />
+            {(inputValue.length !== 0 && colorValue) ? (
+              <button className={styles.activeButton} type="submit">
+                생성
+              </button>
             ) : (
               <button className={styles.inactiveButton} type="button" disabled>
                 생성

@@ -14,10 +14,10 @@ interface DropdownProps {
   data: {
     id: number;
     text: string;
-    profile: string;
-  }[];
-  profile: string;
-  setProfile: React.Dispatch<React.SetStateAction<string>>;
+    profile: string | undefined;
+  }[]
+  profile: string | undefined;
+  setProfile: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 function ManagerDropdown({
@@ -50,7 +50,7 @@ function ManagerDropdown({
     setIsOpen(!isOpen);
   };
 
-  const handleItemClick = (choice: string, profileImg: string) => {
+  const handleItemClick = (choice: string, profileImg: string | undefined) => {
     setValue(choice);
     setIsOpen(false);
     setSearchTerm(choice);

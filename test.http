@@ -56,15 +56,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhb
 
 ###
 
-# 4404 초대
+# # 4404 초대
 
-POST https://sp-taskify-api.vercel.app/5-8/dashboards/8832/invitations
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
+# POST https://sp-taskify-api.vercel.app/5-8/dashboards/8832/invitations
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhbUlkIjoiNS04IiwiaWF0IjoxNzE3ODI3MTQzLCJpc3MiOiJzcC10YXNraWZ5In0.d2n39jJ6as2GqkLmOgAkVvse_iuSzxwn6ziUJvAoL68
 
-{
-  "email": "test4404@naver.com"
-}
+# {
+#   "email": "test4404@naver.com"
+# }
 
 ###
 
@@ -77,6 +77,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYzNSwidGVhb
   "title": "string123",
   "dashboardId": 8866
 }
+
 ###
 
 // 카드 생성

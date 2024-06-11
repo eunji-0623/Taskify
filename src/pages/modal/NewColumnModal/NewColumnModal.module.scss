@@ -119,3 +119,10 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+
+.activeButton {
+  background: var(--violet-violet_5534DA, #5534da);
+  border-radius: 4px;
+  border: 0px;
+  color: #ffffff;
+}

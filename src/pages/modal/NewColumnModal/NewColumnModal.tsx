@@ -1,11 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
+import { apiCreateColumn, apiGetColumnList } from '../../../api/apiModule';
+import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './NewColumnModal.module.scss';
-
-/*
-  컬럼을 생성하는 모달입니다.
-*/
 
 interface ModalProps {
   isOpen: boolean;
@@ -13,21 +10,82 @@ interface ModalProps {
   dashboardId: number;
 }
 
+interface ColumnOverAll {
+  id: number;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [columnList, setColumnList] = useState<Array<string>>([]);
+
+  const [check, setCheck] = useState(false);
+
+  // 컬럼 목록 title 조회
+  const columnData = useCallback(async () => {
+    try {
+      const response = await apiGetColumnList(dashboardId);
+      if (response.result === 'SUCCESS') {
+        const titles = Array.isArray(response.data)
+          ? response.data.map((column: ColumnOverAll) => column.title) : [];
+        setColumnList(titles);
+      } else {
+        throw new Error('error');
+      }
+    } catch (error) {
+      throw new Error('error');
+    }
+  }, [dashboardId]);
+
+  useEffect(() => {
+    if (dashboardId) {
+      columnData();
+    }
+  }, [dashboardId, columnData]);
+
+  // 컬럼 생성 동작
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const newDashboard = {
+      title: inputValue,
+      dashboardId,
+    };
+
+    try {
+      const response = await apiCreateColumn(newDashboard);
+      const { id } = response.data;
+      setIsOpen(false);
+
+      if (id) {
+        columnData();
+      }
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
+
+  // 컬럼 이름 입력
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  // 컬럼 중복 title 확인
+  const columnCheck = useCallback(() => {
+    if (columnList.length > 0) {
+      setCheck(columnList.includes(inputValue));
+    }
+  }, [inputValue, columnList]);
+
+  useEffect(() => {
+    columnCheck();
+  }, [inputValue, columnList, columnCheck]);
 
   // 모달 닫기
-  const close = useCallback(() => {
+  const close = () => {
     setIsOpen(false);
-  }, [setIsOpen]);
-
-  // 새로운 컬럼 생성 동작
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
   };
 
   return (
@@ -46,21 +104,14 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
               required
               onChange={handleChange}
             />
-            {/* <div className={styles.errorMessage}>중복된 컬럼 이름입니다.</div> */}
+            {check && <p className={styles.errorMessage}>중복된 컬럼 이름입니다.</p>}
           </div>
 
           <div className={styles.buttonBlock}>
             <DeleteBtn BtnText="취소" handleBtn={close} />
-            {
-                inputValue.length !== 0 ? (
-                  <ChangeAndSaveBtn
-                    BtnText="생성"
-                    handleBtn={close}
-                  />
-                ) : (
-                  <button className={styles.inactiveButton} type="button" disabled>변경</button>
-                )
-              }
+            { inputValue && !check
+              ? <button className={styles.activeButton} type="submit">생성</button>
+              : <button className={styles.inactiveButton} type="submit" disabled>생성</button>}
           </div>
         </form>
       </div>

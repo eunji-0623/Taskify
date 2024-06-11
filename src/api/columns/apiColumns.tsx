@@ -1,23 +1,23 @@
 import instance from '../axiosInstance';
 import { handleResponse } from '../errorHandler';
 
-interface ColumnOverAll {
-  id: 0;
+export interface ColumnOverAll {
+  id: number;
   title: string;
   createdAt: string;
   updatedAt: string;
 }
 
-interface CreateColumnBody {
+export interface CreateColumnBody {
   title: string;
   dashboardId: number;
 }
 
-interface UpdateColumnBody {
+export interface UpdateColumnBody {
   title: string;
 }
 
-interface UploadCardImageBody {
+export interface UploadCardImageBody {
   image: string;
 }
 
@@ -29,12 +29,11 @@ interface ColumnOverAllResponse {
 interface GetColumnResponse {
   status: number;
   result?: 'SUCCESS';
-  data?: ColumnOverAll[];
-}
-
-interface DeleteColumnResponse {
-  status: number;
-  message?: string;
+  data: {
+    cursorId: number;
+    totalCount: number;
+    dashboards: ColumnOverAll[];
+  };
 }
 
 interface UploadCardImageResponse {
@@ -48,7 +47,7 @@ interface UploadCardImageResponse {
 export async function apiCreateColumn(
   body: CreateColumnBody,
 ): Promise<ColumnOverAllResponse> {
-  const res = await instance.post<ColumnOverAllResponse>('/cards', body);
+  const res = await instance.post<ColumnOverAllResponse>('/columns', body);
   return handleResponse(res);
 }
 
@@ -57,7 +56,7 @@ export async function apiCreateColumn(
 export async function apiGetColumnList(
   dashboardId: number,
 ): Promise<GetColumnResponse> {
-  const res = await instance.get<GetColumnResponse>('/cards', {
+  const res = await instance.get<GetColumnResponse>('/columns', {
     params: {
       dashboardId,
     },
@@ -71,16 +70,17 @@ export async function apiUpdateColumn(
   body: UpdateColumnBody,
   columnId: number,
 ): Promise<ColumnOverAllResponse> {
-  const res = await instance.put<ColumnOverAllResponse>(`/cards/${columnId}`, body);
+  const res = await instance.put<ColumnOverAllResponse>(
+    `/columns/${columnId}`,
+    body,
+  );
   return handleResponse(res);
 }
 
 // 컬럼 삭제
 // columnId를 파라미터로 받습니다.
-export async function apiDeleteColumn(
-  columnId: number,
-): Promise<DeleteColumnResponse> {
-  const res = await instance.delete<DeleteColumnResponse>(`/cards/${columnId}`);
+export async function apiDeleteColumn(columnId: number) {
+  const res = await instance.delete(`/columns/${columnId}`);
   return handleResponse(res);
 }
 
@@ -91,7 +91,7 @@ export async function apiUploadCardImage(
   columnId: number,
 ): Promise<UploadCardImageResponse> {
   const res = await instance.post<UploadCardImageResponse>(
-    `/cards/${columnId}/card-image`,
+    `/columns/${columnId}/card-image`,
     body,
   );
   return handleResponse(res);

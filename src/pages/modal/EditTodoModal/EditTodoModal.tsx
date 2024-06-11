@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import DropdownManagement from '../components/DropdownManagement/DropdownManagement';
 import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
 import TodoContent from '../components/TodoContent/TodoContent';
+import { apiUpdateCard } from '../../../api/apiModule';
 import InputTag from '../components/InputTag/InputTag';
 import InputImage from '../components/InputImage/InputImage';
 import styles from './EditTodoModal.module.scss';
@@ -14,63 +16,66 @@ import TestImg from '/img/test_img.png';
   할 일 카드 모달과 연결을 위해 직접 사용하는 것이 아닌 TodoCardManagement를 통해 사용합니다.
 */
 
+interface CardOverAll {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: {
+    profileImageUrl?: string | undefined
+    nickname: string;
+    id: number;
+  };
+  imageUrl?: string;
+  teamId: string;
+  columnId: number;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   openTodoModal: () => void;
-  cardData: {
-    cardState: string;
-    manager: string;
-    managerImg: string;
-    title: string;
-    description: string;
-    dueDate: string;
-    tags: string[];
-    imageUrl: string;
-  };
-  cardSetData: {
-    setCardState: React.Dispatch<React.SetStateAction<string>>;
-    setManager: React.Dispatch<React.SetStateAction<string>>;
-    setManagerImg: React.Dispatch<React.SetStateAction<string>>;
-    setTitle: React.Dispatch<React.SetStateAction<string>>;
-    setDescription: React.Dispatch<React.SetStateAction<string>>;
-    setDueDate: React.Dispatch<React.SetStateAction<string>>;
-    setTags: React.Dispatch<React.SetStateAction<string[]>>;
-    setImageUrl: React.Dispatch<React.SetStateAction<string>>;
-  };
+  cardId: number;
+  cardData: CardOverAll | undefined;
+  userId: number;
+  columnId: number;
 }
 
-// 할 일 데이터가 필요
 function EditTodoModal({
   isOpen,
   setIsOpen,
   openTodoModal,
+  cardId,
   cardData,
-  cardSetData,
+  userId,
+  columnId,
 }: ModalProps) {
-  const {
-    cardState,
-    manager,
-    managerImg,
-    title,
-    description,
-    dueDate,
-    tags,
-    imageUrl,
-  } = cardData;
+  const [cardState, setCardState] = useState('대시보드 이름');
+  const [manager, setManager] = useState('');
+  const [managerImg, setManagerImg] = useState<string | undefined>('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState('');
 
-  const {
-    setCardState,
-    setManager,
-    setManagerImg,
-    setTitle,
-    setDescription,
-    setDueDate,
-    setTags,
-    setImageUrl,
-  } = cardSetData;
-
-  const test11 = cardState.length !== 0 && title.length !== 0 && description.length !== 0;
+  // 데이터 추가
+  useEffect(() => {
+    if (cardData) {
+      setCardState('test');
+      setManager(cardData.assignee.nickname);
+      setManagerImg(cardData.assignee.profileImageUrl);
+      setTitle(cardData.title);
+      setDescription(cardData.description);
+      setDueDate(cardData.dueDate);
+      setTags(cardData.tags);
+      setImageUrl(cardData.imageUrl || '');
+    }
+  }, [cardData]);
 
   // 테스트 데이터
   const data = [
@@ -92,14 +97,35 @@ function EditTodoModal({
   // }, [setIsOpen]);
 
   // + 할 일 수정 버튼 클릭 시 동작 추가
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  }
+
+    const updateCard = {
+      columnId,
+      assigneeUserId: userId,
+      title,
+      description,
+      dueDate,
+      tags,
+      // imageUrl,
+    };
+
+    try {
+      await apiUpdateCard(updateCard, cardId);
+      setIsOpen(false);
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
 
   // 취소 버튼을 클릭하면 할 일 카드 모달로 돌아갑니다.
   const handleTodoOpen = () => {
     openTodoModal();
   };
+
+  if (!cardData) {
+    return null;
+  }
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -132,7 +158,7 @@ function EditTodoModal({
 
           <div className={styles.buttonBlock}>
             <button className={styles.cancelButton} type="button" onClick={handleTodoOpen}>취소</button>
-            <button className={test11 ? styles.createButton : styles.inactiveButton} type="submit">수정</button>
+            <button className={styles.createButton} type="submit">수정</button>
           </div>
         </form>
       </div>

@@ -12,7 +12,7 @@ function CardContent({ description, imageUrl }: ModalProps) {
         {description}
       </p>
       <div className={styles.contentImageBlock}>
-        <img className={styles.contentImage} src={imageUrl} alt="카드 이미지" />
+        {imageUrl && <img className={styles.contentImage} src={imageUrl} alt="카드 이미지" />}
       </div>
     </div>
   );

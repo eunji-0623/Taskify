@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import TodoCardModal from '../TodoCardModal/TodoCardModal';
 import EditTodoModal from '../EditTodoModal/EditTodoModal';
-import TestImg from '/img/test_img.png';
+import { apiCardDetails } from '../../../api/apiModule';
+// import TestImg from '/img/test_img.png';
 
 /*
   할 일 카드 정보를 보여주는 모달과 할 일 수정 모달을 관리합니다.
@@ -13,58 +14,66 @@ import TestImg from '/img/test_img.png';
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  cardId: number;
+  userId: number;
+  columnId: number;
 }
 
-const test = {
-  id: 7685,
-  title: 'Task Title',
-  description: 'This is a description of the task.',
-  tags: [
-    'urgent',
-    'important',
-  ],
-  dueDate: '2024-07-05 04:04',
+interface CardOverAll {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
   assignee: {
-    id: 3635,
-    nickname: 'test1',
-    profileImageUrl: TestImg,
-  },
-  imageUrl: TestImg,
-  teamId: '5-8',
-  columnId: 29765,
-  dashboardId: 8855,
-  createdAt: '2024-06-09T23:08:40.422Z',
-  updatedAt: '2024-06-09T23:08:40.422Z',
-};
+    profileImageUrl?: string;
+    nickname: string;
+    id: number;
+  };
+  imageUrl?: string;
+  teamId: string;
+  columnId: number;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
-// 카드 데이터 추가 필요 useState로 관리
-function TodoCardManagement({ isOpen, setIsOpen }: ModalProps) {
+// interface CardOverAllResponse {
+//   status: number;
+//   data: CardOverAll;
+// }
+
+function TodoCardManagement({
+  isOpen,
+  setIsOpen,
+  cardId,
+  userId,
+  columnId,
+}: ModalProps) {
+  const [testData, setTestData] = useState<CardOverAll | undefined>();
+
   const [todoModalOpen, setTodoModalOpen] = useState(true);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
-  const [cardState, setCardState] = useState('test2');
-  const [manager, setManager] = useState(test.assignee.nickname);
-  const [managerImg, setManagerImg] = useState(test.assignee.profileImageUrl);
-  const [title, setTitle] = useState(test.title);
-  const [description, setDescription] = useState(test.description);
-  const [dueDate, setDueDate] = useState(test.dueDate);
-  const [tags, setTags] = useState(test.tags);
-  const [imageUrl, setImageUrl] = useState(test.imageUrl);
+  // 카드 상세 조회
+  const columnData = useCallback(async () => {
+    try {
+      const response = await apiCardDetails(cardId);
+      if (response) {
+        setTestData(response);
+      } else {
+        throw new Error('error');
+      }
+    } catch (error) {
+      throw new Error('error');
+    }
+  }, [cardId]);
 
-  const cardData = {
-    cardState, manager, managerImg, title, description, dueDate, tags, imageUrl,
-  };
-
-  const cardSetData = {
-    setCardState,
-    setManager,
-    setManagerImg,
-    setTitle,
-    setDescription,
-    setDueDate,
-    setTags,
-    setImageUrl,
-  };
+  useEffect(() => {
+    if (cardId) {
+      columnData();
+    }
+  }, [cardId, columnData]);
 
   const openEditModal = () => {
     setEditModalOpen(true);
@@ -83,7 +92,8 @@ function TodoCardManagement({ isOpen, setIsOpen }: ModalProps) {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           openEditModal={openEditModal}
-          cardData={cardData}
+          cardId={cardId}
+          cardData={testData}
         />
       )}
       {editModalOpen && (
@@ -91,8 +101,10 @@ function TodoCardManagement({ isOpen, setIsOpen }: ModalProps) {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           openTodoModal={openTodoModal}
-          cardData={cardData}
-          cardSetData={cardSetData}
+          cardId={cardId}
+          cardData={testData}
+          userId={userId}
+          columnId={columnId}
         />
       )}
     </>

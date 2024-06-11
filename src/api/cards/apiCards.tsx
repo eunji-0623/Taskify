@@ -36,6 +36,7 @@ interface CardOverAll {
   imageUrl?: string;
   teamId: string;
   columnId: number;
+  dashboardId: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -98,8 +99,8 @@ export async function apiUpdateCard(
 
 // 카드 조회 api
 // cardId를 파라미터로 받습니다.
-export async function apiCardDetails(cardId: number): Promise<CardOverAllResponse> {
-  const res = await instance.get<CardOverAllResponse>(`/cards/${cardId}`);
+export async function apiCardDetails(cardId: number): Promise<CardOverAll> {
+  const res = await instance.get<CardOverAll>(`/cards/${cardId}`);
   return handleResponse(res);
 }
 

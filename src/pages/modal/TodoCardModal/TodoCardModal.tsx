@@ -8,52 +8,49 @@ import ModalContainer from '../ModalContainer/ModalContainer';
 import Tag from '../../../components/chip/Tag/Tag';
 import Comment from '../components/Comment/Comment';
 import ProgressState from '../../../components/chip/ProgressState/ProgressState';
+import { apiDeleteCard } from '../../../api/apiModule';
 import styles from './TodoCardModal.module.scss';
 import CloseIcon from '/icon/close.svg';
 import KebabIcon from '/icon/kebab.svg';
 import CardSideContent from '../components/CardSideContent/CardSideContent';
 import CardContent from '../components/CardContent/CardContent';
 
-/*
-  만들어진 할 일 카드 정보를 모달로 보여줍니다.
-
-  수정하기 모달과 연결을 위해 직접 사용하는 것이 아닌 TodoCardManagement를 통해 사용합니다.
-*/
+interface CardOverAll {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: {
+    profileImageUrl?: string;
+    nickname: string;
+    id: number;
+  };
+  imageUrl?: string;
+  teamId: string;
+  columnId: number;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   openEditModal: () => void;
-  cardData: {
-    cardState: string;
-    manager: string;
-    managerImg: string;
-    title: string;
-    description: string;
-    dueDate: string;
-    tags: string[];
-    imageUrl?: string;
-  };
+  cardId: number;
+  cardData: CardOverAll | undefined;
 }
 
 function TodoCardModal({
   isOpen,
   setIsOpen,
   openEditModal,
+  cardId,
   cardData,
 }: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
   const kebabRef = useRef<HTMLDivElement>(null);
-  const {
-    cardState,
-    manager,
-    managerImg,
-    title,
-    description,
-    dueDate,
-    tags,
-    imageUrl,
-  } = cardData;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -83,10 +80,24 @@ function TodoCardModal({
     openEditModal();
   };
 
+  // 삭제하기 버튼
+  const handleDelete = async () => {
+    try {
+      await apiDeleteCard(cardId);
+      setIsOpen(false);
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
+
+  if (!cardData) {
+    return null;
+  }
+
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>
-        <h1>{title}</h1>
+        <h1>{cardData.title}</h1>
         <div className={styles.block}>
           <div className={styles.buttonBlock}>
             <button className={styles.kebabButton} type="button" onClick={handleOpen}>
@@ -96,7 +107,7 @@ function TodoCardModal({
               ? (
                 <div className={styles.kebabButtons} ref={kebabRef}>
                   <button className={styles.kebabItem} type="button" onClick={handleEditOpen}>수정하기</button>
-                  <button className={styles.kebabItem} type="button">삭제하기</button>
+                  <button className={styles.kebabItem} type="button" onClick={handleDelete}>삭제하기</button>
                 </div>
               ) : null}
             <button className={styles.cancelButton} type="button" onClick={close}>
@@ -104,14 +115,18 @@ function TodoCardModal({
             </button>
           </div>
 
-          <CardSideContent managerImg={managerImg} manager={manager} dueDate={dueDate} />
+          <CardSideContent
+            managerImg={cardData.assignee.profileImageUrl}
+            manager={cardData.assignee.nickname}
+            dueDate={cardData.dueDate}
+          />
 
           <div className={styles.topBlock}>
             <span className={styles.condition}>
-              <ProgressState content={cardState} />
+              <ProgressState content="대시보드 이름" />
             </span>
             <div className={styles.tagBlock}>
-              {tags.map((item) => (
+              {cardData.tags.map((item) => (
                 <span key={item}>
                   <Tag tagName={item} />
                 </span>
@@ -119,7 +134,7 @@ function TodoCardModal({
             </div>
           </div>
 
-          <CardContent description={description} imageUrl={imageUrl} />
+          <CardContent description={cardData.description} imageUrl={cardData.imageUrl} />
 
           <Comment />
         </div>

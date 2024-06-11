@@ -123,7 +123,7 @@
 
 .delete {
   position: absolute;
-  bottom: 3.5rem;
+  bottom: 3.1rem;
   width: 3.4rem;
   padding: 0;
   background-color: transparent;
@@ -134,6 +134,12 @@
   font-weight: 400;
   text-decoration-line: underline;
   cursor: pointer;
+}
+
+.errorMessage {
+  color: $red_D6173A;
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 
 .inactiveButton {
@@ -147,4 +153,11 @@
   line-height: normal;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.activeButton {
+  background: var(--violet-violet_5534DA, #5534da);
+  border-radius: 4px;
+  border: 0px;
+  color: #ffffff;
 }

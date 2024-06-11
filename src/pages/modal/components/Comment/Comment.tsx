@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Comment.module.scss';
-import CommentItem from '../CommentItem/CommentItem';
+// import CommentItem from '../CommentItem/CommentItem';
 import { apiCreateComments } from '../../../../api/apiModule';
 /*
   댓글 컴포넌트입니다.
@@ -49,10 +49,10 @@ function Comment() {
       </form>
 
       <div className={styles.comments}>
+        {/* <CommentItem name="test" commentText="테스트입니다." image={null} /> */}
+        {/* <CommentItem />
         <CommentItem />
-        <CommentItem />
-        <CommentItem />
-        <CommentItem />
+        <CommentItem /> */}
       </div>
     </div>
   );

@@ -12,10 +12,18 @@ import DeleteColumnModal from '../DeleteColumnModal/DeleteColumnModal';
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  dashboardId: number;
+  columnId: number;
+  columnTitle: string;
 }
 
-// 컬럼 데이터 추가 필요 useState로 관리
-function EditColumnManagement({ isOpen, setIsOpen }: ModalProps) {
+function EditColumnManagement({
+  isOpen,
+  setIsOpen,
+  dashboardId,
+  columnId,
+  columnTitle,
+}: ModalProps) {
   const [editModalOpen, setEditModalOpen] = useState(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
@@ -36,6 +44,9 @@ function EditColumnManagement({ isOpen, setIsOpen }: ModalProps) {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           openDeleteModal={openDeleteModal}
+          columnTitle={columnTitle}
+          columnId={columnId}
+          dashboardId={dashboardId}
         />
       )}
       {deleteModalOpen && (
@@ -43,6 +54,7 @@ function EditColumnManagement({ isOpen, setIsOpen }: ModalProps) {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           openEditModal={openEditModal}
+          columnId={columnId}
         />
       )}
     </>

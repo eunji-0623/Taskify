@@ -23,10 +23,13 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/mydashboard" element={<MyDashboard />} />
           <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
-          <Route path="/dashboard/:id" element={<DashboardForId />} />
+          <Route path="/dashboard/1" element={<DashboardForId />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/mypage" element={<MyPage />} />
+
+          {/* 삭제하기 */}
+          <Route path="/modal" element={<ModalPageTest />} />
         </Routes>
       </DashboardProvider>
     </BrowserRouter>

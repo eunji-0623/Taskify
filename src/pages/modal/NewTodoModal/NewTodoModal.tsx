@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import DropdownManagement from '../components/DropdownManagement/DropdownManagement';
+import { apiCreateCard } from '../../../api/apiModule';
 import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
 import TodoContent from '../components/TodoContent/TodoContent';
@@ -17,23 +18,31 @@ import TestImg from '/img/test_img.png';
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  userId: number;
+  dashboardId: number;
+  columnId: number;
 }
 
-function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
+function NewTodoModal({
+  isOpen,
+  setIsOpen,
+  userId,
+  dashboardId,
+  columnId,
+}: ModalProps) {
   const [manager, setManager] = useState('');
-  const [managerImg, setManagerImg] = useState(TestImg);
+  const [managerImg, setManagerImg] = useState<string | undefined>(TestImg);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState(AddIcon);
 
-  const test11 = manager.length !== 0
+  const check = manager.length !== 0
     && title.length !== 0
     && description.length !== 0
     && dueDate.length !== 0
-    && tags.length !== 0
-    && imageUrl !== AddIcon;
+    && tags.length !== 0;
 
   // 테스트 데이터
   const data = [
@@ -55,9 +64,27 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
   }, [setIsOpen]);
 
   // 새로운 할 일 생성 동작
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  }
+
+    const newTodo = {
+      assigneeUserId: userId,
+      dashboardId,
+      columnId,
+      title,
+      description,
+      dueDate,
+      tags,
+      imageUrl: imageUrl !== AddIcon ? imageUrl : undefined,
+    };
+
+    try {
+      await apiCreateCard(newTodo);
+      setIsOpen(false);
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -90,7 +117,7 @@ function NewTodoModal({ isOpen, setIsOpen }: ModalProps) {
 
           <div className={styles.buttonBlock}>
             <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
-            <button className={test11 ? styles.createButton : styles.inactiveButton} type="submit">수정</button>
+            <button className={check ? styles.createButton : styles.inactiveButton} type="submit">생성</button>
           </div>
         </form>
       </div>

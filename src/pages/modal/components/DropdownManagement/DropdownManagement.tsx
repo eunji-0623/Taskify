@@ -10,10 +10,10 @@ interface ModalProps {
   data: {
     id: number;
     text: string;
-    profile: string;
+    profile: string | undefined
   }[];
-  managerImg: string;
-  setManagerImg: React.Dispatch<React.SetStateAction<string>>;
+  managerImg: string | undefined
+  setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
   text: string;
 }
 

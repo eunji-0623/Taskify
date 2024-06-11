@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef } from 'react';
 import styles from './InputImage.module.scss';
+// import AddIcon from '/icon/add_image_box.svg';
 import PencilIcon from '/icon/pencil.svg';
 
 /*
@@ -9,7 +10,7 @@ import PencilIcon from '/icon/pencil.svg';
 */
 
 interface InputImageProps {
-  imageUrl: string;
+  imageUrl: string | undefined;
   setImageUrl: (url: string) => void;
   text: string;
 }
@@ -58,7 +59,11 @@ function InputImage({
               alt="img"
             />
           </>
-        ) : <img className={styles.contentImageBasic} src={imageUrl} alt="img" />}
+        ) : (
+          imageUrl && (
+            <img className={styles.contentImageBasic} src={imageUrl} alt="img" />
+          )
+        )}
       </button>
 
       <input

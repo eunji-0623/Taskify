@@ -91,7 +91,7 @@ function EmailEdit({ dashboardId }: Props) {
         </thead>
         <tbody>
           {items.map((email) => (
-            <Email email={email.invitee.email} />
+            <Email key={email.id} email={email.invitee.email} />
           ))}
         </tbody>
       </table>

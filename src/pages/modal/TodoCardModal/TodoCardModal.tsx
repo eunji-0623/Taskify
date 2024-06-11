@@ -15,6 +15,10 @@ import KebabIcon from '/icon/kebab.svg';
 import CardSideContent from '../components/CardSideContent/CardSideContent';
 import CardContent from '../components/CardContent/CardContent';
 
+/*
+  할 일 카드 모달입니다.
+*/
+
 interface CardOverAll {
   id: number;
   title: string;

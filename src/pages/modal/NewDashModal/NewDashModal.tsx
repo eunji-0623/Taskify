@@ -33,6 +33,7 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
+  // 생성 클릭 시 동작
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const newDashboard = {

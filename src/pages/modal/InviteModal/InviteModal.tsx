@@ -4,6 +4,10 @@ import { apiInviteDashboards } from '../../../api/apiModule';
 import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
 
+/*
+  초대하기 모달입니다.
+*/
+
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -17,6 +21,7 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
+  // 초대 클릭 시 동작
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 

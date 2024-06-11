@@ -96,7 +96,7 @@ function EditTodoModal({
   //   setIsOpen(false);
   // }, [setIsOpen]);
 
-  // + 할 일 수정 버튼 클릭 시 동작 추가
+  // 할 일 수정 버튼 클릭 시 동작
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 

@@ -3,6 +3,12 @@ import TodoCardModal from '../TodoCardModal/TodoCardModal';
 import EditTodoModal from '../EditTodoModal/EditTodoModal';
 import { apiCardDetails, CardOverAll } from '../../../api/apiModule'; // CardOverAll 인터페이스를 가져옵니다
 
+/*
+  할 일 카드 모달과 할 일 수정 모달을 관리합니다.
+
+  TodoCardModal에서 수정하기 버튼을 클릭하면
+  TodoCardModal은 닫고 EditTodoModal이 열립니다.
+*/
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;

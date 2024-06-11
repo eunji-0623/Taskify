@@ -2,6 +2,10 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import ManagerDropdown from '../ManagerDropdown/ManagerDropdown';
 import styles from './DropdownManagement.module.scss';
 
+/*
+  할 일 모달에 드롭다운 박스입니다.
+*/
+
 interface ModalProps {
   cardState: string;
   setCardState: React.Dispatch<React.SetStateAction<string>>;

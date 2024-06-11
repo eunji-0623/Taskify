@@ -4,6 +4,10 @@ import { apiCreateColumn, apiGetColumnList } from '../../../api/apiModule';
 import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './NewColumnModal.module.scss';
 
+/*
+  새로운 컬럼을 생성하는 모달입니다.
+*/
+
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;

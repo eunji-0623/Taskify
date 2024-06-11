@@ -3,6 +3,10 @@ import styles from './CommentItem.module.scss';
 import TestImg from '/img/test_img.png';
 // import { apiUpdateComment, apiDeleteComment } from '../../../../api/apiModule';
 
+/*
+  Comment.tsx에서 이름, 댓글, 프로필을 입력받아 댓글을 보여줍니다.
+*/
+
 interface CommentProps {
   name: string;
   // commentText: string;

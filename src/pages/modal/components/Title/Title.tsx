@@ -1,5 +1,9 @@
 import styles from './Title.module.scss';
 
+/*
+  할 일 모달에 제목을 작성하는 부분입니다.
+*/
+
 interface ModalProps {
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>

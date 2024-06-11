@@ -1,5 +1,9 @@
 import styles from './TodoContent.module.scss';
 
+/*
+  할 일 모달에 설명을 작성하는 부분입니다.
+*/
+
 interface ModalProps {
   description: string;
   setDescription : React.Dispatch<React.SetStateAction<string>>;

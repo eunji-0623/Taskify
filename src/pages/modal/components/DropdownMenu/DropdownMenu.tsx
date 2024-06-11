@@ -5,7 +5,7 @@ import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
 
 /*
-  상태 드롭다운 메뉴바
+  상태 드롭다운 메뉴바입니다.
   value, setValue, data를 prop로 받습니다.
 */
 

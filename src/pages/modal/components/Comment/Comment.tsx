@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Comment.module.scss';
 // import CommentItem from '../CommentItem/CommentItem';
 import { apiCreateComments } from '../../../../api/apiModule';
+
 /*
   댓글 컴포넌트입니다.
 */

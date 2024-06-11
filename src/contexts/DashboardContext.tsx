@@ -11,6 +11,8 @@ interface DashboardContextProps {
   setActiveDashboard: (dashboard: number) => void;
   isCreateByMe: boolean | undefined;
   setIsCreateByMe: (dashboard: boolean) => void;
+  activeTitle: string | undefined;
+  setActiveTitle: (dashboard: string) => void;
 }
 
 export const DashboardContext = createContext<DashboardContextProps | null>(
@@ -28,14 +30,26 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
   const [isCreateByMe, setIsCreateByMe] = useState<boolean | undefined>(
     undefined,
   );
+  const [activeTitle, setActiveTitle] = useState<string | undefined>(undefined);
 
-  const contextValue = useMemo(() => ({
-    activeDashboard,
-    setActiveDashboard,
-    isCreateByMe,
-    setIsCreateByMe,
-  }), [activeDashboard, setActiveDashboard, isCreateByMe, setIsCreateByMe]);
-
+  const contextValue = useMemo(
+    () => ({
+      activeDashboard,
+      setActiveDashboard,
+      isCreateByMe,
+      setIsCreateByMe,
+      activeTitle,
+      setActiveTitle,
+    }),
+    [
+      activeDashboard,
+      setActiveDashboard,
+      isCreateByMe,
+      setIsCreateByMe,
+      activeTitle,
+      setActiveTitle,
+    ],
+  );
   return (
     <DashboardContext.Provider value={contextValue}>
       {children}

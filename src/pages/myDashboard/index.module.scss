@@ -3,6 +3,7 @@
 .container {
   display: flex;
   overflow: scroll;
+  justify-content: flex-start;
   background-color: $gray_FAFAFA;
 }
 

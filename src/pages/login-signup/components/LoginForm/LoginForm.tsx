@@ -9,6 +9,10 @@ import InputPassword from '../Input/InputPassword';
 import Button from '../Button/Button';
 
 // 로그인 화면의 기능을 수행하는 함수를 불러오고 페이지를 리턴해주는 컴포넌트 입니다.
+// useInputHandlers에서 Input의 유효성 검사를 해주고 에러를 발생시켜 줍니다.
+// useLoginForm에서 폼을 제출할 때 동작하는 기능을 가져옵니다.
+// useEffect로 버튼의 상태(활성화, 비활성화)를 관리합니다.
+
 function LoginForm() {
   // 작동 함수 불러오기
   const {
@@ -20,24 +24,32 @@ function LoginForm() {
     handleEmailBlur,
     handlePasswordChange,
     handlePasswordBlur,
-  } = useInputHandlers(); // 인풋 에러 관리 함수
+  } = useInputHandlers(); // Input 에러 관리 함수
 
-  const {
-    loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen,
-  } = useLoginForm(); // 폼 제출 함수
+  const { loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen } =
+    useLoginForm(); // 로그인 폼 제출 함수
 
-  // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화(setIsButtonDisabled)
+  // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+  // 이메일이 공백이 아니면서 에러가 없는 경우
+  // 패스워드가 공백이 아니면서 에러가 없는 경우
+  // 둘 다 만족해야 버튼 활성화 = setIsButtonDisabled(false)
   useEffect(() => {
     setIsButtonDisabled(
-      email.trim() === ''
-        || password.trim() === ''
-        || emailError
-        || passwordError,
+      email.trim() === '' ||
+        password.trim() === '' ||
+        emailError ||
+        passwordError
     );
   }, [email, password, emailError, passwordError]);
 
+  // 페이지 리턴
+  // constants.ts에서 InputType을 받아와 컴포넌트에 적용시킵니다.
+  // InputEmail에서 이메일 입력 Input을 가져옵니다.
+  // InputPassword에서 패스워드 입력 Input을 가져옵니다.
+  // Button에서 로그인 버튼을 가져옵니다.
+  // AlertModal에서 모달 창을 가져옵니다.
   return (
     <>
       <form className={styles.formContainer} onSubmit={handleSubmit}>

@@ -4,16 +4,24 @@ import { useForm } from 'react-hook-form';
 import { apiLoginRequest } from '../../../../api/apiModule';
 import { User } from './constants';
 
+// 로그인 폼 제출 기능을 수행하는 함수입니다.
+// useForm을 사용하여 기능을 구현했습니다.
+// useNavigate를 사용하여 폼 제출 시 다른 페이지로 이동하도록 구현했습니다.
+// 로그인 실패 시 모달 창이 띄워지도록 useState를 사용하여 구현했습니다.(isModalOpen)
+// 로그인 중에는 버튼이 비활성화 되도록 useState를 사용하여 구현했습니다.(loading)
+// LoginForm 컴포넌트에서 사용됩니다.
+
+// 타입 정의
 interface LoginFormInputs {
   email: string;
   password: string;
 }
 
-// 로그인 폼 제출 기능을 수행하는 함수입니다.
 function useLoginForm() {
   // useForm 훅을 사용하여 폼 상태를 관리
   const { register, handleSubmit } = useForm<LoginFormInputs>();
 
+  // 이외의 상태 관리
   const [loading, setLoading] = useState(false);
   const [, setError] = useState<string | null>(null);
   const [, setUser] = useState<User | null>(null);
@@ -26,7 +34,7 @@ function useLoginForm() {
   };
 
   const onSubmit = async (data: LoginFormInputs) => {
-    setLoading(true);
+    setLoading(true); // 로그인 시도 중에는 버튼 비활성화
     setError(null);
 
     try {
@@ -36,10 +44,11 @@ function useLoginForm() {
     } catch (error) {
       setIsModalOpen(true); // 로그인 실패 시 모달 창 띄우기
     } finally {
-      setLoading(false);
+      setLoading(false); // 로그인 시도가 끝나면 버튼 활성화
     }
   };
 
+  // 사용할 값 리턴
   return {
     loading,
     isModalOpen,

@@ -1,7 +1,11 @@
 import { useState, ChangeEvent } from 'react';
 
-// 인풋을 관리하는 함수 입니다. 에러가 나면 에러를 띄워줍니다.(유효성 검사)
+// 인풋을 관리하는 함수 입니다.
+// 유효성 검사를 통해 에러가 발생하는 곳에 Focus Out할 시 useState를 사용해 에러를 띄워줍니다.
+// LoginForm, SignUpForm 컴포넌트에서 사용됩니다.
+
 function useInputHandlers() {
+  // 상태 관리
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -62,6 +66,7 @@ function useInputHandlers() {
     setPasswordCheckError(password !== passwordCheck);
   };
 
+  // 사용할 값 리턴
   return {
     email,
     name,

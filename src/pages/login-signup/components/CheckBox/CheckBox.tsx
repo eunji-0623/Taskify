@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import styles from './CheckBox.module.scss';
 
+// 이용 약관에 동의합니다 체크 박스를 구현하는 컴포넌트 입니다.
+// handleCheckboxChange 함수를 통해 체크박스의 상태를 관리합니다.
+// LoginForm, SignUpForm 컴포넌트에서 사용됩니다.
+
+// 타입 정의
 interface CheckboxProps {
   Label: string;
   onChange: (isChecked: boolean) => void;
@@ -17,6 +22,7 @@ function Checkbox({ Label, onChange }: CheckboxProps) {
     onChange(newCheckedState);
   };
 
+  // 페이지 리턴
   return (
     <div className={styles.checkboxContainer}>
       <input

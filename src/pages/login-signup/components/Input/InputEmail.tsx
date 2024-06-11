@@ -2,6 +2,11 @@ import classNames from 'classnames';
 import styles from './Input.module.scss';
 import { InputType } from '../utils/constants';
 
+// 이메일 입력 Input을 구현하는 컴포넌트 입니다.
+// onChange, onBlur를 받아와서 에러를 구현합니다. (useInputHandlers)
+// LoginForm, SignUpForm 컴포넌트에서 사용됩니다.
+
+// 타입 정의
 interface InputEmailProps {
   inputText: string;
   id: string;
@@ -27,6 +32,7 @@ function InputEmail({
   onChange,
   onBlur,
 }: InputEmailProps) {
+  // 조건을 만족하면 에러 스타일 적용됨
   const errorInputClass = classNames(styles.emailInputSection, {
     [styles.errorInput]: error,
   });
@@ -35,6 +41,8 @@ function InputEmail({
     [styles.hide]: !error,
   });
 
+  // 페이지 리턴
+  // 상위 요소에서 Props를 할당 받아서 그에 맞는 스타일을 구현.
   return (
     <>
       <label htmlFor={id} className={styles.inputText}>

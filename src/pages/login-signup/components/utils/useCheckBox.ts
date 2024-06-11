@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 // 이용 약관에 동의하는 체크박스의 체크 상태를 관리하는 함수입니다.
+// SignUpForm 컴포넌트에서 사용됩니다.
+
 function useCheckBox() {
   const [isCheckboxAgreed, setIsCheckboxAgreed] = useState(false);
 

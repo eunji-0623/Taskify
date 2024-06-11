@@ -1,3 +1,5 @@
+@import '../../styles/media.scss';
+
 .SideDashBoard {
   display: flex;
   justify-content: flex-start;
@@ -11,6 +13,16 @@
   &.selected {
     background: var(--violet-violet-8, #F1EFFD);
   }
+
+  @include tablet {
+    width: 134px;
+  }
+
+  @include mobile {
+    width: 40px;
+    justify-content: center;
+    padding: 0;
+  }
 }
 
 .Title {
@@ -22,10 +34,39 @@
   line-height: normal;
   margin-left: 16px;
   margin-right: 6px;
+
+  @include tablet {
+    display: none;
+  }
+
+  @include mobile {
+    display: none;
+    font-size: 16px;
+  }
+}
+
+.TitleTablet {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 16px;
+  margin-right: 6px;
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
 }
 
 .CrownImg {
   width: 18px;
   height: 14px;
   flex-shrink: 0;
+
+  @include mobile {
+    display: none;
+  }
 }

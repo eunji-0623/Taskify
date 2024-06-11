@@ -10,7 +10,7 @@ import { apiEditDashboards } from '../../../api/apiModule';
 interface Props {
   name: string;
   color: string;
-  dashboardId: string | undefined;
+  dashboardId: number;
   handleChange: Dispatch<SetStateAction<string>>;
 }
 
@@ -29,12 +29,10 @@ function Info({ name, color, dashboardId, handleChange }: Props) {
   };
 
   const handleSubmitButton = async () => {
-    if (!dashboardId) return;
-
     handleChange(newName);
     await apiEditDashboards(
       { title: newName, color: selectedColor },
-      { dashboardId: +dashboardId }
+      { dashboardId: dashboardId }
     );
   };
 

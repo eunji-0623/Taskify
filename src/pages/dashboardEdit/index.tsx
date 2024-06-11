@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 
 function DashboardEdit() {
   const { id } = useParams();
+  const [dashboardId, setDashboardId] = useState(0);
   const [dashboardName, setDashboardName] = useState('');
   const [dashboardColor, setDashboardColor] = useState('');
 
@@ -20,6 +21,7 @@ function DashboardEdit() {
     const fetchDashboards = async () => {
       if (id) {
         const data = await apiDashboardsDetail({ dashboardId: +id });
+        setDashboardId(+id);
         setDashboardName(data.title);
         setDashboardColor(data.color);
       }
@@ -38,10 +40,10 @@ function DashboardEdit() {
           <NameEdit
             name={dashboardName}
             color={dashboardColor}
-            dashboardId={id}
+            dashboardId={dashboardId}
             handleChange={setDashboardName}
           />
-          <MemberEdit />
+          {dashboardId !== 0 && <MemberEdit dashboardId={dashboardId} />}
           <EmailEdit />
           <button className={styles.removeButton} type="button">
             대시보드 삭제하기

@@ -1,3 +1,4 @@
+import { PagenationBtn } from '../../../components/Btn/Btn';
 import styles from './MemberEdit.module.scss';
 
 /*  대시보드 수정 페이지 중
@@ -6,15 +7,37 @@ import styles from './MemberEdit.module.scss';
 interface Props {
   title: string;
   hasButton?: boolean;
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  currentPage: number;
+  totalPages: number;
+  handlePrevClick: () => void;
+  handleNextClick: () => void;
 }
 
-function EditHeader({ title, hasButton }: Props) {
+function EditHeader({
+  title,
+  hasButton,
+  isFirstPage,
+  isLastPage,
+  currentPage,
+  totalPages,
+  handlePrevClick,
+  handleNextClick,
+}: Props) {
   return (
     <div className={styles.header}>
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.pagination}>
-        <p>1 페이지 중 1</p>
-        <div>페이지 이동 버튼</div>
+        <p>
+          {totalPages} 페이지 중 {currentPage}
+        </p>
+        <PagenationBtn
+          handlePrev={handlePrevClick}
+          handleNext={handleNextClick}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
+        />
         {hasButton ? <button type="button">초대하기</button> : null}
       </div>
     </div>

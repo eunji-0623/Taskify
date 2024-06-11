@@ -1,15 +1,23 @@
+import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './MemberEdit.module.scss';
 
 /*  각각의 멤버 정보입니다
     프로필 이미지, 이름, 삭제버튼으로 구성되어 있습니다 */
 
-function Member() {
+interface Props {
+  // profile: string;
+  name: string;
+}
+
+function Member({ name }: Props) {
+  const handleDeleteButton = () => [];
+
   return (
     <tr className={styles.table_row}>
       <td className={styles.profile}>프로필</td>
-      <td className={styles.name}>정민철</td>
+      <td className={styles.name}>{name}</td>
       <td className={styles.removeButton}>
-        <button type="button">삭제</button>
+        <DeleteBtn BtnText="삭제" handleBtn={handleDeleteButton} />
       </td>
     </tr>
   );

@@ -57,6 +57,7 @@ function DashboardList() {
         {items.map((dashboard) => (
           <li key={dashboard.id}>
             <Dashboard
+              id={dashboard.id}
               color={dashboard.color}
               title={dashboard.title}
               isOwner={dashboard.createdByMe}

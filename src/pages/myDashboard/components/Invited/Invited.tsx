@@ -4,7 +4,10 @@ import Table from './Table/Table';
 import Empty from './Empty/Empty';
 import styles from './Invited.module.scss';
 import useInfiniteScroll from '../../../../hooks/pagination/useInfiniteScroll';
-import { apiMyInvitationsList } from '../../../../api/apiModule';
+import {
+  apiInvitationAccept,
+  apiMyInvitationsList,
+} from '../../../../api/apiModule';
 
 /*  초대받은 대시보드 목록을 보여주기 위한 컴포넌트 입니다
     API 호출을 통해 데이터를 불러온 뒤,
@@ -41,7 +44,7 @@ const PAGE_SIZE = 6;
 
 const fetchInvitations = async (
   cursor: number,
-  title: string,
+  title: string
 ): Promise<InvitationsListResponse> => {
   const data = await apiMyInvitationsList({
     size: PAGE_SIZE,
@@ -76,7 +79,7 @@ function Invited() {
       if (hasNext && newInvitations.invitations.length === 0) {
         setEmpty(true);
       }
-      if (newInvitations.invitations.length < PAGE_SIZE) {
+      if (newInvitations.invitations.length <= PAGE_SIZE) {
         setHasNext(false);
       }
     } catch (error) {
@@ -106,6 +109,20 @@ function Invited() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title]);
 
+  const handleInvitation = async (id: number, isAccept: boolean) => {
+    await apiInvitationAccept(
+      { invitationId: id },
+      { inviteAccepted: isAccept }
+    );
+    setInvitations((prevInvitations) =>
+      prevInvitations.filter((invitation) => invitation.id !== id)
+    );
+
+    if (invitations.length - 1 < PAGE_SIZE && hasNext) {
+      await loadMoreInvitations();
+    }
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>초대받은 대시보드</h2>
@@ -118,6 +135,7 @@ function Invited() {
             invitations={invitations}
             hasNext={hasNext}
             setElement={setElement}
+            handleInvitation={handleInvitation}
           />
         </div>
       )}

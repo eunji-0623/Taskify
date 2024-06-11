@@ -5,20 +5,25 @@ import styles from './index.module.scss';
 import Column from './components/Column/Column';
 import ColumnContainer from './components/Column/ColumnContainer';
 import { AddNewColumnBtn } from '../../components/Btn/Btn';
-// import SideBar from '../../components/sidebar/side/bar';
+import SideBar from '../../components/sidebar/sidebar';
 import GnbHeader from './components/GnbHeader/GnbHeader';
-import { apiGetColumnList, ColumnOverAll } from '../../api/apiModule';
+import {
+  apiGetColumnList,
+  apiLoginRequest,
+  ColumnOverAll,
+} from '../../api/apiModule';
 
 function DashboardMain() {
-  const { dashboardId } = useParams<{ dashboardId: string }>();
+  const { id } = useParams<{ id: string }>();
   const [columnList, setColumnList] = useState<ColumnOverAll[]>([]);
   const [errorState, setErrorState] = useState<string | null>(null);
 
-  async function getColumnList(id: number) {
+  async function getColumnList(dashboardId: number) {
     try {
-      const res = await apiGetColumnList(id);
-      const data = res.data.dashboards;
-      setColumnList(data);
+      const res = await apiGetColumnList(dashboardId);
+      const list = res.data;
+      const dashboards = list;
+      setColumnList(dashboards);
     } catch (error) {
       const axiosError = error as AxiosError;
       setErrorState(axiosError.message);
@@ -27,14 +32,18 @@ function DashboardMain() {
   }
 
   useEffect(() => {
-    getColumnList(Number(dashboardId));
-  }, [dashboardId]);
+    getColumnList(Number(id));
+  }, [id]);
 
-  const handleAddNewColumn = () => {};
-  // const handleColumnClick = () => {};
+  const handleAddNewColumn = () => {
+    apiLoginRequest({ email: 'test333@codeit.kr', password: 'test1234' });
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.sideMenu}>SideBar</div>
+      <div className={styles.sideMenu}>
+        <SideBar />
+      </div>
       <div className={styles.gnbHeader}>
         <GnbHeader />
       </div>
@@ -44,8 +53,8 @@ function DashboardMain() {
           {columnList.map((columnData) => (
             <Column
               key={columnData.id}
+              columnId={columnData.id}
               title={columnData.title}
-              // onClick={handleColumnClick}
             />
           ))}
           <div className={styles.addColumnButtonContainer}>

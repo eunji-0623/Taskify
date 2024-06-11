@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { apiDashboardsDetail } from '../../api/apiModule';
+import { apiDashboardsDetail, apiInvitationList } from '../../api/apiModule';
 import SideBar from '../../components/sidebar/sidebar';
 import GnbHeader from '../dashboard.{dashboardid}/components/GnbHeader/GnbHeader';
 import EmailEdit from './MemberEdit/EmailEdit';
@@ -44,7 +44,7 @@ function DashboardEdit() {
             handleChange={setDashboardName}
           />
           {dashboardId !== 0 && <MemberEdit dashboardId={dashboardId} />}
-          <EmailEdit />
+          {dashboardId !== 0 && <EmailEdit dashboardId={dashboardId} />}
           <button className={styles.removeButton} type="button">
             대시보드 삭제하기
           </button>

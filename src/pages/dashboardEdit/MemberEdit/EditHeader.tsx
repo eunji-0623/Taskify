@@ -1,4 +1,4 @@
-import { PagenationBtn } from '../../../components/Btn/Btn';
+import { ChangeAndSaveBtn, PagenationBtn } from '../../../components/Btn/Btn';
 import styles from './MemberEdit.module.scss';
 
 /*  대시보드 수정 페이지 중
@@ -25,6 +25,8 @@ function EditHeader({
   handlePrevClick,
   handleNextClick,
 }: Props) {
+  const handleInviteButton = () => {};
+
   return (
     <div className={styles.header}>
       <h2 className={styles.title}>{title}</h2>
@@ -38,7 +40,9 @@ function EditHeader({
           isFirstPage={isFirstPage}
           isLastPage={isLastPage}
         />
-        {hasButton ? <button type="button">초대하기</button> : null}
+        {hasButton ? (
+          <ChangeAndSaveBtn BtnText="초대하기" handleBtn={handleInviteButton} />
+        ) : null}
       </div>
     </div>
   );

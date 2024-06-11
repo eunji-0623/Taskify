@@ -16,7 +16,7 @@ interface Props {
   dashboardId: number;
 }
 
-interface Member {
+interface MemberResponse {
   id: number;
   userId: number;
   email: string;
@@ -30,7 +30,7 @@ interface Member {
 function MemberEdit({ dashboardId }: Props) {
   const fetchMembers = async (
     dashboardId: number
-  ): Promise<{ items: Member[]; totalCount: number }> => {
+  ): Promise<{ items: MemberResponse[]; totalCount: number }> => {
     const data = await apiMemberList({ dashboardId });
     return {
       items: data.members,
@@ -51,7 +51,7 @@ function MemberEdit({ dashboardId }: Props) {
     isLastPage,
     handlePrevClick,
     handleNextClick,
-  } = usePagination<Member>({
+  } = usePagination<MemberResponse>({
     fetchData: fetchDataCallback,
     itemsPerPage: ITEMS_PER_PAGE,
   });

@@ -10,13 +10,13 @@ function MyPage() {
     <div className={styles.myPageLayout}>
       <div className={styles.navBar} />
       <div className={styles.sideBar} />
-      <div className={styles.backContainer}>
+      <div className={styles.pageBackContainer}>
         <img
-          className={styles.backIcon}
+          className={styles.pageBackIcon}
           src={ArrowIcon}
           alt="왼쪽 바라보는 화살표 이미지"
         />
-        <span className={styles.backText}>돌아가기</span>
+        <span className={styles.pageBackText}>돌아가기</span>
       </div>
       <ProfileEdit />
       <PasswordEdit />

@@ -1,0 +1,33 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.Button {
+  display: flex;
+  width: 520px;
+  height: 50px;
+  padding: 14px 236px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  gap: 10px;
+
+  margin-top: 20px;
+
+  border: none;
+  border-radius: 8px;
+  background: $violet_5534DA;
+
+  &:disabled {
+    background: $gray_9FA6B2;
+  }
+
+  color: $white_FFFFFF;
+  font-size: 18px;
+  font-weight: 500;
+
+  @include mobile {
+    width: 351px;
+    padding: 15px 0px 14px 0px;
+  }
+}

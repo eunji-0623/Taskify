@@ -26,8 +26,9 @@ function LoginForm() {
     handlePasswordBlur,
   } = useInputHandlers(); // Input 에러 관리 함수
 
-  const { loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen } =
-    useLoginForm(); // 로그인 폼 제출 함수
+  const {
+    loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen,
+  } = useLoginForm(); // 로그인 폼 제출 함수
 
   // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -37,10 +38,10 @@ function LoginForm() {
   // 둘 다 만족해야 버튼 활성화 = setIsButtonDisabled(false)
   useEffect(() => {
     setIsButtonDisabled(
-      email.trim() === '' ||
-        password.trim() === '' ||
-        emailError ||
-        passwordError
+      email.trim() === ''
+        || password.trim() === ''
+        || emailError
+        || passwordError,
     );
   }, [email, password, emailError, passwordError]);
 

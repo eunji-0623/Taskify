@@ -50,16 +50,15 @@ function SignUpForm() {
   const { isCheckboxAgreed, handleCheckboxChange } = useCheckBox(); // 체크박스 상태 관리 함수
 
   // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화 = setIsButtonDisabled(false)
-  const setIsButtonDisabled = () =>
-    email.trim() === '' ||
-    name.trim() === '' ||
-    password.trim() === '' ||
-    passwordCheck.trim() === '' ||
-    emailError ||
-    nameError ||
-    passwordError ||
-    passwordCheckError ||
-    !isCheckboxAgreed;
+  const setIsButtonDisabled = () => email.trim() === ''
+    || name.trim() === ''
+    || password.trim() === ''
+    || passwordCheck.trim() === ''
+    || emailError
+    || nameError
+    || passwordError
+    || passwordCheckError
+    || !isCheckboxAgreed;
 
   // 페이지 리턴
   // constants.ts에서 InputType을 받아와 컴포넌트에 적용시킵니다.

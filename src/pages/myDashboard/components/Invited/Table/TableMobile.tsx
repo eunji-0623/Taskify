@@ -13,8 +13,6 @@ function TableMobile({ title, name }: Props) {
   return (
     <>
       <tr style={{ height: '20px' }} />
-      {' '}
-      {/* 간격을 위한 빈 행 */}
       <tr>
         <td className={styles.head}>이름</td>
         <td>{title}</td>
@@ -32,8 +30,6 @@ function TableMobile({ title, name }: Props) {
         </td>
       </tr>
       <tr style={{ height: '20px', borderBottom: '1px solid #EEE' }} />
-      {' '}
-      {/* 간격을 위한 빈 행 */}
     </>
   );
 }

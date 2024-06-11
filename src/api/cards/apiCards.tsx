@@ -1,7 +1,7 @@
 import instance from '../axiosInstance';
 import { handleResponse } from '../errorHandler';
 
-interface CreateCardBody {
+export interface CreateCardBody {
   assigneeUserId: number;
   dashboardId: number;
   columnId: number;
@@ -12,7 +12,7 @@ interface CreateCardBody {
   imageUrl?: string;
 }
 
-interface UpdateCardBody {
+export interface UpdateCardBody {
   columnId: number;
   assigneeUserId: number;
   title: string;
@@ -22,7 +22,7 @@ interface UpdateCardBody {
   imageUrl?: string;
 }
 
-interface CardOverAll {
+export interface CardOverAll {
   id: number;
   title: string;
   description: string;
@@ -34,30 +34,16 @@ interface CardOverAll {
     id: number;
   };
   imageUrl?: string;
-  teamId: string;
   columnId: number;
   dashboardId: number;
   createdAt: string;
   updatedAt: string;
 }
 
-interface CardOverAllResponse {
-  status: number;
-  data: CardOverAll;
-}
-
-interface GetCardListResponse {
-  status: number;
-  data: {
-    cursorId: number;
-    totalCount: number;
-    cards: CardOverAll[];
-  };
-}
-
-interface DeleteCardResponse {
-  status: number;
-  message?: string;
+export interface GetCardListResponse {
+  cursorId: number;
+  totalCount: number;
+  cards: CardOverAll[];
 }
 
 // 여기부터 api 함수 선언부분입니다. **************************
@@ -65,8 +51,8 @@ interface DeleteCardResponse {
 // 카드 생성 api
 export async function apiCreateCard(
   body: CreateCardBody,
-): Promise<CardOverAllResponse> {
-  const res = await instance.post<CardOverAllResponse>('/cards', body);
+): Promise<CardOverAll> {
+  const res = await instance.post<CardOverAll>('/cards', body);
   return handleResponse(res);
 }
 
@@ -92,8 +78,8 @@ export async function apiGetCardList(
 export async function apiUpdateCard(
   body: UpdateCardBody,
   cardId: number,
-): Promise<CardOverAllResponse> {
-  const res = await instance.put<CardOverAllResponse>(`/cards/${cardId}`, body);
+): Promise<CardOverAll> {
+  const res = await instance.put<CardOverAll>(`/cards/${cardId}`, body);
   return handleResponse(res);
 }
 
@@ -106,9 +92,7 @@ export async function apiCardDetails(cardId: number): Promise<CardOverAll> {
 
 // 카드 삭제 api
 // cardId를 파라미터로 받습니다.
-export async function apiDeleteCard(
-  cardId: number,
-): Promise<DeleteCardResponse> {
-  const res = await instance.delete<DeleteCardResponse>(`/cards/${cardId}`);
+export async function apiDeleteCard(cardId: number) {
+  const res = await instance.delete(`/cards/${cardId}`);
   return handleResponse(res);
 }

@@ -152,8 +152,8 @@ interface PagenationBtnProps {
 export function PagenationBtn({
   handlePrev,
   handleNext,
-  isFirstPage,
-  isLastPage,
+  isFirstPage = false,
+  isLastPage = false,
 }: PagenationBtnProps) {
   return (
     <div className={styles.PagenationBtn}>

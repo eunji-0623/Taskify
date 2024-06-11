@@ -1,4 +1,4 @@
-@use '/src/styles/global.scss' as colors;
+@import '/src/styles/global.scss';
 
 .profileContainer {
   display: flex;
@@ -8,14 +8,14 @@
   flex-shrink: 0;
 
   border-radius: 8px;
-  background: colors.$white_FFFFFF;
+  background: $white_FFFFFF;
 
   margin-top: 25px;
   padding: 30px;
 }
 
 .profileText {
-  color: colors.$black_333236;
+  color: $black_333236;
   font-size: 24px;
   font-weight: 700;
 }
@@ -66,7 +66,7 @@
 }
 
 .inputLabel {
-  color: colors.$black_333236;
+  color: $black_333236;
   font-size: 18px;
   font-weight: 500;
 }
@@ -77,11 +77,11 @@
   flex-shrink: 0;
 
   border-radius: 6px;
-  border: 1px solid colors.$gray_D9D9D9;
-  background: colors.$white_FFFFFF;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
 
   &:focus {
-    border: 1px solid colors.$violet_5534DA;
+    border: 1px solid $violet_5534DA;
   }
 }
 
@@ -91,7 +91,7 @@
   flex-shrink: 0;
 
   border-radius: 4px;
-  background: colors.$violet_5534DA;
+  background: $violet_5534DA;
 
   margin-top: 24px;
 }

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { apiDashboardsDetail, apiInvitationList } from '../../api/apiModule';
+import { apiDashboardsDetail } from '../../api/apiModule';
 import SideBar from '../../components/sidebar/sidebar';
 import GnbHeader from '../dashboard.{dashboardid}/components/GnbHeader/GnbHeader';
 import EmailEdit from './MemberEdit/EmailEdit';

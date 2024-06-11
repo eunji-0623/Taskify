@@ -1,4 +1,5 @@
 import { ChangeAndSaveBtn, PagenationBtn } from '../../../components/Btn/Btn';
+import useWindowSize from '../../../utils/useWindowSize';
 import styles from './MemberEdit.module.scss';
 
 /*  대시보드 수정 페이지 중
@@ -25,26 +26,38 @@ function EditHeader({
   handlePrevClick,
   handleNextClick,
 }: Props) {
+  const { width } = useWindowSize();
+
   const handleInviteButton = () => {};
 
   return (
-    <div className={styles.header}>
-      <h2 className={styles.title}>{title}</h2>
-      <div className={styles.pagination}>
-        <p>
-          {totalPages} 페이지 중 {currentPage}
-        </p>
-        <PagenationBtn
-          handlePrev={handlePrevClick}
-          handleNext={handleNextClick}
-          isFirstPage={isFirstPage}
-          isLastPage={isLastPage}
-        />
-        {hasButton ? (
-          <ChangeAndSaveBtn BtnText="초대하기" handleBtn={handleInviteButton} />
-        ) : null}
+    <>
+      <div className={styles.header}>
+        <h2 className={styles.title}>{title}</h2>
+        <div className={styles.pagination}>
+          <p>
+            {totalPages} 페이지 중 {currentPage}
+          </p>
+          <PagenationBtn
+            handlePrev={handlePrevClick}
+            handleNext={handleNextClick}
+            isFirstPage={isFirstPage}
+            isLastPage={isLastPage}
+          />
+          {hasButton && width >= 768 ? (
+            <ChangeAndSaveBtn
+              BtnText="초대하기"
+              handleBtn={handleInviteButton}
+            />
+          ) : null}
+        </div>
       </div>
-    </div>
+      {hasButton && width < 768 ? (
+        <div className={styles.inviteButton}>
+          <ChangeAndSaveBtn BtnText="초대하기" handleBtn={handleInviteButton} />
+        </div>
+      ) : null}
+    </>
   );
 }
 

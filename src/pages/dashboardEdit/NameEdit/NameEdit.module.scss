@@ -13,7 +13,7 @@
   padding: 28px;
 }
 
-.present {
+.info {
   display: flex;
   justify-content: space-between;
 
@@ -38,7 +38,7 @@
   }
 }
 
-.new {
+.change {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -74,7 +74,7 @@
     width: 544px;
   }
 
-  .new {
+  .change {
     .newNameInput {
       width: 488px;
     }
@@ -84,12 +84,26 @@
 @include mobile {
   .container {
     width: 284px;
+    gap: 25px;
   }
 
-  .new {
+  .info {
+    flex-direction: column;
+
+    .chips {
+      margin-top: 15px;
+    }
+  }
+
+  .change {
     .newNameInput {
       width: 244px;
       height: 42px;
+    }
+
+    .submitButton {
+      right: 14px;
+      bottom: 14px;
     }
   }
 }

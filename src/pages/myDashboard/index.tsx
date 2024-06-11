@@ -13,7 +13,7 @@ function MyDashboard() {
       <SideBar />
       <div className={styles.main}>
         <MyDashboardHeader />
-        <div>
+        <div className={styles.mainContents}>
           <DashboardList />
           <Invited />
         </div>

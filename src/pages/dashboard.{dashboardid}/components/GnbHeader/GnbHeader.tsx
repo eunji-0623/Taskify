@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import styles from './GnbHeader.module.scss';
 import { DashboardContext } from '../../../../contexts/DashboardContext';
-import { useContext } from 'react';
 import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 import CrownImg from '/icon/crown.svg';
 import { InviteBtn, SettingBtn } from '../Btn/Btn';

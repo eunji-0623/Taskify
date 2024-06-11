@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from './Members.module.scss';
 import { MembersProfileImg } from '../../../../components/UserProfileImg/UserProfileImg';
 
-interface member {
+interface Member {
   id: number;
   userId: number;
   email: string;
@@ -14,17 +14,17 @@ interface member {
 }
 
 interface MemberResponse {
-  members: member[];
+  members: Member[];
   totalCount: number;
 }
 
 function Members() {
-  // mock데이터로 테스트
-  const [members, setMembers] = useState<member[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
   const fetchMembers = async (): Promise<MemberResponse> => {
-    const response = await fetch(`/mockData/members.json`); // JSON 파일의 경로를 설정합니다.
+    const response = await fetch('/mockData/members.json');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -37,8 +37,8 @@ function Members() {
       try {
         const data = await fetchMembers();
         setMembers(data.members);
-      } catch (error) {
-        setError((error as Error).message);
+      } catch (e) {
+        setError((e as Error).message);
       } finally {
         setLoading(false);
       }
@@ -46,6 +46,14 @@ function Members() {
 
     getMembers();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>멤버 목록을 불러오지 못했습니다.</div>;
+  }
 
   return (
     <div className={styles.Members}>

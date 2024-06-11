@@ -32,7 +32,7 @@ interface DashboardApi {
 const fetchDashboards = async (page: number) => {
   // mockData 사용. 추후 변경 필요
   const response = await fetch(
-    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`
+    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
   );
   const data = await response.json();
 
@@ -52,11 +52,10 @@ function SideBar() {
   const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = context;
   const navigate = useNavigate();
 
-  const { items, currentPage, totalPages, handlePrevClick, handleNextClick } =
-    usePagination<DashboardApi>({
-      fetchData: fetchDashboards,
-      itemsPerPage: ITEMS_PER_PAGE,
-    });
+  const { items, handlePrevClick, handleNextClick } = usePagination<DashboardApi>({
+    fetchData: fetchDashboards,
+    itemsPerPage: ITEMS_PER_PAGE,
+  });
 
   const ClickDashboard = (id: number, createdByMe: boolean, title: string) => {
     setActiveDashboard(id);
@@ -77,12 +76,17 @@ function SideBar() {
       </Link>
       <div className={styles.SideBarHeader}>
         <span className={styles.Title}>Dash Board</span>
-        <img
-          src={AddBox}
-          alt="대시 보드 추가 버튼 이미지"
-          className={styles.AddBox}
+        <button
+          type="button"
+          className={styles.AddBoxButton}
           onClick={openDash}
-        />
+        >
+          <img
+            src={AddBox}
+            alt="대시 보드 추가 버튼 이미지"
+            className={styles.AddBox}
+          />
+        </button>
         <NewDashModal />
       </div>
       <div className={styles.DashboardsList}>
@@ -93,22 +97,20 @@ function SideBar() {
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() =>
-              ClickDashboard(
-                dashboard.id,
-                dashboard.createdByMe,
-                dashboard.title
-              )
-            }
+            onClick={() => ClickDashboard(
+              dashboard.id,
+              dashboard.createdByMe,
+              dashboard.title,
+            )}
           />
         ))}
       </div>
       <div className={styles.PagenationBtn}>
         <PagenationBtn
+          isFirstPage={false}
+          isLastPage={false}
           handlePrev={handlePrevClick}
           handleNext={handleNextClick}
-          isFirstPage={currentPage === 1}
-          isLastPage={currentPage === totalPages}
         />
       </div>
     </div>

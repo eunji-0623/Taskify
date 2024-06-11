@@ -3,8 +3,6 @@ import Logo from '../components/Logo/Logo';
 import LoginForm from '../components/LoginForm/LoginForm';
 import LInkText from '../components/LinkText/LinkText';
 
-// 에러 및 세부적인 스타일, 기능 추후 추가 예정
-
 function Login() {
   return (
     <div className={styles.Layout}>

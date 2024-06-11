@@ -75,7 +75,11 @@ function MemberEdit({ dashboardId }: Props) {
         </thead>
         <tbody>
           {items.map((member) => (
-            <Member key={member.id} name={member.nickname} />
+            <Member
+              key={member.id}
+              name={member.nickname}
+              profile={member.profileImageUrl}
+            />
           ))}
         </tbody>
       </table>

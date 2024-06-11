@@ -1,19 +1,35 @@
 import styles from './Table.module.scss';
+import { AcceptAndRejectBtn } from '../../../../../components/Btn/Btn';
 
-function TableMobile() {
+interface Props {
+  title: string;
+  name: string;
+}
+
+function TableMobile({ title, name }: Props) {
+  const handleAcceptButton = () => {};
+  const handleRejectButton = () => {};
+
   return (
     <>
+      <tr style={{ height: '20px' }} />
       <tr>
         <td className={styles.head}>이름</td>
-        <td>프로덕트 디자인</td>
+        <td>{title}</td>
       </tr>
       <tr>
         <td className={styles.head}>초대자</td>
-        <td>손동희</td>
+        <td>{name}</td>
       </tr>
       <tr>
-        <td>수락/거절</td>
+        <td colSpan={2} aria-label="수락 거절 버튼">
+          <AcceptAndRejectBtn
+            handleAccept={handleAcceptButton}
+            handleReject={handleRejectButton}
+          />
+        </td>
       </tr>
+      <tr style={{ height: '20px', borderBottom: '1px solid #EEE' }} />
     </>
   );
 }

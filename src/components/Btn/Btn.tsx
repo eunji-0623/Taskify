@@ -22,12 +22,12 @@ interface BtnProps {
 */
 interface AcceptAndRejectBtnProps {
   handleAccept: () => void;
-  handdleReject: () => void;
+  handleReject: () => void;
 }
 
 export function AcceptAndRejectBtn({
   handleAccept,
-  handdleReject,
+  handleReject,
 }: AcceptAndRejectBtnProps) {
   return (
     <div className={styles.AcceptAndRejectBtn}>
@@ -40,7 +40,7 @@ export function AcceptAndRejectBtn({
         수락
       </button>
       <button
-        onClick={handdleReject}
+        onClick={handleReject}
         className={styles.RejectBtn}
         color={BtnColors.blue}
         type="button"
@@ -145,15 +145,32 @@ export function DeleteDashBoardBtn({ handleBtn }: OnlyHandleProps) {
 interface PagenationBtnProps {
   handlePrev: () => void;
   handleNext: () => void;
+  isFirstPage: boolean;
+  isLastPage: boolean;
 }
 
-export function PagenationBtn({ handlePrev, handleNext }: PagenationBtnProps) {
+export function PagenationBtn({
+  handlePrev,
+  handleNext,
+  isFirstPage = false,
+  isLastPage = false,
+}: PagenationBtnProps) {
   return (
     <div className={styles.PagenationBtn}>
-      <button className={styles.PrevBtn} type="button" onClick={handlePrev}>
+      <button
+        className={styles.PrevBtn}
+        type="button"
+        onClick={handlePrev}
+        disabled={isFirstPage}
+      >
         <img src={ArrowLeft} alt="이전 페이지 화살표" width={16} height={16} />
       </button>
-      <button className={styles.NextBtn} type="button" onClick={handleNext}>
+      <button
+        className={styles.NextBtn}
+        type="button"
+        onClick={handleNext}
+        disabled={isLastPage}
+      >
         <img src={ArrowRight} alt="다음 페이지 화살표" width={16} height={16} />
       </button>
     </div>

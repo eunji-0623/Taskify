@@ -2,5 +2,19 @@
 
 .container {
   display: flex;
+  height: 100vh;
+  overflow: scroll;
   background-color: $gray_FAFAFA;
+}
+
+//서브 헤더 넓이와 contents 넓이 분리하기 위함.
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContents {
+  margin-left: 40px;
+  margin-top: 40px;
 }

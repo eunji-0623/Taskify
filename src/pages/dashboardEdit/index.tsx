@@ -12,7 +12,7 @@ function DashboardEdit() {
       <div>sidemenu</div>
       <div>
         <div>header</div>
-        <div>
+        <div className={styles.mainContents}>
           <div>돌아가기</div>
           <NameEdit />
           <MemberEdit />

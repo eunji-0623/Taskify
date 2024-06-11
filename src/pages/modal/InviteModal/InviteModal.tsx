@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
+import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
 
 /*
-  이메일로 초대하는 모달입니다.
+  이메일로 사용자를 초대하는 모달입니다.
 */
 
 interface ModalProps {
@@ -20,9 +21,6 @@ function InviteModal({ isOpen, setIsOpen }: ModalProps) {
   // 초대 버튼 클릭 시 동작
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    // submit 테스트
-    console.log('submit');
   }
 
   return (
@@ -36,8 +34,8 @@ function InviteModal({ isOpen, setIsOpen }: ModalProps) {
           </div>
 
           <div className={styles.buttonBlock}>
-            <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
-            <button className={styles.createButton} type="submit">초대</button>
+            <DeleteBtn BtnText="삭제" handleBtn={close} />
+            <ChangeAndSaveBtn BtnText="초대" handleBtn={close} />
           </div>
         </form>
       </div>

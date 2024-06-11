@@ -90,9 +90,7 @@ export async function apiDashboardsList(
     size: 10,
   },
 ): Promise<DashboardsListResponse> {
-  const res = await instance.get(
-    `/dashboards?navigationMethod=${query.navigationMethod}&cursorId=${query.cursorId}&page=${query.page}&size=${query.size}`,
-  );
+  const res = await instance.get('/dashboards', { params: query });
   return handleResponse(res);
 }
 
@@ -140,7 +138,8 @@ export async function apiInvitationList(
   query: InvitationQuery = { page: 1, size: 10 },
 ): Promise<InvitationListResponse> {
   const res = await instance.get(
-    `/dashboards/${path.dashboardId}/invitations?page=${query.page}&size=${query.size}`,
+    `/dashboards/${path.dashboardId}/invitations`,
+    { params: query },
   );
   return handleResponse(res);
 }

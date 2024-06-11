@@ -1,6 +1,17 @@
 import instance from '../axiosInstance';
 import { handleResponse } from '../errorHandler';
 
+interface CreateCommentBody {
+  content: string;
+  cardId: number;
+  columnId: number;
+  dashboardId: number;
+}
+
+interface UpdateCommentBody {
+  content: string;
+}
+
 interface CommentOverAll {
   id: number;
   content: string;
@@ -14,31 +25,9 @@ interface CommentOverAll {
   };
 }
 
-interface CreateCommentBody {
-  content: string;
-  cardId: number;
-  columnId: number;
-  dashboardId: number;
-}
-
-interface UpdateCommentBody {
-  content: string;
-}
-
-interface CommentOverAllResponse {
-  status: number;
-  data: CommentOverAll;
-}
-
-interface GetCommentResponse {
-  status: number;
+interface GetCommentListResponse {
   cursorId: number;
-  data?: CommentOverAll[];
-}
-
-interface DeleteCommentResponse {
-  status: number;
-  message?: string;
+  comments: CommentOverAll[];
 }
 
 // 여기부터 api 함수 선언부분입니다. **************************
@@ -46,8 +35,8 @@ interface DeleteCommentResponse {
 // 댓글 생성 api
 export async function apiCreateComments(
   body: CreateCommentBody,
-): Promise<CommentOverAllResponse> {
-  const res = await instance.post<CommentOverAllResponse>('/comments', body);
+): Promise<CommentOverAll> {
+  const res = await instance.post<CommentOverAll>('/comments', body);
   return handleResponse(res);
 }
 
@@ -58,8 +47,8 @@ export async function apiGetCommentList(
   cardId: number,
   cursorId: number = 0,
   size: number = 10,
-): Promise<GetCommentResponse> {
-  const res = await instance.get<GetCommentResponse>('/comments', {
+): Promise<GetCommentListResponse> {
+  const res = await instance.get<GetCommentListResponse>('/comments', {
     params: {
       size,
       cursorId,
@@ -74,8 +63,8 @@ export async function apiGetCommentList(
 export async function apiUpdateComment(
   body: UpdateCommentBody,
   commentId: number,
-): Promise<CommentOverAllResponse> {
-  const res = await instance.put<CommentOverAllResponse>(
+): Promise<CommentOverAll> {
+  const res = await instance.put<CommentOverAll>(
     `/comments/${commentId}`,
     body,
   );
@@ -84,11 +73,7 @@ export async function apiUpdateComment(
 
 // 댓글 삭제 api
 // commentId를 파라미터로 받습니다.
-export async function apiDeleteComment(
-  commentId: number,
-): Promise<DeleteCommentResponse> {
-  const res = await instance.delete<DeleteCommentResponse>(
-    `/comments/${commentId}`,
-  );
+export async function apiDeleteComment(commentId: number) {
+  const res = await instance.delete(`/comments/${commentId}`);
   return handleResponse(res);
 }

@@ -37,6 +37,7 @@ function DashboardMain() {
 
   const handleAddNewColumn = () => {
     apiLoginRequest({ email: 'test333@codeit.kr', password: 'test1234' });
+    // 테스트용 코드. 수정 필요
   };
 
   return (

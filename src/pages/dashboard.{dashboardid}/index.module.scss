@@ -20,9 +20,9 @@
   .columns {
     grid-row: 2 / span 1;
     grid-column: 2 / span 2;
-    overflow-y: auto;
     background-color: var(--gray-gray_FAFAFA, #fafafa);
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
 
     .addColumnButtonContainer {
       width: auto;

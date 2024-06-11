@@ -21,13 +21,14 @@
   padding-left: 40px;
 }
 
-.removeButton {
-  width: 320px;
-  height: 62px;
-  padding: 20px 90px;
-  font-size: 18px;
-  font-weight: 500;
-  color: $black_333236;
+.backButton {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.deleteButton {
+  margin-top: 20px;
 }
 
 @include mobile {

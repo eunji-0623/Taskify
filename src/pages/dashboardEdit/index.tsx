@@ -7,6 +7,7 @@ import MemberEdit from './MemberEdit/MemberEdit';
 import NameEdit from './NameEdit/NameEdit';
 import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
+import { DeleteDashBoardBtn } from '../../components/Btn/Btn';
 
 /*  대시보드 수정 페이지
     - 전체적인 레이아웃  */
@@ -30,13 +31,18 @@ function DashboardEdit() {
     fetchDashboards();
   }, [id]);
 
+  const handleDeleteDashboard = () => {};
+
   return (
     <div className={styles.container}>
       <SideBar />
       <div className={styles.main}>
         <GnbHeader />
         <div className={styles.mainContents}>
-          <div>돌아가기</div>
+          <button className={styles.backButton} type="button">
+            <img src="/icon/arrow_forward.svg" alt="화살표" />
+            <p>돌아가기</p>
+          </button>
           <NameEdit
             name={dashboardName}
             color={dashboardColor}
@@ -45,9 +51,9 @@ function DashboardEdit() {
           />
           {dashboardId !== 0 && <MemberEdit dashboardId={dashboardId} />}
           {dashboardId !== 0 && <EmailEdit dashboardId={dashboardId} />}
-          <button className={styles.removeButton} type="button">
-            대시보드 삭제하기
-          </button>
+          <div className={styles.deleteButton}>
+            <DeleteDashBoardBtn handleBtn={handleDeleteDashboard} />
+          </div>
         </div>
       </div>
     </div>

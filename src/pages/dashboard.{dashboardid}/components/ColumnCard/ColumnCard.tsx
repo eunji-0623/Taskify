@@ -36,43 +36,36 @@ function ColumnCard({ cardId, cardData, columnData }: CardProps) {
 
   // 버튼 이벤트 핸들러
   const cardOnClick = () => {
-    setManageCardModalOpen(!manageCardModalOpen);
-  };
-  const handleKeyDown = () => {
-    setManageCardModalOpen(!manageCardModalOpen);
+    setManageCardModalOpen(true);
   };
 
   // 컴포넌트 출력
   return (
-    <div
-      className={styles.container}
-      onKeyDown={handleKeyDown}
-      onClick={cardOnClick}
-      role="button"
-      tabIndex={0}
-    >
-      <div className={styles.card}>
-        {imageUrl && (
-          <div className={styles.img}>
-            <img
-              className={` ${styles.withImg}`}
-              src={imageUrl}
-              alt="uploadedTaskImage"
-            />
+    <div className={styles.wrapper}>
+      <button type="button" onClick={cardOnClick} className={styles.container}>
+        <div className={styles.card}>
+          {imageUrl && (
+            <div className={styles.img}>
+              <img
+                className={` ${styles.withImg}`}
+                src={imageUrl}
+                alt="uploadedTaskImage"
+              />
+            </div>
+          )}
+          <div className={styles.title}>{title}</div>
+          <div className={styles.tag}>
+            {tags.map((tag) => (
+              <Tag tagName={tag} key={tag} />
+            ))}
           </div>
-        )}
-        <div className={styles.title}>{title}</div>
-        <div className={styles.tag}>
-          {tags.map((tag) => (
-            <Tag tagName={tag} key={tag} />
-          ))}
+          <div className={styles.date}>
+            <img src="/icon/calendar.svg" alt="calendarImg" />
+            {formatDate(dueDate)}
+          </div>
+          <div className={styles.avatar}>{assignee.nickname}</div>
         </div>
-        <div className={styles.date}>
-          <img src="/icon/calendar.svg" alt="calendarImg" />
-          {formatDate(dueDate)}
-        </div>
-        <div className={styles.avatar}>{assignee.nickname}</div>
-      </div>
+      </button>
 
       {manageCardModalOpen ? (
         <TodoCardManagement

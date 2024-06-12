@@ -33,13 +33,17 @@ function SideDashBoard({
   }
   const { activeDashboard } = context;
   const Selected = selectedId === activeDashboard;
-  const handleKeyDown = (event : React.KeyboardEvent<HTMLDivElement>) => {
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     // 키보드 이벤트가 엔터 키인지 확인
     if (event.key === 'Enter') {
       // 클릭 이벤트 호출
       onClick();
     }
   };
+
+  const makeTabletTitle = (originalTitle: string): string => (originalTitle.length > 4 ? `${originalTitle.substring(0, 4)}...` : originalTitle);
+
   return (
     <div
       className={`${styles.SideDashBoard} ${Selected ? styles.selected : ''}`}
@@ -50,6 +54,7 @@ function SideDashBoard({
     >
       <ColorDot color={color} />
       <span className={styles.Title}>{title}</span>
+      <span className={styles.TitleTablet}>{makeTabletTitle(title)}</span>
       {createdByMe && (
         <img
           src={CrownImg}

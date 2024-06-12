@@ -40,6 +40,8 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
     setEmail(event.target.value);
   };
 
+  // 중복 초대 확인 추가
+
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>

@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import { useState } from 'react';
 import styles from './CommentItem.module.scss';
 import TestImg from '/img/test_img.png';
 // import { apiUpdateComment, apiDeleteComment } from '../../../../api/apiModule';
@@ -9,35 +10,35 @@ import TestImg from '/img/test_img.png';
 
 interface CommentProps {
   name: string;
-  // commentText: string;
+  commentText: string;
   // image: string | null;
 }
 
-function CommentItem({ name }: CommentProps) {
-  // const [comment, setComment] = useState(commentText);
-  // const [edit, setEdit] = useState(false);
+function CommentItem({ name, commentText }: CommentProps) {
+  const [comment, setComment] = useState(commentText);
+  const [edit, setEdit] = useState(false);
 
   // 댓글 수정
-  // const editComment = async (event) => {
-  //   event.preventDefault();
-  //   setEdit(false);
+  const apiEditComment = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setEdit(false);
 
-  //   const updateComment = {
-  //     content: comment,
-  //   };
+    // const updateComment = {
+    //   content: comment,
+    // };
 
-  //   try {
-  //     const response = await apiUpdateComment(updateComment);
-  //     console.log('test', response);
+    // try {
+    //   const response = await apiUpdateComment(updateComment);
+    //   console.log('test', response);
 
-  //     setComment('');
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+    //   setComment('');
+    // } catch (error) {
+    //   console.error(error);
+    // }
+  };
 
   // 댓글 삭제
-  // const deleteComment = async () => {
+  // const apiDeleteComment = async () => {
   //   const newComment = {
   //     content: comment,
   //     cardId: 7687,
@@ -60,14 +61,14 @@ function CommentItem({ name }: CommentProps) {
   //   setEdit(false);
   // };
 
-  // const testEdit = () => {
-  //   setEdit(true);
-  // };
+  const handleEditClick = () => {
+    setEdit(!edit);
+  };
 
   // 댓글 수정 입력
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setComment(event.target.value);
-  // };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setComment(event.target.value);
+  };
 
   return (
     <div className={styles.container}>
@@ -78,25 +79,26 @@ function CommentItem({ name }: CommentProps) {
       </div>
 
       <div className={styles.commentBlock}>
-        {/* {edit ? (
-            <form onSubmit={editComment}>
-              <label htmlFor="text">댓글</label>
-              <input
-                type="text"
-                id="text"
-                name="text"
-                value={comment}
-                onChange={handleChange}
-              />
-              <button type="submit">수정</button>
-            </form>
-          ) : <p className={styles.comment}>{comment}</p>} */}
+        {edit ? (
+          <form onSubmit={apiEditComment}>
+            <label className={styles.formLabel} htmlFor="text">댓글</label>
+            <input
+              className={styles.formInput}
+              type="text"
+              id="text"
+              name="text"
+              value={comment}
+              onChange={handleChange}
+            />
+            <button className={styles.formButton} type="submit">수정</button>
+          </form>
+        ) : <p className={styles.comment}>{comment}</p>}
       </div>
 
-      {/* <div className={styles.buttonBlock}>
-        <button className={styles.button} type="button" onClick={testEdit}>수정</button>
+      <div className={styles.buttonBlock}>
+        {edit ? <button className={styles.button} type="button" onClick={handleEditClick}>취소</button> : <button className={styles.button} type="button" onClick={handleEditClick}>수정</button>}
         <button className={styles.button} type="button">삭제</button>
-      </div> */}
+      </div>
     </div>
   );
 }

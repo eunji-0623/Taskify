@@ -39,7 +39,7 @@ function EditColumnModal({
   const [check, setCheck] = useState(false);
 
   // 컬럼 목록 조회
-  const columnData = useCallback(async () => {
+  const apiColumnData = useCallback(async () => {
     try {
       const response = await apiGetColumnList(dashboardId);
       if (response.result === 'SUCCESS') {
@@ -56,9 +56,9 @@ function EditColumnModal({
 
   useEffect(() => {
     if (dashboardId) {
-      columnData();
+      apiColumnData();
     }
-  }, [dashboardId, columnData]);
+  }, [dashboardId, apiColumnData]);
 
   // 컬럼 이름 변경 동작
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

@@ -1,27 +1,52 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './Comment.module.scss';
 // import CommentItem from '../CommentItem/CommentItem';
-import { apiCreateComments } from '../../../../api/apiModule';
+import { apiGetCommentList, apiCreateComments } from '../../../../api/apiModule';
 
 /*
   댓글 컴포넌트입니다.
 */
 
-function Comment() {
+interface ModalProps {
+  cardId: number;
+  columnId: number;
+  dashboardId: number;
+}
+
+function Comment({ cardId, columnId, dashboardId }: ModalProps) {
+  // const [commentData, setCommentData] = useState();
   const [comment, setComment] = useState('');
 
-  const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value);
-  };
+  // 댓글 목록 조회
+  const apiGetCommentData = useCallback(async () => {
+    try {
+      const response = await apiGetCommentList(cardId);
+      if (response) {
+        // setCommentData(response);
+        // console.log('테스트', response);
+      } else {
+        throw new Error('error');
+      }
+    } catch (error) {
+      throw new Error('error');
+    }
+  }, [cardId]);
 
+  useEffect(() => {
+    if (cardId) {
+      apiGetCommentData();
+    }
+  }, [cardId, apiGetCommentData]);
+
+  // 새로운 댓글 생성
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const newComment = {
       content: comment,
-      cardId: 7687,
-      columnId: 29765,
-      dashboardId: 8855,
+      cardId,
+      columnId,
+      dashboardId,
     };
 
     try {
@@ -30,6 +55,10 @@ function Comment() {
     } catch (error) {
       throw new Error('error');
     }
+  };
+
+  const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(event.target.value);
   };
 
   return (
@@ -48,10 +77,8 @@ function Comment() {
       </form>
 
       <div className={styles.comments}>
-        {/* <CommentItem name="test" commentText="테스트입니다." image={null} /> */}
-        {/* <CommentItem />
-        <CommentItem />
-        <CommentItem /> */}
+        {/* <CommentItem name="test" commentText="테스트입니다." image={null} />
+        <CommentItem name="test" commentText="테스트입니다." image={null} /> */}
       </div>
     </div>
   );

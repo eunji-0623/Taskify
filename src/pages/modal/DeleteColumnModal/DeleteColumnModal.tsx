@@ -24,7 +24,7 @@ function DeleteColumnModal({
   columnId,
 }: ModalProps) {
   // 컬럼의 모든 카드를 삭제하는 동작
-  const handleDelete = async () => {
+  const apiDelete = async () => {
     try {
       await apiDeleteColumn(columnId);
       setIsOpen(false);
@@ -44,7 +44,7 @@ function DeleteColumnModal({
         <p>컬럼의 모든 카드가 삭제됩니다.</p>
         <div className={styles.buttonBlock}>
           <DeleteBtn BtnText="취소" handleBtn={handleClose} />
-          <ChangeAndSaveBtn BtnText="삭제" handleBtn={handleDelete} />
+          <ChangeAndSaveBtn BtnText="삭제" handleBtn={apiDelete} />
         </div>
       </div>
     </ModalContainer>

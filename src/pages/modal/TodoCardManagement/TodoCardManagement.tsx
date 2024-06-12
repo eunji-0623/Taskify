@@ -15,6 +15,7 @@ interface ModalProps {
   cardId: number;
   userId: number;
   columnId: number;
+  dashboardId: number;
 }
 
 function TodoCardManagement({
@@ -23,18 +24,19 @@ function TodoCardManagement({
   cardId,
   userId,
   columnId,
+  dashboardId,
 }: ModalProps) {
-  const [testData, setTestData] = useState<CardOverAll | undefined>();
+  const [cardData, setCardData] = useState<CardOverAll | undefined>();
 
   const [todoModalOpen, setTodoModalOpen] = useState(true);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
   // 카드 상세 조회
-  const columnData = useCallback(async () => {
+  const apiCardData = useCallback(async () => {
     try {
       const response = await apiCardDetails(cardId);
       if (response) {
-        setTestData(response);
+        setCardData(response);
       } else {
         throw new Error('error');
       }
@@ -45,9 +47,9 @@ function TodoCardManagement({
 
   useEffect(() => {
     if (cardId) {
-      columnData();
+      apiCardData();
     }
-  }, [cardId, columnData]);
+  }, [cardId, apiCardData]);
 
   const openEditModal = () => {
     setEditModalOpen(true);
@@ -67,7 +69,9 @@ function TodoCardManagement({
           setIsOpen={setIsOpen}
           openEditModal={openEditModal}
           cardId={cardId}
-          cardData={testData}
+          cardData={cardData}
+          columnId={columnId}
+          dashboardId={dashboardId}
         />
       )}
       {editModalOpen && (
@@ -76,7 +80,7 @@ function TodoCardManagement({
           setIsOpen={setIsOpen}
           openTodoModal={openTodoModal}
           cardId={cardId}
-          cardData={testData}
+          cardData={cardData}
           userId={userId}
           columnId={columnId}
         />

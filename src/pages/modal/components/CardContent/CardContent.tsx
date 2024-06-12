@@ -1,7 +1,7 @@
 import styles from './CardContent.module.scss';
 
 /*
-  카드 내용과 이미지 부분입니다.
+  카드 모달의 카드 내용과 이미지 부분입니다.
 */
 
 interface ModalProps {

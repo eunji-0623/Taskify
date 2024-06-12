@@ -77,7 +77,7 @@ function EditTodoModal({
     }
   }, [cardData]);
 
-  // 테스트 데이터
+  // 담당자 테스트
   const data = [
     {
       id: 1,

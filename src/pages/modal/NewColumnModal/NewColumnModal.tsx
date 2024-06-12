@@ -24,11 +24,10 @@ interface ColumnOverAll {
 function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [columnList, setColumnList] = useState<Array<string>>([]);
-
   const [check, setCheck] = useState(false);
 
   // 컬럼 목록 title 조회
-  const columnData = useCallback(async () => {
+  const apiColumnData = useCallback(async () => {
     try {
       const response = await apiGetColumnList(dashboardId);
       if (response.result === 'SUCCESS') {
@@ -45,9 +44,9 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
 
   useEffect(() => {
     if (dashboardId) {
-      columnData();
+      apiColumnData();
     }
-  }, [dashboardId, columnData]);
+  }, [dashboardId, apiColumnData]);
 
   // 컬럼 생성 동작
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +63,7 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
       setIsOpen(false);
 
       if (id) {
-        columnData();
+        apiColumnData();
       }
     } catch (error) {
       throw new Error('error');

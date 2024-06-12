@@ -1,7 +1,7 @@
 import styles from './CardSideContent.module.scss';
 
 /*
-  카드에 담당자와 마감일이 있는 부분입니다.
+  카드에 담당자와 마감일 부분입니다.
 */
 
 interface ModalProps {

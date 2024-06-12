@@ -44,7 +44,7 @@ function NewTodoModal({
     && dueDate.length !== 0
     && tags.length !== 0;
 
-  // 테스트 데이터
+  // 담당자 테스트
   const data = [
     {
       id: 1,

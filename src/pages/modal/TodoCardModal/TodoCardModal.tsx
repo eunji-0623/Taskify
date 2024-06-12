@@ -44,6 +44,8 @@ interface ModalProps {
   openEditModal: () => void;
   cardId: number;
   cardData: CardOverAll | undefined;
+  columnId: number;
+  dashboardId: number;
 }
 
 function TodoCardModal({
@@ -52,6 +54,8 @@ function TodoCardModal({
   openEditModal,
   cardId,
   cardData,
+  columnId,
+  dashboardId,
 }: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
   const kebabRef = useRef<HTMLDivElement>(null);
@@ -85,7 +89,7 @@ function TodoCardModal({
   };
 
   // 삭제하기 버튼
-  const handleDelete = async () => {
+  const apiDelete = async () => {
     try {
       await apiDeleteCard(cardId);
       setIsOpen(false);
@@ -111,7 +115,7 @@ function TodoCardModal({
               ? (
                 <div className={styles.kebabButtons} ref={kebabRef}>
                   <button className={styles.kebabItem} type="button" onClick={handleEditOpen}>수정하기</button>
-                  <button className={styles.kebabItem} type="button" onClick={handleDelete}>삭제하기</button>
+                  <button className={styles.kebabItem} type="button" onClick={apiDelete}>삭제하기</button>
                 </div>
               ) : null}
             <button className={styles.cancelButton} type="button" onClick={close}>
@@ -140,7 +144,7 @@ function TodoCardModal({
 
           <CardContent description={cardData.description} imageUrl={cardData.imageUrl} />
 
-          <Comment />
+          <Comment cardId={cardId} columnId={columnId} dashboardId={dashboardId} />
         </div>
       </div>
     </ModalContainer>

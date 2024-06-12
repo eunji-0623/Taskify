@@ -14,6 +14,16 @@ import { UserProvider } from './contexts/UserContext';
 /*
 페이지 라우팅 분리,
 */
+function AppLayout() {
+  return (
+    <Routes>
+      <Route path="/mydashboard" element={<MyDashboard />} />
+      <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
+      <Route path="/dashboard/:id" element={<DashboardForId />} />
+      <Route path="/mypage" element={<MyPage />} />
+    </Routes>
+  );
+}
 
 function App() {
   return (
@@ -24,27 +34,16 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route
           path="/*"
-          element={
+          element={(
             <UserProvider>
               <DashboardProvider>
                 <AppLayout />
               </DashboardProvider>
             </UserProvider>
-          }
+          )}
         />
       </Routes>
     </BrowserRouter>
-  );
-}
-
-function AppLayout() {
-  return (
-    <Routes>
-      <Route path="/mydashboard" element={<MyDashboard />} />
-      <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
-      <Route path="/dashboard/:id" element={<DashboardForId />} />
-      <Route path="/mypage" element={<MyPage />} />
-    </Routes>
   );
 }
 

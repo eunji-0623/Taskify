@@ -1,4 +1,10 @@
-import { createContext, useState, useEffect, ReactNode } from 'react';
+import {
+  createContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useMemo,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiInquireMyInfo } from '../api/apiModule';
 
@@ -32,30 +38,32 @@ interface UserProviderProps {
 export const UserContext = createContext<UserContextProps | null>(null);
 
 // UserProvider 컴포넌트
-export const UserProvider = ({ children }: UserProviderProps) => {
+export function UserProvider({ children }: UserProviderProps) {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const userInfo = await apiInquireMyInfo();
-        setUserInfo(userInfo);
-        console.log(userInfo);
+        const Info = await apiInquireMyInfo();
+        setUserInfo(Info);
       } catch (error) {
-        console.error('Failed to fetch user info:', error);
-        console.log('로그인 해주세요.');
         setUserInfo(null);
-        navigate('/login')
+        navigate('/login');
       }
     };
 
     fetchUserInfo();
   }, [navigate]);
 
+  const value = useMemo(
+    () => ({ userInfo, setUserInfo }),
+    [userInfo],
+  );
+
   return (
-    <UserContext.Provider value={{ userInfo, setUserInfo }}>
+    <UserContext.Provider value={value}>
       {children}
     </UserContext.Provider>
   );
-};
+}

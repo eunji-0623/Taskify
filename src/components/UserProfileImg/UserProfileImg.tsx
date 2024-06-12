@@ -33,6 +33,8 @@ function UserProfileImg({
   );
 }
 
+// 대시보드 멤버들 표현에 사용되는 프로필 이미지
+
 export function MembersProfileImg({
   isImg,
   profileImageUrl,

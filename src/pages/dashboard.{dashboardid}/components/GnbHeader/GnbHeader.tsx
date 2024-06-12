@@ -21,7 +21,7 @@ function GnbHeader() {
   if (!userContext) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { activeTitle, isCreateByMe } = dashContext;
+  const { activeDashboard, activeTitle, isCreateByMe } = dashContext;
   const { userInfo } = userContext;
 
   return (
@@ -38,7 +38,7 @@ function GnbHeader() {
           <InviteBtn />
         </div>
         <div className={styles.MembersAndProfile}>
-          <Members dashboardId={8837}/>
+          <Members dashboardId={activeDashboard} />
           {/* 대시보드 id 가져와야 함. */}
           <div className={styles.VerticalLine} />
           <div className={styles.Profile}>

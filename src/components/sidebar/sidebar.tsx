@@ -54,7 +54,13 @@ function SideBar() {
   const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = context;
   const navigate = useNavigate();
 
-  const { items, currentPage, totalPages ,handlePrevClick, handleNextClick } = usePagination<DashboardDetail>({
+  const {
+    items,
+    currentPage,
+    totalPages,
+    handlePrevClick,
+    handleNextClick,
+  } = usePagination<DashboardDetail>({
     fetchData: fetchDashboards,
     itemsPerPage: ITEMS_PER_PAGE,
   });

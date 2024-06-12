@@ -20,17 +20,21 @@ interface MemberResponse {
 }
 
 interface MemberQuery {
-  dashboardId: number;
+  dashboardId: number | undefined;
   page?: number;
   size?: number;
 }
 
-const fetchDashboardMembers = async (dashboardId: number, page = 1, size = 10): Promise<MemberResponse> => {
+const fetchDashboardMembers = async (
+  dashboardId: number | undefined,
+  page = 1,
+  size = 10,
+): Promise<MemberResponse> => {
   const query: MemberQuery = { dashboardId, page, size };
-  return await apiMemberList(query);
-}
+  return apiMemberList(query);
+};
 
-function Members({ dashboardId }: { dashboardId: number }) {
+function Members({ dashboardId }: { dashboardId: number | undefined}) {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,14 +52,19 @@ function Members({ dashboardId }: { dashboardId: number }) {
     };
 
     getMembers();
-  }, [dashboardId]);
+  }, [dashboardId , members]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>멤버 목록을 불러오지 못했습니다: {error}</div>;
+    return (
+      <div>
+        멤버 목록을 불러오지 못했습니다:
+        {error}
+      </div>
+    );
   }
 
   return (
@@ -65,7 +74,7 @@ function Members({ dashboardId }: { dashboardId: number }) {
           key={member.id}
           isImg={false}
           nickname={member.nickname}
-          profileImageUrl={'#f0f0f0'}
+          profileImageUrl="#f0f0f0"
         />
       ))}
     </div>

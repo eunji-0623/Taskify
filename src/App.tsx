@@ -9,6 +9,7 @@ import Login from './pages/login-signup/login/Login';
 import SignUp from './pages/login-signup/signup/SignUp';
 import MyPage from './pages/mypage/MyPage';
 import { DashboardProvider } from './contexts/DashboardContext';
+import { SignUpProvider } from './contexts/SignUpContext';
 
 /*
 페이지 라우팅 분리,

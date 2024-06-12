@@ -75,7 +75,7 @@ interface InvitationListResponse {
 
 // 대시보드 생성 api
 export async function apiCreateDashboards(
-  body: DashboardOverall
+  body: DashboardOverall,
 ): Promise<DashboardDetail> {
   const res = await instance.post<DashboardDetail>('/dashboards', body);
   return handleResponse(res);
@@ -94,9 +94,11 @@ export async function apiDashboardsList(
     navigationMethod: 'pagination',
     page: 1,
     size: 10,
-  }
+  },
 ): Promise<DashboardsListResponse> {
-  const { navigationMethod, cursorId, page, size } = query;
+  const {
+    navigationMethod, cursorId, page, size,
+  } = query;
   const params: Params = {};
   params.navigationMethod = navigationMethod;
   if (cursorId === 0) {
@@ -110,7 +112,7 @@ export async function apiDashboardsList(
 
 // 대시보드 상세조회 api
 export async function apiDashboardsDetail(
-  path: DashboardsId
+  path: DashboardsId,
 ): Promise<DashboardDetail> {
   const res = await instance.get(`/dashboards/${path.dashboardId}`);
   return handleResponse(res);
@@ -119,11 +121,11 @@ export async function apiDashboardsDetail(
 // 대시보드 수정 api - 생성한 사람만 수정 가능
 export async function apiEditDashboards(
   body: DashboardOverall,
-  path: DashboardsId
+  path: DashboardsId,
 ): Promise<DashboardDetail> {
   const res = await instance.put<DashboardDetail>(
     `/dashboards/${path.dashboardId}`,
-    body
+    body,
   );
   return handleResponse(res);
 }
@@ -137,11 +139,11 @@ export async function apiDeleteDashboards(path: DashboardsId) {
 // 대시보드 초대 api - 생성한 사람만 초대 가능
 export async function apiInviteDashboards(
   body: UserEmail,
-  path: DashboardsId
+  path: DashboardsId,
 ): Promise<InvitationResponse> {
   const res = await instance.post(
     `/dashboards/${path.dashboardId}/invitations`,
-    body
+    body,
   );
   return handleResponse(res);
 }
@@ -149,11 +151,11 @@ export async function apiInviteDashboards(
 // 대시보드 초대 목록 불러오기 api
 export async function apiInvitationList(
   path: DashboardsId,
-  query: InvitationQuery = { page: 1, size: 10 }
+  query: InvitationQuery = { page: 1, size: 10 },
 ): Promise<InvitationListResponse> {
   const res = await instance.get(
     `/dashboards/${path.dashboardId}/invitations`,
-    { params: query }
+    { params: query },
   );
   return handleResponse(res);
 }
@@ -161,10 +163,10 @@ export async function apiInvitationList(
 // 대시보드 초대 취소 api
 export async function apiDeleteInvitation(
   path: DashboardsId,
-  invitationPath: InvitationId
+  invitationPath: InvitationId,
 ) {
   const res = await instance.delete(
-    `/dashboards/${path.dashboardId}/invitations/${invitationPath.invitationId}`
+    `/dashboards/${path.dashboardId}/invitations/${invitationPath.invitationId}`,
   );
   return handleResponse(res);
 }

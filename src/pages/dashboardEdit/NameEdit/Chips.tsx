@@ -24,7 +24,9 @@ function Chips({ selectedColor, handleSelectColor }: Props) {
           onChange={handleClickChips}
         />
         <ColorCircle color={COLORS[0]} diameter={30}>
-          {selectedColor === COLORS[0] ? <img src="/icon/checked.svg" /> : null}
+          {selectedColor === COLORS[0] ? (
+            <img src="/icon/checked.svg" alt="체크" />
+          ) : null}
         </ColorCircle>
       </label>
       <label>
@@ -35,7 +37,9 @@ function Chips({ selectedColor, handleSelectColor }: Props) {
           onChange={handleClickChips}
         />
         <ColorCircle color={COLORS[1]} diameter={30}>
-          {selectedColor === COLORS[1] ? <img src="/icon/checked.svg" /> : null}
+          {selectedColor === COLORS[1] ? (
+            <img src="/icon/checked.svg" alt="체크" />
+          ) : null}
         </ColorCircle>
       </label>
       <label>
@@ -46,7 +50,9 @@ function Chips({ selectedColor, handleSelectColor }: Props) {
           onChange={handleClickChips}
         />
         <ColorCircle color={COLORS[2]} diameter={30}>
-          {selectedColor === COLORS[2] ? <img src="/icon/checked.svg" /> : null}
+          {selectedColor === COLORS[2] ? (
+            <img src="/icon/checked.svg" alt="체크" />
+          ) : null}
         </ColorCircle>
       </label>
       <label>
@@ -57,7 +63,9 @@ function Chips({ selectedColor, handleSelectColor }: Props) {
           onChange={handleClickChips}
         />
         <ColorCircle color={COLORS[3]} diameter={30}>
-          {selectedColor === COLORS[3] ? <img src="/icon/checked.svg" /> : null}
+          {selectedColor === COLORS[3] ? (
+            <img src="/icon/checked.svg" alt="체크" />
+          ) : null}
         </ColorCircle>
       </label>
       <label>
@@ -68,7 +76,9 @@ function Chips({ selectedColor, handleSelectColor }: Props) {
           onChange={handleClickChips}
         />
         <ColorCircle color={COLORS[4]} diameter={30}>
-          {selectedColor === COLORS[4] ? <img src="/icon/checked.svg" /> : null}
+          {selectedColor === COLORS[4] ? (
+            <img src="/icon/checked.svg" alt="체크" />
+          ) : null}
         </ColorCircle>
       </label>
     </div>

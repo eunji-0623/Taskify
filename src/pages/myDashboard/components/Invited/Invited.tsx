@@ -44,7 +44,7 @@ const PAGE_SIZE = 6;
 
 const fetchInvitations = async (
   cursor: number,
-  title: string
+  title: string,
 ): Promise<InvitationsListResponse> => {
   const data = await apiMyInvitationsList({
     size: PAGE_SIZE,
@@ -112,11 +112,9 @@ function Invited() {
   const handleInvitation = async (id: number, isAccept: boolean) => {
     await apiInvitationAccept(
       { invitationId: id },
-      { inviteAccepted: isAccept }
+      { inviteAccepted: isAccept },
     );
-    setInvitations((prevInvitations) =>
-      prevInvitations.filter((invitation) => invitation.id !== id)
-    );
+    setInvitations((prev) => prev.filter((invitation) => invitation.id !== id));
 
     if (invitations.length - 1 < PAGE_SIZE && hasNext) {
       await loadMoreInvitations();

@@ -34,7 +34,7 @@ interface GetCommentListResponse {
 
 // 댓글 생성 api
 export async function apiCreateComments(
-  body: CreateCommentBody
+  body: CreateCommentBody,
 ): Promise<CommentOverAll> {
   const res = await instance.post<CommentOverAll>('/comments', body);
   return handleResponse(res);
@@ -52,12 +52,12 @@ interface Params {
 export async function apiGetCommentList(
   cardId: number,
   cursorId: number = 0,
-  size: number = 10
+  size: number = 10,
 ): Promise<GetCommentListResponse> {
   const params: Params = {};
 
   params.cardId = cardId;
-  size ? (params.size = size) : (params.size = 10);
+  params.size = size;
   if (cursorId) {
     params.cursorId = cursorId;
   }
@@ -72,11 +72,11 @@ export async function apiGetCommentList(
 // commentId를 파라미터로 받습니다.
 export async function apiUpdateComment(
   body: UpdateCommentBody,
-  commentId: number
+  commentId: number,
 ): Promise<CommentOverAll> {
   const res = await instance.put<CommentOverAll>(
     `/comments/${commentId}`,
-    body
+    body,
   );
   return handleResponse(res);
 }

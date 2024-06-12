@@ -10,7 +10,9 @@ interface Props {
   handleInvitation: (id: number, isAccept: boolean) => void;
 }
 
-function TableBody({ id, title, name, handleInvitation }: Props) {
+function TableBody({
+  id, title, name, handleInvitation,
+}: Props) {
   const handleAcceptClick = () => {
     handleInvitation(id, true);
   };

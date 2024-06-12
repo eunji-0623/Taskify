@@ -1,6 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.scss';
 import ColorDot from '../../../../components/chip/ColorCircle/ColorDot';
-import { useNavigate } from 'react-router-dom';
 import useNewDashModal from '../../../../hooks/modal/useNewDashModal';
 
 interface DashboardButtonProps {
@@ -26,7 +26,9 @@ export function AddDashboard() {
 }
 
 /*  각각의 대시보드로 이동하기 위한 버튼  */
-export function Dashboard({ id, color, title, isOwner }: DashboardButtonProps) {
+export function Dashboard({
+  id, color, title, isOwner,
+}: DashboardButtonProps) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/dashboard/${id}`);

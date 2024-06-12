@@ -29,9 +29,9 @@ interface MemberResponse {
 
 function MemberEdit({ dashboardId }: Props) {
   const fetchMembers = async (
-    dashboardId: number
+    id: number,
   ): Promise<{ items: MemberResponse[]; totalCount: number }> => {
-    const data = await apiMemberList({ dashboardId });
+    const data = await apiMemberList({ dashboardId: id });
     return {
       items: data.members,
       totalCount: data.totalCount,
@@ -40,7 +40,7 @@ function MemberEdit({ dashboardId }: Props) {
 
   const fetchDataCallback = useCallback(
     () => fetchMembers(dashboardId),
-    [dashboardId]
+    [dashboardId],
   );
 
   const {

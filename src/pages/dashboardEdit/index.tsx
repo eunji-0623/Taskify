@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiDashboardsDetail } from '../../api/apiModule';
 import SideBar from '../../components/sidebar/sidebar';
@@ -6,7 +7,6 @@ import EmailEdit from './MemberEdit/EmailEdit';
 import MemberEdit from './MemberEdit/MemberEdit';
 import NameEdit from './NameEdit/NameEdit';
 import styles from './index.module.scss';
-import { useEffect, useState } from 'react';
 import { DeleteDashBoardBtn } from '../../components/Btn/Btn';
 import DeleteDashboardModal from '../modal/DeleteDashboardModal/DeleteDashboardModal';
 

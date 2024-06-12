@@ -40,12 +40,12 @@ interface EmailResponse {
 
 function EmailEdit({ dashboardId }: Props) {
   const fetchInvitations = async (
-    dashboardId: number,
-    page: number
+    id: number,
+    page: number,
   ): Promise<{ items: EmailResponse[]; totalCount: number }> => {
     const data = await apiInvitationList(
-      { dashboardId },
-      { page: page, size: ITEMS_PER_PAGE }
+      { dashboardId: id },
+      { page, size: ITEMS_PER_PAGE },
     );
     return {
       items: data.invitations,
@@ -55,7 +55,7 @@ function EmailEdit({ dashboardId }: Props) {
 
   const fetchDataCallback = useCallback(
     () => fetchInvitations(dashboardId, 1),
-    [dashboardId]
+    [dashboardId],
   );
 
   const {

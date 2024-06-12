@@ -14,7 +14,7 @@ function Email({ email }: Props) {
   return (
     <tr className={styles.table_row}>
       <td className={styles.email}>{email}</td>
-      <td className={styles.removeButton}>
+      <td className={styles.removeButton} aria-label="취소 버튼">
         <DeleteBtn BtnText="취소" handleBtn={handleCancelButton} />
       </td>
     </tr>

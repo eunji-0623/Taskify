@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import styles from './GnbHeader.module.scss';
 import { DashboardContext } from '../../../../contexts/DashboardContext';
+import { UserContext } from '../../../../contexts/UserContext';
 import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 import CrownImg from '/icon/crown.svg';
 import { InviteBtn, SettingBtn } from '../Btn/Btn';
@@ -11,12 +12,17 @@ import Members from '../Members/Members';
 */
 
 function GnbHeader() {
-  const context = useContext(DashboardContext);
+  const dashContext = useContext(DashboardContext);
+  const userContext = useContext(UserContext);
 
-  if (!context) {
+  if (!dashContext) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { activeTitle, isCreateByMe } = context;
+  if (!userContext) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+  const { activeTitle, isCreateByMe } = dashContext;
+  const { userInfo } = userContext;
 
   return (
     <header className={styles.GnbHeader}>
@@ -34,12 +40,14 @@ function GnbHeader() {
         <div className={styles.MembersAndProfile}>
           <Members />
           <div className={styles.VerticalLine} />
-          <UserProfileImg
-            isImg={false}
-            profileImageUrl="#A3C4A2"
-            nickname="Test"
-          />
-          <div>Test</div>
+          <div className={styles.Profile}>
+            <UserProfileImg
+              isImg={false}
+              profileImageUrl="#A3C4A2"
+              nickname="박수민"
+            />
+            <div className={styles.nickName}>{userInfo?.nickname}</div>
+          </div>
         </div>
       </div>
     </header>

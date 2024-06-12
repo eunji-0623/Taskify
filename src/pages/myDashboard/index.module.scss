@@ -1,21 +1,19 @@
 @use '/src/styles/global.scss' as *;
 
 .container {
-  display: flex;
+  display: grid;
   height: 100vh;
-  overflow: scroll;
-  justify-content: flex-start;
+
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
   background-color: $gray_FAFAFA;
-}
+  .sideMenu {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 1;
+  }
 
-//서브 헤더 넓이와 contents 넓이 분리하기 위함.
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.mainContents {
-  margin-left: 40px;
-  margin-top: 40px;
+  .mainContents {
+    margin-left: 40px;
+    margin-top: 40px;
+  }
 }

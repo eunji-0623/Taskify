@@ -3,6 +3,7 @@ import ModalContainer from '../ModalContainer/ModalContainer';
 import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import styles from './DeleteDashboardModal.module.scss';
 import { apiDeleteDashboards } from '../../../api/apiModule';
+import { useNavigate, Link } from 'react-router-dom';
 
 /*
   컬럼 삭제할 수 있는 모달입니다.
@@ -15,6 +16,7 @@ interface ModalProps {
 }
 
 function DeleteDashboardModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
+  const navigate = useNavigate();
   // 모달 닫기
   const close = useCallback(() => {
     setIsOpen(false);
@@ -22,6 +24,7 @@ function DeleteDashboardModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
 
   const handleDeleteButton = async () => {
     await apiDeleteDashboards({ dashboardId: dashboardId });
+    navigate('/myDashboard');
   };
 
   return (

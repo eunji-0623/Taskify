@@ -41,7 +41,7 @@ function usePagination<T>({
           : Math.ceil(result.totalCount / itemsPerPage)
       );
       setIsFirstPage(currentPage === 1);
-      setIsLastPage(currentPage === totalPages);
+      setIsLastPage(currentPage > Math.ceil(result.totalCount / itemsPerPage));
     }
     loadItems();
   }, [currentPage, fetchData, itemsPerPage]);

@@ -8,6 +8,7 @@ import NameEdit from './NameEdit/NameEdit';
 import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
 import { DeleteDashBoardBtn } from '../../components/Btn/Btn';
+import DeleteDashboardModal from '../modal/DeleteDashboardModal/DeleteDashboardModal';
 
 /*  대시보드 수정 페이지
     - 전체적인 레이아웃  */
@@ -17,6 +18,7 @@ function DashboardEdit() {
   const [dashboardId, setDashboardId] = useState(0);
   const [dashboardName, setDashboardName] = useState('');
   const [dashboardColor, setDashboardColor] = useState('');
+  const [deleteDashboard, setDeleteDashboard] = useState(false);
 
   useEffect(() => {
     const fetchDashboards = async () => {
@@ -31,7 +33,9 @@ function DashboardEdit() {
     fetchDashboards();
   }, [id]);
 
-  const handleDeleteDashboard = () => {};
+  const handleDeleteDashboard = () => {
+    setDeleteDashboard(!deleteDashboard);
+  };
 
   return (
     <div className={styles.container}>
@@ -53,6 +57,13 @@ function DashboardEdit() {
           {dashboardId !== 0 && <EmailEdit dashboardId={dashboardId} />}
           <div className={styles.deleteButton}>
             <DeleteDashBoardBtn handleBtn={handleDeleteDashboard} />
+            {deleteDashboard ? (
+              <DeleteDashboardModal
+                isOpen={deleteDashboard}
+                setIsOpen={setDeleteDashboard}
+                dashboardId={dashboardId}
+              />
+            ) : null}
           </div>
         </div>
       </div>

@@ -77,8 +77,10 @@ function MemberEdit({ dashboardId }: Props) {
           {items.map((member) => (
             <Member
               key={member.id}
+              memberId={member.id}
               name={member.nickname}
               profile={member.profileImageUrl}
+              isOwner={member.isOwner}
             />
           ))}
         </tbody>

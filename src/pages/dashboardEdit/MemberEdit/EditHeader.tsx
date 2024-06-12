@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { ChangeAndSaveBtn, PagenationBtn } from '../../../components/Btn/Btn';
 import useWindowSize from '../../../utils/useWindowSize';
 import styles from './MemberEdit.module.scss';
+import InviteModal from '../../modal/InviteModal/InviteModal';
 
 /*  대시보드 수정 페이지 중
     구성원, 초대 내역의 페이지네이션을 위한 부분입니다  */
@@ -27,8 +29,11 @@ function EditHeader({
   handleNextClick,
 }: Props) {
   const { width } = useWindowSize();
+  const [sendInvitation, setSendInvitation] = useState(false);
 
-  const handleInviteButton = () => {};
+  const handleInviteButton = () => {
+    setSendInvitation(!sendInvitation);
+  };
 
   return (
     <>
@@ -45,10 +50,18 @@ function EditHeader({
             isLastPage={isLastPage}
           />
           {hasButton && width >= 768 ? (
-            <ChangeAndSaveBtn
-              BtnText="초대하기"
-              handleBtn={handleInviteButton}
-            />
+            <>
+              <ChangeAndSaveBtn
+                BtnText="초대하기"
+                handleBtn={handleInviteButton}
+              />
+              {sendInvitation ? (
+                <InviteModal
+                  isOpen={sendInvitation}
+                  setIsOpen={setSendInvitation}
+                />
+              ) : null}
+            </>
           ) : null}
         </div>
       </div>

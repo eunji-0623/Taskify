@@ -1,3 +1,4 @@
+import React from 'react';
 import SideBar from '../../components/sidebar/sidebar';
 import DashboardList from './components/DashboardList/DashboardList';
 import MyDashboardHeader from './components/Header/Header';
@@ -10,9 +11,13 @@ import styles from './index.module.scss';
 function MyDashboard() {
   return (
     <div className={styles.container}>
-      <SideBar />
+      <div className={styles.sidebar}>
+        <SideBar />
+      </div>
       <div className={styles.main}>
-        <MyDashboardHeader />
+        <div className={styles.MyDashboardHeader}>
+          <MyDashboardHeader />
+        </div>
         <div className={styles.mainContents}>
           <DashboardList />
           <Invited />

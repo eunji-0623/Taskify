@@ -5,7 +5,6 @@ import styles from './index.module.scss';
 import Column from './components/Column/Column';
 import ColumnContainer from './components/Column/ColumnContainer';
 import { AddNewColumnBtn } from '../../components/Btn/Btn';
-// import SideBar from '../../components/sidebar/side/bar';
 import GnbHeader from './components/GnbHeader/GnbHeader';
 import { apiGetColumnList, ColumnOverAll } from '../../api/apiModule';
 import SideBar from '../../components/sidebar/sidebar';
@@ -35,7 +34,9 @@ function DashboardMain() {
   // const handleColumnClick = () => {};
   return (
     <div className={styles.container}>
-      <SideBar />
+      <div className={styles.SideBar}>
+        <SideBar />
+      </div>
       <div className={styles.gnbHeader}>
         <GnbHeader />
       </div>

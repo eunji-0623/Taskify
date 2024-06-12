@@ -1,0 +1,45 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "userId": 1,
+      "email": "1@naver.com",
+      "nickname": "1",
+      "profileImageUrl": "#a5d348",
+      "createdAt": "2024-06-10T14:39:58.389Z",
+      "updatedAt": "2024-06-10T14:39:58.389Z",
+      "isOwner": true
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "email": "2@naver.com",
+      "nickname": "2",
+      "profileImageUrl": "#48d3b9",
+      "createdAt": "2024-06-10T14:39:58.389Z",
+      "updatedAt": "2024-06-10T14:39:58.389Z",
+      "isOwner": true
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "email": "3@naver.com",
+      "nickname": "3",
+      "profileImageUrl": "#8743d5",
+      "createdAt": "2024-06-10T14:39:58.389Z",
+      "updatedAt": "2024-06-10T14:39:58.389Z",
+      "isOwner": true
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "email": "4@naver.com",
+      "nickname": "4",
+      "profileImageUrl": "#d64b85",
+      "createdAt": "2024-06-10T14:39:58.389Z",
+      "updatedAt": "2024-06-10T14:39:58.389Z",
+      "isOwner": true
+    }
+  ],
+  "totalCount": 4
+}

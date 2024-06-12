@@ -3,10 +3,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import styles from './sidebar.module.scss';
 import Logo from '/icon/logo_large.svg';
 import AddBox from '/icon/add_box.svg';
+import LogoMobile from '/icon/logo_small.svg';
 import SideDashBoard from '../SideDashBoard/SideDashBoard';
 import { PagenationBtn } from '../Btn/Btn';
 import usePagination from '../../hooks/pagination/usePagination';
 import { DashboardContext } from '../../contexts/DashboardContext';
+import useNewDashModal from '../../hooks/modal/useNewDashModal';
 
 /*
 사이드 바 컴포넌트 입니다.
@@ -41,12 +43,13 @@ const fetchDashboards = async (page: number) => {
 };
 
 function SideBar() {
+  const { NewDashModal, openDash } = useNewDashModal();
   const context = useContext(DashboardContext);
 
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { setActiveDashboard, setIsCreateByMe } = context;
+  const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = context;
   const navigate = useNavigate();
 
   const { items, handlePrevClick, handleNextClick } = usePagination<DashboardApi>({
@@ -54,9 +57,10 @@ function SideBar() {
     itemsPerPage: ITEMS_PER_PAGE,
   });
 
-  const ClickDashboard = (id: number, createdByMe: boolean) => {
+  const ClickDashboard = (id: number, createdByMe: boolean, title: string) => {
     setActiveDashboard(id);
     setIsCreateByMe(createdByMe);
+    setActiveTitle(title);
     navigate(`/dashboard/${id}`);
   };
 
@@ -64,14 +68,26 @@ function SideBar() {
     <div className={styles.SideBar}>
       <Link to="/">
         <img src={Logo} alt="로고 이미지" className={styles.LogoImg} />
+        <img
+          src={LogoMobile}
+          alt="로고 이미지"
+          className={styles.LogoImgMobile}
+        />
       </Link>
       <div className={styles.SideBarHeader}>
         <span className={styles.Title}>Dash Board</span>
-        <img
-          src={AddBox}
-          alt="대시 보드 추가 버튼 이미지"
-          className={styles.AddBox}
-        />
+        <button
+          type="button"
+          className={styles.AddBoxButton}
+          onClick={openDash}
+        >
+          <img
+            src={AddBox}
+            alt="대시 보드 추가 버튼 이미지"
+            className={styles.AddBox}
+          />
+        </button>
+        <NewDashModal />
       </div>
       <div className={styles.DashboardsList}>
         {items.map((dashboard) => (
@@ -81,7 +97,11 @@ function SideBar() {
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() => ClickDashboard(dashboard.id, dashboard.createdByMe)}
+            onClick={() => ClickDashboard(
+              dashboard.id,
+              dashboard.createdByMe,
+              dashboard.title,
+            )}
           />
         ))}
       </div>

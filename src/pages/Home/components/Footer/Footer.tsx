@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Footer.module.scss';
 import MailImg from '/icon/email_icon.svg';
 import FacebookImg from '/icon/facebook_logo.svg';
-import InstagramImg from '/public/icon/instagram_logo.svg';
+import InstagramImg from '/icon/instagram_logo.svg';
 
 /*
 랜딩 페이지의 Footer 입니다.

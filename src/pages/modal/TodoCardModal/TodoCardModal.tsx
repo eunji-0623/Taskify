@@ -45,6 +45,7 @@ interface ModalProps {
   cardId: number;
   cardData: CardOverAll | undefined;
   columnId: number;
+  userId: number;
   dashboardId: number;
 }
 
@@ -55,6 +56,7 @@ function TodoCardModal({
   cardId,
   cardData,
   columnId,
+  userId,
   dashboardId,
 }: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
@@ -144,7 +146,7 @@ function TodoCardModal({
 
           <CardContent description={cardData.description} imageUrl={cardData.imageUrl} />
 
-          <Comment cardId={cardId} columnId={columnId} dashboardId={dashboardId} />
+          <Comment cardId={cardId} columnId={columnId} userId={userId} dashboardId={dashboardId} />
         </div>
       </div>
     </ModalContainer>

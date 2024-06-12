@@ -59,8 +59,8 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
 
     try {
       const response = await apiCreateColumn(newDashboard);
-      const { id } = response.data;
       setIsOpen(false);
+      const { id } = response.data;
 
       if (id) {
         apiColumnData();
@@ -69,6 +69,12 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
       throw new Error('error');
     }
   };
+
+  useEffect(() => {
+    if (dashboardId) {
+      apiColumnData();
+    }
+  }, [dashboardId, apiColumnData]);
 
   // 컬럼 이름 입력
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

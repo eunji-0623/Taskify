@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './Comment.module.scss';
-// import CommentItem from '../CommentItem/CommentItem';
+import CommentItem from '../CommentItem/CommentItem';
 import { apiGetCommentList, apiCreateComments } from '../../../../api/apiModule';
 
 /*
@@ -10,33 +10,50 @@ import { apiGetCommentList, apiCreateComments } from '../../../../api/apiModule'
 interface ModalProps {
   cardId: number;
   columnId: number;
+  userId: number;
   dashboardId: number;
 }
 
-function Comment({ cardId, columnId, dashboardId }: ModalProps) {
-  // const [commentData, setCommentData] = useState();
+interface CommentOverAll {
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  cardId: number;
+  author: {
+    profileImageUrl: string;
+    nickname: string;
+    id: number;
+  };
+}
+
+function Comment({ cardId, columnId, userId, dashboardId }: ModalProps) {
   const [comment, setComment] = useState('');
 
-  // 댓글 목록 조회
-  const apiGetCommentData = useCallback(async () => {
+  const [comments, setComments] = useState<CommentOverAll[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [cursorId, setCursorId] = useState<number>(0);
+  const [size, setSize] = useState<number>(10);
+
+  const apiCommentList = useCallback(async () => {
+    setLoading(true);
+    setError(null);
     try {
       const response = await apiGetCommentList(cardId);
-      if (response) {
-        // setCommentData(response);
-        // console.log('테스트', response);
-      } else {
-        throw new Error('error');
-      }
-    } catch (error) {
-      throw new Error('error');
+      setComments(response.comments);
+    } catch (err) {
+      setError('error');
+    } finally {
+      setLoading(false);
     }
   }, [cardId]);
 
   useEffect(() => {
-    if (cardId) {
-      apiGetCommentData();
-    }
-  }, [cardId, apiGetCommentData]);
+    apiCommentList();
+  }, [cardId, cursorId, size, apiCommentList]);
+
+  if (loading) return <div className={styles.loadingText}>로딩 중...</div>;
 
   // 새로운 댓글 생성
   const handleSubmit = async (event: React.FormEvent) => {
@@ -52,6 +69,8 @@ function Comment({ cardId, columnId, dashboardId }: ModalProps) {
     try {
       await apiCreateComments(newComment);
       setComment('');
+
+      apiCommentList();
     } catch (error) {
       throw new Error('error');
     }
@@ -73,12 +92,26 @@ function Comment({ cardId, columnId, dashboardId }: ModalProps) {
           value={comment}
           onChange={handleCommentChange}
         />
-        <button className={styles.formButton} type="submit">입력</button>
+        {comment ? <button className={styles.formButtonClick} type="submit">입력</button> : <button className={styles.formButton} type="submit" disabled>입력</button>}
       </form>
 
       <div className={styles.comments}>
-        {/* <CommentItem name="test" commentText="테스트입니다." image={null} />
-        <CommentItem name="test" commentText="테스트입니다." image={null} /> */}
+        {comments.length === 0 ? (
+          <p className={styles.loadingText}>댓글이 없습니다.</p>
+        ) : (
+          comments.map((commentItem) => (
+            <CommentItem
+              key={commentItem.id}
+              name={commentItem.author.nickname}
+              commentText={commentItem.content}
+              userId={userId}
+              edituserId={commentItem.author.id}
+              image={commentItem.author.profileImageUrl}
+              commentId={commentItem.id}
+              apiCommentList={apiCommentList}
+            />
+          ))
+        )}
       </div>
     </div>
   );

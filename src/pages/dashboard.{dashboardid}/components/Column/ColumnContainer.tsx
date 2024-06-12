@@ -6,6 +6,7 @@ interface ContainerProps {
   children: ReactNode;
 }
 
+// 반응형으로 컬럼을 배치하기 위한 컴포넌트
 function ColumnContainer({ children }: ContainerProps) {
   const { width } = useWindowSize();
 

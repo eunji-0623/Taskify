@@ -20,17 +20,11 @@
   .columns {
     grid-row: 2 / span 1;
     grid-column: 2 / span 2;
-    overflow-y: auto;
     background-color: var(--gray-gray_FAFAFA, #fafafa);
-    overflow: hidden;
+    overflow-x: auto;
 
-    .addColumnButtonContainer {
-      width: auto;
-      @include desktop {
-        padding-top: 4.25rem;
-        padding-left: 1.25rem;
-        padding-right: 3rem;
-      }
+    @include desktop {
+      overflow-y: hidden;
     }
   }
 }

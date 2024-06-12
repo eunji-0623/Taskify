@@ -9,6 +9,7 @@ import { PagenationBtn } from '../Btn/Btn';
 import usePagination from '../../hooks/pagination/usePagination';
 import { DashboardContext } from '../../contexts/DashboardContext';
 import useNewDashModal from '../../hooks/modal/useNewDashModal';
+import { apiDashboardsList } from '../../api/apiModule';
 
 /*
 사이드 바 컴포넌트 입니다.
@@ -17,9 +18,7 @@ import useNewDashModal from '../../hooks/modal/useNewDashModal';
 대시보드 클릭 시, /dashboard/{dashboardId}로 이동합니다.
 */
 
-const ITEMS_PER_PAGE = 15;
-
-interface DashboardApi {
+interface DashboardDetail {
   id: number;
   title: string;
   color: string;
@@ -29,15 +28,18 @@ interface DashboardApi {
   userId: number;
 }
 
-const fetchDashboards = async (page: number) => {
-  // mockData 사용. 추후 변경 필요
-  const response = await fetch(
-    `/mockData/dashboards.json?page=${page}&limit=${ITEMS_PER_PAGE}`,
-  );
-  const data = await response.json();
+const ITEMS_PER_PAGE = 10;
 
+const fetchDashboards = async (
+  page: number,
+): Promise<{ items: DashboardDetail[]; totalCount: number }> => {
+  const data = await apiDashboardsList({
+    navigationMethod: 'pagination',
+    page,
+    size: ITEMS_PER_PAGE,
+  });
   return {
-    items: data.dashboards,
+    items: Object.values(data.dashboards),
     totalCount: data.totalCount,
   };
 };
@@ -52,7 +54,7 @@ function SideBar() {
   const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = context;
   const navigate = useNavigate();
 
-  const { items, handlePrevClick, handleNextClick } = usePagination<DashboardApi>({
+  const { items, currentPage, totalPages ,handlePrevClick, handleNextClick } = usePagination<DashboardDetail>({
     fetchData: fetchDashboards,
     itemsPerPage: ITEMS_PER_PAGE,
   });
@@ -107,8 +109,8 @@ function SideBar() {
       </div>
       <div className={styles.PagenationBtn}>
         <PagenationBtn
-          isFirstPage={false}
-          isLastPage={false}
+          isFirstPage={currentPage === 1}
+          isLastPage={currentPage === totalPages}
           handlePrev={handlePrevClick}
           handleNext={handleNextClick}
         />

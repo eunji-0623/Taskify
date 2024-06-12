@@ -38,13 +38,14 @@ function GnbHeader() {
           <InviteBtn />
         </div>
         <div className={styles.MembersAndProfile}>
-          <Members />
+          <Members dashboardId={8837}/>
+          {/* 대시보드 id 가져와야 함. */}
           <div className={styles.VerticalLine} />
           <div className={styles.Profile}>
             <UserProfileImg
               isImg={false}
               profileImageUrl="#A3C4A2"
-              nickname="박수민"
+              nickname={userInfo?.nickname}
             />
             <div className={styles.nickName}>{userInfo?.nickname}</div>
           </div>

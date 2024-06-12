@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './Members.module.scss';
 import { MembersProfileImg } from '../../../../components/UserProfileImg/UserProfileImg';
+import { apiMemberList } from '../../../../api/apiModule';
 
 interface Member {
   id: number;
@@ -18,24 +19,26 @@ interface MemberResponse {
   totalCount: number;
 }
 
-function Members() {
+interface MemberQuery {
+  dashboardId: number;
+  page?: number;
+  size?: number;
+}
+
+const fetchDashboardMembers = async (dashboardId: number, page = 1, size = 10): Promise<MemberResponse> => {
+  const query: MemberQuery = { dashboardId, page, size };
+  return await apiMemberList(query);
+}
+
+function Members({ dashboardId }: { dashboardId: number }) {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchMembers = async (): Promise<MemberResponse> => {
-    const response = await fetch('/mockData/members.json');
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data: MemberResponse = await response.json();
-    return data;
-  };
-
   useEffect(() => {
     const getMembers = async () => {
       try {
-        const data = await fetchMembers();
+        const data = await fetchDashboardMembers(dashboardId);
         setMembers(data.members);
       } catch (e) {
         setError((e as Error).message);
@@ -45,14 +48,14 @@ function Members() {
     };
 
     getMembers();
-  }, []);
+  }, [dashboardId]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>멤버 목록을 불러오지 못했습니다.</div>;
+    return <div>멤버 목록을 불러오지 못했습니다: {error}</div>;
   }
 
   return (
@@ -62,7 +65,7 @@ function Members() {
           key={member.id}
           isImg={false}
           nickname={member.nickname}
-          profileImageUrl={member.profileImageUrl}
+          profileImageUrl={'#f0f0f0'}
         />
       ))}
     </div>

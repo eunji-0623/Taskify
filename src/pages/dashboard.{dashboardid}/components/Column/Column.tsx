@@ -6,18 +6,39 @@ import { AddNewTaskBtn } from '../../../../components/Btn/Btn';
 import { apiGetCardList, CardOverAll } from '../../../../api/apiModule';
 import useInfiniteScroll from '../../../../hooks/pagination/useInfiniteScroll';
 import CardList from '../CardList/CardList';
+import EditColumnManagement from '../../../modal/EditColumnManagement/EditColumnManagement';
+import NewTodoModal from '../../../modal/NewTodoModal/NewTodoModal';
 
 interface ColumnProps {
   title: string;
   columnId: number;
+  dashboardId: number;
+  userId: number;
 }
-function Column({ title, columnId }: ColumnProps) {
-  const handleAddTaskBtn = () => {};
+interface ColumnData {
+  userId: number;
+  columnId: number;
+  dashboardId: number;
+}
+
+function Column({
+  title,
+  columnId,
+  dashboardId,
+  userId,
+}: ColumnProps) {
   const [cardList, setCardList] = useState<CardOverAll[]>([]);
+  const [columnData, setColumnData] = useState<ColumnData>({
+    userId: 0,
+    columnId: 0,
+    dashboardId: 0,
+  });
   const [cursor, setCursor] = useState<number | null>(null);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [hasNext, setHasNext] = useState(false);
   const [errorState, setErrorState] = useState<string | null>(null);
+  const [settingModalOpen, setSettingModalOpen] = useState<boolean>(false);
+  const [addCardModalOpen, setAddCardModalOpen] = useState<boolean>(false);
 
   // 스크롤 관련 ref
   const columnRef = useRef<HTMLDivElement>(null);
@@ -25,31 +46,7 @@ function Column({ title, columnId }: ColumnProps) {
   // 다음에 불러오는 카드 수
   const PAGE_SIZE = 5;
 
-  const getMoreCardList = async () => {
-    try {
-      const res = await apiGetCardList({
-        size: PAGE_SIZE,
-        cursorId: cursor,
-        columnId,
-      });
-      const moreList = res.cards;
-      setCursor(res.cursorId);
-      setTotalCount(res.totalCount);
-      setCardList((prevList) => [...prevList, ...moreList]);
-      if (moreList.length < PAGE_SIZE) setHasNext(false);
-      else setHasNext(true);
-    } catch (error) {
-      const axiosError = error as AxiosError;
-      setErrorState(axiosError.message || '목록을 가져오는데 실패했습니다');
-    }
-  };
-
-  const setElement = useInfiniteScroll(getMoreCardList, {
-    root: null,
-    rootMargin: '50px',
-    threshold: 0.5,
-  });
-
+  // 처음 카드 목록을 조회
   useEffect(() => {
     const getFirstCardList = async () => {
       try {
@@ -70,13 +67,58 @@ function Column({ title, columnId }: ColumnProps) {
     getFirstCardList();
   }, [columnId]);
 
-  // 스크롤을 맨 위로 초기화
-  const handleHeaderClick = () => {
-    if (columnRef.current) {
-      columnRef.current.scrollTop = 0;
+  // 이후의 카드 목록을 조회
+  const getMoreCardList = async () => {
+    try {
+      const res = await apiGetCardList({
+        size: PAGE_SIZE,
+        cursorId: cursor,
+        columnId,
+      });
+      const moreList = res.cards;
+      setCursor(res.cursorId);
+      setTotalCount(res.totalCount);
+      setCardList((prevList) => [...prevList, ...moreList]);
+      if (moreList.length < PAGE_SIZE) setHasNext(false);
+      else setHasNext(true);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      setErrorState(axiosError.message || '목록을 가져오는데 실패했습니다');
     }
   };
 
+  // 무한스크롤 구현용 컴포넌트
+  const setElement = useInfiniteScroll(getMoreCardList, {
+    root: null,
+    rootMargin: '50px',
+    threshold: 0.5,
+  });
+
+  // 컬럼 데이터 prop 전달용
+  useEffect(() => {
+    setColumnData({
+      userId,
+      columnId,
+      dashboardId,
+    });
+  }, [userId, columnId, dashboardId]);
+
+  // 버튼 이벤트 핸들러
+
+  const scrollToTop = () => {
+    if (columnRef.current) {
+      // 스크롤을 맨 위로 초기화
+      columnRef.current.scrollTop = 0;
+    }
+  };
+  const handleSettingOnClick = () => {
+    setSettingModalOpen(!settingModalOpen);
+  };
+  const handleAddTaskBtn = () => {
+    setAddCardModalOpen(!addCardModalOpen);
+  };
+
+  // 컴포넌트 출력
   return (
     <div className={styles.container}>
       <div>{errorState}</div>
@@ -84,13 +126,37 @@ function Column({ title, columnId }: ColumnProps) {
         <ColumnHeader
           name={title}
           totalNum={totalCount}
-          onClick={handleHeaderClick}
+          scrollToTop={scrollToTop}
+          handleSettingOnClick={handleSettingOnClick}
         />
       </div>
       <div className={styles.addTaskButtonContainer}>
         <AddNewTaskBtn handleBtn={handleAddTaskBtn} />
       </div>
-      <CardList cardList={cardList} hasNext={hasNext} setElement={setElement} />
+      <CardList
+        cardList={cardList}
+        hasNext={hasNext}
+        setElement={setElement}
+        columnData={columnData}
+      />
+      {settingModalOpen ? (
+        <EditColumnManagement
+          isOpen={settingModalOpen}
+          setIsOpen={setSettingModalOpen}
+          dashboardId={Number(dashboardId)}
+          columnId={columnId}
+          columnTitle={title}
+        />
+      ) : null}
+      {addCardModalOpen ? (
+        <NewTodoModal
+          isOpen={addCardModalOpen}
+          setIsOpen={setAddCardModalOpen}
+          columnId={columnId}
+          dashboardId={Number(dashboardId)}
+          userId={userId}
+        />
+      ) : null}
     </div>
   );
 }

@@ -101,7 +101,6 @@
     border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 500;
-    cursor: pointer;
 
     @include mobile{
       width: 8.625rem;
@@ -124,7 +123,7 @@
 
 .delete {
   position: absolute;
-  bottom: 3.5rem;
+  bottom: 3.1rem;
   width: 3.4rem;
   padding: 0;
   background-color: transparent;
@@ -135,4 +134,30 @@
   font-weight: 400;
   text-decoration-line: underline;
   cursor: pointer;
+}
+
+.errorMessage {
+  color: $red_D6173A;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.inactiveButton {
+  background: var(--gray-gray_9FA6B2, #9FA6B2);
+  color: var(--white, #FFF);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.activeButton {
+  background: var(--violet-violet_5534DA, #5534da);
+  border-radius: 4px;
+  border: 0px;
+  color: #ffffff;
 }

@@ -7,23 +7,56 @@ import {
 import ModalContainer from '../ModalContainer/ModalContainer';
 import Tag from '../../../components/chip/Tag/Tag';
 import Comment from '../components/Comment/Comment';
+import ProgressState from '../../../components/chip/ProgressState/ProgressState';
+import { apiDeleteCard } from '../../../api/apiModule';
 import styles from './TodoCardModal.module.scss';
 import CloseIcon from '/icon/close.svg';
 import KebabIcon from '/icon/kebab.svg';
-import TestCard from '/img/test_img_card_with_people1.png';
-import TestImg from '/img/test_img.png';
+import CardSideContent from '../components/CardSideContent/CardSideContent';
+import CardContent from '../components/CardContent/CardContent';
 
 /*
-  만들어진 할 일 카드 정보를 모달로 보여줍니다.
+  할 일 카드 모달입니다.
 */
+
+interface CardOverAll {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: {
+    profileImageUrl?: string;
+    nickname: string;
+    id: number;
+  };
+  imageUrl?: string;
+  teamId: string;
+  columnId: number;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  openEditModal: () => void;
+  cardId: number;
+  cardData: CardOverAll | undefined;
+  columnId: number;
+  dashboardId: number;
 }
 
-// 카드 데이터가 필요
-function TodoCardModal({ isOpen, setIsOpen }: ModalProps) {
+function TodoCardModal({
+  isOpen,
+  setIsOpen,
+  openEditModal,
+  cardId,
+  cardData,
+  columnId,
+  dashboardId,
+}: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
   const kebabRef = useRef<HTMLDivElement>(null);
 
@@ -46,19 +79,33 @@ function TodoCardModal({ isOpen, setIsOpen }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  function handleOpen() {
+  const handleOpen = () => {
     setKebabOpen(!kebabOpen);
-  }
+  };
 
-  // 댓글을 처리하는 동작 추가
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
+  // 수정하기 버튼을 클릭하면 할 일 수정 모달이 열립니다.
+  const handleEditOpen = () => {
+    openEditModal();
+  };
+
+  // 삭제하기 버튼
+  const apiDelete = async () => {
+    try {
+      await apiDeleteCard(cardId);
+      setIsOpen(false);
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
+
+  if (!cardData) {
+    return null;
   }
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={styles.container}>
-        <h1>새로운 일정 관리</h1>
+        <h1>{cardData.title}</h1>
         <div className={styles.block}>
           <div className={styles.buttonBlock}>
             <button className={styles.kebabButton} type="button" onClick={handleOpen}>
@@ -67,8 +114,8 @@ function TodoCardModal({ isOpen, setIsOpen }: ModalProps) {
             {kebabOpen
               ? (
                 <div className={styles.kebabButtons} ref={kebabRef}>
-                  <button className={styles.kebabItem} type="button">수정하기</button>
-                  <button className={styles.kebabItem} type="button">삭제하기</button>
+                  <button className={styles.kebabItem} type="button" onClick={handleEditOpen}>수정하기</button>
+                  <button className={styles.kebabItem} type="button" onClick={apiDelete}>삭제하기</button>
                 </div>
               ) : null}
             <button className={styles.cancelButton} type="button" onClick={close}>
@@ -76,58 +123,28 @@ function TodoCardModal({ isOpen, setIsOpen }: ModalProps) {
             </button>
           </div>
 
-          <div className={styles.rightContent}>
-            <div className={styles.managerBlock}>
-              <h3>담당자</h3>
-              <div className={styles.profileBlock}>
-                <img className={styles.profile} src={TestImg} alt="테스트 이미지" />
-                프로필
-              </div>
-            </div>
-            <div className={styles.dateBlock}>
-              <h3>마감일</h3>
-              <p>마감일</p>
-            </div>
-          </div>
+          <CardSideContent
+            managerImg={cardData.assignee.profileImageUrl}
+            manager={cardData.assignee.nickname}
+            dueDate={cardData.dueDate}
+          />
 
           <div className={styles.topBlock}>
-            <span className={styles.condition}>상태</span>
+            <span className={styles.condition}>
+              <ProgressState content="대시보드 이름" />
+            </span>
             <div className={styles.tagBlock}>
-              <Tag tagName="태그1" />
-              <Tag tagName="태그2" />
+              {cardData.tags.map((item) => (
+                <span key={item}>
+                  <Tag tagName={item} />
+                </span>
+              ))}
             </div>
           </div>
 
-          <div className={styles.contentBlock}>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum finibus nibh arcu, quis consequat ante cursus eget.
-              Cras mattis, nulla non laoreet porttitor, diam justo laoreet eros,
-              vel aliquet diam elit at leo.
-            </p>
-            <div className={styles.contentImageBlock}>
-              <img className={styles.contentImage} src={TestCard} alt="카드 이미지" />
-            </div>
-          </div>
+          <CardContent description={cardData.description} imageUrl={cardData.imageUrl} />
 
-          <div className={styles.commentBlock}>
-            <h2>댓글</h2>
-            <form onSubmit={handleSubmit} className={styles.formBlock}>
-              <textarea
-                className={styles.textareaBlock}
-                id="content"
-                name="content"
-                placeholder="댓글 작성하기"
-                // value={comment}
-                // onChange={handleCommentChange}
-              />
-              <button className={styles.formButton} type="submit">입력</button>
-            </form>
-
-            <div className={styles.comments}>
-              <Comment />
-            </div>
-          </div>
+          <Comment cardId={cardId} columnId={columnId} dashboardId={dashboardId} />
         </div>
       </div>
     </ModalContainer>

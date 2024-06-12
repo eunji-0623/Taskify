@@ -47,7 +47,7 @@ interface UploadCardImageResponse {
 export async function apiCreateColumn(
   body: CreateColumnBody,
 ): Promise<ColumnOverAllResponse> {
-  const res = await instance.post<ColumnOverAllResponse>('/cards', body);
+  const res = await instance.post<ColumnOverAllResponse>('/columns', body);
   return handleResponse(res);
 }
 
@@ -56,7 +56,7 @@ export async function apiCreateColumn(
 export async function apiGetColumnList(
   dashboardId: number,
 ): Promise<GetColumnResponse> {
-  const res = await instance.get<GetColumnResponse>('/cards', {
+  const res = await instance.get<GetColumnResponse>('/columns', {
     params: {
       dashboardId,
     },
@@ -71,7 +71,7 @@ export async function apiUpdateColumn(
   columnId: number,
 ): Promise<ColumnOverAllResponse> {
   const res = await instance.put<ColumnOverAllResponse>(
-    `/cards/${columnId}`,
+    `/columns/${columnId}`,
     body,
   );
   return handleResponse(res);
@@ -80,7 +80,7 @@ export async function apiUpdateColumn(
 // 컬럼 삭제
 // columnId를 파라미터로 받습니다.
 export async function apiDeleteColumn(columnId: number) {
-  const res = await instance.delete(`/cards/${columnId}`);
+  const res = await instance.delete(`/columns/${columnId}`);
   return handleResponse(res);
 }
 
@@ -91,7 +91,7 @@ export async function apiUploadCardImage(
   columnId: number,
 ): Promise<UploadCardImageResponse> {
   const res = await instance.post<UploadCardImageResponse>(
-    `/cards/${columnId}/card-image`,
+    `/columns/${columnId}/card-image`,
     body,
   );
   return handleResponse(res);

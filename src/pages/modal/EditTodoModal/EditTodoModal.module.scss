@@ -12,7 +12,7 @@
   background-color: $white_FFFFFF;
 
   @include mobile{
-    width: 24.4375rem;
+    width: 23.4375rem;
     height: 44.5rem;
     padding: 1rem;
   }
@@ -31,21 +31,6 @@
   }
 }
 
-.inputTop {
-  margin-top: 0.63rem;
-  padding: 0.8rem 0.8rem 0.8rem 1rem;
-  color: $black_333236;
-  font-size: 0.8rem;
-  font-weight: 400;
-  border-radius: 0.375rem;
-  border: 1px solid $gray_D9D9D9;
-  background: $white_FFFFFF;
-
-  &::placeholder {
-    font-size: 0.8rem;
-  }
-}
-
 .content {
   height: 36rem;
   display: flex;
@@ -59,82 +44,23 @@
   }
 }
 
-// 스크롤 투명
+// 스크롤
 ::-webkit-scrollbar {
-  display: none
+  width: 4px;
+  height: 0;
 }
 
-.contentBlock {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 161, 0.293); 
+  border: 0;
+  border-radius: 12px;
 }
 
-.contentDropdown {
-  width: 100%;
-  display: flex;
-  gap: 1rem;
+// // 스크롤 투명
+// ::-webkit-scrollbar {
+//   display: none
+// }
 
-  @include mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-
-.contentInput {
-  height: 3rem;
-
-  @include mobile {
-    height: 2.2rem;
-  }
-
-  &:focus {
-    outline: none; 
-    border: 1px solid $violet_5534DA;
-  }
-}
-
-.contentName {
-  width: 12rem;
-
-  @include mobile{
-    width: 100%;
-  }
-}
-
-.contentText {
-  height: 6rem;
-  overflow-wrap: break-word;
-}
-
-.textarea {
-  width: 100%;
-  height: 6.25em;
-  margin-top: 0.63rem;
-  padding: 0.8rem 0.8rem 0.8rem 1rem;
-  border: none;
-  resize: none;
-  color: #333236;
-  font-size: 0.8rem;
-  font-weight: 400;
-  border-radius: 0.375rem;
-  border: 1px solid #d9d9d9;
-  background: $white_FFFFFF;
-
-  &::placeholder {
-    font-size: 0.8rem;
-  }
-
-  &:focus {
-    outline: none; 
-    border: 1px solid $violet_5534DA;
-  }
-}
-
-.contentSpan {
-  color: $violet_5534DA;
-}
 
 .buttonBlock {
   display: flex;
@@ -174,4 +100,20 @@
   border: 0px;
   background: $violet_5534DA;
   color: $white_FFFFFF;
+}
+
+.inactiveButton {
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: var(--gray-gray_9FA6B2, #9FA6B2);
+  color: var(--white, #FFF);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: not-allowed;
+  pointer-events: none;
 }

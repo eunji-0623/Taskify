@@ -1,28 +1,84 @@
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './Comment.module.scss';
-import TestImg from '/img/test_img.png';
+// import CommentItem from '../CommentItem/CommentItem';
+import { apiGetCommentList, apiCreateComments } from '../../../../api/apiModule';
 
 /*
   댓글 컴포넌트입니다.
-
-  기능 추가를 하겠습니다.
 */
 
-function Comment() {
+interface ModalProps {
+  cardId: number;
+  columnId: number;
+  dashboardId: number;
+}
+
+function Comment({ cardId, columnId, dashboardId }: ModalProps) {
+  // const [commentData, setCommentData] = useState();
+  const [comment, setComment] = useState('');
+
+  // 댓글 목록 조회
+  const apiGetCommentData = useCallback(async () => {
+    try {
+      const response = await apiGetCommentList(cardId);
+      if (response) {
+        // setCommentData(response);
+        // console.log('테스트', response);
+      } else {
+        throw new Error('error');
+      }
+    } catch (error) {
+      throw new Error('error');
+    }
+  }, [cardId]);
+
+  useEffect(() => {
+    if (cardId) {
+      apiGetCommentData();
+    }
+  }, [cardId, apiGetCommentData]);
+
+  // 새로운 댓글 생성
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const newComment = {
+      content: comment,
+      cardId,
+      columnId,
+      dashboardId,
+    };
+
+    try {
+      await apiCreateComments(newComment);
+      setComment('');
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
+
+  const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(event.target.value);
+  };
+
   return (
-    <div className={styles.container}>
-      <img className={styles.image} src={TestImg} alt="테스트 이미지" />
-      <div className={styles.titleBlock}>
-        <span className={styles.name}>이름</span>
-        <span className={styles.date}>2022.12.27 14:00</span>
-      </div>
+    <div className={styles.commentBlock}>
+      <h2>댓글</h2>
+      <form onSubmit={handleSubmit} className={styles.formBlock}>
+        <textarea
+          className={styles.textareaBlock}
+          id="content"
+          name="content"
+          placeholder="댓글 작성하기"
+          value={comment}
+          onChange={handleCommentChange}
+        />
+        <button className={styles.formButton} type="submit">입력</button>
+      </form>
 
-      <div className={styles.commentBlock}>
-        <p className={styles.comment}>오늘안에 CCC 까지 만들 수 있을까요?</p>
-      </div>
-
-      <div className={styles.buttonBlock}>
-        <button className={styles.button} type="button">수정</button>
-        <button className={styles.button} type="button">삭제</button>
+      <div className={styles.comments}>
+        {/* <CommentItem name="test" commentText="테스트입니다." image={null} />
+        <CommentItem name="test" commentText="테스트입니다." image={null} /> */}
       </div>
     </div>
   );

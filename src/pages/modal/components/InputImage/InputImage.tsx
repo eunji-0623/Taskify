@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef } from 'react';
 import styles from './InputImage.module.scss';
+// import AddIcon from '/icon/add_image_box.svg';
 import PencilIcon from '/icon/pencil.svg';
 
 /*
@@ -9,16 +10,15 @@ import PencilIcon from '/icon/pencil.svg';
 */
 
 interface InputImageProps {
-  uploadImgUrl: string;
-  setUploadImgUrl: (url: string) => void;
-  // eslint-disable-next-line react/require-default-props
-  text?: string;
+  imageUrl: string | undefined;
+  setImageUrl: (url: string) => void;
+  text: string;
 }
 
 function InputImage({
-  uploadImgUrl,
-  setUploadImgUrl,
-  text = '',
+  imageUrl,
+  setImageUrl,
+  text,
 }: InputImageProps) {
   const uploadImageRef = useRef<HTMLInputElement>(null);
 
@@ -36,7 +36,7 @@ function InputImage({
       reader.readAsDataURL(uploadFile);
       reader.onloadend = () => {
         if (reader.result) {
-          setUploadImgUrl(reader.result as string);
+          setImageUrl(reader.result as string);
         }
       };
     }
@@ -50,7 +50,7 @@ function InputImage({
           <>
             <img
               className={styles.contentImage}
-              src={uploadImgUrl}
+              src={imageUrl}
               alt="img"
             />
             <img
@@ -59,7 +59,11 @@ function InputImage({
               alt="img"
             />
           </>
-        ) : <img className={styles.contentImageBasic} src={uploadImgUrl} alt="img" />}
+        ) : (
+          imageUrl && (
+            <img className={styles.contentImageBasic} src={imageUrl} alt="img" />
+          )
+        )}
       </button>
 
       <input

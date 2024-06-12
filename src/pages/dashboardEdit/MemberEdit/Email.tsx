@@ -1,3 +1,4 @@
+import { apiDeleteInvitation } from '../../../api/apiModule';
 import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './MemberEdit.module.scss';
 
@@ -6,10 +7,17 @@ import styles from './MemberEdit.module.scss';
 
 interface Props {
   email: string;
+  dashboardId: number;
+  invitationId: number;
 }
 
-function Email({ email }: Props) {
-  const handleCancelButton = () => {};
+function Email({ email, dashboardId, invitationId }: Props) {
+  const handleCancelButton = async () => {
+    await apiDeleteInvitation(
+      { dashboardId: dashboardId },
+      { invitationId: invitationId }
+    );
+  };
 
   return (
     <tr className={styles.table_row}>

@@ -35,8 +35,10 @@ export interface CardOverAll {
   };
   imageUrl?: string;
   columnId: number;
+  dashboardId: number;
   createdAt: string;
   updatedAt: string;
+  teamId: string;
 }
 
 export interface GetCardListResponse {

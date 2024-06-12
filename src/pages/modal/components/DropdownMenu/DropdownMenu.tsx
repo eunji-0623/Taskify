@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
+import ProgressState from '../../../../components/chip/ProgressState/ProgressState';
 import styles from './DropdownMenu.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
 
 /*
-  상태 드롭다운 메뉴바
+  상태 드롭다운 메뉴바입니다.
   value, setValue, data를 prop로 받습니다.
 */
 
@@ -23,7 +24,6 @@ function DropdownMenu({
   data,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<string | null>('');
   const modalRef = useRef<HTMLDivElement>(null);
 
   // 영역 밖 클릭 시 닫기
@@ -48,7 +48,6 @@ function DropdownMenu({
   const handleItemClick = (choice: string) => {
     setValue(choice);
     setIsOpen(false);
-    setSelected(choice);
   };
 
   return (
@@ -58,7 +57,7 @@ function DropdownMenu({
         className={styles.dropdownButton}
         onClick={toggleDropdown}
       >
-        <ul>{value}</ul>
+        <ProgressState content={value} />
         <img src={ArrowDropDown} alt="드롭다운" />
       </button>
 
@@ -73,11 +72,11 @@ function DropdownMenu({
                   style={{ borderRadius: '0.375rem' }}
                   onClick={() => handleItemClick(item.text)}
                 >
-                  {selected === item.text && (
+                  {value === item.text && (
                     <img className={styles.checkedImg} src={checked} alt="체크 아이콘" />
                   )}
                   <div className={styles.item}>
-                    {item.text}
+                    <ProgressState content={item.text} />
                   </div>
                 </button>
               </li>

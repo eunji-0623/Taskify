@@ -1,27 +1,46 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import { DeleteBtn, ChangeAndSaveBtn } from '../../../components/Btn/Btn';
+import { apiInviteDashboards } from '../../../api/apiModule';
+import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
 
 /*
-  이메일로 사용자를 초대하는 모달입니다.
+  초대하기 모달입니다.
 */
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  dashboardId: number;
 }
 
-function InviteModal({ isOpen, setIsOpen }: ModalProps) {
-  // 모달 닫기
+function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
+  const [email, setEmail] = useState('');
+
   const close = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  // 초대 버튼 클릭 시 동작
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  // 초대 클릭 시 동작
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  }
+
+    try {
+      const emailObj = { email };
+      const response = await apiInviteDashboards(emailObj, { dashboardId });
+      if (response) {
+        setIsOpen(false);
+      }
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  // 중복 초대 확인 추가
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -30,12 +49,25 @@ function InviteModal({ isOpen, setIsOpen }: ModalProps) {
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
             <label htmlFor="email">이메일</label>
-            <input className={styles.inputText} type="text" id="email" name="email" placeholder="이름을 입력해 주세요" required />
+            <input
+              className={styles.inputText}
+              type="email"
+              id="email"
+              name="email"
+              placeholder="이메일을 입력해 주세요"
+              required
+              value={email}
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.buttonBlock}>
-            <DeleteBtn BtnText="삭제" handleBtn={close} />
-            <ChangeAndSaveBtn BtnText="초대" handleBtn={close} />
+            <DeleteBtn BtnText="취소" handleBtn={close} />
+            {email.length !== 0 ? (
+              <button className={styles.activeButton} type="submit">초대</button>
+            ) : (
+              <button className={styles.inactiveButton} type="button" disabled>초대</button>
+            )}
           </div>
         </form>
       </div>

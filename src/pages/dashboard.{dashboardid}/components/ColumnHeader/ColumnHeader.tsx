@@ -16,21 +16,22 @@ function ColumnHeader({ name, totalNum, onClick }: ColumnHeaderProps) {
 
     const target = event.target as HTMLElement;
     // ColorDot이나 settingButton을 클릭했을 경우 onClick을 무시합니다.
-    if (
-      target.closest(`.${styles.settingButton}`) ||
-      target.closest(`.${styles.colorDot}`)
-    ) {
+    if (target.closest(`.${styles.colorDot}`)) {
       return;
     }
     onClick();
   };
 
   return (
-    <div className={styles.container} onClick={handleClick}>
+    <div className={styles.container}>
       <ColorDot color="#5534DA" />
       <div className={styles.columnName}>{name}</div>
       <NumChip num={totalNum} />
-      <button type="button" className={styles.settingButton}>
+      <button
+        type="button"
+        className={styles.settingButton}
+        onClick={handleClick}
+      >
         <img
           src="/icon/setting.svg"
           alt="setting_button"

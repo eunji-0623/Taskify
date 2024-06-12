@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Btn.module.scss';
 import SettingImg from '/icon/setting.svg';
 import AddBoxImg from '/icon/add_box.svg';
 import { DashboardContext } from '../../../../contexts/DashboardContext';
-import useInviteModal from '../../../../hooks/modal/useInviteModal';
+import InviteModal from '../../../modal/InviteModal/InviteModal';
 
 export function SettingBtn() {
   const context = useContext(DashboardContext);
@@ -32,11 +32,15 @@ export function SettingBtn() {
 }
 
 export function InviteBtn() {
-  const { InviteModal, openInvite } = useInviteModal();
+  const [testState, setTestState] = useState(false);
+
+  function InviteClick() {
+    setTestState(!testState);
+  }
 
   return (
     <>
-      <button type="button" className={styles.InviteBtn} onClick={openInvite}>
+      <button type="button" className={styles.InviteBtn} onClick={InviteClick}>
         <img
           src={AddBoxImg}
           alt="초대하기 버튼 이미지"
@@ -44,7 +48,13 @@ export function InviteBtn() {
         />
         <span className={styles.Text}>초대하기</span>
       </button>
-      <InviteModal />
+      {testState ? (
+        <InviteModal
+          isOpen={testState}
+          setIsOpen={setTestState}
+          dashboardId={8922}
+        />
+      ) : null }
     </>
   );
 }

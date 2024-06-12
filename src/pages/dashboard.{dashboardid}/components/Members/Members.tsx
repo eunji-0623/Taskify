@@ -34,7 +34,7 @@ const fetchDashboardMembers = async (
   return apiMemberList(query);
 };
 
-function Members({ dashboardId }: { dashboardId: number | undefined}) {
+function Members({ dashboardId }: { dashboardId: number | undefined }) {
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +52,7 @@ function Members({ dashboardId }: { dashboardId: number | undefined}) {
     };
 
     getMembers();
-  }, [dashboardId , members]);
+  }, [dashboardId]);
 
   if (loading) {
     return <div>Loading...</div>;

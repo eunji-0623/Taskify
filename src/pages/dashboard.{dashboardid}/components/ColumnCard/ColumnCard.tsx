@@ -1,13 +1,19 @@
+import { format } from 'date-fns';
 import styles from './ColumnCard.module.scss';
 import Tag from '../../../../components/chip/Tag/Tag';
 
 interface CardProps {
   assignee: string;
   title: string;
-  dueDate: Date;
+  dueDate: string;
   tags: string[];
   imageUrl?: string;
 }
+
+const formatDate = (date: string) => {
+  const editData: string = format(date, 'yyyy-MM-dd HH:mm');
+  return editData;
+};
 
 // 일정을 카드 모양으로 보여주는 컴포넌트입니다.
 // 사진, 제목, 태그, 기한, 작성자이미지를 prop으로 받습니다.
@@ -27,7 +33,7 @@ function ColumnCard({
             <img
               className={` ${styles.withImg}`}
               src={imageUrl}
-              alt="uploadedImage"
+              alt="uploadedTaskImage"
             />
           </div>
         )}
@@ -39,7 +45,7 @@ function ColumnCard({
         </div>
         <div className={styles.date}>
           <img src="/icon/calendar.svg" alt="calendarImg" />
-          {dueDate.toLocaleDateString()}
+          {formatDate(dueDate)}
         </div>
         <div className={styles.avatar}>{assignee}</div>
       </div>

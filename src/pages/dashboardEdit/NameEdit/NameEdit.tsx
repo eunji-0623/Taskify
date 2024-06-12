@@ -1,6 +1,4 @@
-import {
-  useState, useEffect, Dispatch, SetStateAction,
-} from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import styles from './NameEdit.module.scss';
 import { ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import { apiEditDashboards } from '../../../api/apiModule';
@@ -16,9 +14,7 @@ interface Props {
   handleChange: Dispatch<SetStateAction<string>>;
 }
 
-function Info({
-  name, color, dashboardId, handleChange,
-}: Props) {
+function Info({ name, color, dashboardId, handleChange }: Props) {
   const [newName, setNewName] = useState('');
   const [selectedColor, setSelectedColor] = useState(color);
 
@@ -27,11 +23,16 @@ function Info({
   };
 
   const handleSubmitButton = async () => {
-    handleChange(newName);
+    if (newName === '') {
+      handleChange(name);
+    } else {
+      handleChange(newName);
+    }
     await apiEditDashboards(
       { title: newName, color: selectedColor },
-      { dashboardId },
+      { dashboardId }
     );
+    setNewName('');
   };
 
   useEffect(() => {
@@ -53,6 +54,7 @@ function Info({
           className={styles.newNameInput}
           placeholder="변경할 이름을 입력해주세요"
           onChange={handleChangeName}
+          value={newName}
         />
         <div className={styles.submitButton}>
           <ChangeAndSaveBtn BtnText="변경" handleBtn={handleSubmitButton} />

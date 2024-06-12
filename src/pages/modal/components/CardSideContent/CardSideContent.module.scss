@@ -1,0 +1,89 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.sideContent {
+  position: absolute;
+  top: 5.32rem;
+  right: 1.75rem;
+  width: 12.5rem;
+  height: 9.6875rem;
+  margin-right: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
+
+  h3 {
+    color: $black_000000;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: $black_333236;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  @include mobile {
+    position: static;
+    width: 17.6rem;
+    height: 5rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.managerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profileBlock {
+  width: 100%;
+  height: 2.125rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  span {
+    color: var(--black-black_333236, #333236);
+    font-family: Pretendard;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.profile {
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: 999px;
+}
+
+.dateBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  span {
+    color: var(--black-black_333236, #333236);
+    font-family: Pretendard;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

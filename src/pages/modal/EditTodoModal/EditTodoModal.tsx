@@ -1,8 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import DropdownMenu from '../components/DropdownMenu/DropdownMenu';
-import ManagerDropdown from '../components/ManagerDropdown/ManagerDropdown';
+import DropdownManagement from '../components/DropdownManagement/DropdownManagement';
+import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
+import TodoContent from '../components/TodoContent/TodoContent';
+import { apiUpdateCard } from '../../../api/apiModule';
 import InputTag from '../components/InputTag/InputTag';
 import InputImage from '../components/InputImage/InputImage';
 import styles from './EditTodoModal.module.scss';
@@ -10,25 +12,72 @@ import TestImg from '/img/test_img.png';
 
 /*
   할 일 수정을 위한 모달입니다.
+
+  할 일 카드 모달과 연결을 위해 직접 사용하는 것이 아닌 TodoCardManagement를 통해 사용합니다.
 */
+
+interface CardOverAll {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: {
+    profileImageUrl?: string | undefined
+    nickname: string;
+    id: number;
+  };
+  imageUrl?: string;
+  teamId: string;
+  columnId: number;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  openTodoModal: () => void;
+  cardId: number;
+  cardData: CardOverAll | undefined;
+  userId: number;
+  columnId: number;
 }
 
-// 할 일 데이터가 필요
-function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
-  const [condition, setCondition] = useState('test1');
-  const [manager, setManager] = useState('test1');
-  const [profile, setProfile] = useState(TestImg);
-  const [title, setTitle] = useState('test');
-  const [contents, setContents] = useState('test');
-  const [deadline, setDeadline] = useState<Date | null>(new Date());
-  const [tags, setTags] = useState(['테스트1', '태스트2', '테스트태그']);
-  const [uploadImgUrl, setUploadImgUrl] = useState(TestImg);
+function EditTodoModal({
+  isOpen,
+  setIsOpen,
+  openTodoModal,
+  cardId,
+  cardData,
+  userId,
+  columnId,
+}: ModalProps) {
+  const [cardState, setCardState] = useState('대시보드 이름');
+  const [manager, setManager] = useState('');
+  const [managerImg, setManagerImg] = useState<string | undefined>('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState('');
 
-  // 테스트 데이터
+  // 데이터 추가
+  useEffect(() => {
+    if (cardData) {
+      setCardState('test');
+      setManager(cardData.assignee.nickname);
+      setManagerImg(cardData.assignee.profileImageUrl);
+      setTitle(cardData.title);
+      setDescription(cardData.description);
+      setDueDate(cardData.dueDate);
+      setTags(cardData.tags);
+      setImageUrl(cardData.imageUrl || '');
+    }
+  }, [cardData]);
+
+  // 담당자 테스트
   const data = [
     {
       id: 1,
@@ -40,26 +89,42 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
       text: 'test2',
       profile: TestImg,
     },
-    {
-      id: 3,
-      text: '3333',
-      profile: TestImg,
-    },
-    {
-      id: 4,
-      text: '4444',
-      profile: TestImg,
-    },
   ];
 
   // 모달 닫기
-  const close = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
+  // const close = useCallback(() => {
+  //   setIsOpen(false);
+  // }, [setIsOpen]);
 
   // 할 일 수정 버튼 클릭 시 동작
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const updateCard = {
+      columnId,
+      assigneeUserId: userId,
+      title,
+      description,
+      dueDate,
+      tags,
+      // imageUrl,
+    };
+
+    try {
+      await apiUpdateCard(updateCard, cardId);
+      setIsOpen(false);
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
+
+  // 취소 버튼을 클릭하면 할 일 카드 모달로 돌아갑니다.
+  const handleTodoOpen = () => {
+    openTodoModal();
+  };
+
+  if (!cardData) {
+    return null;
   }
 
   return (
@@ -69,71 +134,30 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
 
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
-            <div className={styles.contentDropdown}>
-              <div className={styles.contentBlock}>
-                <h3>상태</h3>
-                <DropdownMenu
-                  value={condition}
-                  setValue={setCondition}
-                  data={data}
-                />
-              </div>
-              <div className={styles.contentBlock}>
-                <h3>담당자</h3>
-                <ManagerDropdown
-                  value={manager}
-                  setValue={setManager}
-                  data={data}
-                  profile={profile}
-                  setProfile={setProfile}
-                />
-              </div>
-            </div>
+            <DropdownManagement
+              cardState={cardState}
+              setCardState={setCardState}
+              manager={manager}
+              setManager={setManager}
+              data={data}
+              managerImg={managerImg}
+              setManagerImg={setManagerImg}
+              text=""
+            />
 
-            <div className={styles.contentBlock}>
-              <label htmlFor="title">
-                제목
-                <span className={styles.contentSpan}> *</span>
-              </label>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className={`${styles.contentInput} ${styles.inputTop}`}
-                type="text"
-                id="title"
-                name="title"
-                placeholder="제목을 입력해 주세요"
-                required
-              />
-            </div>
+            <Title title={title} setTitle={setTitle} />
 
-            <div className={styles.contentBlock}>
-              <label htmlFor="content">
-                설명
-                <span className={styles.contentSpan}> *</span>
-              </label>
-              <textarea
-                value={contents}
-                onChange={(e) => setContents(e.target.value)}
-                className={styles.textarea}
-                id="content"
-                name="content"
-                placeholder="설명을 입력해 주세요"
-              />
-            </div>
+            <TodoContent description={description} setDescription={setDescription} />
 
-            <div className={styles.contentBlock}>
-              <h3>마감일</h3>
-              <Calendar deadline={deadline} setDeadline={setDeadline} />
-            </div>
+            <Calendar dueDate={dueDate} setDueDate={setDueDate} />
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <InputImage uploadImgUrl={uploadImgUrl} setUploadImgUrl={setUploadImgUrl} />
+            <InputImage imageUrl={imageUrl} setImageUrl={setImageUrl} text="" />
           </div>
 
           <div className={styles.buttonBlock}>
-            <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
+            <button className={styles.cancelButton} type="button" onClick={handleTodoOpen}>취소</button>
             <button className={styles.createButton} type="submit">수정</button>
           </div>
         </form>

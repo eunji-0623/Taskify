@@ -23,7 +23,7 @@ function MyDashboardHeader() {
         <UserProfileImg
           isImg={false}
           profileImageUrl="#A3C4A2"
-          nickname="Test"
+          nickname={userInfo?.nickname}
         />
         <div className={styles.userName}>{userInfo?.nickname}</div>
       </div>

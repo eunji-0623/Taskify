@@ -62,7 +62,6 @@ function Members({ dashboardId }: { dashboardId: number | undefined }) {
     return (
       <div>
         멤버 목록을 불러오지 못했습니다:
-        {error}
       </div>
     );
   }

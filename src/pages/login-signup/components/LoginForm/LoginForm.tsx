@@ -37,10 +37,10 @@ function LoginForm() {
   // 둘 다 만족해야 버튼 활성화 = setIsButtonDisabled(false)
   useEffect(() => {
     setIsButtonDisabled(
-      values.email.trim() === '' ||
-        values.password.trim() === '' ||
-        emailError ||
-        passwordError
+      values.email.trim() === ''
+        || values.password.trim() === ''
+        || emailError
+        || passwordError,
     );
   }, [values.email, values.password, emailError, passwordError]);
 

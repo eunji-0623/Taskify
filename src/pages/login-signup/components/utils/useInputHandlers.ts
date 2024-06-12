@@ -7,7 +7,7 @@ import { SignUpFormInputs } from './useSignUpForm';
 
 function useInputHandlers(
   values: SignUpFormInputs,
-  setValues: React.Dispatch<React.SetStateAction<SignUpFormInputs>>
+  setValues: React.Dispatch<React.SetStateAction<SignUpFormInputs>>,
 ) {
   const [emailError, setEmailError] = useState(false);
   const [nameError, setNameError] = useState(false);

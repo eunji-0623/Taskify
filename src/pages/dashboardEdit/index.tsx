@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { apiDashboardsDetail } from '../../api/apiModule';
 import SideBar from '../../components/sidebar/sidebar';
 import GnbHeader from '../dashboard.{dashboardid}/components/GnbHeader/GnbHeader';
@@ -20,6 +20,8 @@ function DashboardEdit() {
   const [dashboardColor, setDashboardColor] = useState('');
   const [deleteDashboard, setDeleteDashboard] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchDashboards = async () => {
       if (id) {
@@ -33,6 +35,10 @@ function DashboardEdit() {
     fetchDashboards();
   }, [id]);
 
+  const handleBackButton = () => {
+    navigate(`/dashboard/${id}`);
+  };
+
   const handleDeleteDashboard = () => {
     setDeleteDashboard(!deleteDashboard);
   };
@@ -43,7 +49,11 @@ function DashboardEdit() {
       <div className={styles.main}>
         <GnbHeader />
         <div className={styles.mainContents}>
-          <button className={styles.backButton} type="button">
+          <button
+            className={styles.backButton}
+            type="button"
+            onClick={handleBackButton}
+          >
             <img src="/icon/arrow_forward.svg" alt="화살표" />
             <p>돌아가기</p>
           </button>

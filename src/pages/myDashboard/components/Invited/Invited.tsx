@@ -5,9 +5,7 @@ import Empty from './Empty/Empty';
 import styles from './Invited.module.scss';
 import useInfiniteScroll from '../../../../hooks/pagination/useInfiniteScroll';
 import {
-  apiGetCommentList,
   apiInvitationAccept,
-  apiLoginRequest,
   apiMyInvitationsList,
 } from '../../../../api/apiModule';
 
@@ -57,10 +55,6 @@ const fetchInvitations = async (
     invitations: data.invitations,
     cursorId: data.cursorId,
   };
-};
-
-const fetchTest = async () => {
-  await apiGetCommentList(7733);
 };
 
 function Invited() {
@@ -129,18 +123,8 @@ function Invited() {
     }
   };
 
-  const handleTestButton = () => {
-    fetchTest();
-  };
-
-  const handleLogin = async () => {
-    await apiLoginRequest({ email: 'test22@naver.com', password: 'test2200' });
-  };
-
   return (
     <div className={styles.container}>
-      <button onClick={handleLogin}>로그인</button>
-      <button onClick={handleTestButton}>댓글</button>
       <h2 className={styles.title}>초대받은 대시보드</h2>
       <Search searchingWord={handleSearch} />
       {empty ? (

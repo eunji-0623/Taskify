@@ -10,7 +10,7 @@ function MyPage() {
   const navigate = useNavigate();
 
   const handleBackButton = () => {
-    navigate(`/mydashboard`);
+    navigate('/mydashboard');
   };
 
   return (

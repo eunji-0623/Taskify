@@ -18,8 +18,8 @@ type InputLayoutProps = {
   readOnly: boolean;
   disabled: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  error?: string;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  error: string;
 };
 
 function InputLayout({

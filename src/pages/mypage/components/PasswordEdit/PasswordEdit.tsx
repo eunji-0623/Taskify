@@ -48,6 +48,8 @@ function PasswordEdit() {
         onChange={handlePasswordChange}
         readOnly={false}
         disabled={false}
+        onBlur={() => {}}
+        error=""
       />
       <InputLayout
         labelText="새 비밀번호"
@@ -61,6 +63,8 @@ function PasswordEdit() {
         onChange={handleNewPasswordChange}
         readOnly={false}
         disabled={false}
+        onBlur={() => {}}
+        error=""
       />
       <InputLayout
         labelText="새 비밀번호 확인"

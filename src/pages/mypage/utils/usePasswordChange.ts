@@ -1,4 +1,6 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import {
+  SetStateAction, useCallback, useEffect, useState,
+} from 'react';
 import { apiChangePassword } from '../../../api/apiModule';
 
 // 패스워드 변경 기능을 구현하는 함수입니다.
@@ -30,13 +32,13 @@ function usePasswordChange() {
   };
 
   // 패스워드가 일치하는지 여부 검사
-  const checkPasswordMatch = (
-    newPassword: string,
-    confirmNewPassword: string
-  ) => {
-    const match = newPassword === confirmNewPassword;
-    setIsPasswordMatch(match);
-  };
+  const checkPasswordMatch = useCallback(
+    (newPass: string, confirmNewPass: string) => {
+      const match = newPass === confirmNewPass;
+      setIsPasswordMatch(match);
+    },
+    [],
+  );
 
   // 각 패스워드 변경 함수
   // 현재 패스워드
@@ -48,31 +50,36 @@ function usePasswordChange() {
 
   // 새로운 패스워드
   const handleNewPasswordChange = (e: { target: { value: string } }) => {
-    const value = e.target.value;
-    setNewPassword(value);
-    checkPasswordMatch(value, confirmNewPassword);
+    const newPass = e.target.value;
+    setNewPassword(newPass);
+    checkPasswordMatch(newPass, confirmNewPassword);
   };
 
   // 새로운 패스워드 확인
   const handleConfirmNewPasswordChange = (e: { target: { value: string } }) => {
-    const value = e.target.value;
-    setConfirmNewPassword(value);
-    checkPasswordMatch(newPassword, value);
+    const confirmNewPass = e.target.value;
+    setConfirmNewPassword(confirmNewPass);
+    checkPasswordMatch(newPassword, confirmNewPass);
   };
+
+  // 패스워드 상태에 따라 버튼 활성화
+  const checkAllFieldsFilled = useCallback(() => {
+    const allFieldsFilled = password.length > 0
+      && newPassword.length > 0
+      && confirmNewPassword.length > 0;
+    setIsButtonEnabled(allFieldsFilled && isPasswordMatch);
+  }, [password, newPassword, confirmNewPassword, isPasswordMatch]);
 
   // 각 Input의 값이 변경될 때마다 상태 업데이트
   useEffect(() => {
     checkAllFieldsFilled();
-  }, [password, newPassword, confirmNewPassword, isPasswordMatch]);
-
-  // 패스워드 상태에 따라 버튼 활성화
-  const checkAllFieldsFilled = () => {
-    const allFieldsFilled =
-      password.length > 0 &&
-      newPassword.length > 0 &&
-      confirmNewPassword.length > 0;
-    setIsButtonEnabled(allFieldsFilled && isPasswordMatch);
-  };
+  }, [
+    password,
+    newPassword,
+    confirmNewPassword,
+    isPasswordMatch,
+    checkAllFieldsFilled,
+  ]);
 
   // 최종 변경 버튼 함수
   const handleChangePasswordClick = async () => {

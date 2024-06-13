@@ -12,6 +12,10 @@ interface EditMyInfoBody {
   profileImageUrl: string;
 }
 
+interface UploadImage {
+  image: string;
+}
+
 interface UserResponse {
   id: number;
   email: string;
@@ -22,7 +26,6 @@ interface UserResponse {
 }
 
 interface EditImageResponse {
-  url: string;
   profileImageUrl: string;
 }
 
@@ -40,7 +43,7 @@ export async function apiInquireMyInfo(): Promise<UserResponse> {
 
 // 내 정보 수정 api
 export async function apiEditMyInfo(
-  body: EditMyInfoBody
+  body: EditMyInfoBody,
 ): Promise<UserResponse> {
   const res = await instance.put<UserResponse>('/users/me', body);
   return handleResponse(res);
@@ -48,12 +51,8 @@ export async function apiEditMyInfo(
 
 // 프로필 이미지 업로드 api
 export async function apiUploadImage(
-  body: FormData
+  body: UploadImage,
 ): Promise<EditImageResponse> {
-  const res = await instance.post<EditImageResponse>('/users/me/image', body, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const res = await instance.post<EditImageResponse>('/users/me/image', body);
   return handleResponse(res);
 }

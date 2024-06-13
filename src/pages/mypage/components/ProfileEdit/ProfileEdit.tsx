@@ -41,37 +41,43 @@ function ProfileEdit() {
           <div className={styles.profileSection}>
             <ImageButton onChange={handleImageChange} />
             <div className={styles.inputLayout}>
-              <>
-                <InputLayout
-                  labelText="이메일"
-                  id="myPage-email"
-                  name="myPage-email"
-                  type="email"
-                  placeholder="이메일 입력"
-                  isProfile={isProfile}
-                  topMargin={topMargin}
-                  onChange={handleNicknameChange}
-                  value={userInfo.email}
-                  readOnly
-                  disabled={true}
-                />
-                <InputLayout
-                  labelText="닉네임"
-                  id="myPage-name"
-                  name="myPage-name"
-                  type="text"
-                  placeholder="닉네임 입력"
-                  isProfile={isProfile}
-                  topMargin={!topMargin}
-                  value={nickname}
-                  onChange={handleNicknameChange}
-                  readOnly={false}
-                  disabled={false}
-                />
-              </>
+              <InputLayout
+                labelText="이메일"
+                id="myPage-email"
+                name="myPage-email"
+                type="email"
+                placeholder="이메일 입력"
+                isProfile={isProfile}
+                topMargin={topMargin}
+                onChange={handleNicknameChange}
+                value={userInfo.email}
+                readOnly
+                disabled
+                onBlur={() => {}}
+                error=""
+              />
+              <InputLayout
+                labelText="닉네임"
+                id="myPage-name"
+                name="myPage-name"
+                type="text"
+                placeholder="닉네임 입력"
+                isProfile={isProfile}
+                topMargin={!topMargin}
+                value={nickname}
+                onChange={handleNicknameChange}
+                readOnly={false}
+                disabled={false}
+                onBlur={() => {}}
+                error=""
+              />
             </div>
           </div>
-          <Button ButtonText="변경" onClick={handleUpdateClick} />
+          <Button
+            ButtonText="변경"
+            onClick={handleUpdateClick}
+            disabled={false}
+          />
         </>
       )}
       {isModalOpen && (

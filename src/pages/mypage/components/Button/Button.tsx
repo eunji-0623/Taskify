@@ -7,7 +7,7 @@ import styles from './Button.module.scss';
 type ButtonProps = {
   ButtonText: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
+  disabled: boolean;
 };
 
 function Button({ ButtonText, onClick, disabled }: ButtonProps) {

@@ -34,13 +34,13 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route
           path="/*"
-          element={
+          element={(
             <UserProvider>
               <DashboardProvider>
                 <AppLayout />
               </DashboardProvider>
             </UserProvider>
-          }
+          )}
         />
       </Routes>
     </BrowserRouter>

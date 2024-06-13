@@ -39,7 +39,7 @@ function EditColumnModal({
   const [check, setCheck] = useState(false);
 
   // 컬럼 목록 조회
-  const apiColumnData = useCallback(async () => {
+  const columnData = useCallback(async () => {
     try {
       const response = await apiGetColumnList(dashboardId);
       if (response.result === 'SUCCESS') {
@@ -56,9 +56,9 @@ function EditColumnModal({
 
   useEffect(() => {
     if (dashboardId) {
-      apiColumnData();
+      columnData();
     }
-  }, [dashboardId, apiColumnData]);
+  }, [dashboardId, columnData]);
 
   // 컬럼 이름 변경 동작
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -89,9 +89,9 @@ function EditColumnModal({
   // 컬럼 중복 title 확인
   const columnCheck = useCallback(() => {
     if (columnList.length > 0) {
-      setCheck(columnList.includes(inputValue));
+      setCheck(columnList.includes(inputValue) && inputValue !== columnTitle);
     }
-  }, [inputValue, columnList]);
+  }, [inputValue, columnList, columnTitle]);
 
   useEffect(() => {
     columnCheck();

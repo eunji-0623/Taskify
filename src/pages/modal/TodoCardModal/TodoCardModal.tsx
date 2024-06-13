@@ -8,7 +8,7 @@ import ModalContainer from '../ModalContainer/ModalContainer';
 import Tag from '../../../components/chip/Tag/Tag';
 import Comment from '../components/Comment/Comment';
 import ProgressState from '../../../components/chip/ProgressState/ProgressState';
-import { apiDeleteCard } from '../../../api/apiModule';
+import { apiDeleteCard, apiGetColumnList } from '../../../api/apiModule';
 import styles from './TodoCardModal.module.scss';
 import CloseIcon from '/icon/close.svg';
 import KebabIcon from '/icon/kebab.svg';
@@ -45,6 +45,7 @@ interface ModalProps {
   cardId: number;
   cardData: CardOverAll | undefined;
   columnId: number;
+  userId: number;
   dashboardId: number;
 }
 
@@ -55,9 +56,11 @@ function TodoCardModal({
   cardId,
   cardData,
   columnId,
+  userId,
   dashboardId,
 }: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
+  const [cardState, setCardState] = useState('');
   const kebabRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -73,6 +76,25 @@ function TodoCardModal({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [kebabOpen]);
+
+  // 컬럼 리스트 조회
+  useEffect(() => {
+    const fetchDashboardDetail = async () => {
+      try {
+        const response = await apiGetColumnList(dashboardId);
+        if (response.result === 'SUCCESS') {
+          const column = response.data.find((item) => item.id === columnId);
+          setCardState(column ? column.title : '');
+        } else {
+          throw new Error('error');
+        }
+      } catch (error) {
+        throw new Error('error');
+      }
+    };
+
+    fetchDashboardDetail();
+  }, [dashboardId, columnId]);
 
   // 모달 닫기
   const close = useCallback(() => {
@@ -131,7 +153,7 @@ function TodoCardModal({
 
           <div className={styles.topBlock}>
             <span className={styles.condition}>
-              <ProgressState content="대시보드 이름" />
+              <ProgressState content={cardState} />
             </span>
             <div className={styles.tagBlock}>
               {cardData.tags.map((item) => (
@@ -144,7 +166,7 @@ function TodoCardModal({
 
           <CardContent description={cardData.description} imageUrl={cardData.imageUrl} />
 
-          <Comment cardId={cardId} columnId={columnId} dashboardId={dashboardId} />
+          <Comment cardId={cardId} columnId={columnId} userId={userId} dashboardId={dashboardId} />
         </div>
       </div>
     </ModalContainer>

@@ -164,8 +164,7 @@ function EditTodoModal({
       await apiUpdateCard(updateCard, cardId);
       setIsOpen(false);
     } catch (error) {
-      console.error('Error updating card:', error);
-      // 오류 처리: 사용자에게 적절한 방식으로 오류를 표시하거나 처리합니다.
+      throw new Error('error');
     }
   };
 

@@ -76,6 +76,7 @@ function NewTodoModal({
       description,
       dueDate,
       tags,
+      image: imageUrl,
     };
 
     // const uploadImageBody = {
@@ -83,22 +84,24 @@ function NewTodoModal({
     // };
 
     try {
-      await Promise.all([
-        apiCreateCard(newTodo),
-        // apiUploadCardImage(uploadImageBody, columnId),
-      ]);
+      await apiCreateCard(newTodo);
       setIsOpen(false);
     } catch (error) {
       throw new Error('error');
     }
+
+    // try {
+    //   await apiUploadCardImage(uploadImageBody, columnId),
+    //   setIsOpen(false);
+    // } catch (error) {
+    //   throw new Error('error');
+    // }
   };
 
   const createButton = manager.length !== 0
     && title.length !== 0
     && description.length !== 0
-    && dueDate.length !== 0
-    && tags.length !== 0
-    && imageUrl !== null;
+    && dueDate.length !== 0;
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>

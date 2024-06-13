@@ -83,19 +83,19 @@ function NewTodoModal({
     //   image: imageUrl,
     // };
 
-    try {
-      await apiCreateCard(newTodo);
-      setIsOpen(false);
-    } catch (error) {
-      throw new Error('error');
-    }
-
     // try {
     //   await apiUploadCardImage(uploadImageBody, columnId),
     //   setIsOpen(false);
     // } catch (error) {
     //   throw new Error('error');
     // }
+
+    try {
+      await apiCreateCard(newTodo);
+      setIsOpen(false);
+    } catch (error) {
+      throw new Error('error');
+    }
   };
 
   const createButton = manager.length !== 0

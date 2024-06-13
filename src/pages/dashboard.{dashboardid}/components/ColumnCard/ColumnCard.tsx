@@ -36,10 +36,10 @@ function ColumnCard({ cardId, cardData, columnData }: CardProps) {
 
   // 버튼 이벤트 핸들러
   const cardOnClick = () => {
-    setManageCardModalOpen(!manageCardModalOpen);
+    setManageCardModalOpen(true);
   };
   const handleKeyDown = () => {
-    setManageCardModalOpen(!manageCardModalOpen);
+    setManageCardModalOpen(true);
   };
 
   // 컴포넌트 출력

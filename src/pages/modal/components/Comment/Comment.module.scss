@@ -75,7 +75,6 @@
   border-radius: 0.25rem;
   border: 1px solid $gray_D9D9D9;
   background: $white_FFFFFF;
-
   color: $violet_5534DA;
   text-align: center;
   font-family: Pretendard;
@@ -90,9 +89,27 @@
   }
 }
 
+.formButtonClick {
+  @extend .formButton;
+  background: var(--violet-violet_5534DA, #5534da);
+  border-radius: 4px;
+  border: 0px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
 .comments {
   margin-top: 1.69rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  height: 19rem;
+  overflow: auto;
+}
+
+.loadingText {
+  font-family: Pretendard;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 500;
 }

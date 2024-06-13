@@ -1,45 +1,55 @@
+import { useContext } from 'react';
 import styles from './GnbHeader.module.scss';
 import { DashboardContext } from '../../../../contexts/DashboardContext';
-import { useContext } from 'react';
+import { UserContext } from '../../../../contexts/UserContext';
 import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 import CrownImg from '/icon/crown.svg';
+import { InviteBtn, SettingBtn } from '../Btn/Btn';
+import Members from '../Members/Members';
 
 /*
 /dashboard/{dashboardId} 페이지에 해당하는 헤더 컴포넌트입니다.
 */
 
 function GnbHeader() {
-  const context = useContext(DashboardContext);
+  const dashContext = useContext(DashboardContext);
+  const userContext = useContext(UserContext);
 
-  if (!context) {
+  if (!dashContext) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { activeDashboard, isCreateByMe } = context;
+  if (!userContext) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+  const { activeDashboard, activeTitle, isCreateByMe } = dashContext;
+  const { userInfo } = userContext;
 
   return (
     <header className={styles.GnbHeader}>
       <div className={styles.TitleContainer}>
-        <div className={styles.DashboardTitle}>
-          {'Dashboard '}
-          {activeDashboard}
-        </div>
+        <div className={styles.DashboardTitle}>{activeTitle}</div>
         {isCreateByMe && (
           <img src={CrownImg} alt="관리자 이미지" width={20} height={16} />
         )}
       </div>
       <div className={styles.HandleAndProfile}>
         <div className={styles.BtnContainer}>
-          <button type="button">관리</button>
-          <button type="button">초대하기</button>
+          <SettingBtn />
+          <InviteBtn />
         </div>
-        <div>members</div>
-        <div className={styles.VerticalLine} />
-        <UserProfileImg
-          isImg={false}
-          profileImageUrl="#A3C4A2"
-          nickname="Test"
-        />
-        <div>Test</div>
+        <div className={styles.MembersAndProfile}>
+          <Members dashboardId={activeDashboard} />
+          {/* 대시보드 id 가져와야 함. */}
+          <div className={styles.VerticalLine} />
+          <div className={styles.Profile}>
+            <UserProfileImg
+              isImg={false}
+              profileImageUrl="#A3C4A2"
+              nickname={userInfo?.nickname}
+            />
+            <div className={styles.nickName}>{userInfo?.nickname}</div>
+          </div>
+        </div>
       </div>
     </header>
   );

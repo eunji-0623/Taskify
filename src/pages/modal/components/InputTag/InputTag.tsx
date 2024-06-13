@@ -16,7 +16,7 @@ function InputTag({ tags, setTags }: InputProps) {
   const [newTag, setNewTag] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
 
-  // 엔터키를 눌렀을 때 수행할 동작
+  // 엔터키를 눌렀을 때 동작
   function onKeyPress(e: React.KeyboardEvent<HTMLElement>) {
     setErrorMessage(false);
 
@@ -38,7 +38,7 @@ function InputTag({ tags, setTags }: InputProps) {
     }
   }
 
-  // 태그에 있는 삭제 버튼을 클릭하면 삭제
+  // 태그에 있는 삭제 버튼을 클릭
   function handleDelete(index: number) {
     setTags((prevTags) => {
       const updatedTags = prevTags.slice(0, index).concat(prevTags.slice(index + 1));

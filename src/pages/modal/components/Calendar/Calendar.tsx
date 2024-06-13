@@ -2,7 +2,7 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
 import CalendarIcon from '/icon/calendar.svg';
-import { Locale } from 'date-fns';
+import { Locale, format } from 'date-fns';
 import styles from './Calendar.module.scss';
 
 /*
@@ -16,20 +16,26 @@ const koreanLocale = ko as unknown as Locale;
 registerLocale('ko', koreanLocale);
 
 interface CalendarProps {
-  deadline: Date | null;
-  setDeadline: React.Dispatch<React.SetStateAction<Date | null>>;
+  dueDate: string;
+  setDueDate: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Calendar({ deadline, setDeadline }: CalendarProps) {
+function Calendar({ dueDate, setDueDate }: CalendarProps) {
   const handleDateChange = (date: Date | null) => {
-    setDeadline(date); // 날짜 객체 그대로 전달
+    if (date) {
+      const editData: string = format(date, 'yyyy-MM-dd HH:mm');
+      setDueDate(editData);
+    }
   };
+
+  const parsedDeadline = dueDate ? new Date(dueDate) : null;
 
   return (
     <div className={styles.container}>
+      <h3>마감일</h3>
       <DatePicker
         className={styles.calendarBlock}
-        selected={deadline}
+        selected={parsedDeadline}
         locale="ko"
         onChange={handleDateChange}
         showTimeSelect

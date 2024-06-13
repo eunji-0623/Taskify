@@ -1,26 +1,26 @@
-import { ChangeEvent, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import styles from './InputImage.module.scss';
 import PencilIcon from '/icon/pencil.svg';
-
-/*
-  할 일 모달에서 이미지를 첨부할 수 있습니다.
-
-  prop으로 이미지url을 받습니다.
-*/
+import AddIcon from '/icon/add_image_box.svg';
 
 interface InputImageProps {
-  uploadImgUrl: string;
-  setUploadImgUrl: (url: string) => void;
-  // eslint-disable-next-line react/require-default-props
-  text?: string;
+  imageUrl: string | ArrayBuffer | null;
+  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  text: string;
 }
 
 function InputImage({
-  uploadImgUrl,
-  setUploadImgUrl,
-  text = '',
+  imageUrl,
+  setImageUrl,
+  text,
 }: InputImageProps) {
   const uploadImageRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (imageUrl === null) {
+      setImageUrl(AddIcon);
+    }
+  }, [imageUrl, setImageUrl]);
 
   const onClickImage = () => {
     if (uploadImageRef.current) {
@@ -28,19 +28,20 @@ function InputImage({
     }
   };
 
-  const onchangeImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    if (files && files[0]) {
-      const uploadFile = files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(uploadFile);
-      reader.onloadend = () => {
-        if (reader.result) {
-          setUploadImgUrl(reader.result as string);
-        }
-      };
-    }
-  };
+  // URL 변경
+  // const ImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { files } = e.target;
+  //   if (files && files.length > 0) {
+  //     const uploadFile = files[0];
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(uploadFile);
+  //     reader.onloadend = () => {
+  //       if (reader.result) {
+  //         setImageUrl(reader.result);
+  //       }
+  //     };
+  //   }
+  // };
 
   return (
     <div className={styles.contentBlock}>
@@ -50,7 +51,7 @@ function InputImage({
           <>
             <img
               className={styles.contentImage}
-              src={uploadImgUrl}
+              src={typeof imageUrl === 'string' ? imageUrl : ''}
               alt="img"
             />
             <img
@@ -59,7 +60,9 @@ function InputImage({
               alt="img"
             />
           </>
-        ) : <img className={styles.contentImageBasic} src={uploadImgUrl} alt="img" />}
+        ) : (
+          <img className={styles.contentImageBasic} src={typeof imageUrl === 'string' ? imageUrl : ''} alt="img" />
+        )}
       </button>
 
       <input
@@ -69,7 +72,7 @@ function InputImage({
         accept="image/*"
         style={{ display: 'none' }}
         ref={uploadImageRef}
-        onChange={onchangeImageUpload}
+        // onChange={ImageUpload}
       />
     </div>
   );

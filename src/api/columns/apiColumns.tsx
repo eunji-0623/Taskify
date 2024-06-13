@@ -1,13 +1,6 @@
 import instance from '../axiosInstance';
 import { handleResponse } from '../errorHandler';
 
-export interface ColumnOverAll {
-  id: number;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface CreateColumnBody {
   title: string;
   dashboardId: number;
@@ -21,23 +14,19 @@ export interface UploadCardImageBody {
   image: string;
 }
 
-interface ColumnOverAllResponse {
-  status: number;
-  data: ColumnOverAll;
+export interface ColumnOverAll {
+  id: number;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface GetColumnResponse {
-  status: number;
-  result?: 'SUCCESS';
-  data: {
-    cursorId: number;
-    totalCount: number;
-    dashboards: ColumnOverAll[];
-  };
+export interface GetColumnListResponse {
+  result: string;
+  data: ColumnOverAll[];
 }
 
-interface UploadCardImageResponse {
-  status: number;
+export interface UploadCardImageResponse {
   imageUrl: string;
 }
 
@@ -46,8 +35,8 @@ interface UploadCardImageResponse {
 // 컬럼 생성 api
 export async function apiCreateColumn(
   body: CreateColumnBody,
-): Promise<ColumnOverAllResponse> {
-  const res = await instance.post<ColumnOverAllResponse>('/cards', body);
+): Promise<ColumnOverAll> {
+  const res = await instance.post<ColumnOverAll>('/columns', body);
   return handleResponse(res);
 }
 
@@ -55,8 +44,8 @@ export async function apiCreateColumn(
 // dashboardId를 파라미터로 받습니다.
 export async function apiGetColumnList(
   dashboardId: number,
-): Promise<GetColumnResponse> {
-  const res = await instance.get<GetColumnResponse>('/cards', {
+): Promise<GetColumnListResponse> {
+  const res = await instance.get<GetColumnListResponse>('/columns', {
     params: {
       dashboardId,
     },
@@ -69,18 +58,15 @@ export async function apiGetColumnList(
 export async function apiUpdateColumn(
   body: UpdateColumnBody,
   columnId: number,
-): Promise<ColumnOverAllResponse> {
-  const res = await instance.put<ColumnOverAllResponse>(
-    `/cards/${columnId}`,
-    body,
-  );
+): Promise<ColumnOverAll> {
+  const res = await instance.put<ColumnOverAll>(`/columns/${columnId}`, body);
   return handleResponse(res);
 }
 
 // 컬럼 삭제
 // columnId를 파라미터로 받습니다.
 export async function apiDeleteColumn(columnId: number) {
-  const res = await instance.delete(`/cards/${columnId}`);
+  const res = await instance.delete(`/columns/${columnId}`);
   return handleResponse(res);
 }
 
@@ -91,7 +77,7 @@ export async function apiUploadCardImage(
   columnId: number,
 ): Promise<UploadCardImageResponse> {
   const res = await instance.post<UploadCardImageResponse>(
-    `/cards/${columnId}/card-image`,
+    `/columns/${columnId}/card-image`,
     body,
   );
   return handleResponse(res);

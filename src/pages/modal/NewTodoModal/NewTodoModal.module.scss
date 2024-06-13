@@ -12,7 +12,7 @@
   background-color: $white_FFFFFF;
 
   @include mobile{
-    width: 24.4375rem;
+    width: 23.4375rem;
     height: 42rem;
     padding: 1rem;
   }
@@ -59,10 +59,23 @@
   }
 }
 
-// 스크롤 투명
+// 스크롤
 ::-webkit-scrollbar {
-  display: none
+  width: 4px;
+  height: 0;
 }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 161, 0.293); 
+  border: 0;
+  border-radius: 12px;
+}
+
+
+// // 스크롤 투명
+// ::-webkit-scrollbar {
+//   display: none
+// }
 
 .contentBlock {
   width: 100%;
@@ -176,4 +189,20 @@
   border: 0px;
   background: $violet_5534DA;
   color: $white_FFFFFF;
+}
+
+.inactiveButton {
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: var(--gray-gray_9FA6B2, #9FA6B2);
+  color: var(--white, #FFF);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: not-allowed;
+  pointer-events: none;
 }

@@ -35,14 +35,22 @@ export interface CardOverAll {
   };
   imageUrl?: string;
   columnId: number;
+  dashboardId: number;
   createdAt: string;
   updatedAt: string;
+  teamId: string;
 }
 
 export interface GetCardListResponse {
   cursorId: number;
   totalCount: number;
   cards: CardOverAll[];
+}
+
+export interface GetCardListQuery {
+  size?: number;
+  cursorId?: number | null;
+  columnId?: number;
 }
 
 // 여기부터 api 함수 선언부분입니다. **************************
@@ -58,15 +66,14 @@ export async function apiCreateCard(
 // 카드 목록 가져오기 api
 // size, cursorId, columnId를 파라미터로 받습니다.
 export async function apiGetCardList(
-  size: number,
-  cursorId: number,
-  columnId: number,
+  query: GetCardListQuery,
 ): Promise<GetCardListResponse> {
+  const { size, columnId, cursorId } = query;
   const res = await instance.get<GetCardListResponse>('/cards', {
     params: {
       size,
-      cursorId,
       columnId,
+      cursorId,
     },
   });
   return handleResponse(res);

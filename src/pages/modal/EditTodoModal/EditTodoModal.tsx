@@ -1,65 +1,159 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import DropdownMenu from '../components/DropdownMenu/DropdownMenu';
-import ManagerDropdown from '../components/ManagerDropdown/ManagerDropdown';
+import EditDropdownManagement from '../components/EditDropdownManagement/EditDropdownManagement';
+import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
+import TodoContent from '../components/TodoContent/TodoContent';
+import { apiGetColumnList, apiMemberList, apiUpdateCard } from '../../../api/apiModule';
 import InputTag from '../components/InputTag/InputTag';
 import InputImage from '../components/InputImage/InputImage';
 import styles from './EditTodoModal.module.scss';
-import TestImg from '/img/test_img.png';
 
-/*
-  할 일 수정을 위한 모달입니다.
-*/
+interface Member {
+  id: number;
+  userId: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+}
+
+interface CardOverAll {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: {
+    profileImageUrl?: string;
+    nickname: string;
+    id: number;
+  };
+  imageUrl?: string;
+  teamId: string;
+  columnId: number;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  openTodoModal: () => void;
+  cardId: number;
+  cardData: CardOverAll | undefined;
+  userId: number;
+  columnId: number;
+  dashboardId: number;
 }
 
-// 할 일 데이터가 필요
-function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
-  const [condition, setCondition] = useState('test1');
-  const [manager, setManager] = useState('test1');
-  const [profile, setProfile] = useState(TestImg);
-  const [title, setTitle] = useState('test');
-  const [contents, setContents] = useState('test');
-  const [deadline, setDeadline] = useState<Date | null>(new Date());
-  const [tags, setTags] = useState(['테스트1', '태스트2', '테스트태그']);
-  const [uploadImgUrl, setUploadImgUrl] = useState(TestImg);
+function EditTodoModal({
+  isOpen,
+  setIsOpen,
+  openTodoModal,
+  cardId,
+  cardData,
+  userId,
+  columnId,
+  dashboardId,
+}: ModalProps) {
+  const [cardState, setCardState] = useState<string>('');
+  const [manager, setManager] = useState('');
+  const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [dueDate, setDueDate] = useState<string>('');
+  const [tags, setTags] = useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [members, setMembers] = useState<Member[]>([]);
+  const [columnList, setColumnList] = useState<string[]>([]);
+  const [columnListId, setColumnListId] = useState<number[]>([]);
+  const [clickColumnId, setClickColumnId] = useState(Number);
 
-  // 테스트 데이터
-  const data = [
-    {
-      id: 1,
-      text: 'test1',
-      profile: TestImg,
-    },
-    {
-      id: 2,
-      text: 'test2',
-      profile: TestImg,
-    },
-    {
-      id: 3,
-      text: '3333',
-      profile: TestImg,
-    },
-    {
-      id: 4,
-      text: '4444',
-      profile: TestImg,
-    },
-  ];
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await apiMemberList({ dashboardId });
+        setMembers(response.members);
+      } catch (err) {
+        throw new Error('error');
+      }
+    };
 
-  // 모달 닫기
-  const close = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
+    fetchMembers();
+  }, [dashboardId]);
 
-  // 할 일 수정 버튼 클릭 시 동작
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  // 현재 데이터 추가
+  useEffect(() => {
+    if (cardData) {
+      setManager(cardData.assignee.nickname);
+      setManagerImg(cardData.assignee.profileImageUrl);
+      setTitle(cardData.title);
+      setDescription(cardData.description);
+      setDueDate(cardData.dueDate);
+      setTags(cardData.tags);
+      setImageUrl(cardData.imageUrl || '');
+    }
+  }, [cardData]);
+
+  // 컬럼 리스트 조회
+  useEffect(() => {
+    const fetchDashboardDetail = async () => {
+      try {
+        const response = await apiGetColumnList(dashboardId);
+        if (response.result === 'SUCCESS') {
+          const titles = Array.isArray(response.data)
+            ? response.data.map((column) => column.title) : [];
+          setColumnList(titles);
+
+          const idList = Array.isArray(response.data)
+            ? response.data.map((column) => column.id) : [];
+          setColumnListId(idList);
+
+          const column = response.data.find((item) => item.id === columnId);
+          setCardState(column ? column.title : '');
+        } else {
+          throw new Error('error');
+        }
+      } catch (error) {
+        throw new Error('error');
+      }
+    };
+
+    fetchDashboardDetail();
+  }, [dashboardId, columnId]);
+
+  // 수정 클릭
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const updateCard = {
+      columnId: clickColumnId,
+      assigneeUserId: userId,
+      title,
+      description,
+      dueDate,
+      tags,
+      // imageUrl,
+    };
+
+    try {
+      await apiUpdateCard(updateCard, cardId);
+      setIsOpen(false);
+    } catch (error) {
+      throw new Error('error');
+    }
+  };
+
+  const handleTodoOpen = () => {
+    openTodoModal();
+  };
+
+  if (!cardData) {
+    return null;
   }
 
   return (
@@ -69,71 +163,32 @@ function EditTodoModal({ isOpen, setIsOpen }: ModalProps) {
 
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
-            <div className={styles.contentDropdown}>
-              <div className={styles.contentBlock}>
-                <h3>상태</h3>
-                <DropdownMenu
-                  value={condition}
-                  setValue={setCondition}
-                  data={data}
-                />
-              </div>
-              <div className={styles.contentBlock}>
-                <h3>담당자</h3>
-                <ManagerDropdown
-                  value={manager}
-                  setValue={setManager}
-                  data={data}
-                  profile={profile}
-                  setProfile={setProfile}
-                />
-              </div>
-            </div>
+            <EditDropdownManagement
+              cardState={cardState}
+              setCardState={setCardState}
+              columnList={columnList}
+              columnListId={columnListId}
+              setColumnId={setClickColumnId}
+              manager={manager}
+              setManager={setManager}
+              managerImg={managerImg}
+              setManagerImg={setManagerImg}
+              members={members}
+            />
 
-            <div className={styles.contentBlock}>
-              <label htmlFor="title">
-                제목
-                <span className={styles.contentSpan}> *</span>
-              </label>
-              <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className={`${styles.contentInput} ${styles.inputTop}`}
-                type="text"
-                id="title"
-                name="title"
-                placeholder="제목을 입력해 주세요"
-                required
-              />
-            </div>
+            <Title title={title} setTitle={setTitle} />
 
-            <div className={styles.contentBlock}>
-              <label htmlFor="content">
-                설명
-                <span className={styles.contentSpan}> *</span>
-              </label>
-              <textarea
-                value={contents}
-                onChange={(e) => setContents(e.target.value)}
-                className={styles.textarea}
-                id="content"
-                name="content"
-                placeholder="설명을 입력해 주세요"
-              />
-            </div>
+            <TodoContent description={description} setDescription={setDescription} />
 
-            <div className={styles.contentBlock}>
-              <h3>마감일</h3>
-              <Calendar deadline={deadline} setDeadline={setDeadline} />
-            </div>
+            <Calendar dueDate={dueDate} setDueDate={setDueDate} />
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <InputImage uploadImgUrl={uploadImgUrl} setUploadImgUrl={setUploadImgUrl} />
+            <InputImage imageUrl={imageUrl} setImageUrl={setImageUrl} text="" />
           </div>
 
           <div className={styles.buttonBlock}>
-            <button className={styles.cancelButton} type="button" onClick={close}>취소</button>
+            <button className={styles.cancelButton} type="button" onClick={handleTodoOpen}>취소</button>
             <button className={styles.createButton} type="submit">수정</button>
           </div>
         </form>

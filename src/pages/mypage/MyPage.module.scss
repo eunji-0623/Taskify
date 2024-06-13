@@ -1,33 +1,27 @@
-@import '/src/styles/global.scss';
-@import '/src/styles/media.scss';
+@import '../../styles/utils.scss';
 
 .myPageLayout {
-  display: flex;
-  background: $gray_FAFAFA;
-}
+  display: grid;
+  height: 100vh;
+  background-color: var(--gray-gray_FAFAFA, #fafafa);
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
 
-.MyPageContainer {
-  display: flex;
-  flex-direction: column;
-}
-s .pageBackContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  .sidebar {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 1;
+  }
 
-  width: auto;
-  height: auto;
-  gap: 6px;
-}
+  .MypageHeader {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 2;
+  }
 
-.pageBackIcon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-
-.pageBackText {
-  color: $black_333236;
-  font-size: 20px;
-  font-weight: 500;
+  .myPageContents {
+    margin-left: 20px;
+    margin-top: 20px;
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 2;
+    overflow-x: auto;
+  }
 }

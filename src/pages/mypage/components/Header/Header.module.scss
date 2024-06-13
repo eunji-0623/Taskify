@@ -24,3 +24,16 @@
   justify-content: center;
   gap: 12px;
 }
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.userName {
+  color: $black_333236, #333236;
+  font-size: 16px;
+  font-weight: 500;
+}

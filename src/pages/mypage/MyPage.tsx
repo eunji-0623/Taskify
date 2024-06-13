@@ -5,8 +5,6 @@ import ArrowIcon from '../../../public/icon/arrow_forward.svg';
 import SideBar from '../../components/sidebar/sidebar';
 import MyPageHeader from './components/Header/Header';
 
-// navBar, sideBar 부분은 컴포넌트로 추가할 예정입니다.
-
 function MyPage() {
   return (
     <div className={styles.myPageLayout}>

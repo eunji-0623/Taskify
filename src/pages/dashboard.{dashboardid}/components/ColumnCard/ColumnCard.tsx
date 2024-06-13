@@ -13,7 +13,6 @@ interface CardProps {
     columnId: number;
     dashboardId: number;
   };
-  afterSubmit: () => void;
 }
 
 // 날짜 표시 formating
@@ -29,7 +28,6 @@ function ColumnCard({
   cardId,
   cardData,
   columnData,
-  afterSubmit,
 }: CardProps) {
   const [manageCardModalOpen, setManageCardModalOpen] = useState<boolean>(false);
   const {
@@ -45,6 +43,10 @@ function ColumnCard({
     setManageCardModalOpen(true);
   };
 
+  // 모달 응답
+  const afterSubmit = () => {
+    window.location.reload();
+  };
   // 컴포넌트 출력
   return (
     <div className={styles.wrapper}>

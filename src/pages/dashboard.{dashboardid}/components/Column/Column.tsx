@@ -148,7 +148,6 @@ function Column({
         hasNext={hasNext}
         setElement={setElement}
         columnData={columnData}
-        afterSubmit={afterSubmit}
       />
       {settingModalOpen ? (
         <EditColumnManagement

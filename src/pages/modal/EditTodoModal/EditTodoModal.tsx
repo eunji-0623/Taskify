@@ -80,16 +80,14 @@ function EditTodoModal({
     const fetchMembers = async () => {
       try {
         const response = await apiMemberList({ dashboardId });
-        console.log(response);
         setMembers(response.members);
 
         const idList = Array.isArray(response.members)
           ? response.members.map((member) => member.userId)
           : [];
         setMemberIdList(idList);
-        console.log(idList);
       } catch (err) {
-        console.error('Error fetching members:', err);
+        throw new Error('error');
       }
     };
 

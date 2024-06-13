@@ -38,7 +38,6 @@ function InputImage({
       reader.onloadend = () => {
         if (reader.result) {
           setImageUrl(reader.result.toString());
-          console.log(reader.result.toString());
         }
       };
     }

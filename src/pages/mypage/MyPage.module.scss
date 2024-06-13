@@ -1,22 +1,32 @@
 @import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
 
 .myPageLayout {
+  display: flex;
   background: $gray_FAFAFA;
 }
 
-.backContainer {
+.MyPageContainer {
   display: flex;
+  flex-direction: column;
+}
+s .pageBackContainer {
+  display: flex;
+  flex-direction: row;
   align-items: flex-start;
+
+  width: auto;
+  height: auto;
   gap: 6px;
 }
 
-.backIcon {
+.pageBackIcon {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
 }
 
-.backText {
+.pageBackText {
   color: $black_333236;
   font-size: 20px;
   font-weight: 500;

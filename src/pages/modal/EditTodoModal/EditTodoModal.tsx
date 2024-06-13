@@ -130,10 +130,6 @@ function EditTodoModal({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (clickColumnId === undefined) {
-      return;
-    }
-
     const updateCard = {
       columnId: clickColumnId,
       assigneeUserId: userId,

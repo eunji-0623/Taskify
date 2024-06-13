@@ -22,7 +22,10 @@ const ITEMS_PER_PAGE = 5;
 
 const fetchDashboards = async (
   page: number,
-): Promise<{ items: DashboardDetail[]; totalCount: number }> => {
+): Promise<{
+  items: DashboardDetail[];
+  totalCount: number;
+}> => {
   const data = await apiDashboardsList({
     navigationMethod: 'pagination',
     page,
@@ -57,6 +60,7 @@ function DashboardList() {
         {items.map((dashboard) => (
           <li key={dashboard.id}>
             <Dashboard
+              id={dashboard.id}
               color={dashboard.color}
               title={dashboard.title}
               isOwner={dashboard.createdByMe}

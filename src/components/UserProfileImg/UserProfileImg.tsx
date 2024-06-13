@@ -11,7 +11,7 @@ nickname props는 이미지가 없는 유저에 한해서 FirstName만 보입니
 interface UserProfileImgProps {
   isImg: boolean;
   profileImageUrl: string;
-  nickname: string;
+  nickname: string | undefined;
 }
 
 function UserProfileImg({
@@ -27,11 +27,13 @@ function UserProfileImg({
       {isImg ? (
         <img src={profileImageUrl} alt="프로필 이미지" className={styles.Img} />
       ) : (
-        <div className={styles.FirstName}>{nickname[0]}</div>
+        <div className={styles.FirstName}>{nickname?.[0].toUpperCase()}</div>
       )}
     </div>
   );
 }
+
+// 대시보드 멤버들 표현에 사용되는 프로필 이미지
 
 export function MembersProfileImg({
   isImg,
@@ -46,7 +48,7 @@ export function MembersProfileImg({
       {isImg ? (
         <img src={profileImageUrl} alt="프로필 이미지" className={styles.Img} />
       ) : (
-        <div className={styles.FirstName}>{nickname[0]}</div>
+        <div className={styles.FirstName}>{nickname?.[0].toUpperCase()}</div>
       )}
     </div>
   );

@@ -30,6 +30,7 @@
 .addDashboard {
   @include dashboard();
   justify-content: center;
+  gap: 10px;
 }
 
 @include tablet {

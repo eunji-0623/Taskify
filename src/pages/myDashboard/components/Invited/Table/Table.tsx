@@ -20,9 +20,15 @@ interface TableProps {
   invitations: Invitation[];
   hasNext: boolean;
   setElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
+  handleInvitation: (id: number, isAccept: boolean) => void;
 }
 
-function Table({ invitations, hasNext, setElement }: TableProps) {
+function Table({
+  invitations,
+  hasNext,
+  setElement,
+  handleInvitation,
+}: TableProps) {
   const { width } = useWindowSize();
 
   return (
@@ -34,8 +40,10 @@ function Table({ invitations, hasNext, setElement }: TableProps) {
             {invitations.map((invitation) => (
               <TableBody
                 key={invitation.id}
+                id={invitation.id}
                 title={invitation.dashboard.title}
                 name={invitation.inviter.nickname}
+                handleInvitation={handleInvitation}
               />
             ))}
             {hasNext && <tr ref={setElement} style={{ height: '20px' }} />}
@@ -46,6 +54,7 @@ function Table({ invitations, hasNext, setElement }: TableProps) {
           {invitations.map((invitation) => (
             <TableMobile
               key={invitation.id}
+              id={invitation.id}
               title={invitation.dashboard.title}
               name={invitation.inviter.nickname}
             />

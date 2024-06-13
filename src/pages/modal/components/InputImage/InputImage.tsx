@@ -5,7 +5,7 @@ import AddIcon from '/icon/add_image_box.svg';
 
 interface InputImageProps {
   imageUrl: string | ArrayBuffer | null;
-  setImageUrl: (url: string) => void;
+  setImageUrl: (url: string | ArrayBuffer | null) => void;
   text: string;
 }
 
@@ -16,10 +16,8 @@ function InputImage({
 }: InputImageProps) {
   const uploadImageRef = useRef<HTMLInputElement>(null);
 
-  console.log(imageUrl);
-
   useEffect(() => {
-    if (!imageUrl) {
+    if (imageUrl === null) {
       setImageUrl(AddIcon);
     }
   }, [imageUrl, setImageUrl]);
@@ -30,7 +28,7 @@ function InputImage({
     }
   };
 
-  // Base64 인코딩된 데이터 URL로 변환
+  // URL 변경
   const ImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files && files.length > 0) {
@@ -39,7 +37,7 @@ function InputImage({
       reader.readAsDataURL(uploadFile);
       reader.onloadend = () => {
         if (reader.result) {
-          setImageUrl(reader.result.toString());
+          setImageUrl(reader.result);
         }
       };
     }
@@ -53,7 +51,7 @@ function InputImage({
           <>
             <img
               className={styles.contentImage}
-              src={imageUrl as string}
+              src={typeof imageUrl === 'string' ? imageUrl : ''}
               alt="img"
             />
             <img
@@ -63,7 +61,7 @@ function InputImage({
             />
           </>
         ) : (
-          <img className={styles.contentImageBasic} src={imageUrl as string} alt="img" />
+          <img className={styles.contentImageBasic} src={typeof imageUrl === 'string' ? imageUrl : ''} alt="img" />
         )}
       </button>
 

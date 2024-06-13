@@ -2,33 +2,42 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import ManagerDropdown from '../ManagerDropdown/ManagerDropdown';
 import styles from './DropdownManagement.module.scss';
 
-/*
-  할 일 모달에 드롭다운 박스입니다.
-*/
+interface Member {
+  id: number;
+  userId: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+}
 
 interface ModalProps {
-  cardState: string;
-  setCardState: React.Dispatch<React.SetStateAction<string>>;
-  manager: string;
-  setManager: React.Dispatch<React.SetStateAction<string>>;
-  data: {
-    id: number;
-    text: string;
-    profile: string | undefined
-  }[];
-  managerImg: string | undefined
+  cardState?: string;
+  setCardState?: React.Dispatch<React.SetStateAction<string>>;
+  manager: string | null;
+  setManager: React.Dispatch<React.SetStateAction<string | null>>;
+  managerImg: string | undefined;
   setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
+  members: Member[];
   text: string;
+  columnList?: string[];
+  columnListId?: number[];
+  setColumnId?: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 
 function DropdownManagement({
   cardState = '',
   setCardState = () => {},
+  columnList,
   manager,
   setManager,
-  data,
+  members,
   managerImg,
   setManagerImg,
+  columnListId,
+  setColumnId,
   text,
 }: ModalProps) {
   return (
@@ -39,7 +48,9 @@ function DropdownManagement({
           <DropdownMenu
             value={cardState}
             setValue={setCardState}
-            data={data}
+            columnList={columnList}
+            columnListId={columnListId}
+            setColumnId={setColumnId}
           />
         </div>
       ) : null}
@@ -48,7 +59,7 @@ function DropdownManagement({
         <ManagerDropdown
           value={manager}
           setValue={setManager}
-          data={data}
+          members={members}
           profile={managerImg}
           setProfile={setManagerImg}
         />

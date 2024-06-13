@@ -1,11 +1,7 @@
 import { useState } from 'react';
+import { format } from 'date-fns';
 import styles from './CommentItem.module.scss';
-import TestImg from '/img/test_img.png';
 import { apiUpdateComment, apiDeleteComment } from '../../../../api/apiModule';
-
-/*
-  Comment.tsx에서 이름, 댓글, 프로필을 입력받아 댓글을 보여줍니다.
-*/
 
 interface CommentProps {
   name: string;
@@ -15,9 +11,19 @@ interface CommentProps {
   apiCommentList: () => void;
   userId: number;
   edituserId: number;
+  date: string;
 }
 
-function CommentItem({ name, commentText, image, commentId, apiCommentList, userId, edituserId }: CommentProps) {
+function CommentItem({
+  name,
+  commentText,
+  date,
+  image,
+  commentId,
+  apiCommentList,
+  userId,
+  edituserId,
+}: CommentProps) {
   const [comment, setComment] = useState(commentText);
   const [editComment, setEditComment] = useState(commentText);
   const [edit, setEdit] = useState(false);
@@ -32,9 +38,7 @@ function CommentItem({ name, commentText, image, commentId, apiCommentList, user
     };
 
     try {
-      const response = await apiUpdateComment(updateComment, commentId);
-      console.log('test', response);
-
+      await apiUpdateComment(updateComment, commentId);
       setComment(editComment);
     } catch (error) {
       throw new Error('error');
@@ -70,10 +74,10 @@ function CommentItem({ name, commentText, image, commentId, apiCommentList, user
 
   return (
     <div className={styles.container}>
-      <img className={styles.image} src={TestImg} alt="테스트 이미지" />
+      <img className={styles.image} src={image || ''} alt="테스트 이미지" />
       <div className={styles.titleBlock}>
         <span className={styles.name}>{name}</span>
-        <span className={styles.date}>2022.12.27 14:00</span>
+        <span className={styles.date}>{format(date, 'yyyy-MM-dd HH:mm')}</span>
       </div>
 
       <div className={styles.commentBlock}>

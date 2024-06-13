@@ -27,23 +27,25 @@ interface CommentOverAll {
   };
 }
 
-function Comment({ cardId, columnId, userId, dashboardId }: ModalProps) {
+function Comment({
+  cardId,
+  columnId,
+  userId,
+  dashboardId,
+}: ModalProps) {
   const [comment, setComment] = useState('');
-
   const [comments, setComments] = useState<CommentOverAll[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [cursorId, setCursorId] = useState<number>(0);
-  const [size, setSize] = useState<number>(10);
 
+  // 댓글 목록 조회
   const apiCommentList = useCallback(async () => {
     setLoading(true);
-    setError(null);
     try {
       const response = await apiGetCommentList(cardId);
       setComments(response.comments);
-    } catch (err) {
-      setError('error');
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    } catch (error) {
+      throw new Error('error');
     } finally {
       setLoading(false);
     }
@@ -51,7 +53,7 @@ function Comment({ cardId, columnId, userId, dashboardId }: ModalProps) {
 
   useEffect(() => {
     apiCommentList();
-  }, [cardId, cursorId, size, apiCommentList]);
+  }, [cardId, apiCommentList]);
 
   if (loading) return <div className={styles.loadingText}>로딩 중...</div>;
 
@@ -104,6 +106,7 @@ function Comment({ cardId, columnId, userId, dashboardId }: ModalProps) {
               key={commentItem.id}
               name={commentItem.author.nickname}
               commentText={commentItem.content}
+              date={commentItem.createdAt}
               userId={userId}
               edituserId={commentItem.author.id}
               image={commentItem.author.profileImageUrl}

@@ -3,27 +3,29 @@ import styles from './ManagerDropdown.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
 
-/*
-  관리자 드롭다운 메뉴바
-  value, setValue, data를 prop로 받습니다.
-*/
+interface Member {
+  id: number;
+  userId: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+}
 
 interface DropdownProps {
-  value: string;
+  value: string | null;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  data: {
-    id: number;
-    text: string;
-    profile: string | undefined;
-  }[]
   profile: string | undefined;
   setProfile: React.Dispatch<React.SetStateAction<string | undefined>>;
+  members: Member[];
 }
 
 function ManagerDropdown({
   value,
   setValue,
-  data,
+  members,
   profile,
   setProfile,
 }: DropdownProps) {
@@ -31,7 +33,6 @@ function ManagerDropdown({
   const [searchTerm, setSearchTerm] = useState(value);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 영역 밖 클릭 시 닫기
   useEffect(() => {
     const handleModal = (event: MouseEvent) => {
       if (isOpen && !modalRef.current?.contains(event.target as Node)) {
@@ -50,25 +51,26 @@ function ManagerDropdown({
     setIsOpen(!isOpen);
   };
 
-  const handleItemClick = (choice: string, profileImg: string | undefined) => {
-    setValue(choice);
+  const handleItemClick = (nickname: string, profileImageUrl: string) => {
+    setValue(nickname);
     setIsOpen(false);
-    setSearchTerm(choice);
-    setProfile(profileImg);
+    setSearchTerm(nickname);
+    setProfile(profileImageUrl);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = data.filter((item) => item.text.toLowerCase()
-    .includes(searchTerm.toLowerCase()));
+  // const filteredData = members.filter((member) => member.nickname
+  //   && searchTerm
+  //   && member.nickname.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <div className={styles.container} ref={modalRef}>
       <button className={styles.searchBlock} onClick={toggleDropdown} type="button">
         <div className={styles.searchCenter}>
-          {value && <img className={styles.profileImg} src={profile} alt="프로필 이미지" />}
+          <img className={styles.profileImg} src={profile} alt="프로필 이미지" />
           <input
             className={styles.searchInput}
             type="text"
@@ -89,14 +91,14 @@ function ManagerDropdown({
         <div className={styles.dropdownBlock}>
           <div className={styles.dropdownContent}>
             <ul className={styles.items}>
-              {filteredData.map((item) => (
-                <li key={item.id}>
+              {members.map((member) => (
+                <li key={member.id}>
                   <button
                     className={styles.itemBlock}
                     type="button"
-                    onClick={() => handleItemClick(item.text, item.profile)}
+                    onClick={() => handleItemClick(member.nickname, member.profileImageUrl)}
                   >
-                    {value === item.text && (
+                    {value === member.nickname && (
                       <img
                         className={styles.checkedImg}
                         src={checked}
@@ -104,8 +106,12 @@ function ManagerDropdown({
                       />
                     )}
                     <div className={styles.item}>
-                      <img className={styles.dropdownprofile} src={item.profile} alt={item.text} />
-                      {item.text}
+                      <img
+                        className={styles.dropdownProfile}
+                        src={member.profileImageUrl}
+                        alt={member.nickname}
+                      />
+                      {member.nickname}
                     </div>
                   </button>
                 </li>

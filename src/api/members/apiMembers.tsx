@@ -6,7 +6,7 @@ interface MemberId {
 }
 
 interface MemberQuery {
-  dashboardId: number;
+  dashboardId: number | undefined;
   page?: number;
   size?: number;
 }

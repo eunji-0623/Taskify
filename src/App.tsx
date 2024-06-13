@@ -9,26 +9,42 @@ import Login from './pages/login-signup/login/Login';
 import SignUp from './pages/login-signup/signup/SignUp';
 import MyPage from './pages/mypage/MyPage';
 import { DashboardProvider } from './contexts/DashboardContext';
+import { UserProvider } from './contexts/UserContext';
 
 /*
 페이지 라우팅 분리,
 */
+function AppLayout() {
+  return (
+    <Routes>
+      <Route path="/mydashboard" element={<MyDashboard />} />
+      <Route path="/dashboard/:id/edit" element={<DashboardEdit />} />
+      <Route path="/dashboard/:id" element={<DashboardForId />} />
+      <Route path="/mypage" element={<MyPage />} />
+    </Routes>
+  );
+}
 
 function App() {
   return (
     <BrowserRouter>
-      <DashboardProvider>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/mydashboard" element={<MyDashboard />} />
-          <Route path="/dashboard/:id/edit" element={<DashboardEdit />} />
-          <Route path="/dashboard/:id" element={<DashboardForId />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/mypage" element={<MyPage />} />
-        </Routes>
-      </DashboardProvider>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/*"
+          element={(
+            <UserProvider>
+              <DashboardProvider>
+                <AppLayout />
+              </DashboardProvider>
+            </UserProvider>
+          )}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
+
 export default App;

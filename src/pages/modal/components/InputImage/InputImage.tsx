@@ -5,7 +5,7 @@ import AddIcon from '/icon/add_image_box.svg';
 
 interface InputImageProps {
   imageUrl: string | ArrayBuffer | null;
-  setImageUrl: (url: string | ArrayBuffer | null) => void;
+  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
   text: string;
 }
 

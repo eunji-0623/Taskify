@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import DropdownManagement from '../components/DropdownManagement/DropdownManagement';
+import NewDropdownManagement from '../components/NewDropdownManagement/NewDropdownManagement';
 import { apiCreateCard, apiMemberList } from '../../../api/apiModule';
 import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
@@ -37,7 +37,7 @@ function NewTodoModal({
   columnId,
 }: ModalProps) {
   const [manager, setManager] = useState('');
-  const [managerImg, setManagerImg] = useState<string | null>(TestImg);
+  const [managerImg, setManagerImg] = useState<string | undefined>(TestImg);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
@@ -107,13 +107,12 @@ function NewTodoModal({
 
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
-            <DropdownManagement
+            <NewDropdownManagement
               manager={manager}
               setManager={setManager}
               managerImg={managerImg}
               setManagerImg={setManagerImg}
               members={members}
-              text="new"
             />
 
             <Title title={title} setTitle={setTitle} />

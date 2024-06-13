@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import styles from './InputImage.module.scss';
 import PencilIcon from '/icon/pencil.svg';
 import AddIcon from '/icon/add_image_box.svg';
@@ -29,19 +29,19 @@ function InputImage({
   };
 
   // URL 변경
-  const ImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    if (files && files.length > 0) {
-      const uploadFile = files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(uploadFile);
-      reader.onloadend = () => {
-        if (reader.result) {
-          setImageUrl(reader.result);
-        }
-      };
-    }
-  };
+  // const ImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { files } = e.target;
+  //   if (files && files.length > 0) {
+  //     const uploadFile = files[0];
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(uploadFile);
+  //     reader.onloadend = () => {
+  //       if (reader.result) {
+  //         setImageUrl(reader.result);
+  //       }
+  //     };
+  //   }
+  // };
 
   return (
     <div className={styles.contentBlock}>
@@ -72,7 +72,7 @@ function InputImage({
         accept="image/*"
         style={{ display: 'none' }}
         ref={uploadImageRef}
-        onChange={ImageUpload}
+        // onChange={ImageUpload}
       />
     </div>
   );

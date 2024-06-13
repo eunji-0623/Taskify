@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import DropdownManagement from '../components/DropdownManagement/DropdownManagement';
+import EditDropdownManagement from '../components/EditDropdownManagement/EditDropdownManagement';
 import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
 import TodoContent from '../components/TodoContent/TodoContent';
@@ -62,7 +62,7 @@ function EditTodoModal({
 }: ModalProps) {
   const [cardState, setCardState] = useState<string>('');
   const [manager, setManager] = useState('');
-  const [managerImg, setManagerImg] = useState<string | null>(null);
+  const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [dueDate, setDueDate] = useState<string>('');
@@ -71,7 +71,7 @@ function EditTodoModal({
   const [members, setMembers] = useState<Member[]>([]);
   const [columnList, setColumnList] = useState<string[]>([]);
   const [columnListId, setColumnListId] = useState<number[]>([]);
-  const [clickColumnId, setClickColumnId] = useState<number | null>(null);
+  const [clickColumnId, setClickColumnId] = useState(Number);
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -163,7 +163,7 @@ function EditTodoModal({
 
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
-            <DropdownManagement
+            <EditDropdownManagement
               cardState={cardState}
               setCardState={setCardState}
               columnList={columnList}
@@ -174,7 +174,6 @@ function EditTodoModal({
               managerImg={managerImg}
               setManagerImg={setManagerImg}
               members={members}
-              text=""
             />
 
             <Title title={title} setTitle={setTitle} />

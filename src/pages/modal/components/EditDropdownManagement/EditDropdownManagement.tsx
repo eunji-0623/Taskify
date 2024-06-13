@@ -1,6 +1,6 @@
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import ManagerDropdown from '../ManagerDropdown/ManagerDropdown';
-import styles from './DropdownManagement.module.scss';
+import styles from './EditDropdownManagement.module.scss';
 
 interface Member {
   id: number;
@@ -14,20 +14,19 @@ interface Member {
 }
 
 interface ModalProps {
-  cardState?: string;
-  setCardState?: React.Dispatch<React.SetStateAction<string>>;
+  cardState: string;
+  setCardState: React.Dispatch<React.SetStateAction<string>>;
   manager: string | null;
   setManager: React.Dispatch<React.SetStateAction<string>>;
-  managerImg: string | null;
-  setManagerImg: React.Dispatch<React.SetStateAction<string | null>>;
+  managerImg: string | undefined;
+  setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];
-  text: string;
-  columnList?: string[];
-  columnListId?: number[];
-  setColumnId?: React.Dispatch<React.SetStateAction<number | null>>;
+  columnList: string[];
+  columnListId: number[];
+  setColumnId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function DropdownManagement({
+function EditDropdownManagement({
   cardState = '',
   setCardState = () => {},
   columnList,
@@ -38,22 +37,19 @@ function DropdownManagement({
   setManagerImg,
   columnListId,
   setColumnId,
-  text,
 }: ModalProps) {
   return (
     <div className={styles.contentDropdown}>
-      {text !== 'new' ? (
-        <div className={styles.contentBlock}>
-          <h3>상태</h3>
-          <DropdownMenu
-            value={cardState}
-            setValue={setCardState}
-            columnList={columnList}
-            columnListId={columnListId}
-            setColumnId={setColumnId}
-          />
-        </div>
-      ) : null}
+      <div className={styles.contentBlock}>
+        <h3>상태</h3>
+        <DropdownMenu
+          value={cardState}
+          setValue={setCardState}
+          columnList={columnList}
+          columnListId={columnListId}
+          setColumnId={setColumnId}
+        />
+      </div>
       <div className={styles.contentBlock}>
         <h3>담당자</h3>
         <ManagerDropdown
@@ -68,4 +64,4 @@ function DropdownManagement({
   );
 }
 
-export default DropdownManagement;
+export default EditDropdownManagement;

@@ -30,7 +30,6 @@ function ManagerDropdown({
   setProfile,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState(value);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,11 +51,10 @@ function ManagerDropdown({
   };
 
   const handleItemClick = (nickname: string, profileImageUrl: string) => {
-    console.log('s',nickname)
     setValue(nickname);
     setIsOpen(false);
-    // setSearchTerm(nickname);
     setProfile(profileImageUrl);
+    // setSearchTerm(nickname);
   };
 
   // const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +74,7 @@ function ManagerDropdown({
             className={styles.searchInput}
             type="text"
             placeholder="이름을 입력해 주세요"
-            value={value}
+            value={value ?? ''}
             onClick={toggleDropdown}
             // onChange={handleSearchChange}
           />

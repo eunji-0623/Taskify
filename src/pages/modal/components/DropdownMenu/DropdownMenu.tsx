@@ -9,7 +9,7 @@ interface DropdownProps {
   setValue: React.Dispatch<React.SetStateAction<string>>;
   columnList: Array<string>;
   columnListId: Array<number>;
-  setColumnId: React.Dispatch<React.SetStateAction<number[]>>
+  setColumnId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function DropdownMenu({

@@ -39,7 +39,7 @@ function GnbHeader() {
         </div>
         <div className={styles.MembersAndProfile}>
           <Members dashboardId={activeDashboard} />
-          {/* 대시보드 id 가져와야 함. */}
+          {/* 대시보드 id 가져와야 함. */}    
           <div className={styles.VerticalLine} />
           <div className={styles.Profile}>
             <UserProfileImg

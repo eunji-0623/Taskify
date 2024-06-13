@@ -1,14 +1,21 @@
 import styles from './Table.module.scss';
 import { AcceptAndRejectBtn } from '../../../../../components/Btn/Btn';
+import { apiInvitationAccept } from '../../../../../api/apiModule';
 
 interface Props {
+  id: number;
   title: string;
   name: string;
 }
 
-function TableMobile({ title, name }: Props) {
-  const handleAcceptButton = () => {};
-  const handleRejectButton = () => {};
+function TableMobile({ id, title, name }: Props) {
+  const handleAccept = async () => {
+    await apiInvitationAccept({ invitationId: id }, { inviteAccepted: true });
+  };
+
+  const handleReject = async () => {
+    await apiInvitationAccept({ invitationId: id }, { inviteAccepted: false });
+  };
 
   return (
     <>
@@ -24,8 +31,8 @@ function TableMobile({ title, name }: Props) {
       <tr>
         <td colSpan={2} aria-label="수락 거절 버튼">
           <AcceptAndRejectBtn
-            handleAccept={handleAcceptButton}
-            handleReject={handleRejectButton}
+            handleAccept={handleAccept}
+            handleReject={handleReject}
           />
         </td>
       </tr>

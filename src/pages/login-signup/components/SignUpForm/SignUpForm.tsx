@@ -5,8 +5,7 @@ import InputEmail from '../Input/InputEmail';
 import InputPassword from '../Input/InputPassword';
 import Checkbox from '../CheckBox/CheckBox';
 import Button from '../Button/Button';
-import useInputHandlers from '../utils/useInputHandlers';
-import useSignUpForm from '../utils/useSignUpForm';
+import { useCombinedSignUpForm } from '../utils/useCombinedForm';
 import useCheckBox from '../utils/useCheckBox';
 
 // 회원가입 화면의 기능을 수행하는 함수를 불러오고 페이지를 리턴해주는 컴포넌트 입니다.
@@ -17,10 +16,14 @@ import useCheckBox from '../utils/useCheckBox';
 
 function SignUpForm() {
   const {
-    email,
-    name,
-    password,
-    passwordCheck,
+    values,
+    loading,
+    isModalOpen,
+    isErrorModalOpen,
+    handleSubmit,
+    closeModal,
+    setIsModalOpen,
+    setIsErrorModalOpen,
     emailError,
     nameError,
     passwordError,
@@ -33,27 +36,15 @@ function SignUpForm() {
     handlePasswordBlur,
     handlePasswordCheckChange,
     handlePasswordCheckBlur,
-  } = useInputHandlers(); // Input 에러 관리 함수
-
-  const {
-    loading,
-    isModalOpen,
-    isErrorModalOpen,
-    isWhatModalOpen,
-    handleSubmit,
-    closeModal,
-    setIsModalOpen,
-    setIsErrorModalOpen,
-    setIsWhatModalOpen,
-  } = useSignUpForm(); // 회원가입 폼 제출 함수
+  } = useCombinedSignUpForm();
 
   const { isCheckboxAgreed, handleCheckboxChange } = useCheckBox(); // 체크박스 상태 관리 함수
 
-  // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화 = setIsButtonDisabled(false)
-  const setIsButtonDisabled = () => email.trim() === ''
-    || name.trim() === ''
-    || password.trim() === ''
-    || passwordCheck.trim() === ''
+  // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화 = isButtonDisabled(false)
+  const isButtonDisabled = () => values.email.trim() === ''
+    || values.nickname.trim() === ''
+    || values.password.trim() === ''
+    || values.passwordCheck.trim() === ''
     || emailError
     || nameError
     || passwordError
@@ -80,7 +71,7 @@ function SignUpForm() {
             placeholder="이메일을 입력해 주세요."
             errorText="이메일 형식으로 작성해 주세요."
             error={emailError}
-            value={email}
+            value={values.email}
             onChange={handleEmailChange}
             onBlur={handleEmailBlur}
           />
@@ -93,7 +84,7 @@ function SignUpForm() {
             type={InputType.Text}
             placeholder="닉네임을 입력해 주세요."
             errorText="열 자 이하로 작성해 주세요."
-            value={name}
+            value={values.nickname}
             onChange={handleNameChange}
             onBlur={handleNameBlur}
             error={nameError}
@@ -108,7 +99,7 @@ function SignUpForm() {
             placeholder="비밀번호를 입력해 주세요."
             errorText="8자 이상 작성해 주세요."
             error={passwordError}
-            value={password}
+            value={values.password}
             onChange={handlePasswordChange}
             onBlur={handlePasswordBlur}
           />
@@ -121,7 +112,7 @@ function SignUpForm() {
             type={InputType.Password}
             placeholder="비밀번호를 한번 더 입력해 주세요"
             errorText="비밀번호가 일치하지 않습니다."
-            value={passwordCheck}
+            value={values.passwordCheck}
             onChange={handlePasswordCheckChange}
             onBlur={handlePasswordCheckBlur}
             error={passwordCheckError}
@@ -134,7 +125,7 @@ function SignUpForm() {
         <Button
           pageName="signUp"
           buttonText={loading ? '회원가입 중...' : '회원가입'}
-          isDisabled={setIsButtonDisabled() || loading}
+          isDisabled={isButtonDisabled() || loading}
         />
       </form>
       {/* 회원가입 성공 모달 */}
@@ -150,15 +141,6 @@ function SignUpForm() {
       {isErrorModalOpen && (
         <AlertModal isOpen={isErrorModalOpen} setIsOpen={setIsErrorModalOpen}>
           <p>이미 사용 중인 이메일입니다.</p>
-          <button type="button" onClick={closeModal}>
-            확인
-          </button>
-        </AlertModal>
-      )}
-      {/* 그 밖의 에러 모달 */}
-      {isWhatModalOpen && (
-        <AlertModal isOpen={isWhatModalOpen} setIsOpen={setIsWhatModalOpen}>
-          <p>에러가 발생했습니다.</p>
           <button type="button" onClick={closeModal}>
             확인
           </button>

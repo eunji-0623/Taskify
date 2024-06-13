@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './sidebar.module.scss';
 import Logo from '/icon/logo_large.svg';
@@ -6,17 +7,9 @@ import AddBox from '/icon/add_box.svg';
 import LogoMobile from '/icon/logo_small.svg';
 import SideDashBoard from '../SideDashBoard/SideDashBoard';
 import { PagenationBtn } from '../Btn/Btn';
-import usePagination from '../../hooks/pagination/usePagination';
 import { DashboardContext } from '../../contexts/DashboardContext';
 import useNewDashModal from '../../hooks/modal/useNewDashModal';
 import { apiDashboardsList } from '../../api/apiModule';
-
-/*
-사이드 바 컴포넌트 입니다.
-우선 기본적으로 대시보드를 15개씩 보이도록 하고,
-스크롤은 따로 적용되도록 하였습니다.
-대시보드 클릭 시, /dashboard/{dashboardId}로 이동합니다.
-*/
 
 interface DashboardDetail {
   id: number;
@@ -28,15 +21,17 @@ interface DashboardDetail {
   userId: number;
 }
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 15;
+const ITEMS_PER_PAGE_MOBILE = 100;
 
 const fetchDashboards = async (
   page: number,
+  itemsPerPage: number,
 ): Promise<{ items: DashboardDetail[]; totalCount: number }> => {
   const data = await apiDashboardsList({
     navigationMethod: 'pagination',
     page,
-    size: ITEMS_PER_PAGE,
+    size: itemsPerPage,
   });
   return {
     items: Object.values(data.dashboards),
@@ -46,24 +41,63 @@ const fetchDashboards = async (
 
 function SideBar() {
   const { NewDashModal, openDash } = useNewDashModal();
+  const navigate = useNavigate();
   const context = useContext(DashboardContext);
 
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = context;
-  const navigate = useNavigate();
 
-  const {
-    items,
-    currentPage,
-    totalPages,
-    handlePrevClick,
-    handleNextClick,
-  } = usePagination<DashboardDetail>({
-    fetchData: fetchDashboards,
-    itemsPerPage: ITEMS_PER_PAGE,
-  });
+  const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = context;
+
+  // 상태 관리
+  const [dashboardItems, setDashboardItems] = useState<DashboardDetail[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // 화면 크기에 따라 한 페이지당 보여줄 대시보드 수를 결정
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const itemsPerPage = isMobile ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE;
+
+  // 데이터 로드 및 페이지 설정
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { items: dashboards, totalCount } = await fetchDashboards(1, itemsPerPage);
+        setDashboardItems(dashboards);
+        setTotalPages(Math.ceil(totalCount / itemsPerPage));
+      } catch (error) {
+        console.error('Error fetching dashboards:', error);
+      }
+    };
+
+    fetchData();
+  }, [itemsPerPage]);
+  
+  const fetchPageData = async (page: number) => {
+    try {
+      const { items: dashboards } = await fetchDashboards(page, itemsPerPage);
+      setDashboardItems(dashboards);
+    } catch (error) {
+      console.error('Error fetching dashboards for page:', page, error);
+    }
+  };
+
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
+      const prevPage = currentPage - 1;
+      fetchPageData(prevPage);
+      setCurrentPage(prevPage);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      const nextPage = currentPage + 1;
+      fetchPageData(nextPage);
+      setCurrentPage(nextPage);
+    }
+  };
 
   const ClickDashboard = (id: number, createdByMe: boolean, title: string) => {
     setActiveDashboard(id);
@@ -83,7 +117,7 @@ function SideBar() {
         />
       </Link>
       <div className={styles.SideBarHeader}>
-        <span className={styles.Title}>Dash Board</span>
+        <span className={styles.Title}>Dash Boards</span>
         <button
           type="button"
           className={styles.AddBoxButton}
@@ -98,29 +132,33 @@ function SideBar() {
         <NewDashModal />
       </div>
       <div className={styles.DashboardsList}>
-        {items.map((dashboard) => (
+        {dashboardItems.map((dashboard) => (
           <SideDashBoard
             key={dashboard.id}
             color={dashboard.color}
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() => ClickDashboard(
-              dashboard.id,
-              dashboard.createdByMe,
-              dashboard.title,
-            )}
+            onClick={() =>
+              ClickDashboard(
+                dashboard.id,
+                dashboard.createdByMe,
+                dashboard.title
+              )
+            }
           />
         ))}
       </div>
-      <div className={styles.PagenationBtn}>
-        <PagenationBtn
-          isFirstPage={currentPage === 1}
-          isLastPage={currentPage === totalPages}
-          handlePrev={handlePrevClick}
-          handleNext={handleNextClick}
-        />
-      </div>
+      {!isMobile && (
+        <div className={styles.PaginationBtn}>
+          <PagenationBtn
+            isFirstPage={currentPage === 1}
+            isLastPage={currentPage === totalPages}
+            handlePrev={handlePrevClick}
+            handleNext={handleNextClick}
+          />
+        </div>
+      )}
     </div>
   );
 }

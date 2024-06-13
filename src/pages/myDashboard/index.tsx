@@ -1,4 +1,3 @@
-import React from 'react';
 import SideBar from '../../components/sidebar/sidebar';
 import DashboardList from './components/DashboardList/DashboardList';
 import MyDashboardHeader from './components/Header/Header';
@@ -14,14 +13,12 @@ function MyDashboard() {
       <div className={styles.sidebar}>
         <SideBar />
       </div>
-      <div className={styles.main}>
-        <div className={styles.MyDashboardHeader}>
-          <MyDashboardHeader />
-        </div>
-        <div className={styles.mainContents}>
-          <DashboardList />
-          <Invited />
-        </div>
+      <div className={styles.MyDashboardHeader}>
+        <MyDashboardHeader />
+      </div>
+      <div className={styles.mainContents}>
+        <DashboardList />
+        <Invited />
       </div>
     </div>
   );

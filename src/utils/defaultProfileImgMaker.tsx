@@ -43,7 +43,7 @@ function toSvgImg({ initial, size, color }: ToSvgProps) {
 }
 
 // 랜덤 컬러 선택기
-function RandomColorPicker() {
+export function RandomColorPicker() {
   const num = Math.floor(Math.random() * colors.length);
   return colors[num];
 }

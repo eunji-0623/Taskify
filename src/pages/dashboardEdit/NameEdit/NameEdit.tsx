@@ -1,30 +1,68 @@
+import {
+  useState, useEffect, Dispatch, SetStateAction,
+} from 'react';
 import styles from './NameEdit.module.scss';
+import { ChangeAndSaveBtn } from '../../../components/Btn/Btn';
+import { apiEditDashboards } from '../../../api/apiModule';
+import Chips from './Chips';
 
 /*  대시보드 수정 페이지 중
     이름과 색상을 바꾸기 위한 부분입니다.  */
 
-function Info() {
+interface Props {
+  name: string;
+  color: string;
+  dashboardId: number;
+  handleChange: Dispatch<SetStateAction<string>>;
+}
+
+function Info({
+  name, color, dashboardId, handleChange,
+}: Props) {
+  const [newName, setNewName] = useState('');
+  const [selectedColor, setSelectedColor] = useState(color);
+
+  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewName(event.target.value);
+  };
+
+  const handleSubmitButton = async () => {
+    if (newName === '') {
+      handleChange(name);
+    } else {
+      handleChange(newName);
+    }
+    await apiEditDashboards(
+      { title: newName, color: selectedColor },
+      { dashboardId },
+    );
+    setNewName('');
+  };
+
+  useEffect(() => {
+    setSelectedColor(color);
+  }, [color]);
+
   return (
     <div className={styles.container}>
-      <div className={styles.present}>
-        <h3 className={styles.name}>현재 대시보드 이름</h3>
-        <div className={styles.chips}>
-          <button type="button">1</button>
-          <button type="button">2</button>
-          <button type="button">3</button>
-          <button type="button">4</button>
-          <button type="button">5</button>
-        </div>
+      <div className={styles.info}>
+        <h3 className={styles.name}>{name}</h3>
+        <Chips
+          selectedColor={selectedColor}
+          handleSelectColor={setSelectedColor}
+        />
       </div>
-      <div className={styles.new}>
+      <div className={styles.change}>
         <p className={styles.description}>대시보드 이름</p>
         <input
           className={styles.newNameInput}
           placeholder="변경할 이름을 입력해주세요"
+          onChange={handleChangeName}
+          value={newName}
         />
-        <button className={styles.submitButton} type="button">
-          변경
-        </button>
+        <div className={styles.submitButton}>
+          <ChangeAndSaveBtn BtnText="변경" handleBtn={handleSubmitButton} />
+        </div>
       </div>
     </div>
   );

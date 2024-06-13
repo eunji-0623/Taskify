@@ -8,7 +8,7 @@
 .dashboardList {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 70px 70px;
+  grid-auto-rows: 70px;
   gap: 13px;
 }
 
@@ -28,7 +28,7 @@
 
   .dashboardList {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 68px 68px 68px;
+    grid-auto-rows: 68px;
     gap: 10px;
   }
 }
@@ -40,7 +40,7 @@
 
   .dashboardList {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 58px);
+    grid-auto-rows: 58px;
     gap: 8px;
   }
 }

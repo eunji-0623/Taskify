@@ -18,7 +18,7 @@ function AppLayout() {
   return (
     <Routes>
       <Route path="/mydashboard" element={<MyDashboard />} />
-      <Route path="/dashboard/1/edit" element={<DashboardEdit />} />
+      <Route path="/dashboard/:id/edit" element={<DashboardEdit />} />
       <Route path="/dashboard/:id" element={<DashboardForId />} />
       <Route path="/mypage" element={<MyPage />} />
     </Routes>

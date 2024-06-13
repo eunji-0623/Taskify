@@ -20,6 +20,7 @@ function DeleteDashboardModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
   // 모달 닫기
   const close = useCallback(() => {
     setIsOpen(false);
+    window.location.reload();
   }, [setIsOpen]);
 
   const handleDeleteButton = async () => {

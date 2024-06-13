@@ -60,7 +60,9 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
     try {
       const response = await apiCreateColumn(newDashboard);
       setIsOpen(false);
-      const { id } = response.data;
+      window.location.reload();
+
+      const { id } = response;
 
       if (id) {
         apiColumnData();

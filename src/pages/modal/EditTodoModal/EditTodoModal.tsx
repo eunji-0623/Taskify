@@ -6,7 +6,7 @@ import Calendar from '../components/Calendar/Calendar';
 import TodoContent from '../components/TodoContent/TodoContent';
 import { apiGetColumnList, apiMemberList, apiUpdateCard } from '../../../api/apiModule';
 import InputTag from '../components/InputTag/InputTag';
-import InputImage from '../components/InputImage/InputImage';
+import EditInputImage from '../components/EditInputImage/EditInputImage';
 import styles from './EditTodoModal.module.scss';
 
 interface Member {
@@ -161,6 +161,7 @@ function EditTodoModal({
     try {
       await apiUpdateCard(updateCard, cardId);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
@@ -204,7 +205,7 @@ function EditTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <InputImage imageUrl={imageUrl} setImageUrl={setImageUrl} text="" />
+            <EditInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
           </div>
 
           <div className={styles.buttonBlock}>

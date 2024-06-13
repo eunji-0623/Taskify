@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { format } from 'date-fns';
 import styles from './CommentItem.module.scss';
 import { apiUpdateComment, apiDeleteComment } from '../../../../api/apiModule';
@@ -8,13 +8,14 @@ interface CommentProps {
   commentText: string;
   image: string | null;
   commentId: number;
-  apiCommentList: () => void;
+  apiCommentList: (Id: number, pId: number | null) => Promise<void>;
   userId: number;
   edituserId: number;
   date: string;
+  cardId: number;
 }
 
-function CommentItem({
+const CommentItem = forwardRef<HTMLDivElement, CommentProps>(({
   name,
   commentText,
   date,
@@ -23,7 +24,8 @@ function CommentItem({
   apiCommentList,
   userId,
   edituserId,
-}: CommentProps) {
+  cardId,
+}, ref) => {
   const [comment, setComment] = useState(commentText);
   const [editComment, setEditComment] = useState(commentText);
   const [edit, setEdit] = useState(false);
@@ -49,7 +51,7 @@ function CommentItem({
   const apiDelete = async () => {
     try {
       await apiDeleteComment(commentId);
-      apiCommentList();
+      apiCommentList(cardId, 0);
     } catch (error) {
       throw new Error('error');
     }
@@ -73,7 +75,7 @@ function CommentItem({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={ref}>
       <img className={styles.image} src={image || ''} alt="테스트 이미지" />
       <div className={styles.titleBlock}>
         <span className={styles.name}>{name}</span>
@@ -94,7 +96,9 @@ function CommentItem({
             />
             <button className={styles.formButton} type="submit">수정</button>
           </form>
-        ) : <p className={styles.comment}>{comment}</p>}
+        ) : (
+          <p className={styles.comment}>{comment}</p>
+        )}
       </div>
 
       {userId === edituserId && (
@@ -109,6 +113,6 @@ function CommentItem({
       )}
     </div>
   );
-}
+});
 
 export default CommentItem;

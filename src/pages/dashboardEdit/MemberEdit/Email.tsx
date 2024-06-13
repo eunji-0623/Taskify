@@ -14,8 +14,8 @@ interface Props {
 function Email({ email, dashboardId, invitationId }: Props) {
   const handleCancelButton = async () => {
     await apiDeleteInvitation(
-      { dashboardId: dashboardId },
-      { invitationId: invitationId }
+      { dashboardId },
+      { invitationId },
     );
   };
 

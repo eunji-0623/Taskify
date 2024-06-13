@@ -3,10 +3,13 @@
 .container {
   display: grid;
   height: 100vh;
+  overflow: scroll;
+  background-color: $gray_FAFAFA;
 
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   background-color: $gray_FAFAFA;
+  
   .sideMenu {
     grid-row: 1 / span 2;
     grid-column: 1 / span 1;

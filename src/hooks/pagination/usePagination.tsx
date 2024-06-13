@@ -35,11 +35,13 @@ function usePagination<T>({
     async function loadItems() {
       const result = await fetchData(currentPage);
       setItems(result.items);
-      setTotalPage(Math.ceil(result.totalCount / itemsPerPage));
-      setIsFirstPage(currentPage === 1);
-      setIsLastPage(
-        currentPage === Math.ceil(result.totalCount / itemsPerPage),
+      setTotalPage(
+        result.totalCount === 0
+          ? 1
+          : Math.ceil(result.totalCount / itemsPerPage),
       );
+      setIsFirstPage(currentPage === 1);
+      setIsLastPage(currentPage >= Math.ceil(result.totalCount / itemsPerPage));
     }
     loadItems();
   }, [currentPage, fetchData, itemsPerPage]);

@@ -4,14 +4,22 @@ import styles from './Table.module.scss';
 /* Table의 각 요소들입니다. */
 
 interface Props {
+  id: number;
   title: string;
   name: string;
+  handleInvitation: (id: number, isAccept: boolean) => void;
 }
 
-function TableBody({ title, name }: Props) {
-  // 수락, 거절 기능 추가 필요
-  const handleAccept = () => {};
-  const handdleReject = () => {};
+function TableBody({
+  id, title, name, handleInvitation,
+}: Props) {
+  const handleAcceptClick = () => {
+    handleInvitation(id, true);
+  };
+
+  const handleRejectClick = () => {
+    handleInvitation(id, false);
+  };
 
   return (
     <tr className={styles.body}>
@@ -19,8 +27,8 @@ function TableBody({ title, name }: Props) {
       <td className={styles.name}>{name}</td>
       <td className={styles.button} aria-label="수락 거절 버튼">
         <AcceptAndRejectBtn
-          handleAccept={handleAccept}
-          handleReject={handdleReject}
+          handleAccept={handleAcceptClick}
+          handleReject={handleRejectClick}
         />
       </td>
     </tr>

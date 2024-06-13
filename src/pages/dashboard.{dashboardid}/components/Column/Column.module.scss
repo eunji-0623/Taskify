@@ -6,9 +6,12 @@
   position: relative;
   flex-flow: column;
   border: 1px solid #eee;
-  height: 100vh;
-  flex-shrink: 0;
   overflow: scroll;
+
+  @include desktop {
+    height: 94.6vh;
+    flex-shrink: 0;
+  }
 }
 
 .columnHeaderContainer {

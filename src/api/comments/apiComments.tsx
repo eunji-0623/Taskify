@@ -40,7 +40,7 @@ export async function apiCreateComments(
   return handleResponse(res);
 }
 
-interface Params {
+interface ParamsProps {
   cardId?: number;
   cursorId?: number;
   size?: number;
@@ -54,10 +54,15 @@ export async function apiGetCommentList(
   cursorId: number = 0,
   size: number = 10,
 ): Promise<GetCommentListResponse> {
-  const params: Params = {};
+  const params: ParamsProps = {};
 
   params.cardId = cardId;
-  params.size = size;
+  if (size !== undefined) {
+    params.size = size;
+  } else {
+    params.size = 10;
+  }
+
   if (cursorId) {
     params.cursorId = cursorId;
   }

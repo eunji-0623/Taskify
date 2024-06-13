@@ -71,6 +71,7 @@ function TodoCardManagement({
           cardId={cardId}
           cardData={cardData}
           columnId={columnId}
+          userId={userId}
           dashboardId={dashboardId}
         />
       )}
@@ -83,6 +84,7 @@ function TodoCardManagement({
           cardData={cardData}
           userId={userId}
           columnId={columnId}
+          dashboardId={dashboardId}
         />
       )}
     </>

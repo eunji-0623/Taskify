@@ -10,6 +10,7 @@ interface CardListProps {
     dashboardId: number;
   };
   setElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
+  afterSubmit: () => void;
 }
 
 function CardList({
@@ -17,6 +18,7 @@ function CardList({
   hasNext,
   columnData,
   setElement,
+  afterSubmit,
 }: CardListProps) {
   return (
     <div>
@@ -26,6 +28,7 @@ function CardList({
           cardId={cardData.id}
           cardData={cardData}
           columnData={columnData}
+          afterSubmit={afterSubmit}
         />
       ))}
       {hasNext && <div ref={setElement} style={{ height: '20px' }} />}

@@ -13,6 +13,7 @@ interface CardProps {
     columnId: number;
     dashboardId: number;
   };
+  afterSubmit: () => void;
 }
 
 // 날짜 표시 formating
@@ -24,10 +25,20 @@ const formatDate = (date: string) => {
 // 일정을 카드 모양으로 보여주는 컴포넌트입니다.
 // 사진, 제목, 태그, 기한, 작성자이미지를 prop으로 받습니다.
 // 현재 작성자 이미지 대신 이름만 보여지게 처리했습니다. 수정 필요합니다.
-function ColumnCard({ cardId, cardData, columnData }: CardProps) {
-  const [manageCardModalOpen, setManageCardModalOpen] =
-    useState<boolean>(false);
-  const { assignee, title, dueDate, tags, imageUrl } = cardData;
+function ColumnCard({
+  cardId,
+  cardData,
+  columnData,
+  afterSubmit,
+}: CardProps) {
+  const [manageCardModalOpen, setManageCardModalOpen] = useState<boolean>(false);
+  const {
+    assignee,
+    title,
+    dueDate,
+    tags,
+    imageUrl,
+  } = cardData;
 
   // 버튼 이벤트 핸들러
   const cardOnClick = () => {
@@ -70,6 +81,7 @@ function ColumnCard({ cardId, cardData, columnData }: CardProps) {
           userId={columnData.userId}
           columnId={columnData.columnId}
           cardId={cardId}
+          afterSubmit={afterSubmit}
         />
       ) : null}
     </div>

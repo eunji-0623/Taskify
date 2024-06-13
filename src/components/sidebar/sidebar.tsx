@@ -54,6 +54,8 @@ function SideBar() {
   const [dashboardItems, setDashboardItems] = useState<DashboardDetail[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // 화면 크기에 따라 한 페이지당 보여줄 대시보드 수를 결정
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -67,19 +69,21 @@ function SideBar() {
         setDashboardItems(dashboards);
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
       } catch (error) {
-        console.error('Error fetching dashboards:', error);
+        setIsError(true);
+        setErrorMessage('Error fetching dashboards');
       }
     };
 
     fetchData();
   }, [itemsPerPage]);
-  
+
   const fetchPageData = async (page: number) => {
     try {
       const { items: dashboards } = await fetchDashboards(page, itemsPerPage);
       setDashboardItems(dashboards);
     } catch (error) {
-      console.error('Error fetching dashboards for page:', page, error);
+      setIsError(true);
+      setErrorMessage(`Error fetching dashboards for page: ${page}`);
     }
   };
 
@@ -131,6 +135,11 @@ function SideBar() {
         </button>
         <NewDashModal />
       </div>
+      {isError && (
+        <div className={styles.ErrorMessage}>
+          {errorMessage}
+        </div>
+      )}
       <div className={styles.DashboardsList}>
         {dashboardItems.map((dashboard) => (
           <SideDashBoard
@@ -139,13 +148,11 @@ function SideBar() {
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() =>
-              ClickDashboard(
-                dashboard.id,
-                dashboard.createdByMe,
-                dashboard.title
-              )
-            }
+            onClick={() => ClickDashboard(
+              dashboard.id,
+              dashboard.createdByMe,
+              dashboard.title,
+            )}
           />
         ))}
       </div>

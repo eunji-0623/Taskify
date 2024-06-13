@@ -3,8 +3,6 @@ import styles from './Members.module.scss';
 import { MembersProfileImg } from '../../../../components/UserProfileImg/UserProfileImg';
 import { apiMemberList } from '../../../../api/apiModule';
 import MoreMembers from './MoreMembers';
-import { RandomColorPicker } from '../../../../utils/defaultProfileImgMaker';
-
 /*
 대시보드에 초대된 멤버 목록을 보여주는 컴포넌트 입니다.
 초과된 멤버의 경우 +N으로 표시됩니다.
@@ -15,7 +13,7 @@ const maxShowMember = {
   pcSize: 4,
   tabletSize: 3,
   mobileSize: 2,
-}
+};
 
 interface Member {
   id: number;
@@ -105,7 +103,7 @@ function Members({ dashboardId }: { dashboardId: number | undefined }) {
 
   return (
     <div className={styles.Members}>
-      {members.slice(0, maxMembersToShow).map((member, index) => (
+      {members.slice(0, maxMembersToShow).map((member) => (
         <MembersProfileImg
           key={member.id}
           isImg={false}

@@ -81,16 +81,32 @@ export async function apiCreateDashboards(
   return handleResponse(res);
 }
 
+interface Params {
+  navigationMethod?: string;
+  cursorId?: number;
+  page?: number;
+  size?: number;
+}
+
 // 대시보드 목록 조회 api
 export async function apiDashboardsList(
   query: DashboardsListQuery = {
     navigationMethod: 'pagination',
-    cursorId: undefined,
     page: 1,
     size: 10,
   },
 ): Promise<DashboardsListResponse> {
-  const res = await instance.get('/dashboards', { params: query });
+  const {
+    navigationMethod, cursorId, page, size,
+  } = query;
+  const params: Params = {};
+  params.navigationMethod = navigationMethod;
+  if (cursorId === 0) {
+    params.cursorId = cursorId;
+  }
+  params.page = page;
+  params.size = size;
+  const res = await instance.get('/dashboards', { params });
   return handleResponse(res);
 }
 

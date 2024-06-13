@@ -40,6 +40,12 @@ export async function apiCreateComments(
   return handleResponse(res);
 }
 
+interface Params {
+  cardId?: number;
+  cursorId?: number;
+  size?: number;
+}
+
 // 댓글 목록 조회 api
 // size, cursorId, cardId를 파라미터로 받습니다.
 // cursorId, size 미지정시 1페이지의 10개의 댓글을 불러옵니다.
@@ -48,12 +54,16 @@ export async function apiGetCommentList(
   cursorId: number = 0,
   size: number = 10,
 ): Promise<GetCommentListResponse> {
+  const params: Params = {};
+
+  params.cardId = cardId;
+  params.size = size;
+  if (cursorId) {
+    params.cursorId = cursorId;
+  }
+
   const res = await instance.get<GetCommentListResponse>('/comments', {
-    params: {
-      size,
-      cursorId,
-      cardId,
-    },
+    params,
   });
   return handleResponse(res);
 }

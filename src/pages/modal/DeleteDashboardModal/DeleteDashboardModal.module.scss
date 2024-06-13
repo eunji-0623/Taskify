@@ -1,0 +1,56 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.container {
+  width: 33.75rem;
+  height: 15.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  padding: 1.75rem;
+  background-color: $white_FFFFFF;
+
+  @include mobile{
+    width: 20.4375rem;
+    height: 13.75rem;
+    padding: 1.75rem 1.35rem;
+  }
+
+  p {
+    // 폰트 추가
+    color: $black_333236;
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin: 4.4rem auto 0;
+
+    @include mobile{
+      font-size: 1rem;
+      margin-top: 3.2rem;
+    }
+  }
+}
+
+.buttonBlock {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  @include mobile {
+  }
+
+  button {
+    width: 7.5rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    @include mobile{
+      width: 8.625rem;
+      height: 2.625rem;
+      font-size: 0.875rem;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import '/src/styles/global.scss';
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 24px;
+  margin-bottom: 28px;
+}
+
+.button {
+  width: 85px;
+  height: 35px;
+  flex-shrink: 0;
+
+  color: $white_FFFFFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+
+  border-radius: 4px;
+  background: $violet_5534DA;
+}

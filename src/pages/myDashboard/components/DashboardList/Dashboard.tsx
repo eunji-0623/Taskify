@@ -28,7 +28,9 @@ export function AddDashboard() {
 }
 
 /*  각각의 대시보드로 이동하기 위한 버튼  */
-export function Dashboard({ id, color, title, isOwner }: DashboardButtonProps) {
+export function Dashboard({
+  id, color, title, isOwner,
+}: DashboardButtonProps) {
   const navigate = useNavigate();
   const dashContext = useContext(DashboardContext);
 

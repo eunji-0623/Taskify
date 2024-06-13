@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './LoginForm.module.scss';
-import useLoginForm from '../utils/useLoginFrom';
-import useInputHandlers from '../utils/useInputHandlers';
+import { useCombinedLoginForm } from '../utils/useCombinedForm';
 import AlertModal from '../../../modal/AlertModal/AlertModal';
 import { InputType } from '../utils/constants';
 import InputEmail from '../Input/InputEmail';
@@ -16,19 +15,19 @@ import Button from '../Button/Button';
 function LoginForm() {
   // 작동 함수 불러오기
   const {
-    email,
-    password,
+    values,
     emailError,
     passwordError,
     handleEmailChange,
     handleEmailBlur,
     handlePasswordChange,
     handlePasswordBlur,
-  } = useInputHandlers(); // Input 에러 관리 함수
-
-  const {
-    loading, isModalOpen, handleSubmit, closeModal, setIsModalOpen,
-  } = useLoginForm(); // 로그인 폼 제출 함수
+    loading,
+    isModalOpen,
+    handleSubmit,
+    closeModal,
+    setIsModalOpen,
+  } = useCombinedLoginForm();
 
   // 모든 Input에서 에러가 발생하지 않을 때 버튼 활성화
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -38,12 +37,12 @@ function LoginForm() {
   // 둘 다 만족해야 버튼 활성화 = setIsButtonDisabled(false)
   useEffect(() => {
     setIsButtonDisabled(
-      email.trim() === ''
-        || password.trim() === ''
+      values.email.trim() === ''
+        || values.password.trim() === ''
         || emailError
         || passwordError,
     );
-  }, [email, password, emailError, passwordError]);
+  }, [values.email, values.password, emailError, passwordError]);
 
   // 페이지 리턴
   // constants.ts에서 InputType을 받아와 컴포넌트에 적용시킵니다.
@@ -63,7 +62,7 @@ function LoginForm() {
             placeholder="이메일을 입력해 주세요."
             errorText="이메일 형식으로 작성해 주세요."
             error={emailError}
-            value={email}
+            value={values.email}
             onChange={handleEmailChange}
             onBlur={handleEmailBlur}
           />
@@ -77,7 +76,7 @@ function LoginForm() {
             placeholder="비밀번호를 입력해 주세요."
             errorText="8자 이상 작성해 주세요."
             error={passwordError}
-            value={password}
+            value={values.password}
             onChange={handlePasswordChange}
             onBlur={handlePasswordBlur}
           />

@@ -1,6 +1,6 @@
 @import '/src/styles/global.scss';
 
-.inputContainer {
+@mixin inputContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -9,16 +9,25 @@
   gap: 10px;
 }
 
+.topInputContainer {
+  @include inputContainer;
+  margin-top: 0;
+}
+
+.normalInputContainer {
+  @include inputContainer;
+}
+
 .inputLabel {
   color: $black_333236;
   font-size: 18px;
   font-weight: 500;
 }
 
-.inputSection {
-  width: 565px;
+@mixin inputSection {
   height: 50px;
   flex-shrink: 0;
+  padding: 15px;
 
   border-radius: 6px;
   border: 1px solid $gray_D9D9D9;
@@ -27,4 +36,14 @@
   &:focus {
     border: 1px solid $violet_5534DA;
   }
+}
+
+.profileInputSection {
+  @include inputSection;
+  width: 366px;
+}
+
+.passwordInputSection {
+  @include inputSection;
+  width: 564px;
 }

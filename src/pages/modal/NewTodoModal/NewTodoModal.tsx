@@ -37,7 +37,7 @@ function NewTodoModal({
   columnId,
 }: ModalProps) {
   const [manager, setManager] = useState('');
-  const [managerImg, setManagerImg] = useState<string | undefined>(TestImg);
+  const [managerImg, setManagerImg] = useState<string | null>(TestImg);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');

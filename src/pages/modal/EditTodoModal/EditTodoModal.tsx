@@ -61,8 +61,8 @@ function EditTodoModal({
   dashboardId,
 }: ModalProps) {
   const [cardState, setCardState] = useState<string>('');
-  const [manager, setManager] = useState<string | null>(null);
-  const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
+  const [manager, setManager] = useState('');
+  const [managerImg, setManagerImg] = useState<string | null>(null);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [dueDate, setDueDate] = useState<string>('');
@@ -71,7 +71,7 @@ function EditTodoModal({
   const [members, setMembers] = useState<Member[]>([]);
   const [columnList, setColumnList] = useState<string[]>([]);
   const [columnListId, setColumnListId] = useState<number[]>([]);
-  const [clickColumnId, setClickColumnId] = useState<number | undefined>(undefined);
+  const [clickColumnId, setClickColumnId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchMembers = async () => {

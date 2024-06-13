@@ -17,14 +17,14 @@ interface ModalProps {
   cardState?: string;
   setCardState?: React.Dispatch<React.SetStateAction<string>>;
   manager: string | null;
-  setManager: React.Dispatch<React.SetStateAction<string | null>>;
-  managerImg: string | undefined;
-  setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setManager: React.Dispatch<React.SetStateAction<string>>;
+  managerImg: string | null;
+  setManagerImg: React.Dispatch<React.SetStateAction<string | null>>;
   members: Member[];
   text: string;
   columnList?: string[];
   columnListId?: number[];
-  setColumnId?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setColumnId?: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 function DropdownManagement({

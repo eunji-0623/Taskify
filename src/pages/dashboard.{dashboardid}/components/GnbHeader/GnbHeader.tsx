@@ -49,7 +49,7 @@ function GnbHeader() {
   const dashContext = useContext(DashboardContext);
   const userContext = useContext(UserContext);
 
-  const profileClick = () => {
+  const profileOver = () => {
     setProfileKebabOpen(true); // 상태를 토글
   };
   const ProfileLeave = () => {
@@ -82,7 +82,7 @@ function GnbHeader() {
           <Members dashboardId={activeDashboard} />
           {/* 대시보드 id 가져와야 함. */}
           <div className={styles.VerticalLine} />
-          <div onMouseLeave={ProfileLeave} onMouseOver={profileClick} onFocus={profileClick}>
+          <div onMouseLeave={ProfileLeave} onMouseOver={profileOver} onFocus={profileOver}>
             <div className={styles.Profile}>
               <UserProfileImg
                 isImg={false}

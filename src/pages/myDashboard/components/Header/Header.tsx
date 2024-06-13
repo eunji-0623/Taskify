@@ -43,7 +43,7 @@ function MyDashboardHeader() {
   const [ProfileKebabOpen, setProfileKebabOpen] = useState<boolean>(false);
   const userContext = useContext(UserContext);
 
-  const profileClick = () => {
+  const profileOver = () => {
     setProfileKebabOpen(true); // 상태를 토글
   };
   const ProfileLeave = () => {
@@ -61,9 +61,9 @@ function MyDashboardHeader() {
       <div className={styles.DashboardTitle}>내 대시보드</div>
       <div
         className={styles.DashboardUserInfo}
-        onMouseOver={profileClick}
+        onMouseOver={profileOver}
         onMouseLeave={ProfileLeave}
-        onFocus={profileClick}
+        onFocus={profileOver}
       >
         <UserProfileImg
           isImg={false}

@@ -25,14 +25,9 @@ const formatDate = (date: string) => {
 // 사진, 제목, 태그, 기한, 작성자이미지를 prop으로 받습니다.
 // 현재 작성자 이미지 대신 이름만 보여지게 처리했습니다. 수정 필요합니다.
 function ColumnCard({ cardId, cardData, columnData }: CardProps) {
-  const [manageCardModalOpen, setManageCardModalOpen] = useState<boolean>(false);
-  const {
-    assignee,
-    title,
-    dueDate,
-    tags,
-    imageUrl,
-  } = cardData;
+  const [manageCardModalOpen, setManageCardModalOpen] =
+    useState<boolean>(false);
+  const { assignee, title, dueDate, tags, imageUrl } = cardData;
 
   // 버튼 이벤트 핸들러
   const cardOnClick = () => {

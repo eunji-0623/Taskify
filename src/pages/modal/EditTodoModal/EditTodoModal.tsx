@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import DropdownManagement from '../components/DropdownManagement/DropdownManagement';
+import EditDropdownManagement from '../components/EditDropdownManagement/EditDropdownManagement';
 import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
 import TodoContent from '../components/TodoContent/TodoContent';
-import { apiUpdateCard } from '../../../api/apiModule';
+import { apiGetColumnList, apiMemberList, apiUpdateCard } from '../../../api/apiModule';
 import InputTag from '../components/InputTag/InputTag';
 import InputImage from '../components/InputImage/InputImage';
 import styles from './EditTodoModal.module.scss';
-import TestImg from '/img/test_img.png';
 
-/*
-  할 일 수정을 위한 모달입니다.
-
-  할 일 카드 모달과 연결을 위해 직접 사용하는 것이 아닌 TodoCardManagement를 통해 사용합니다.
-*/
+interface Member {
+  id: number;
+  userId: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+}
 
 interface CardOverAll {
   id: number;
@@ -23,7 +27,7 @@ interface CardOverAll {
   tags: string[];
   dueDate: string;
   assignee: {
-    profileImageUrl?: string | undefined
+    profileImageUrl?: string;
     nickname: string;
     id: number;
   };
@@ -43,6 +47,7 @@ interface ModalProps {
   cardData: CardOverAll | undefined;
   userId: number;
   columnId: number;
+  dashboardId: number;
 }
 
 function EditTodoModal({
@@ -53,20 +58,37 @@ function EditTodoModal({
   cardData,
   userId,
   columnId,
+  dashboardId,
 }: ModalProps) {
-  const [cardState, setCardState] = useState('대시보드 이름');
+  const [cardState, setCardState] = useState<string>('');
   const [manager, setManager] = useState('');
-  const [managerImg, setManagerImg] = useState<string | undefined>('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [dueDate, setDueDate] = useState<string>('');
   const [tags, setTags] = useState<string[]>([]);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [members, setMembers] = useState<Member[]>([]);
+  const [columnList, setColumnList] = useState<string[]>([]);
+  const [columnListId, setColumnListId] = useState<number[]>([]);
+  const [clickColumnId, setClickColumnId] = useState(Number);
 
-  // 데이터 추가
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await apiMemberList({ dashboardId });
+        setMembers(response.members);
+      } catch (err) {
+        throw new Error('error');
+      }
+    };
+
+    fetchMembers();
+  }, [dashboardId]);
+
+  // 현재 데이터 추가
   useEffect(() => {
     if (cardData) {
-      setCardState('test');
       setManager(cardData.assignee.nickname);
       setManagerImg(cardData.assignee.profileImageUrl);
       setTitle(cardData.title);
@@ -77,31 +99,39 @@ function EditTodoModal({
     }
   }, [cardData]);
 
-  // 담당자 테스트
-  const data = [
-    {
-      id: 1,
-      text: 'test1',
-      profile: TestImg,
-    },
-    {
-      id: 2,
-      text: 'test2',
-      profile: TestImg,
-    },
-  ];
+  // 컬럼 리스트 조회
+  useEffect(() => {
+    const fetchDashboardDetail = async () => {
+      try {
+        const response = await apiGetColumnList(dashboardId);
+        if (response.result === 'SUCCESS') {
+          const titles = Array.isArray(response.data)
+            ? response.data.map((column) => column.title) : [];
+          setColumnList(titles);
 
-  // 모달 닫기
-  // const close = useCallback(() => {
-  //   setIsOpen(false);
-  // }, [setIsOpen]);
+          const idList = Array.isArray(response.data)
+            ? response.data.map((column) => column.id) : [];
+          setColumnListId(idList);
 
-  // 할 일 수정 버튼 클릭 시 동작
+          const column = response.data.find((item) => item.id === columnId);
+          setCardState(column ? column.title : '');
+        } else {
+          throw new Error('error');
+        }
+      } catch (error) {
+        throw new Error('error');
+      }
+    };
+
+    fetchDashboardDetail();
+  }, [dashboardId, columnId]);
+
+  // 수정 클릭
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const updateCard = {
-      columnId,
+      columnId: clickColumnId,
       assigneeUserId: userId,
       title,
       description,
@@ -118,7 +148,6 @@ function EditTodoModal({
     }
   };
 
-  // 취소 버튼을 클릭하면 할 일 카드 모달로 돌아갑니다.
   const handleTodoOpen = () => {
     openTodoModal();
   };
@@ -134,15 +163,17 @@ function EditTodoModal({
 
         <form onSubmit={handleSubmit}>
           <div className={styles.content}>
-            <DropdownManagement
+            <EditDropdownManagement
               cardState={cardState}
               setCardState={setCardState}
+              columnList={columnList}
+              columnListId={columnListId}
+              setColumnId={setClickColumnId}
               manager={manager}
               setManager={setManager}
-              data={data}
               managerImg={managerImg}
               setManagerImg={setManagerImg}
-              text=""
+              members={members}
             />
 
             <Title title={title} setTitle={setTitle} />

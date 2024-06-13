@@ -61,7 +61,7 @@ function EditTodoModal({
   dashboardId,
 }: ModalProps) {
   const [cardState, setCardState] = useState<string>('');
-  const [manager, setManager] = useState('');
+  const [manager, setManager] = useState<string>('');
   const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -69,35 +69,32 @@ function EditTodoModal({
   const [tags, setTags] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [members, setMembers] = useState<Member[]>([]);
+  const [memberIdList, setMemberIdList] = useState<number[]>([]);
+  const [clickManagerId, setClickManagerId] = useState<number>(userId);
   const [columnList, setColumnList] = useState<string[]>([]);
   const [columnListId, setColumnListId] = useState<number[]>([]);
-  const [clickColumnId, setClickColumnId] = useState(Number);
+  const [clickColumnId, setClickColumnId] = useState<number>(columnId);
 
+  // 멤버 목록 조회
   useEffect(() => {
     const fetchMembers = async () => {
       try {
         const response = await apiMemberList({ dashboardId });
+        console.log(response);
         setMembers(response.members);
+
+        const idList = Array.isArray(response.members)
+          ? response.members.map((member) => member.userId)
+          : [];
+        setMemberIdList(idList);
+        console.log(idList);
       } catch (err) {
-        throw new Error('error');
+        console.error('Error fetching members:', err);
       }
     };
 
     fetchMembers();
-  }, [dashboardId]);
-
-  // 현재 데이터 추가
-  useEffect(() => {
-    if (cardData) {
-      setManager(cardData.assignee.nickname);
-      setManagerImg(cardData.assignee.profileImageUrl);
-      setTitle(cardData.title);
-      setDescription(cardData.description);
-      setDueDate(cardData.dueDate);
-      setTags(cardData.tags);
-      setImageUrl(cardData.imageUrl || '');
-    }
-  }, [cardData]);
+  }, [dashboardId, userId]);
 
   // 컬럼 리스트 조회
   useEffect(() => {
@@ -106,11 +103,13 @@ function EditTodoModal({
         const response = await apiGetColumnList(dashboardId);
         if (response.result === 'SUCCESS') {
           const titles = Array.isArray(response.data)
-            ? response.data.map((column) => column.title) : [];
+            ? response.data.map((column) => column.title)
+            : [];
           setColumnList(titles);
 
           const idList = Array.isArray(response.data)
-            ? response.data.map((column) => column.id) : [];
+            ? response.data.map((column) => column.id)
+            : [];
           setColumnListId(idList);
 
           const column = response.data.find((item) => item.id === columnId);
@@ -126,13 +125,34 @@ function EditTodoModal({
     fetchDashboardDetail();
   }, [dashboardId, columnId]);
 
+  // 현재 데이터 추가
+  useEffect(() => {
+    if (cardData) {
+      setManager(cardData.assignee.nickname);
+      setManagerImg(cardData.assignee.profileImageUrl);
+      setTitle(cardData.title);
+      setDescription(cardData.description);
+      setDueDate(cardData.dueDate);
+      setTags(cardData.tags);
+      setImageUrl(cardData.imageUrl || '');
+    }
+  }, [cardData]);
+
   // 수정 클릭
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (clickColumnId === 0) {
+      setClickColumnId(columnId);
+    }
+
+    if (clickManagerId === 0) {
+      setClickManagerId(userId);
+    }
+
     const updateCard = {
       columnId: clickColumnId,
-      assigneeUserId: userId,
+      assigneeUserId: clickManagerId,
       title,
       description,
       dueDate,
@@ -144,7 +164,8 @@ function EditTodoModal({
       await apiUpdateCard(updateCard, cardId);
       setIsOpen(false);
     } catch (error) {
-      throw new Error('error');
+      console.error('Error updating card:', error);
+      // 오류 처리: 사용자에게 적절한 방식으로 오류를 표시하거나 처리합니다.
     }
   };
 
@@ -174,6 +195,8 @@ function EditTodoModal({
               managerImg={managerImg}
               setManagerImg={setManagerImg}
               members={members}
+              memberIdList={memberIdList}
+              setClickManagerId={setClickManagerId}
             />
 
             <Title title={title} setTitle={setTitle} />

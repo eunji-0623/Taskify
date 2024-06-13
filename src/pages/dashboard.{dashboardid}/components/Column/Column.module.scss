@@ -6,6 +6,8 @@
   position: relative;
   flex-flow: column;
   border: 1px solid #eee;
+  border-left: 0;
+  border-top: 0;
   overflow: scroll;
 
   @include desktop {

@@ -5,20 +5,33 @@ import styles from './Table.module.scss';
 
 interface Props {
   id: number;
+  inviterId: number;
+  dashboardId: number;
   title: string;
   name: string;
-  handleInvitation: (id: number, isAccept: boolean) => void;
+  handleInvitation: (
+    id: number,
+    inviterId: number,
+    dashboardId: number,
+    title: string,
+    isAccept: boolean
+  ) => void;
 }
 
 function TableBody({
-  id, title, name, handleInvitation,
+  id,
+  inviterId,
+  dashboardId,
+  title,
+  name,
+  handleInvitation,
 }: Props) {
   const handleAcceptClick = () => {
-    handleInvitation(id, true);
+    handleInvitation(id, inviterId, dashboardId, title, true);
   };
 
   const handleRejectClick = () => {
-    handleInvitation(id, false);
+    handleInvitation(id, inviterId, dashboardId, title, false);
   };
 
   return (

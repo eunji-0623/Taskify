@@ -77,10 +77,13 @@ export async function apiUploadCardImage(
   columnId: number,
 ): Promise<UploadCardImageResponse> {
   const res = await instance.post<UploadCardImageResponse>(
-    `/columns/${columnId}/card-image`, body, {
+    `/columns/${columnId}/card-image`,
+    body,
+    {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    });
+    },
+  );
   return handleResponse(res);
 }

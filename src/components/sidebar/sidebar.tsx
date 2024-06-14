@@ -52,7 +52,10 @@ function SideBar() {
 
   // 상태 관리
   const [dashboardItems, setDashboardItems] = useState<DashboardDetail[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const savedPage = localStorage.getItem('currentPage');
+    return savedPage ? Number(savedPage) : 1;
+  });
   const [totalPages, setTotalPages] = useState(1);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -65,7 +68,7 @@ function SideBar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { items: dashboards, totalCount } = await fetchDashboards(1, itemsPerPage);
+        const { items: dashboards, totalCount } = await fetchDashboards(currentPage, itemsPerPage);
         setDashboardItems(dashboards);
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
       } catch (error) {
@@ -75,7 +78,11 @@ function SideBar() {
     };
 
     fetchData();
-  }, [itemsPerPage]);
+  }, [itemsPerPage, currentPage]);
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage.toString());
+  }, [currentPage]);
 
   const fetchPageData = async (page: number) => {
     try {

@@ -13,6 +13,12 @@ import Members from '../Members/Members';
 */
 
 function ProfileKebab() {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+  const {setUserInfo} = context;
+
   const navigate = useNavigate();
 
   const myPageClick = () => {
@@ -20,6 +26,7 @@ function ProfileKebab() {
   };
 
   const logoutClick = () => {
+    setUserInfo(null);
     localStorage.clear(); // 모든 localStorage 항목을 제거
     navigate('/login'); // 페이지 새로고침
   };

@@ -108,7 +108,7 @@ function Members({ dashboardId }: { dashboardId: number | undefined }) {
           key={member.id}
           isImg={false}
           nickname={member.nickname}
-          profileImageUrl={member.profileImageUrl}
+          profileImageUrl={'#f0f0f0'}
         />
       ))}
       {extraMembersCount > 0 && (

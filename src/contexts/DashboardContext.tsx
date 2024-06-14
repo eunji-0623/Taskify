@@ -64,6 +64,15 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     }
   }, [activeTitle]);
 
+  useEffect(() => {
+    // Clear local storage when navigating to /dashboard
+    if (location.pathname === '/dashboard') {
+      localStorage.removeItem('activeDashboard');
+      localStorage.removeItem('isCreatedByMe');
+      localStorage.removeItem('activeTitle');
+    }
+  }, [location.pathname]);
+
   const contextValue = useMemo(
     () => ({
       activeDashboard,

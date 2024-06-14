@@ -57,15 +57,16 @@ function useProfileChange() {
         let profileImageUrl = '';
 
         // 프로필 이미지 업로드
-        if (profileImage) {
-          const formData = new FormData();
-          formData.append('image', profileImage);
 
-          const uploadImageResponse = await apiUploadImage(formData);
-          profileImageUrl = uploadImageResponse.url;
+        if (profileImage) {
+          const base64Image = await fileToBase64(profileImage);
+          const uploadImageResponse = await apiUploadImage({
+            image: base64Image,
+          });
+          profileImageUrl = uploadImageResponse.profileImageUrl;
         }
 
-        // 닉네임 업데이트
+        // user 정보 업데이트
         const updateData = {
           nickname,
           profileImageUrl,
@@ -98,3 +99,19 @@ function useProfileChange() {
 }
 
 export default useProfileChange;
+
+// base64로 변환하는 함수
+async function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        resolve(reader.result); // 전체 Base64 문자열 반환
+      } else {
+        reject(new Error('base64로 변환에 실패했습니다.'));
+      }
+    };
+    reader.onerror = (error) => reject(error);
+  });
+}

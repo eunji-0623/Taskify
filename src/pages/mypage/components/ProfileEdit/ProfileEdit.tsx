@@ -82,7 +82,7 @@ function ProfileEdit() {
       )}
       {isModalOpen && (
         <AlertModal isOpen={isModalOpen} setIsOpen={closeSuccessModalAndReload}>
-          <p>닉네임이 변경되었습니다.</p>
+          <p>변경되었습니다.</p>
           <button type="button" onClick={closeSuccessModalAndReload}>
             확인
           </button>
@@ -90,7 +90,7 @@ function ProfileEdit() {
       )}
       {isErrorModalOpen && (
         <AlertModal isOpen={isErrorModalOpen} setIsOpen={setIsErrorModalOpen}>
-          <p>닉네임 변경에 실패했습니다.</p>
+          <p>변경에 실패했습니다.</p>
           <button type="button" onClick={closeModal}>
             확인
           </button>

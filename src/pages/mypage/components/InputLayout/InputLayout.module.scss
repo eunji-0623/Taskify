@@ -1,4 +1,5 @@
 @import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
 
 @mixin inputContainer {
   display: flex;
@@ -16,12 +17,17 @@
 
 .normalInputContainer {
   @include inputContainer;
+  margin-top: 16px;
 }
 
 .inputLabel {
   color: $black_333236;
   font-size: 18px;
   font-weight: 500;
+
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 @mixin inputSection {
@@ -45,11 +51,23 @@
 .profileInputSection {
   @include inputSection;
   width: 366px;
+
+  @include mobile {
+    width: 244px;
+    height: 42px;
+    flex-shrink: 0;
+  }
 }
 
 .passwordInputSection {
   @include inputSection;
   width: 564px;
+
+  @include mobile {
+    width: 244px;
+    height: 42px;
+    flex-shrink: 0;
+  }
 }
 
 .error {

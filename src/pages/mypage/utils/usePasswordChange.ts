@@ -1,4 +1,6 @@
-import { SetStateAction, useCallback, useEffect, useState } from 'react';
+import {
+  SetStateAction, useCallback, useEffect, useState,
+} from 'react';
 import { apiChangePassword } from '../../../api/apiModule';
 
 // 패스워드 변경 기능을 구현하는 함수입니다.
@@ -35,7 +37,7 @@ function usePasswordChange() {
       const match = newPass === confirmNewPass;
       setIsPasswordMatch(match);
     },
-    []
+    [],
   );
 
   // 각 패스워드 변경 함수
@@ -62,10 +64,9 @@ function usePasswordChange() {
 
   // 패스워드 상태에 따라 버튼 활성화
   const checkAllFieldsFilled = useCallback(() => {
-    const allFieldsFilled =
-      password.length > 0 &&
-      newPassword.length > 0 &&
-      confirmNewPassword.length > 0;
+    const allFieldsFilled = password.length > 0
+      && newPassword.length > 0
+      && confirmNewPassword.length > 0;
     setIsButtonEnabled(allFieldsFilled && isPasswordMatch);
   }, [password, newPassword, confirmNewPassword, isPasswordMatch]);
 

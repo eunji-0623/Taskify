@@ -1,4 +1,5 @@
 @import '../../../../styles/media.scss';
+@import '../../../../styles/global.scss';
 
 .MyDashboardHeader {
   width: 100%;
@@ -19,7 +20,7 @@
 }
 
 .DashboardTitle {
-  color: var(--black-black_333236, #333236);
+  color: $black_333236;
   font-family: Pretendard;
   font-size: 20px;
   font-style: normal;

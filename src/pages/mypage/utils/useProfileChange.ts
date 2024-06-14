@@ -3,13 +3,24 @@ import { UserContext } from '../../../contexts/UserContext';
 import { apiEditMyInfo, apiUploadImage } from '../../../api/apiModule';
 
 // 닉네임과 프로필을 변경하는 함수입니다.
-// 기존 값을 먼저 보여주며, 변경하고 변경 버튼을 누르면 닉네임이 변경됩니다.
+// 닉네임은 기존 값을 먼저 보여주며, 변경하고 변경 버튼을 누르면 닉네임이 변경됩니다.
+// 프로필도 설정된 값을 먼저 보여주며, 설정된 값이 없을 경우 추가 버튼이 보입니다.
+// 둘 중 하나만 변경하더라도 변경이 가능하도록 구현했습니다.
 // ProfileEdit 컴포넌트에서 사용됩니다.
+
+// 타입 정의
+interface UpdateData {
+  nickname: string;
+  profileImageUrl: string;
+}
 
 function useProfileChange() {
   // user 정보 받아오기, UserContext가 null일 수 있으므로 이를 안전하게 처리
   const userContext = useContext(UserContext);
   const userInfo = userContext?.userInfo;
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(
+    userInfo?.profileImageUrl || null,
+  );
 
   // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +46,7 @@ function useProfileChange() {
   useEffect(() => {
     if (userInfo) {
       setNickname(userInfo.nickname);
+      setProfileImageUrl(userInfo.profileImageUrl || null);
     }
   }, [userInfo]);
 
@@ -46,7 +58,12 @@ function useProfileChange() {
   // 프로필 이미지 값 변경 처리 함수
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setProfileImage(e.target.files[0]);
+      const file = e.target.files[0];
+      setProfileImage(file);
+
+      // URL.createObjectURL을 사용하여 새로운 이미지 URL 생성
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImageUrl(imageUrl);
     }
   };
 
@@ -54,22 +71,21 @@ function useProfileChange() {
   const handleUpdateClick = async () => {
     if (userContext && userContext.setUserInfo && userInfo) {
       try {
-        let profileImageUrl = '';
+        let newProfileImageUrl = profileImageUrl;
 
         // 프로필 이미지 업로드
-
         if (profileImage) {
-          const base64Image = await fileToBase64(profileImage);
-          const uploadImageResponse = await apiUploadImage({
-            image: base64Image,
-          });
-          profileImageUrl = uploadImageResponse.profileImageUrl;
+          const formData = new FormData();
+          formData.append('image', profileImage);
+
+          const uploadImageResponse = await apiUploadImage(formData);
+          newProfileImageUrl = uploadImageResponse.profileImageUrl;
         }
 
         // user 정보 업데이트
-        const updateData = {
+        const updateData: UpdateData = {
           nickname,
-          profileImageUrl,
+          profileImageUrl: newProfileImageUrl || '',
         };
 
         const response = await apiEditMyInfo(updateData);
@@ -85,6 +101,7 @@ function useProfileChange() {
 
   return {
     nickname,
+    profileImageUrl,
     profileImage,
     isModalOpen,
     isErrorModalOpen,
@@ -99,19 +116,3 @@ function useProfileChange() {
 }
 
 export default useProfileChange;
-
-// base64로 변환하는 함수
-async function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        resolve(reader.result); // 전체 Base64 문자열 반환
-      } else {
-        reject(new Error('base64로 변환에 실패했습니다.'));
-      }
-    };
-    reader.onerror = (error) => reject(error);
-  });
-}

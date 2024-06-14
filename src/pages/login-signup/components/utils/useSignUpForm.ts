@@ -34,6 +34,26 @@ function useSignUpForm() {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  // 이미지 URL을 Blob으로 변환하는 함수
+  async function urlToBlob(url: string): Promise<Blob> {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return blob;
+  }
+
+  // 모달 창 닫는 함수
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsErrorModalOpen(false);
+  };
+
+  // 변경 성공 시 모달을 닫으면 자동으로 로그인 페이지로 이동
+  const closeSuccessModalAndReload = () => {
+    setIsModalOpen(false);
+    navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
+  };
+
+  // 회원가입 폼 제출
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true); // 회원가입 시도 중에는 버튼 비활성화
@@ -45,22 +65,19 @@ function useSignUpForm() {
       await apiSignUp({ email, nickname, password }); // 회원가입 API 호출
 
       const profileImgUrl = defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
-      await apiUploadImage({ image: profileImgUrl }); // 프로필 이미지 저장 API 호출
+      const profileImgBlob = await urlToBlob(profileImgUrl); // 이미지 Blob으로 변환
+      const formData = new FormData();
+      formData.append('image', profileImgBlob, 'profile.png'); // FormData에 이미지 추가
+
+      await apiUploadImage(formData); // 프로필 이미지 저장 API 호출
 
       setIsModalOpen(true); // 성공 시 모달 창 띄우기
-      navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
     } catch (error) {
       setIsErrorModalOpen(true);
       setError('중복된 이메일입니다.');
     } finally {
       setLoading(false); // 회원가입 시도가 끝나면 버튼 활성화
     }
-  };
-
-  // 모달 창 닫는 함수
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setIsErrorModalOpen(false);
   };
 
   // 사용할 값 리턴
@@ -74,6 +91,7 @@ function useSignUpForm() {
     closeModal,
     setIsModalOpen,
     setIsErrorModalOpen,
+    closeSuccessModalAndReload,
   };
 }
 

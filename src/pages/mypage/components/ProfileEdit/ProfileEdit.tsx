@@ -14,6 +14,7 @@ import useProfileChange from '../../utils/useProfileChange';
 function ProfileEdit() {
   const {
     nickname,
+    profileImageUrl,
     isModalOpen,
     isErrorModalOpen,
     closeModal,
@@ -39,7 +40,10 @@ function ProfileEdit() {
         <>
           <span className={styles.profileText}>프로필</span>
           <div className={styles.profileSection}>
-            <ImageButton onChange={handleImageChange} />
+            <ImageButton
+              onChange={handleImageChange}
+              currentImageUrl={profileImageUrl}
+            />
             <div className={styles.inputLayout}>
               <InputLayout
                 labelText="이메일"
@@ -63,7 +67,7 @@ function ProfileEdit() {
                 type="text"
                 placeholder="닉네임 입력"
                 isProfile={isProfile}
-                topMargin={!topMargin}
+                topMargin={topMargin}
                 value={nickname}
                 onChange={handleNicknameChange}
                 readOnly={false}

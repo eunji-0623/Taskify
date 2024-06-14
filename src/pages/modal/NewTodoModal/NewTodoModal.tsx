@@ -8,7 +8,6 @@ import TodoContent from '../components/TodoContent/TodoContent';
 import InputTag from '../components/InputTag/InputTag';
 import NewInputImage from '../components/NewInputImage/NewInputImage';
 import styles from './NewTodoModal.module.scss';
-import TestImg from '/icon/testProfile.svg';
 
 interface Member {
   id: number;
@@ -39,15 +38,15 @@ function NewTodoModal({
   afterSubmit,
 }: ModalProps) {
   const [manager, setManager] = useState('');
-  const [managerImg, setManagerImg] = useState<string | undefined>(TestImg);
+  const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [tags, setTags] = useState<string[]>([]);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [members, setMembers] = useState<Member[]>([]);
 
-  // 아래 삭제
+  // 삭제
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [memberIdList, setMemberIdList] = useState<number[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -84,16 +83,16 @@ function NewTodoModal({
       description,
       dueDate,
       tags,
-      image: imageUrl,
+      imageUrl,
     };
 
     try {
       await apiCreateCard(newTodo);
       setIsOpen(false);
+      afterSubmit();
     } catch (error) {
       throw new Error('error');
     }
-    afterSubmit();
   };
 
   const createButton = manager.length !== 0
@@ -126,7 +125,7 @@ function NewTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <NewInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
+            <NewInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} columnId={columnId} />
           </div>
 
           <div className={styles.buttonBlock}>

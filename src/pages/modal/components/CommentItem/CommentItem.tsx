@@ -2,10 +2,11 @@ import { forwardRef, useState } from 'react';
 import { format } from 'date-fns';
 import styles from './CommentItem.module.scss';
 import { apiUpdateComment, apiDeleteComment } from '../../../../api/apiModule';
+import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 
 interface CommentOverAll {
   id: number;
-  content: string;
+  Block: string;
   createdAt: string;
   updatedAt: string;
   cardId: number;
@@ -92,41 +93,57 @@ const CommentItem = forwardRef<HTMLDivElement, CommentProps>(({
 
   return (
     <div className={styles.container} ref={ref}>
-      <img className={styles.image} src={image || ''} alt="테스트 이미지" />
-      <div className={styles.titleBlock}>
-        <span className={styles.name}>{name}</span>
-        <span className={styles.date}>{format(date, 'yyyy-MM-dd HH:mm')}</span>
-      </div>
-
-      <div className={styles.commentBlock}>
-        {edit ? (
-          <form onSubmit={apiEditComment}>
-            <label className={styles.formLabel} htmlFor="text">댓글</label>
-            <input
-              className={styles.formInput}
-              type="text"
-              id="text"
-              name="text"
-              value={editComment}
-              onChange={handleChange}
-            />
-            <button className={styles.formButton} type="submit">수정</button>
-          </form>
+      {
+        image ? (
+          <UserProfileImg
+            isImg
+            profileImageUrl={image}
+            nickname={name}
+          />
         ) : (
-          <p className={styles.comment}>{comment}</p>
+          <UserProfileImg
+            isImg={false}
+            profileImageUrl=""
+            nickname={name}
+          />
+        )
+      }
+      <div>
+        <div className={styles.titleBlock}>
+          <span className={styles.name}>{name}</span>
+          <span className={styles.date}>{format(date, 'yyyy-MM-dd HH:mm')}</span>
+        </div>
+
+        <div className={styles.commentBlock}>
+          {edit ? (
+            <form onSubmit={apiEditComment}>
+              <label className={styles.formLabel} htmlFor="text">댓글</label>
+              <input
+                className={styles.formInput}
+                type="text"
+                id="text"
+                name="text"
+                value={editComment}
+                onChange={handleChange}
+              />
+              <button className={styles.formButton} type="submit">수정</button>
+            </form>
+          ) : (
+            <p className={styles.comment}>{comment}</p>
+          )}
+        </div>
+
+        {userId === edituserId && (
+          <div className={styles.buttonBlock}>
+            {edit ? (
+              <button className={styles.button} type="button" onClick={handleEditCancelClick}>취소</button>
+            ) : (
+              <button className={styles.button} type="button" onClick={handleEditClick}>수정</button>
+            )}
+            <button className={styles.button} type="button" onClick={apiDelete}>삭제</button>
+          </div>
         )}
       </div>
-
-      {userId === edituserId && (
-        <div className={styles.buttonBlock}>
-          {edit ? (
-            <button className={styles.button} type="button" onClick={handleEditCancelClick}>취소</button>
-          ) : (
-            <button className={styles.button} type="button" onClick={handleEditClick}>수정</button>
-          )}
-          <button className={styles.button} type="button" onClick={apiDelete}>삭제</button>
-        </div>
-      )}
     </div>
   );
 });

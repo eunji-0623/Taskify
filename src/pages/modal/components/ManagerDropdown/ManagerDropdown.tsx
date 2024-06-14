@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import styles from './ManagerDropdown.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
+import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 
 interface Member {
   id: number;
@@ -15,8 +16,8 @@ interface Member {
 }
 
 interface DropdownProps {
-  value: string | null;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  value: string | undefined
+  setValue: React.Dispatch<React.SetStateAction<string | undefined>>
   profile: string | undefined;
   setProfile: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];
@@ -74,7 +75,17 @@ function ManagerDropdown({
     <div className={styles.container} ref={modalRef}>
       <button className={styles.searchBlock} onClick={toggleDropdown} type="button">
         <div className={styles.searchCenter}>
-          <img className={styles.profileImg} src={profile} alt="프로필 이미지" />
+          {
+              profile ? (
+                <UserProfileImg
+                  isImg
+                  profileImageUrl={profile}
+                  nickname={value}
+                />
+              ) : (
+                <></>
+              )
+            }
           <input
             className={styles.searchInput}
             type="text"
@@ -110,11 +121,21 @@ function ManagerDropdown({
                       />
                     )}
                     <div className={styles.item}>
-                      <img
-                        className={styles.dropdownProfile}
-                        src={member.profileImageUrl}
-                        alt={member.nickname}
-                      />
+                      {
+                        profile ? (
+                          <UserProfileImg
+                            isImg
+                            profileImageUrl={member.profileImageUrl}
+                            nickname={member.nickname}
+                          />
+                        ) : (
+                          <UserProfileImg
+                            isImg={false}
+                            profileImageUrl=""
+                            nickname={member.nickname}
+                          />
+                        )
+                      }
                       {member.nickname}
                     </div>
                   </button>

@@ -1,3 +1,4 @@
+import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
 import styles from './CardSideContent.module.scss';
 
 /*
@@ -16,7 +17,21 @@ function CardSideContent({ managerImg, manager, dueDate }: ModalProps) {
       <div className={styles.managerBlock}>
         <h3>담당자</h3>
         <div className={styles.profileBlock}>
-          {managerImg && <img className={styles.profile} src={managerImg} alt="프로필 이미지" />}
+          {
+            managerImg ? (
+              <UserProfileImg
+                isImg
+                profileImageUrl={managerImg}
+                nickname={manager}
+              />
+            ) : (
+              <UserProfileImg
+                isImg={false}
+                profileImageUrl=""
+                nickname={manager}
+              />
+            )
+          }
           <span>{manager}</span>
         </div>
       </div>

@@ -16,8 +16,8 @@ interface Member {
 interface ModalProps {
   cardState: string;
   setCardState: React.Dispatch<React.SetStateAction<string>>;
-  manager: string | null;
-  setManager: React.Dispatch<React.SetStateAction<string>>;
+  manager: string | undefined
+  setManager: React.Dispatch<React.SetStateAction<string | undefined>>
   managerImg: string | undefined;
   setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];
@@ -29,7 +29,7 @@ interface ModalProps {
 }
 
 function EditDropdownManagement({
-  cardState = '',
+  cardState,
   setCardState = () => {},
   columnList,
   manager,

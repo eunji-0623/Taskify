@@ -1,24 +1,24 @@
 import { useRef, useEffect, ChangeEvent } from 'react';
 import styles from './NewInputImage.module.scss';
-import AddIcon from '/icon/add_image_box.svg';
-// import { apiUploadCardImage } from '../../../../api/apiModule';
+import AddImageIcon from '/icon/add_image_box.svg';
+import { apiUploadCardImage } from '../../../../api/apiModule';
 
 interface InputImageProps {
-  imageUrl: string | null;
-  setImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
-  // columnId: number;
+  imageUrl: string | undefined;
+  setImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
+  columnId: number;
 }
 
 function NewInputImage({
   imageUrl,
   setImageUrl,
-  // columnId,
+  columnId,
 }: InputImageProps) {
   const uploadImageRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (imageUrl === null) {
-      setImageUrl(AddIcon);
+    if (!imageUrl) {
+      setImageUrl(AddImageIcon);
     }
   }, [imageUrl, setImageUrl]);
 
@@ -28,36 +28,26 @@ function NewInputImage({
     }
   };
 
-  const ImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files && files.length > 0) {
       const uploadFile = files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(uploadFile);
-      reader.onloadend = async () => {
-        // if (reader.result) {
-        //   const imageUrl = reader.result.toString();
-        //   setImageUrl(imageUrl);
-        //   await testUpload();
-        // }
-      };
+      const formData = new FormData();
+      formData.append('image', uploadFile);
+
+      try {
+        const response = await apiUploadCardImage(formData, columnId);
+        setImageUrl(response.imageUrl);
+      } catch (error) {
+        throw new Error('error');
+      }
     }
   };
-
-  // const testUpload = async () => {
-  //   if (imageUrl !== AddIcon) {
-  //     try {
-  //       await apiUploadCardImage(imageUrl, columnId);
-  //     } catch (error) {
-  //       throw new Error('error');
-  //     }
-  //   }
-  // };
 
   return (
     <div className={styles.contentBlock}>
       <button className={styles.imageBlock} onClick={onClickImage} type="button">
-        <img className={styles.contentImageBasic} src={imageUrl === null ? AddIcon : imageUrl} alt="img" />
+        <img className={styles.contentImageBasic} src={imageUrl} alt="img" />
       </button>
       <label htmlFor="image" style={{ display: 'none' }}>이미지</label>
       <input
@@ -67,7 +57,7 @@ function NewInputImage({
         accept="image/*"
         style={{ display: 'none' }}
         ref={uploadImageRef}
-        onChange={ImageUpload}
+        onChange={handleImageUpload}
       />
     </div>
   );

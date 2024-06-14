@@ -15,8 +15,8 @@ interface Member {
 }
 
 interface ModalProps {
-  manager: string | null;
-  setManager: React.Dispatch<React.SetStateAction<string>>;
+  manager: string;
+  setManager: React.Dispatch<React.SetStateAction<string | undefined>>;
   managerImg: string | undefined;
   setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];

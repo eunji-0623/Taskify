@@ -73,12 +73,14 @@ export async function apiDeleteColumn(columnId: number) {
 // 카드 이미지 업로드
 // columnId를 파라미터로 받습니다.
 export async function apiUploadCardImage(
-  body: UploadCardImageBody,
+  body: FormData,
   columnId: number,
 ): Promise<UploadCardImageResponse> {
   const res = await instance.post<UploadCardImageResponse>(
-    `/columns/${columnId}/card-image`,
-    body,
-  );
+    `/columns/${columnId}/card-image`, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   return handleResponse(res);
 }

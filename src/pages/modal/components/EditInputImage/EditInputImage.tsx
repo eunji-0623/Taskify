@@ -1,19 +1,20 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, ChangeEvent } from 'react';
 import styles from './EditInputImage.module.scss';
 import PencilIcon from '/icon/pencil.svg';
 import AddIcon from '/icon/add_image_box.svg';
+import { apiUploadCardImage } from '../../../../api/apiModule';
 // import { apiUploadCardImage } from '../../../../api/apiModule';
 
 interface InputImageProps {
   imageUrl: string | null;
   setImageUrl: React.Dispatch<React.SetStateAction<string>>;
-  // columnId: number;
+  columnId: number;
 }
 
 function EditInputImage({
   imageUrl,
   setImageUrl,
-  // columnId,
+  columnId,
 }: InputImageProps) {
   const uploadImageRef = useRef<HTMLInputElement>(null);
 
@@ -29,31 +30,21 @@ function EditInputImage({
     }
   };
 
-  // const ImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { files } = e.target;
-  //   if (files && files.length > 0) {
-  //     const uploadFile = files[0];
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(uploadFile);
-  //     reader.onloadend = async () => {
-  //       if (reader.result) {
-  //         const imageUrl = reader.result.toString();
-  //         setImageUrl(imageUrl);
-  //         await testUpload(imageUrl);
-  //       }
-  //     };
-  //   }
-  // };
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (files && files.length > 0) {
+      const uploadFile = files[0];
+      const formData = new FormData();
+      formData.append('image', uploadFile);
 
-  // const testUpload = async (imageUrl: string) => {
-  //   if (imageUrl !== AddIcon) {
-  //     try {
-  //       await apiUploadCardImage(imageUrl, columnId);
-  //     } catch (error) {
-  //       throw new Error('error');
-  //     }
-  //   }
-  // };
+      try {
+        const response = await apiUploadCardImage(formData, columnId);
+        setImageUrl(response.imageUrl);
+      } catch (error) {
+        throw new Error('error');
+      }
+    }
+  };
 
   return (
     <div className={styles.contentBlock}>
@@ -78,7 +69,7 @@ function EditInputImage({
         accept="image/*"
         style={{ display: 'none' }}
         ref={uploadImageRef}
-        // onChange={ImageUpload}
+        onChange={handleImageUpload}
       />
     </div>
   );

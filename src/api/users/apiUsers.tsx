@@ -53,6 +53,10 @@ export async function apiEditMyInfo(
 export async function apiUploadImage(
   body: UploadImage,
 ): Promise<EditImageResponse> {
-  const res = await instance.post<EditImageResponse>('/users/me/image', body);
+  const res = await instance.post<EditImageResponse>('/users/me/image', body, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return handleResponse(res);
 }

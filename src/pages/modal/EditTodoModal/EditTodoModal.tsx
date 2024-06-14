@@ -49,7 +49,7 @@ function EditTodoModal({
   afterSubmit,
 }: ModalProps) {
   const [cardState, setCardState] = useState<string>('');
-  const [manager, setManager] = useState<string>('');
+  const [manager, setManager] = useState<string | undefined>(undefined);
   const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -143,7 +143,7 @@ function EditTodoModal({
       description,
       dueDate,
       tags,
-      // imageUrl,
+      imageUrl,
     };
 
     try {
@@ -196,7 +196,7 @@ function EditTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <EditInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
+            <EditInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} columnId={columnId} />
           </div>
 
           <div className={styles.buttonBlock}>

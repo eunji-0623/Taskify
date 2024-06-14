@@ -10,7 +10,7 @@ nickname props는 이미지가 없는 유저에 한해서 FirstName만 보입니
 
 interface UserProfileImgProps {
   isImg: boolean;
-  profileImageUrl: string;
+  profileImageUrl?: string;
   nickname: string | undefined;
 }
 

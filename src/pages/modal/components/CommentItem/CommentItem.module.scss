@@ -3,18 +3,8 @@
 
 .container {
   position: relative;
-  padding-left: 2.5rem;
   display: flex;
-  flex-direction: column;
   gap: 0.5rem;
-}
-
-.image {
-  position: absolute;
-  left: 0rem;
-  width: 1.625rem;
-  height: 1.625rem;
-  border-radius: 999px;
 }
 
 .titleBlock {

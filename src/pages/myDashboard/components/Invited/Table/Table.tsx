@@ -50,7 +50,7 @@ function Table({
                 invitations.map((invitation) => [
                   `${invitation.inviter.id}-${invitation.dashboard.id}`,
                   invitation,
-                ])
+                ]),
               ).values(),
             ].map((invitation) => (
               <TableBody
@@ -68,16 +68,24 @@ function Table({
         </>
       ) : (
         <tbody>
-          {/* {invitations
-            .filter((invitation) => !invitation.inviteAccepted)
-            .map((invitation) => (
-              <TableMobile
-                key={invitation.id}
-                id={invitation.id}
-                title={invitation.dashboard.title}
-                name={invitation.inviter.nickname}
-              />
-            ))} */}
+          {[
+            ...new Map(
+              invitations.map((invitation) => [
+                `${invitation.inviter.id}-${invitation.dashboard.id}`,
+                invitation,
+              ]),
+            ).values(),
+          ].map((invitation) => (
+            <TableMobile
+              key={invitation.id}
+              id={invitation.id}
+              inviterId={invitation.inviter.id}
+              dashboardId={invitation.dashboard.id}
+              title={invitation.dashboard.title}
+              name={invitation.inviter.nickname}
+              handleInvitation={handleInvitation}
+            />
+          ))}
           {hasNext && <tr ref={setElement} style={{ height: '50px' }} />}
         </tbody>
       )}

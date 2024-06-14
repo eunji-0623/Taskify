@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiSignUp, apiUploadImage } from '../../../../api/apiModule';
+import { apiSignUp } from '../../../../api/apiModule';
 import defaultProfileImgMaker from '../../../../utils/defaultProfileImgMaker';
 
 // 회원가입 폼 제출 기능을 수행하는 함수입니다.
@@ -34,13 +34,6 @@ function useSignUpForm() {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  // 이미지 URL을 Blob으로 변환하는 함수
-  async function urlToBlob(url: string): Promise<Blob> {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return blob;
-  }
-
   // 모달 창 닫는 함수
   const closeModal = () => {
     setIsModalOpen(false);
@@ -64,13 +57,7 @@ function useSignUpForm() {
     try {
       await apiSignUp({ email, nickname, password }); // 회원가입 API 호출
 
-      const profileImgUrl = defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
-
-      const profileImgBlob = await urlToBlob(profileImgUrl); // 이미지 Blob으로 변환
-      const formData = new FormData();
-      formData.append('image', profileImgBlob, 'profile.png'); // FormData에 이미지 추가
-
-      await apiUploadImage(formData); // 프로필 이미지 저장 API 호출
+      defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
 
       setIsModalOpen(true); // 성공 시 모달 창 띄우기
     } catch (error) {

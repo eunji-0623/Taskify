@@ -115,7 +115,6 @@ function TodoCardModal({
     try {
       await apiDeleteCard(cardId);
       setIsOpen(false);
-      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }

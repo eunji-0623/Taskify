@@ -161,7 +161,6 @@ function EditTodoModal({
     try {
       await apiUpdateCard(updateCard, cardId);
       setIsOpen(false);
-      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }

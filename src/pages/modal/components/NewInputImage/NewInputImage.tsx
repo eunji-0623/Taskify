@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, ChangeEvent } from 'react';
 import styles from './NewInputImage.module.scss';
 import AddIcon from '/icon/add_image_box.svg';
 // import { apiUploadCardImage } from '../../../../api/apiModule';
@@ -28,23 +28,23 @@ function NewInputImage({
     }
   };
 
-  // const ImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { files } = e.target;
-  //   if (files && files.length > 0) {
-  //     const uploadFile = files[0];
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(uploadFile);
-  //     reader.onloadend = async () => {
-  //       if (reader.result) {
-  //         const imageUrl = reader.result.toString();
-  //         setImageUrl(imageUrl);
-  //         await testUpload(imageUrl);
-  //       }
-  //     };
-  //   }
-  // };
+  const ImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (files && files.length > 0) {
+      const uploadFile = files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(uploadFile);
+      reader.onloadend = async () => {
+        // if (reader.result) {
+        //   const imageUrl = reader.result.toString();
+        //   setImageUrl(imageUrl);
+        //   await testUpload();
+        // }
+      };
+    }
+  };
 
-  // const testUpload = async (imageUrl: string) => {
+  // const testUpload = async () => {
   //   if (imageUrl !== AddIcon) {
   //     try {
   //       await apiUploadCardImage(imageUrl, columnId);
@@ -57,7 +57,7 @@ function NewInputImage({
   return (
     <div className={styles.contentBlock}>
       <button className={styles.imageBlock} onClick={onClickImage} type="button">
-        <img className={styles.contentImageBasic} src={typeof imageUrl === 'string' ? imageUrl : ''} alt="img" />
+        <img className={styles.contentImageBasic} src={imageUrl === null ? AddIcon : imageUrl} alt="img" />
       </button>
       <label htmlFor="image" style={{ display: 'none' }}>이미지</label>
       <input
@@ -67,7 +67,7 @@ function NewInputImage({
         accept="image/*"
         style={{ display: 'none' }}
         ref={uploadImageRef}
-        // onChange={ImageUpload}
+        onChange={ImageUpload}
       />
     </div>
   );

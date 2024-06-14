@@ -30,7 +30,6 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
       const response = await apiInviteDashboards(emailObj, { dashboardId });
       if (response) {
         setIsOpen(false);
-        window.location.reload();
       }
     } catch (error) {
       throw new Error('error');
@@ -40,8 +39,6 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
-
-  // 중복 초대 확인 추가
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>

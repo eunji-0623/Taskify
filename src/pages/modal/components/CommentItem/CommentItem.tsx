@@ -3,6 +3,19 @@ import { format } from 'date-fns';
 import styles from './CommentItem.module.scss';
 import { apiUpdateComment, apiDeleteComment } from '../../../../api/apiModule';
 
+interface CommentOverAll {
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  cardId: number;
+  author: {
+    profileImageUrl: string;
+    nickname: string;
+    id: number;
+  };
+}
+
 interface CommentProps {
   name: string;
   commentText: string;
@@ -13,6 +26,7 @@ interface CommentProps {
   edituserId: number;
   date: string;
   cardId: number;
+  setComments: React.Dispatch<React.SetStateAction<CommentOverAll[]>>
 }
 
 const CommentItem = forwardRef<HTMLDivElement, CommentProps>(({
@@ -25,6 +39,7 @@ const CommentItem = forwardRef<HTMLDivElement, CommentProps>(({
   userId,
   edituserId,
   cardId,
+  setComments,
 }, ref) => {
   const [comment, setComment] = useState(commentText);
   const [editComment, setEditComment] = useState(commentText);
@@ -51,7 +66,8 @@ const CommentItem = forwardRef<HTMLDivElement, CommentProps>(({
   const apiDelete = async () => {
     try {
       await apiDeleteComment(commentId);
-      apiCommentList(cardId, 0);
+      setComments([]);
+      apiCommentList(cardId, null);
     } catch (error) {
       throw new Error('error');
     }

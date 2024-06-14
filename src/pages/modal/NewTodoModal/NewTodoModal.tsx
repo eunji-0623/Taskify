@@ -44,6 +44,8 @@ function NewTodoModal({
   const [tags, setTags] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [members, setMembers] = useState<Member[]>([]);
+
+  // 아래 삭제
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [memberIdList, setMemberIdList] = useState<number[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -86,7 +88,6 @@ function NewTodoModal({
     try {
       await apiCreateCard(newTodo);
       setIsOpen(false);
-      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
@@ -122,7 +123,7 @@ function NewTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <NewInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
+            <NewInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} columnId={columnId} />
           </div>
 
           <div className={styles.buttonBlock}>

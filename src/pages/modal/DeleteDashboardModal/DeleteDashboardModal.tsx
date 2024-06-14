@@ -17,10 +17,10 @@ interface ModalProps {
 
 function DeleteDashboardModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
   const navigate = useNavigate();
+
   // 모달 닫기
   const close = useCallback(() => {
     setIsOpen(false);
-    window.location.reload();
   }, [setIsOpen]);
 
   const handleDeleteButton = async () => {

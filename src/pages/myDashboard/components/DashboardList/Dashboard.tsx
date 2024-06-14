@@ -1,7 +1,9 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.scss';
 import ColorDot from '../../../../components/chip/ColorCircle/ColorDot';
 import useNewDashModal from '../../../../hooks/modal/useNewDashModal';
+import { DashboardContext } from '../../../../contexts/DashboardContext';
 
 interface DashboardButtonProps {
   id: number;
@@ -30,7 +32,18 @@ export function Dashboard({
   id, color, title, isOwner,
 }: DashboardButtonProps) {
   const navigate = useNavigate();
+  const dashContext = useContext(DashboardContext);
+
+  if (!dashContext) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+
+  const { setActiveDashboard, setIsCreateByMe, setActiveTitle } = dashContext;
+
   const handleClick = () => {
+    setActiveDashboard(id);
+    setIsCreateByMe(isOwner);
+    setActiveTitle(title);
     navigate(`/dashboard/${id}`);
   };
 

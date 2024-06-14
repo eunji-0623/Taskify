@@ -15,9 +15,13 @@ function MyPage() {
 
   return (
     <div className={styles.myPageLayout}>
-      <SideBar />
-      <div className={styles.MyPageContainer}>
+      <div className={styles.sidebar}>
+        <SideBar />
+      </div>
+      <div className={styles.MypageHeader}>
         <MyPageHeader />
+      </div>
+      <div className={styles.myPageContents}>
         <div className={styles.pageBackContainer}>
           <button
             className={styles.backButton}

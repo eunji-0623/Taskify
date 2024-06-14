@@ -45,9 +45,13 @@ function DashboardEdit() {
 
   return (
     <div className={styles.container}>
-      <SideBar />
-      <div className={styles.main}>
+      <div className={styles.sideMenu}>
+        <SideBar />
+      </div>
+      <div className={styles.header}>
         <GnbHeader />
+      </div>
+      <div className={styles.main}>
         <div className={styles.mainContents}>
           <button
             className={styles.backButton}

@@ -47,6 +47,7 @@ interface ModalProps {
   columnId: number;
   userId: number;
   dashboardId: number;
+  afterSubmit: () => void;
 }
 
 function TodoCardModal({
@@ -58,6 +59,7 @@ function TodoCardModal({
   columnId,
   userId,
   dashboardId,
+  afterSubmit,
 }: ModalProps) {
   const [kebabOpen, setKebabOpen] = useState(false);
   const [cardState, setCardState] = useState('');
@@ -115,9 +117,11 @@ function TodoCardModal({
     try {
       await apiDeleteCard(cardId);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
+    afterSubmit();
   };
 
   if (!cardData) {

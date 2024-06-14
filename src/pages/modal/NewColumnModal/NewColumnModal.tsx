@@ -12,6 +12,7 @@ interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   dashboardId: number;
+  afterSubmit: () => void;
 }
 
 interface ColumnOverAll {
@@ -21,7 +22,12 @@ interface ColumnOverAll {
   updatedAt: string;
 }
 
-function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
+function NewColumnModal({
+  isOpen,
+  setIsOpen,
+  dashboardId,
+  afterSubmit,
+}: ModalProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [columnList, setColumnList] = useState<Array<string>>([]);
   const [check, setCheck] = useState(false);
@@ -32,7 +38,8 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
       const response = await apiGetColumnList(dashboardId);
       if (response.result === 'SUCCESS') {
         const titles = Array.isArray(response.data)
-          ? response.data.map((column: ColumnOverAll) => column.title) : [];
+          ? response.data.map((column: ColumnOverAll) => column.title)
+          : [];
         setColumnList(titles);
       } else {
         throw new Error('error');
@@ -60,7 +67,7 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
     try {
       const response = await apiCreateColumn(newDashboard);
       setIsOpen(false);
-      const { id } = response.data;
+      const { id } = response;
 
       if (id) {
         apiColumnData();
@@ -68,6 +75,7 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
     } catch (error) {
       throw new Error('error');
     }
+    afterSubmit();
   };
 
   useEffect(() => {
@@ -113,14 +121,22 @@ function NewColumnModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
               required
               onChange={handleChange}
             />
-            {check && <p className={styles.errorMessage}>중복된 컬럼 이름입니다.</p>}
+            {check && (
+              <p className={styles.errorMessage}>중복된 컬럼 이름입니다.</p>
+            )}
           </div>
 
           <div className={styles.buttonBlock}>
             <DeleteBtn BtnText="취소" handleBtn={close} />
-            { inputValue && !check
-              ? <button className={styles.activeButton} type="submit">생성</button>
-              : <button className={styles.inactiveButton} type="submit" disabled>생성</button>}
+            {inputValue && !check ? (
+              <button className={styles.activeButton} type="submit">
+                생성
+              </button>
+            ) : (
+              <button className={styles.inactiveButton} type="submit" disabled>
+                생성
+              </button>
+            )}
           </div>
         </form>
       </div>

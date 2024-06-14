@@ -17,6 +17,7 @@ interface ModalProps {
   columnTitle: string;
   columnId: number;
   dashboardId: number;
+  afterSubmit: () => void;
 }
 
 interface ColumnOverAll {
@@ -33,6 +34,7 @@ function EditColumnModal({
   columnTitle,
   columnId,
   dashboardId,
+  afterSubmit,
 }: ModalProps) {
   const [inputValue, setInputValue] = useState<string>(columnTitle);
   const [columnList, setColumnList] = useState<Array<string>>([]);
@@ -71,9 +73,11 @@ function EditColumnModal({
     try {
       await apiUpdateColumn(newColumn, columnId);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
+    afterSubmit();
   };
 
   // 삭제하기 버튼을 클릭하면 컬럼 삭제 모달이 열립니다.

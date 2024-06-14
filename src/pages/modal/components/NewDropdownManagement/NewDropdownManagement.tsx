@@ -1,3 +1,5 @@
+// NewDropdownManagement.tsx
+
 import ManagerDropdown from '../ManagerDropdown/ManagerDropdown';
 import styles from './NewDropdownManagement.module.scss';
 
@@ -15,9 +17,11 @@ interface Member {
 interface ModalProps {
   manager: string | null;
   setManager: React.Dispatch<React.SetStateAction<string>>;
-  managerImg: string | undefined
-  setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>
+  managerImg: string | undefined;
+  setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];
+  memberIdList: number[];
+  setClickManagerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function NewDropdownManagement({
@@ -26,6 +30,8 @@ function NewDropdownManagement({
   members,
   managerImg,
   setManagerImg,
+  memberIdList,
+  setClickManagerId,
 }: ModalProps) {
   return (
     <div className={styles.contentDropdown}>
@@ -37,6 +43,8 @@ function NewDropdownManagement({
           members={members}
           profile={managerImg}
           setProfile={setManagerImg}
+          memberIdList={memberIdList}
+          setClickManagerId={setClickManagerId}
         />
       </div>
     </div>

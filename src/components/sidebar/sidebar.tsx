@@ -65,7 +65,7 @@ function SideBar() {
   const [errorMessage, setErrorMessage] = useState('');
 
   // 화면 크기에 따라 한 페이지당 보여줄 대시보드 수를 결정
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const itemsPerPage = isMobile ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE;
 
   // 데이터 로드 및 페이지 설정
@@ -82,7 +82,7 @@ function SideBar() {
     };
 
     fetchData();
-  }, [itemsPerPage, currentPage]);
+  }, [itemsPerPage, currentPage, prevPage]);
 
   useEffect(() => {
     localStorage.setItem('currentPage', currentPage.toString());
@@ -95,13 +95,13 @@ function SideBar() {
         setCurrentPage(1);
       }
       else {
-        localStorage.setItem('currentPage', currentPage.toString());
+        localStorage.setItem('currentPage', prevPage.toString());
         setCurrentPage(prevPage);
       }
     }
 
     isMobileSetPage();
-  }, [isMobile])
+  }, [prevPage, isMobile])
 
   const fetchPageData = async (page: number) => {
     try {

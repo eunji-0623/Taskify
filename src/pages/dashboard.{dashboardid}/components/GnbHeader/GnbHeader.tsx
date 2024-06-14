@@ -82,7 +82,7 @@ function GnbHeader() {
       </div>
       <div className={styles.HandleAndProfile}>
         <div className={styles.BtnContainer}>
-          <SettingBtn />
+          {isCreateByMe ? <SettingBtn /> : <div></div>}
           <InviteBtn />
         </div>
         <div className={styles.MembersAndProfile}>

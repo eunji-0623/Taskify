@@ -19,7 +19,7 @@ function useProfileChange() {
   const userContext = useContext(UserContext);
   const userInfo = userContext?.userInfo;
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(
-    userInfo?.profileImageUrl || null
+    userInfo?.profileImageUrl || null,
   );
 
   // 모달 상태 관리

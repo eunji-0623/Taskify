@@ -43,7 +43,7 @@ export async function apiInquireMyInfo(): Promise<UserResponse> {
 
 // 내 정보 수정 api
 export async function apiEditMyInfo(
-  body: EditMyInfoBody,
+  body: EditMyInfoBody
 ): Promise<UserResponse> {
   const res = await instance.put<UserResponse>('/users/me', body);
   return handleResponse(res);
@@ -51,7 +51,7 @@ export async function apiEditMyInfo(
 
 // 프로필 이미지 업로드 api
 export async function apiUploadImage(
-  body: UploadImage,
+  body: UploadImage
 ): Promise<EditImageResponse> {
   const res = await instance.post<EditImageResponse>('/users/me/image', body);
   return handleResponse(res);

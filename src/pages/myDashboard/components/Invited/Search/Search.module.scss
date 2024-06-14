@@ -1,4 +1,5 @@
 @use '/src/styles/global.scss' as colors;
+@import '/src/styles/utils.scss';
 
 .container {
   width: 966px;
@@ -22,15 +23,15 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@include tablet {
   .container {
     width: 448px;
   }
 }
 
-@media screen and (max-width: 768px) {
+@include mobile {
   .container {
-    width: 228px;
+    width: 100%;
   }
 
   .searchInput {

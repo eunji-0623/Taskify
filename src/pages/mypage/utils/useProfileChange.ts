@@ -19,7 +19,7 @@ function useProfileChange() {
   const userContext = useContext(UserContext);
   const userInfo = userContext?.userInfo;
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(
-    userInfo?.profileImageUrl || null,
+    userInfo?.profileImageUrl || null
   );
 
   // 모달 상태 관리
@@ -84,8 +84,8 @@ function useProfileChange() {
 
         // user 정보 업데이트
         const updateData: UpdateData = {
-          nickname,
-          profileImageUrl: newProfileImageUrl || '',
+          nickname: nickname || userInfo.nickname,
+          profileImageUrl: newProfileImageUrl || userInfo.profileImageUrl || '',
         };
 
         const response = await apiEditMyInfo(updateData);

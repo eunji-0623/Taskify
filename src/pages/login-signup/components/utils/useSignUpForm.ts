@@ -65,6 +65,7 @@ function useSignUpForm() {
       await apiSignUp({ email, nickname, password }); // 회원가입 API 호출
 
       const profileImgUrl = defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
+
       const profileImgBlob = await urlToBlob(profileImgUrl); // 이미지 Blob으로 변환
       const formData = new FormData();
       formData.append('image', profileImgBlob, 'profile.png'); // FormData에 이미지 추가

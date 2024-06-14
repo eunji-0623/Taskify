@@ -15,6 +15,7 @@ interface ModalProps {
   dashboardId: number;
   columnId: number;
   columnTitle: string;
+  afterSubmit: () => void;
 }
 
 function EditColumnManagement({
@@ -23,6 +24,7 @@ function EditColumnManagement({
   dashboardId,
   columnId,
   columnTitle,
+  afterSubmit,
 }: ModalProps) {
   const [editModalOpen, setEditModalOpen] = useState(true);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -47,6 +49,7 @@ function EditColumnManagement({
           columnTitle={columnTitle}
           columnId={columnId}
           dashboardId={dashboardId}
+          afterSubmit={afterSubmit}
         />
       )}
       {deleteModalOpen && (
@@ -55,6 +58,7 @@ function EditColumnManagement({
           setIsOpen={setIsOpen}
           openEditModal={openEditModal}
           columnId={columnId}
+          afterSubmit={afterSubmit}
         />
       )}
     </>

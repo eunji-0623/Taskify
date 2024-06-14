@@ -20,4 +20,8 @@
 
   border-radius: 4px;
   background: $violet_5534DA;
+
+  &:disabled {
+    background: $gray_9FA6B2;
+  }
 }

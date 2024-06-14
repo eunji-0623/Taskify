@@ -4,7 +4,12 @@ import EditDropdownManagement from '../components/EditDropdownManagement/EditDro
 import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
 import TodoContent from '../components/TodoContent/TodoContent';
-import { apiGetColumnList, apiMemberList, apiUpdateCard } from '../../../api/apiModule';
+import {
+  apiGetColumnList,
+  apiMemberList,
+  apiUpdateCard,
+  CardOverAll,
+} from '../../../api/apiModule';
 import InputTag from '../components/InputTag/InputTag';
 import EditInputImage from '../components/EditInputImage/EditInputImage';
 import styles from './EditTodoModal.module.scss';
@@ -20,25 +25,6 @@ interface Member {
   isOwner: boolean;
 }
 
-interface CardOverAll {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  dueDate: string;
-  assignee: {
-    profileImageUrl?: string;
-    nickname: string;
-    id: number;
-  };
-  imageUrl?: string;
-  teamId: string;
-  columnId: number;
-  dashboardId: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -48,6 +34,7 @@ interface ModalProps {
   userId: number;
   columnId: number;
   dashboardId: number;
+  afterSubmit: () => void;
 }
 
 function EditTodoModal({
@@ -59,6 +46,7 @@ function EditTodoModal({
   userId,
   columnId,
   dashboardId,
+  afterSubmit,
 }: ModalProps) {
   const [cardState, setCardState] = useState<string>('');
   const [manager, setManager] = useState<string>('');
@@ -164,6 +152,7 @@ function EditTodoModal({
     } catch (error) {
       throw new Error('error');
     }
+    afterSubmit();
   };
 
   const handleTodoOpen = () => {
@@ -198,7 +187,10 @@ function EditTodoModal({
 
             <Title title={title} setTitle={setTitle} />
 
-            <TodoContent description={description} setDescription={setDescription} />
+            <TodoContent
+              description={description}
+              setDescription={setDescription}
+            />
 
             <Calendar dueDate={dueDate} setDueDate={setDueDate} />
 
@@ -208,8 +200,16 @@ function EditTodoModal({
           </div>
 
           <div className={styles.buttonBlock}>
-            <button className={styles.cancelButton} type="button" onClick={handleTodoOpen}>취소</button>
-            <button className={styles.createButton} type="submit">수정</button>
+            <button
+              className={styles.cancelButton}
+              type="button"
+              onClick={handleTodoOpen}
+            >
+              취소
+            </button>
+            <button className={styles.createButton} type="submit">
+              수정
+            </button>
           </div>
         </form>
       </div>

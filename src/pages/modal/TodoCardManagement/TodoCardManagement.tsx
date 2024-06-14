@@ -16,6 +16,7 @@ interface ModalProps {
   userId: number;
   columnId: number;
   dashboardId: number;
+  afterSubmit: () => void;
 }
 
 function TodoCardManagement({
@@ -25,6 +26,7 @@ function TodoCardManagement({
   userId,
   columnId,
   dashboardId,
+  afterSubmit,
 }: ModalProps) {
   const [cardData, setCardData] = useState<CardOverAll | undefined>();
 
@@ -73,6 +75,7 @@ function TodoCardManagement({
           columnId={columnId}
           userId={userId}
           dashboardId={dashboardId}
+          afterSubmit={afterSubmit}
         />
       )}
       {editModalOpen && (
@@ -85,6 +88,7 @@ function TodoCardManagement({
           userId={userId}
           columnId={columnId}
           dashboardId={dashboardId}
+          afterSubmit={afterSubmit}
         />
       )}
     </>

@@ -1,7 +1,21 @@
 @import '../../../../styles/utils.scss';
+.wrapper {
+  padding: 0.625rem 1.25rem;
+
+  @include desktop {
+    width: 22.125rem;
+  }
+  @include tablet {
+    width: 100%;
+  }
+  @include mobile {
+    padding: 0.375rem 0.75rem;
+    width: 100%;
+  }
+}
 .container {
+  text-align: left;
   width: 100%;
-  padding: 0;
 }
 .card {
   border: 1px solid var(--gray-D9D9D9, #d9d9d9);
@@ -15,10 +29,8 @@
     'tag    tag'
     'date   avatar';
   gap: 0.625rem;
-  margin-right: 1.25rem;
 
   @include desktop {
-    margin: 1.25rem 1.25rem 0;
     max-width: 19.813rem;
     padding-top: 0.625rem;
   }
@@ -26,7 +38,6 @@
   @include tablet {
     height: 5.813rem;
     padding-left: 0;
-    margin: 1.25rem 1.25rem 0;
     grid-template-areas:
       'img  title title title'
       'img  tag   date  avatar';
@@ -37,7 +48,6 @@
   }
 
   @include mobile {
-    margin: 0.75rem 0.75rem 0;
     padding: 0.75rem;
     padding-top: 0.125rem;
   }

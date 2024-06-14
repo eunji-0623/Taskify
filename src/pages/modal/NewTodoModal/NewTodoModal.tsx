@@ -27,6 +27,7 @@ interface ModalProps {
   userId: number;
   dashboardId: number;
   columnId: number;
+  afterSubmit: () => void;
 }
 
 function NewTodoModal({
@@ -35,6 +36,7 @@ function NewTodoModal({
   userId,
   dashboardId,
   columnId,
+  afterSubmit,
 }: ModalProps) {
   const [manager, setManager] = useState('');
   const [managerImg, setManagerImg] = useState<string | undefined>(TestImg);
@@ -91,6 +93,7 @@ function NewTodoModal({
     } catch (error) {
       throw new Error('error');
     }
+    afterSubmit();
   };
 
   const createButton = manager.length !== 0

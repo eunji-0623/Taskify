@@ -1,4 +1,4 @@
-import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
+import UserProfileImg, { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 import styles from './CardSideContent.module.scss';
 
 /*
@@ -19,10 +19,8 @@ function CardSideContent({ managerImg, manager, dueDate }: ModalProps) {
         <div className={styles.profileBlock}>
           {
             managerImg ? (
-              <UserProfileImg
-                isImg
+              <UserProfileImgSvg
                 profileImageUrl={managerImg}
-                nickname={manager}
               />
             ) : (
               <UserProfileImg

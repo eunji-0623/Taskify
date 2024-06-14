@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import styles from './ManagerDropdown.module.scss';
+import styles from './EditManagerDropdown.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
 import UserProfileImg, { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
@@ -21,7 +21,7 @@ interface Member {
 
 interface DropdownProps {
   value: string | undefined
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<string | undefined>>
   profile: string | undefined;
   setProfile: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];
@@ -29,7 +29,7 @@ interface DropdownProps {
   setClickManagerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function ManagerDropdown({
+function EditManagerDropdown({
   value,
   setValue,
   members,
@@ -157,4 +157,4 @@ function ManagerDropdown({
   );
 }
 
-export default ManagerDropdown;
+export default EditManagerDropdown;

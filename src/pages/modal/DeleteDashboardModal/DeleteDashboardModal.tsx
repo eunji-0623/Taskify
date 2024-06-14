@@ -23,6 +23,7 @@ function DeleteDashboardModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
     setIsOpen(false);
   }, [setIsOpen]);
 
+  // 삭제 클릭
   const handleDeleteButton = async () => {
     await apiDeleteDashboards({ dashboardId });
     navigate('/myDashboard');

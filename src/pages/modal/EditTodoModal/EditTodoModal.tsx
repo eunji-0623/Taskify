@@ -63,7 +63,7 @@ function EditTodoModal({
   const [columnListId, setColumnListId] = useState<number[]>([]);
   const [clickColumnId, setClickColumnId] = useState<number>(columnId);
 
-  // 멤버 목록 조회
+  // 대시보드 멤버 목록 조회
   useEffect(() => {
     const fetchMembers = async () => {
       try {

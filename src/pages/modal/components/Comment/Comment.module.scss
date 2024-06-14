@@ -22,7 +22,7 @@
 }
 
 .comment {
-  color: var(--black-black_333236, #333236);
+  color: $black_333236;
   font-family: Pretendard;
   font-size: 0.75rem;
   font-style: normal;
@@ -36,8 +36,8 @@
   padding: 1rem;
   align-items: flex-start;
   border-radius: 0.375rem;
-  border: 1px solid #d9d9d9;
-  background: #ffffff;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
   width: 100%;
   height: 6.25em;
   margin-top: 0.63rem;
@@ -48,8 +48,8 @@
   font-size: 0.8rem;
   font-weight: 400;
   border-radius: 0.375rem;
-  border: 1px solid #d9d9d9;
-  background: #ffffff;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
 
   &:focus {
     // 클릭 시 생기는 기본 테두리 변경
@@ -91,10 +91,10 @@
 
 .formButtonClick {
   @extend .formButton;
-  background: var(--violet-violet_5534DA, #5534da);
+  background: $violet_5534DA;
   border-radius: 4px;
   border: 0px;
-  color: #ffffff;
+  color: $white_FFFFFF;
   cursor: pointer;
 }
 
@@ -119,8 +119,8 @@
   bottom: 1rem; 
   right: 1.5rem; 
   z-index: 1000; 
-  background-color: #5534da; 
-  color: #fff; 
+  background-color: $violet_5534DA; 
+  color: $white_FFFFFF; 
   padding: 0.4rem; 
   border: none; 
   border-radius: 4px;

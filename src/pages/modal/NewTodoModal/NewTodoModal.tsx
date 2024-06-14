@@ -45,11 +45,7 @@ function NewTodoModal({
   const [tags, setTags] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [members, setMembers] = useState<Member[]>([]);
-
-  // 삭제
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [memberIdList, setMemberIdList] = useState<number[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [clickManagerId, setClickManagerId] = useState<number>(userId);
 
   // 대시보드 멤버 목록 조회
@@ -58,13 +54,18 @@ function NewTodoModal({
       try {
         const response = await apiMemberList({ dashboardId });
         setMembers(response.members);
+
+        const idList = Array.isArray(response.members)
+          ? response.members.map((member) => member.userId)
+          : [];
+        setMemberIdList(idList);
       } catch (err) {
         throw new Error('error');
       }
     };
 
     fetchMembers();
-  }, [dashboardId]);
+  }, [dashboardId, userId]);
 
   // 닫기
   const close = useCallback(() => {
@@ -75,8 +76,12 @@ function NewTodoModal({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (clickManagerId === 0) {
+      setClickManagerId(userId);
+    }
+
     const newTodo = {
-      assigneeUserId: userId,
+      assigneeUserId: clickManagerId,
       dashboardId,
       columnId,
       title,

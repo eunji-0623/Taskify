@@ -17,6 +17,7 @@ interface ModalProps {
 function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
   const [email, setEmail] = useState('');
 
+  // 모달 닫기
   const close = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);

@@ -1,6 +1,10 @@
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
-import ManagerDropdown from '../ManagerDropdown/ManagerDropdown';
+import EditManagerDropdown from '../EditManagerDropdown/EditManagerDropdown';
 import styles from './EditDropdownManagement.module.scss';
+
+/*
+  할 일 수정 모달의 상태와 담당자 드롭다운 메뉴를 관리합니다.
+*/
 
 interface Member {
   id: number;
@@ -16,7 +20,7 @@ interface Member {
 interface ModalProps {
   cardState: string;
   setCardState: React.Dispatch<React.SetStateAction<string>>;
-  manager: string | undefined
+  manager: string | undefined;
   setManager: React.Dispatch<React.SetStateAction<string | undefined>>
   managerImg: string | undefined;
   setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -56,7 +60,7 @@ function EditDropdownManagement({
       </div>
       <div className={styles.contentBlock}>
         <h3>담당자</h3>
-        <ManagerDropdown
+        <EditManagerDropdown
           value={manager}
           setValue={setManager}
           members={members}

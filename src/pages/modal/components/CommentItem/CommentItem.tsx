@@ -2,11 +2,11 @@ import { forwardRef, useState } from 'react';
 import { format } from 'date-fns';
 import styles from './CommentItem.module.scss';
 import { apiUpdateComment, apiDeleteComment } from '../../../../api/apiModule';
-import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
+import UserProfileImg, { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 
 interface CommentOverAll {
   id: number;
-  Block: string;
+  content: string;
   createdAt: string;
   updatedAt: string;
   cardId: number;
@@ -27,7 +27,7 @@ interface CommentProps {
   edituserId: number;
   date: string;
   cardId: number;
-  setComments: React.Dispatch<React.SetStateAction<CommentOverAll[]>>
+  setComments: React.Dispatch<React.SetStateAction<CommentOverAll[]>>;
 }
 
 const CommentItem = forwardRef<HTMLDivElement, CommentProps>(({
@@ -95,10 +95,8 @@ const CommentItem = forwardRef<HTMLDivElement, CommentProps>(({
     <div className={styles.container} ref={ref}>
       {
         image ? (
-          <UserProfileImg
-            isImg
+          <UserProfileImgSvg
             profileImageUrl={image}
-            nickname={name}
           />
         ) : (
           <UserProfileImg

@@ -3,6 +3,10 @@ import styles from './NewInputImage.module.scss';
 import AddImageIcon from '/icon/add_image_box.svg';
 import { apiUploadCardImage } from '../../../../api/apiModule';
 
+/*
+  할 일 생성 모달에서 이미지를 첨부할 때 apiUploadCardImage로 카드 이미지를 업로드합니다.
+*/
+
 interface InputImageProps {
   imageUrl: string | undefined;
   setImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;

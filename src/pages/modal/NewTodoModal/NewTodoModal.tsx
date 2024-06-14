@@ -126,7 +126,7 @@ function NewTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <NewInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} columnId={columnId} />
+            <NewInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
           </div>
 
           <div className={styles.buttonBlock}>

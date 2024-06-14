@@ -31,7 +31,7 @@ function MemberEdit({ dashboardId }: Props) {
   const [reload, setReload] = useState(false);
 
   const fetchMembers = async (
-    id: number
+    id: number,
   ): Promise<{ items: MemberResponse[]; totalCount: number }> => {
     const data = await apiMemberList({ dashboardId: id });
     return {
@@ -42,7 +42,8 @@ function MemberEdit({ dashboardId }: Props) {
 
   const fetchDataCallback = useCallback(
     () => fetchMembers(dashboardId),
-    [dashboardId, reload]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [dashboardId, reload],
   );
 
   const {

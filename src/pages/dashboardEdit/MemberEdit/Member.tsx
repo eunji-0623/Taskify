@@ -13,7 +13,9 @@ interface Props {
   handleReload: () => void;
 }
 
-function Member({ memberId, name, profile, isOwner, handleReload }: Props) {
+function Member({
+  memberId, name, profile, isOwner, handleReload,
+}: Props) {
   const handleDeleteButton = async () => {
     await apiDeleteMemeber({ memberId });
     handleReload();
@@ -25,7 +27,9 @@ function Member({ memberId, name, profile, isOwner, handleReload }: Props) {
         <img src={profile} alt="프로필" />
       </td>
       <td className={styles.name}>
-        {name} {isOwner ? <img src="/icon/crown.svg" alt="왕관" /> : null}
+        {name}
+        {' '}
+        {isOwner ? <img src="/icon/crown.svg" alt="왕관" /> : null}
       </td>
       <td className={styles.removeButton}>
         {!isOwner ? (

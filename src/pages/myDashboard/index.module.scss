@@ -1,4 +1,4 @@
-@use '/src/styles/global.scss' as *;
+@import '../../styles/utils.scss';
 
 .container {
   display: grid;
@@ -28,5 +28,8 @@
   .mainContents {
     margin-left: 40px;
     margin-top: 40px;
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 2;
+    overflow-x: auto;
   }
 }

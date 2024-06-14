@@ -56,6 +56,10 @@ function SideBar() {
     const savedPage = localStorage.getItem('currentPage');
     return savedPage ? Number(savedPage) : 1;
   });
+  const [prevPage, setPrevPage] = useState(() => {
+    const savedPage = localStorage.getItem('currentPage');
+    return savedPage ? Number(savedPage) : 1;
+  });
   const [totalPages, setTotalPages] = useState(1);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -84,6 +88,21 @@ function SideBar() {
     localStorage.setItem('currentPage', currentPage.toString());
   }, [currentPage]);
 
+  useEffect(() => {
+    const isMobileSetPage = () => {
+      if(isMobile) {
+        localStorage.setItem('currentPage', '1');
+        setCurrentPage(1);
+      }
+      else {
+        localStorage.setItem('currentPage', currentPage.toString());
+        setCurrentPage(prevPage);
+      }
+    }
+
+    isMobileSetPage();
+  }, [isMobile])
+
   const fetchPageData = async (page: number) => {
     try {
       const { items: dashboards } = await fetchDashboards(page, itemsPerPage);
@@ -99,6 +118,7 @@ function SideBar() {
       const prevPage = currentPage - 1;
       fetchPageData(prevPage);
       setCurrentPage(prevPage);
+      setPrevPage(prevPage);
     }
   };
 
@@ -107,6 +127,7 @@ function SideBar() {
       const nextPage = currentPage + 1;
       fetchPageData(nextPage);
       setCurrentPage(nextPage);
+      setPrevPage(nextPage);
     }
   };
 

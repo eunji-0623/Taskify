@@ -16,6 +16,7 @@ interface Props {
   totalPages: number;
   handlePrevClick: () => void;
   handleNextClick: () => void;
+  dashboardId?: number;
 }
 
 function EditHeader({
@@ -27,7 +28,10 @@ function EditHeader({
   totalPages,
   handlePrevClick,
   handleNextClick,
+  dashboardId,
 }: Props) {
+  if (!dashboardId) return;
+
   const { width } = useWindowSize();
   const [sendInvitation, setSendInvitation] = useState(false);
 
@@ -41,10 +45,7 @@ function EditHeader({
         <h2 className={styles.title}>{title}</h2>
         <div className={styles.pagination}>
           <p>
-            {totalPages}
-            {' '}
-            페이지 중
-            {currentPage}
+            {totalPages} 페이지 중{currentPage}
           </p>
           <PagenationBtn
             handlePrev={handlePrevClick}
@@ -62,6 +63,7 @@ function EditHeader({
                 <InviteModal
                   isOpen={sendInvitation}
                   setIsOpen={setSendInvitation}
+                  dashboardId={dashboardId}
                 />
               ) : null}
             </>

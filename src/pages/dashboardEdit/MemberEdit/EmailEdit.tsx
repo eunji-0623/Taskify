@@ -41,11 +41,11 @@ interface EmailResponse {
 function EmailEdit({ dashboardId }: Props) {
   const fetchInvitations = async (
     id: number,
-    page: number,
+    page: number
   ): Promise<{ items: EmailResponse[]; totalCount: number }> => {
     const data = await apiInvitationList(
       { dashboardId: id },
-      { page, size: ITEMS_PER_PAGE },
+      { page, size: ITEMS_PER_PAGE }
     );
     return {
       items: data.invitations,
@@ -55,7 +55,7 @@ function EmailEdit({ dashboardId }: Props) {
 
   const fetchDataCallback = useCallback(
     () => fetchInvitations(dashboardId, 1),
-    [dashboardId],
+    [dashboardId]
   );
 
   const {
@@ -82,6 +82,7 @@ function EmailEdit({ dashboardId }: Props) {
         totalPages={totalPages}
         handlePrevClick={handlePrevClick}
         handleNextClick={handleNextClick}
+        dashboardId={dashboardId}
       />
       <table>
         <thead className={styles.table_head}>

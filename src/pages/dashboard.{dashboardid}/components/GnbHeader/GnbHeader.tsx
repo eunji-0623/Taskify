@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './GnbHeader.module.scss';
 import { DashboardContext } from '../../../../contexts/DashboardContext';
 import { UserContext } from '../../../../contexts/UserContext';
-import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
+import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 import CrownImg from '/icon/crown.svg';
 import { InviteBtn, SettingBtn } from '../Btn/Btn';
 import Members from '../Members/Members';
@@ -87,15 +87,15 @@ function GnbHeader() {
         </div>
         <div className={styles.MembersAndProfile}>
           <Members dashboardId={activeDashboard} />
-          {/* 대시보드 id 가져와야 함. */}
           <div className={styles.VerticalLine} />
           <div onMouseLeave={ProfileLeave} onMouseOver={profileOver} onFocus={profileOver}>
             <div className={styles.Profile}>
-              <UserProfileImg
+              {/* <UserProfileImg
                 isImg={false}
                 profileImageUrl="#A3C4A2"
                 nickname={userInfo?.nickname}
-              />
+              /> */}
+              <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl}/>
               <div className={styles.nickName}>{userInfo?.nickname}</div>
             </div>
             {ProfileKebabOpen && <ProfileKebab />}

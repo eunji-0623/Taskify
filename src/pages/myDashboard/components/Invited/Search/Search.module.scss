@@ -31,7 +31,7 @@
 
 @include mobile {
   .container {
-    width: 100%;
+    width: max(100%, 228px);
   }
 
   .searchInput {

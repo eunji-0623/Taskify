@@ -44,7 +44,7 @@
 @include mobile {
   .dashboard,
   .addDashboard {
-    width: 100%;
+    width: max(100%, 260px);
     height: 58px;
   }
 }

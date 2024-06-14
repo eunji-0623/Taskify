@@ -30,6 +30,7 @@ function DeleteColumnModal({
     try {
       await apiDeleteColumn(columnId);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }

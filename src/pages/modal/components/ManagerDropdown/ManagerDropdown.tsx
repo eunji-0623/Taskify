@@ -20,6 +20,8 @@ interface DropdownProps {
   profile: string | undefined;
   setProfile: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];
+  memberIdList: number[];
+  setClickManagerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function ManagerDropdown({
@@ -28,6 +30,8 @@ function ManagerDropdown({
   members,
   profile,
   setProfile,
+  memberIdList,
+  setClickManagerId,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -50,10 +54,11 @@ function ManagerDropdown({
     setIsOpen(!isOpen);
   };
 
-  const handleItemClick = (nickname: string, profileImageUrl: string) => {
+  const handleItemClick = (nickname: string, profileImageUrl: string, index: number) => {
     setValue(nickname);
     setIsOpen(false);
     setProfile(profileImageUrl);
+    setClickManagerId(memberIdList[index]);
     // setSearchTerm(nickname);
   };
 
@@ -90,12 +95,12 @@ function ManagerDropdown({
         <div className={styles.dropdownBlock}>
           <div className={styles.dropdownContent}>
             <ul className={styles.items}>
-              {members.map((member) => (
+              {members.map((member, index) => (
                 <li key={member.id}>
                   <button
                     className={styles.itemBlock}
                     type="button"
-                    onClick={() => handleItemClick(member.nickname, member.profileImageUrl)}
+                    onClick={() => handleItemClick(member.nickname, member.profileImageUrl, index)}
                   >
                     {value === member.nickname && (
                       <img

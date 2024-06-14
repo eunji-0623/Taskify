@@ -73,6 +73,7 @@ function EditColumnModal({
     try {
       await apiUpdateColumn(newColumn, columnId);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }

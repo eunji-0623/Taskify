@@ -11,7 +11,7 @@ import {
   CardOverAll,
 } from '../../../api/apiModule';
 import InputTag from '../components/InputTag/InputTag';
-import InputImage from '../components/InputImage/InputImage';
+import EditInputImage from '../components/EditInputImage/EditInputImage';
 import styles from './EditTodoModal.module.scss';
 
 interface Member {
@@ -49,7 +49,7 @@ function EditTodoModal({
   afterSubmit,
 }: ModalProps) {
   const [cardState, setCardState] = useState<string>('');
-  const [manager, setManager] = useState('');
+  const [manager, setManager] = useState<string>('');
   const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -57,35 +57,30 @@ function EditTodoModal({
   const [tags, setTags] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [members, setMembers] = useState<Member[]>([]);
+  const [memberIdList, setMemberIdList] = useState<number[]>([]);
+  const [clickManagerId, setClickManagerId] = useState<number>(userId);
   const [columnList, setColumnList] = useState<string[]>([]);
   const [columnListId, setColumnListId] = useState<number[]>([]);
   const [clickColumnId, setClickColumnId] = useState<number>(columnId);
 
+  // 멤버 목록 조회
   useEffect(() => {
     const fetchMembers = async () => {
       try {
         const response = await apiMemberList({ dashboardId });
         setMembers(response.members);
+
+        const idList = Array.isArray(response.members)
+          ? response.members.map((member) => member.userId)
+          : [];
+        setMemberIdList(idList);
       } catch (err) {
         throw new Error('error');
       }
     };
 
     fetchMembers();
-  }, [dashboardId]);
-
-  // 현재 데이터 추가
-  useEffect(() => {
-    if (cardData) {
-      setManager(cardData.assignee.nickname);
-      setManagerImg(cardData.assignee.profileImageUrl);
-      setTitle(cardData.title);
-      setDescription(cardData.description);
-      setDueDate(cardData.dueDate);
-      setTags(cardData.tags);
-      setImageUrl(cardData.imageUrl || '');
-    }
-  }, [cardData]);
+  }, [dashboardId, userId]);
 
   // 컬럼 리스트 조회
   useEffect(() => {
@@ -116,13 +111,34 @@ function EditTodoModal({
     fetchDashboardDetail();
   }, [dashboardId, columnId]);
 
+  // 현재 데이터 추가
+  useEffect(() => {
+    if (cardData) {
+      setManager(cardData.assignee.nickname);
+      setManagerImg(cardData.assignee.profileImageUrl);
+      setTitle(cardData.title);
+      setDescription(cardData.description);
+      setDueDate(cardData.dueDate);
+      setTags(cardData.tags);
+      setImageUrl(cardData.imageUrl || '');
+    }
+  }, [cardData]);
+
   // 수정 클릭
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (clickColumnId === 0) {
+      setClickColumnId(columnId);
+    }
+
+    if (clickManagerId === 0) {
+      setClickManagerId(userId);
+    }
+
     const updateCard = {
       columnId: clickColumnId,
-      assigneeUserId: userId,
+      assigneeUserId: clickManagerId,
       title,
       description,
       dueDate,
@@ -133,6 +149,7 @@ function EditTodoModal({
     try {
       await apiUpdateCard(updateCard, cardId);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
@@ -165,6 +182,8 @@ function EditTodoModal({
               managerImg={managerImg}
               setManagerImg={setManagerImg}
               members={members}
+              memberIdList={memberIdList}
+              setClickManagerId={setClickManagerId}
             />
 
             <Title title={title} setTitle={setTitle} />
@@ -178,7 +197,7 @@ function EditTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <InputImage imageUrl={imageUrl} setImageUrl={setImageUrl} text="" />
+            <EditInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
           </div>
 
           <div className={styles.buttonBlock}>

@@ -60,6 +60,11 @@ function ColumnList() {
     setAddColumnModalOpen(!addColumnModalOpen);
   };
 
+  // 모달에서 응답이 올 시
+  const afterSubmit = (): void => {
+    getColumnList(Number(dashboardId));
+  };
+
   // 컴포넌트 출력
   return (
     <ColumnContainer>
@@ -71,6 +76,7 @@ function ColumnList() {
           title={columnData.title}
           dashboardId={Number(dashboardId)}
           userId={userId}
+          afterSubmit={afterSubmit}
         />
       ))}
       <div className={styles.addColumnButtonContainer}>
@@ -81,6 +87,7 @@ function ColumnList() {
           isOpen={addColumnModalOpen}
           setIsOpen={setAddColumnModalOpen}
           dashboardId={Number(dashboardId)}
+          afterSubmit={afterSubmit}
         />
       ) : null}
     </ColumnContainer>

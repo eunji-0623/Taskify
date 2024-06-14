@@ -72,7 +72,7 @@
 
 @include mobile {
   .container {
-    width: 284px;
+    width: max(100%, 284px);
     padding: 20px;
     gap: 25px;
   }

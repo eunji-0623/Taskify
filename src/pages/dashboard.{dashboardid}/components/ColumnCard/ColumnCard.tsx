@@ -24,7 +24,11 @@ const formatDate = (date: string) => {
 // 일정을 카드 모양으로 보여주는 컴포넌트입니다.
 // 사진, 제목, 태그, 기한, 작성자이미지를 prop으로 받습니다.
 // 현재 작성자 이미지 대신 이름만 보여지게 처리했습니다. 수정 필요합니다.
-function ColumnCard({ cardId, cardData, columnData }: CardProps) {
+function ColumnCard({
+  cardId,
+  cardData,
+  columnData,
+}: CardProps) {
   const [manageCardModalOpen, setManageCardModalOpen] = useState<boolean>(false);
   const {
     assignee,
@@ -38,41 +42,38 @@ function ColumnCard({ cardId, cardData, columnData }: CardProps) {
   const cardOnClick = () => {
     setManageCardModalOpen(true);
   };
-  const handleKeyDown = () => {
-    setManageCardModalOpen(true);
-  };
 
+  // 모달 응답
+  const afterSubmit = () => {
+    window.location.reload();
+  };
   // 컴포넌트 출력
   return (
-    <div
-      className={styles.container}
-      onKeyDown={handleKeyDown}
-      onClick={cardOnClick}
-      role="button"
-      tabIndex={0}
-    >
-      <div className={styles.card}>
-        {imageUrl && (
-          <div className={styles.img}>
-            <img
-              className={` ${styles.withImg}`}
-              src={imageUrl}
-              alt="uploadedTaskImage"
-            />
+    <div className={styles.wrapper}>
+      <button type="button" onClick={cardOnClick} className={styles.container}>
+        <div className={styles.card}>
+          {imageUrl && (
+            <div className={styles.img}>
+              <img
+                className={` ${styles.withImg}`}
+                src={imageUrl}
+                alt="uploadedTaskImage"
+              />
+            </div>
+          )}
+          <div className={styles.title}>{title}</div>
+          <div className={styles.tag}>
+            {tags.map((tag) => (
+              <Tag tagName={tag} key={tag} />
+            ))}
           </div>
-        )}
-        <div className={styles.title}>{title}</div>
-        <div className={styles.tag}>
-          {tags.map((tag) => (
-            <Tag tagName={tag} key={tag} />
-          ))}
+          <div className={styles.date}>
+            <img src="/icon/calendar.svg" alt="calendarImg" />
+            {formatDate(dueDate)}
+          </div>
+          <div className={styles.avatar}>{assignee.nickname}</div>
         </div>
-        <div className={styles.date}>
-          <img src="/icon/calendar.svg" alt="calendarImg" />
-          {formatDate(dueDate)}
-        </div>
-        <div className={styles.avatar}>{assignee.nickname}</div>
-      </div>
+      </button>
 
       {manageCardModalOpen ? (
         <TodoCardManagement
@@ -82,6 +83,7 @@ function ColumnCard({ cardId, cardData, columnData }: CardProps) {
           userId={columnData.userId}
           columnId={columnData.columnId}
           cardId={cardId}
+          afterSubmit={afterSubmit}
         />
       ) : null}
     </div>

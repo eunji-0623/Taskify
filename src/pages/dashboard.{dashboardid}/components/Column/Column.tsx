@@ -14,6 +14,7 @@ interface ColumnProps {
   columnId: number;
   dashboardId: number;
   userId: number;
+  afterSubmit: ()=> void;
 }
 interface ColumnData {
   userId: number;
@@ -26,6 +27,7 @@ function Column({
   columnId,
   dashboardId,
   userId,
+  afterSubmit: changeColumnName,
 }: ColumnProps) {
   const [cardList, setCardList] = useState<CardOverAll[]>([]);
   const [columnData, setColumnData] = useState<ColumnData>({
@@ -47,25 +49,26 @@ function Column({
   const PAGE_SIZE = 5;
 
   // 처음 카드 목록을 조회
-  useEffect(() => {
-    const getFirstCardList = async () => {
-      try {
-        const res = await apiGetCardList({ size: 10, columnId });
-        const firstList = res.cards;
-        setCursor(res.cursorId);
-        setTotalCount(res.totalCount);
-        setCardList(firstList);
-        if (firstList.length < 10) {
-          setHasNext(false);
-        } else setHasNext(true);
-      } catch (error) {
-        const axiosError = error as AxiosError;
-        setErrorState(axiosError.message || '목록을 가져오는데 실패했습니다');
-      }
-    };
+  const getFirstCardList = async () => {
+    try {
+      const res = await apiGetCardList({ size: 10, columnId });
+      const firstList = res.cards;
+      setCursor(res.cursorId);
+      setTotalCount(res.totalCount);
+      setCardList(firstList);
+      if (firstList.length < 10) {
+        setHasNext(false);
+      } else setHasNext(true);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      setErrorState(axiosError.message || '목록을 가져오는데 실패했습니다');
+    }
+  };
 
+  useEffect(() => {
     getFirstCardList();
-  }, [columnId]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // 이후의 카드 목록을 조회
   const getMoreCardList = async () => {
@@ -118,6 +121,13 @@ function Column({
     setAddCardModalOpen(!addCardModalOpen);
   };
 
+  // 모달 응답
+  const afterSubmit = () => {
+    setCardList([]);
+    setCursor(null);
+    getFirstCardList();
+  };
+
   // 컴포넌트 출력
   return (
     <div className={styles.container}>
@@ -146,6 +156,7 @@ function Column({
           dashboardId={Number(dashboardId)}
           columnId={columnId}
           columnTitle={title}
+          afterSubmit={changeColumnName}
         />
       ) : null}
       {addCardModalOpen ? (
@@ -155,6 +166,7 @@ function Column({
           columnId={columnId}
           dashboardId={Number(dashboardId)}
           userId={userId}
+          afterSubmit={afterSubmit}
         />
       ) : null}
     </div>

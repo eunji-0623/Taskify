@@ -10,15 +10,17 @@ import styles from './index.module.scss';
 function MyDashboard() {
   return (
     <div className={styles.container}>
-      <div className={styles.sidebar}>
+      <div className={styles.sideMenu}>
         <SideBar />
       </div>
-      <div className={styles.MyDashboardHeader}>
+      <div className={styles.header}>
         <MyDashboardHeader />
       </div>
-      <div className={styles.mainContents}>
-        <DashboardList />
-        <Invited />
+      <div className={styles.main}>
+        <div className={styles.mainContents}>
+          <DashboardList />
+          <Invited />
+        </div>
       </div>
     </div>
   );

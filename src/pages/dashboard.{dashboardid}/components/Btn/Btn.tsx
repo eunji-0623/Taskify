@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './Btn.module.scss';
 import SettingImg from '/icon/setting.svg';
 import AddBoxImg from '/icon/add_box.svg';
@@ -34,6 +34,8 @@ export function SettingBtn() {
 export function InviteBtn() {
   const [testState, setTestState] = useState(false);
 
+  const { id: dashboardId } = useParams<{ id: string }>();
+
   function InviteClick() {
     setTestState(!testState);
   }
@@ -52,7 +54,7 @@ export function InviteBtn() {
         <InviteModal
           isOpen={testState}
           setIsOpen={setTestState}
-          dashboardId={8922}
+          dashboardId={Number(dashboardId)}
         />
       ) : null }
     </>

@@ -24,6 +24,8 @@ interface ModalProps {
   columnList: string[];
   columnListId: number[];
   setColumnId: React.Dispatch<React.SetStateAction<number>>;
+  memberIdList: number[];
+  setClickManagerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function EditDropdownManagement({
@@ -37,6 +39,8 @@ function EditDropdownManagement({
   setManagerImg,
   columnListId,
   setColumnId,
+  memberIdList,
+  setClickManagerId,
 }: ModalProps) {
   return (
     <div className={styles.contentDropdown}>
@@ -58,6 +62,8 @@ function EditDropdownManagement({
           members={members}
           profile={managerImg}
           setProfile={setManagerImg}
+          memberIdList={memberIdList}
+          setClickManagerId={setClickManagerId}
         />
       </div>
     </div>

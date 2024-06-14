@@ -6,7 +6,7 @@ import Title from '../components/Title/Title';
 import Calendar from '../components/Calendar/Calendar';
 import TodoContent from '../components/TodoContent/TodoContent';
 import InputTag from '../components/InputTag/InputTag';
-import InputImage from '../components/InputImage/InputImage';
+import NewInputImage from '../components/NewInputImage/NewInputImage';
 import styles from './NewTodoModal.module.scss';
 import TestImg from '/icon/testProfile.svg';
 
@@ -27,6 +27,7 @@ interface ModalProps {
   userId: number;
   dashboardId: number;
   columnId: number;
+  afterSubmit: () => void;
 }
 
 function NewTodoModal({
@@ -35,6 +36,7 @@ function NewTodoModal({
   userId,
   dashboardId,
   columnId,
+  afterSubmit,
 }: ModalProps) {
   const [manager, setManager] = useState('');
   const [managerImg, setManagerImg] = useState<string | undefined>(TestImg);
@@ -42,8 +44,12 @@ function NewTodoModal({
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [tags, setTags] = useState<string[]>([]);
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [members, setMembers] = useState<Member[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [memberIdList, setMemberIdList] = useState<number[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [clickManagerId, setClickManagerId] = useState<number>(userId);
 
   // 대시보드 멤버 목록 조회
   useEffect(() => {
@@ -76,29 +82,23 @@ function NewTodoModal({
       description,
       dueDate,
       tags,
+      image: imageUrl,
     };
 
-    // const uploadImageBody = {
-    //   image: imageUrl,
-    // };
-
     try {
-      await Promise.all([
-        apiCreateCard(newTodo),
-        // apiUploadCardImage(uploadImageBody, columnId),
-      ]);
+      await apiCreateCard(newTodo);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
+    afterSubmit();
   };
 
   const createButton = manager.length !== 0
     && title.length !== 0
     && description.length !== 0
-    && dueDate.length !== 0
-    && tags.length !== 0
-    && imageUrl !== null;
+    && dueDate.length !== 0;
 
   return (
     <ModalContainer isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -113,6 +113,8 @@ function NewTodoModal({
               managerImg={managerImg}
               setManagerImg={setManagerImg}
               members={members}
+              memberIdList={memberIdList}
+              setClickManagerId={setClickManagerId}
             />
 
             <Title title={title} setTitle={setTitle} />
@@ -123,7 +125,7 @@ function NewTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <InputImage imageUrl={imageUrl} setImageUrl={setImageUrl} text="new" />
+            <NewInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
           </div>
 
           <div className={styles.buttonBlock}>

@@ -30,6 +30,7 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
       const response = await apiInviteDashboards(emailObj, { dashboardId });
       if (response) {
         setIsOpen(false);
+        window.location.reload();
       }
     } catch (error) {
       throw new Error('error');

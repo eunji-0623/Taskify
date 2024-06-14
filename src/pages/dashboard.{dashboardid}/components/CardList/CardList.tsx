@@ -1,4 +1,3 @@
-import { ReactEventHandler } from 'react';
 import ColumnCard from '../ColumnCard/ColumnCard';
 import { CardOverAll } from '../../../../api/apiModule';
 
@@ -11,7 +10,6 @@ interface CardListProps {
     dashboardId: number;
   };
   setElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
-  handleCardOnclick: ReactEventHandler;
 }
 
 function CardList({
@@ -19,7 +17,6 @@ function CardList({
   hasNext,
   columnData,
   setElement,
-  handleCardOnclick,
 }: CardListProps) {
   return (
     <div>
@@ -29,7 +26,6 @@ function CardList({
           cardId={cardData.id}
           cardData={cardData}
           columnData={columnData}
-          handleCardOnclick={handleCardOnclick}
         />
       ))}
       {hasNext && <div ref={setElement} style={{ height: '20px' }} />}

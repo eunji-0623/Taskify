@@ -15,6 +15,7 @@ interface ModalProps {
   setIsOpen: (isOpen: boolean) => void;
   openEditModal: () => void;
   columnId: number;
+  afterSubmit: () => void;
 }
 
 function DeleteColumnModal({
@@ -22,15 +23,18 @@ function DeleteColumnModal({
   setIsOpen,
   openEditModal,
   columnId,
+  afterSubmit,
 }: ModalProps) {
   // 컬럼의 모든 카드를 삭제하는 동작
   const apiDelete = async () => {
     try {
       await apiDeleteColumn(columnId);
       setIsOpen(false);
+      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
+    afterSubmit();
   };
 
   // 취소를 클릭하면 컬럼 관리 모달로 돌아갑니다.

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import styles from './ManagerDropdown.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
-import UserProfileImg, { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
+import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 
 /*
   관리자를 드롭다운 메뉴로 볼 수 있습니다.
@@ -82,17 +82,18 @@ function ManagerDropdown({
       <button className={styles.searchBlock} onClick={toggleDropdown} type="button">
         <div className={styles.searchCenter}>
           {
-            profile ? (
-              <UserProfileImgSvg
-                profileImageUrl={profile}
-              />
-            ) : (
-              <UserProfileImg
-                isImg={false}
-                profileImageUrl=""
-                nickname={value}
-              />
-            )
+            // profile ? (
+            //   <UserProfileImgSvg
+            //     profileImageUrl={profile}
+            //   />
+            // ) : (
+            //   <UserProfileImg
+            //     isImg={false}
+            //     profileImageUrl=""
+            //     nickname={value}
+            //   />
+            // )
+            profile && <UserProfileImgSvg profileImageUrl={profile} />
           }
           <input
             className={styles.searchInput}
@@ -101,6 +102,7 @@ function ManagerDropdown({
             value={value ?? ''}
             onClick={toggleDropdown}
             // onChange={handleSearchChange}
+            readOnly
           />
           <img
             className={styles.searchImg}
@@ -130,19 +132,18 @@ function ManagerDropdown({
                     )}
                     <div className={styles.item}>
                       {
-                        profile ? (
-                          <UserProfileImg
-                            isImg
-                            profileImageUrl={member.profileImageUrl}
-                            nickname={member.nickname}
-                          />
-                        ) : (
-                          <UserProfileImg
-                            isImg={false}
-                            profileImageUrl=""
-                            nickname={member.nickname}
-                          />
-                        )
+                        // profile ? (
+                        //   <UserProfileImgSvg
+                        //     profileImageUrl={member.profileImageUrl}
+                        //   />
+                        // ) : (
+                        //   <UserProfileImg
+                        //     isImg={false}
+                        //     profileImageUrl=""
+                        //     nickname={member.nickname}
+                        //   />
+                        // )
+                        profile && <UserProfileImgSvg profileImageUrl={profile} />
                       }
                       {member.nickname}
                     </div>

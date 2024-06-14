@@ -1,4 +1,4 @@
-import { useRef, useEffect, ChangeEvent } from 'react';
+import { useRef, ChangeEvent } from 'react';
 import styles from './NewInputImage.module.scss';
 import AddImageIcon from '/icon/add_image_box.svg';
 import { apiUploadCardImage } from '../../../../api/apiModule';
@@ -20,11 +20,11 @@ function NewInputImage({
 }: InputImageProps) {
   const uploadImageRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (!imageUrl) {
-      setImageUrl(AddImageIcon);
-    }
-  }, [imageUrl, setImageUrl]);
+  // useEffect(() => {
+  //   if (!imageUrl) {
+  //     setImageUrl(AddImageIcon);
+  //   }
+  // }, [imageUrl, setImageUrl]);
 
   const onClickImage = () => {
     if (uploadImageRef.current) {
@@ -51,7 +51,9 @@ function NewInputImage({
   return (
     <div className={styles.contentBlock}>
       <button className={styles.imageBlock} onClick={onClickImage} type="button">
-        <img className={styles.contentImageBasic} src={imageUrl} alt="img" />
+        {imageUrl === undefined
+          ? <img className={styles.contentImageBasic} src={AddImageIcon} alt="img" />
+          : <img className={styles.contentImageBasic} src={imageUrl} alt="img" />}
       </button>
       <label htmlFor="image" style={{ display: 'none' }}>이미지</label>
       <input

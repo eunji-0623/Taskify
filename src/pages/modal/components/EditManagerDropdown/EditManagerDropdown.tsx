@@ -101,6 +101,7 @@ function EditManagerDropdown({
             value={value ?? ''}
             onClick={toggleDropdown}
             // onChange={handleSearchChange}
+            readOnly
           />
           <img
             className={styles.searchImg}

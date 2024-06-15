@@ -1,10 +1,15 @@
 import {
-  useState, useEffect, Dispatch, SetStateAction,
+  useState,
+  useEffect,
+  useContext,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 import styles from './NameEdit.module.scss';
 import { ChangeAndSaveBtn } from '../../../components/Btn/Btn';
 import { apiEditDashboards } from '../../../api/apiModule';
 import Chips from './Chips';
+import { DashboardContext } from '../../../contexts/DashboardContext';
 
 /*  대시보드 수정 페이지 중
     이름과 색상을 바꾸기 위한 부분입니다.  */
@@ -21,6 +26,7 @@ function Info({
 }: Props) {
   const [newName, setNewName] = useState('');
   const [selectedColor, setSelectedColor] = useState(color);
+  const dashContext = useContext(DashboardContext);
 
   const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewName(event.target.value);
@@ -31,12 +37,14 @@ function Info({
       handleChange(name);
     } else {
       handleChange(newName);
+      dashContext?.setActiveTitle(newName);
     }
     await apiEditDashboards(
       { title: newName, color: selectedColor },
       { dashboardId },
     );
     setNewName('');
+    window.location.reload();
   };
 
   useEffect(() => {

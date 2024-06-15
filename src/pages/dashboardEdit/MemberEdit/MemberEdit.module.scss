@@ -52,6 +52,12 @@
     width: 38px;
     height: 38px;
     margin-right: 12px;
+
+    .profileImage {
+      width: 38px;
+      height: 38px;
+      object-fit: cover;
+    }
   }
 
   .email {
@@ -72,7 +78,7 @@
 
 @include mobile {
   .container {
-    width: 284px;
+    width: max(100%, 284px);
     padding: 20px;
     gap: 25px;
   }

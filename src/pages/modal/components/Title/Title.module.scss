@@ -10,10 +10,6 @@
 .contentInput {
   height: 3rem;
 
-  @include mobile {
-    height: 2.2rem;
-  }
-
   &:focus {
     outline: none; 
     border: 1px solid $violet_5534DA;

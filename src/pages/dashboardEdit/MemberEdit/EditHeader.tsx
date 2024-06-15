@@ -16,6 +16,7 @@ interface Props {
   totalPages: number;
   handlePrevClick: () => void;
   handleNextClick: () => void;
+  dashboardId: number;
 }
 
 function EditHeader({
@@ -27,6 +28,7 @@ function EditHeader({
   totalPages,
   handlePrevClick,
   handleNextClick,
+  dashboardId,
 }: Props) {
   const { width } = useWindowSize();
   const [sendInvitation, setSendInvitation] = useState(false);
@@ -62,6 +64,7 @@ function EditHeader({
                 <InviteModal
                   isOpen={sendInvitation}
                   setIsOpen={setSendInvitation}
+                  dashboardId={dashboardId}
                 />
               ) : null}
             </>

@@ -10,9 +10,11 @@ interface Invitation {
   id: number;
   inviter: {
     nickname: string;
+    id: number;
   };
   dashboard: {
     title: string;
+    id: number;
   };
 }
 
@@ -20,7 +22,13 @@ interface TableProps {
   invitations: Invitation[];
   hasNext: boolean;
   setElement: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
-  handleInvitation: (id: number, isAccept: boolean) => void;
+  handleInvitation: (
+    id: number,
+    inviterId: number,
+    dashboardId: number,
+    title: string,
+    isAccept: boolean
+  ) => void;
 }
 
 function Table({
@@ -37,10 +45,19 @@ function Table({
         <>
           <TableHeader />
           <tbody>
-            {invitations.map((invitation) => (
+            {[
+              ...new Map(
+                invitations.map((invitation) => [
+                  `${invitation.inviter.id}-${invitation.dashboard.id}`,
+                  invitation,
+                ]),
+              ).values(),
+            ].map((invitation) => (
               <TableBody
                 key={invitation.id}
                 id={invitation.id}
+                inviterId={invitation.inviter.id}
+                dashboardId={invitation.dashboard.id}
                 title={invitation.dashboard.title}
                 name={invitation.inviter.nickname}
                 handleInvitation={handleInvitation}
@@ -51,12 +68,22 @@ function Table({
         </>
       ) : (
         <tbody>
-          {invitations.map((invitation) => (
+          {[
+            ...new Map(
+              invitations.map((invitation) => [
+                `${invitation.inviter.id}-${invitation.dashboard.id}`,
+                invitation,
+              ]),
+            ).values(),
+          ].map((invitation) => (
             <TableMobile
               key={invitation.id}
               id={invitation.id}
+              inviterId={invitation.inviter.id}
+              dashboardId={invitation.dashboard.id}
               title={invitation.dashboard.title}
               name={invitation.inviter.nickname}
+              handleInvitation={handleInvitation}
             />
           ))}
           {hasNext && <tr ref={setElement} style={{ height: '50px' }} />}

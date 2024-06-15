@@ -1,5 +1,6 @@
 import { apiDeleteMemeber } from '../../../api/apiModule';
 import { DeleteBtn } from '../../../components/Btn/Btn';
+import { UserProfileImgSvg } from '../../../components/UserProfileImg/UserProfileImg';
 import styles from './MemberEdit.module.scss';
 
 /*  각각의 멤버 정보입니다
@@ -10,19 +11,24 @@ interface Props {
   profile: string;
   name: string;
   isOwner: boolean;
+  handleReload: () => void;
 }
 
 function Member({
-  memberId, name, profile, isOwner,
+  memberId, name, profile, isOwner, handleReload,
 }: Props) {
   const handleDeleteButton = async () => {
     await apiDeleteMemeber({ memberId });
+    handleReload();
   };
 
   return (
     <tr className={styles.table_row}>
       <td className={styles.profile}>
-        <img src={profile} alt="프로필" />
+        <UserProfileImgSvg
+          profileImageUrl={profile}
+          aria-label={`${name}의 프로필 이미지`}
+        />
       </td>
       <td className={styles.name}>
         {name}

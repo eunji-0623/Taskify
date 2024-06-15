@@ -5,6 +5,7 @@ import {
   ReactNode,
   useMemo,
 } from 'react';
+import { useLocation } from 'react-router-dom';
 
 /*
   사이드 바 대시보드 클릭에 따라 데이터를 옮기고 Navigate 하기 위한 상태관리 Context 입니다.
@@ -20,31 +21,27 @@ interface DashboardContextProps {
   setActiveTitle: (dashboard: string) => void;
 }
 
-export const DashboardContext = createContext<DashboardContextProps | null>(
-  null,
-);
+export const DashboardContext = createContext<DashboardContextProps | null>(null);
 
 interface DashboardProviderProps {
   children: ReactNode;
 }
 
 export function DashboardProvider({ children }: DashboardProviderProps) {
-  const [activeDashboard, setActiveDashboard] = useState<number | undefined>(
-    () => {
-      const savedDashboardId = localStorage.getItem('activeDashboard');
-      return savedDashboardId ? Number(savedDashboardId) : undefined;
-    },
-  );
-  const [isCreateByMe, setIsCreateByMe] = useState<boolean | undefined>(
-    () => {
-      const savedIsCreatedByMe = localStorage.getItem('isCreatedByMe');
-      return savedIsCreatedByMe ? Boolean(savedIsCreatedByMe) : undefined;
-    },
-  );
+  const [activeDashboard, setActiveDashboard] = useState<number | undefined>(() => {
+    const savedDashboardId = localStorage.getItem('activeDashboard');
+    return savedDashboardId ? Number(savedDashboardId) : undefined;
+  });
+  const [isCreateByMe, setIsCreateByMe] = useState<boolean | undefined>(() => {
+    const savedIsCreatedByMe = localStorage.getItem('isCreatedByMe');
+    return savedIsCreatedByMe ? savedIsCreatedByMe === 'true' : undefined;
+  });
   const [activeTitle, setActiveTitle] = useState<string | undefined>(() => {
     const savedTitle = localStorage.getItem('activeTitle');
     return savedTitle || undefined;
   });
+
+  const location = useLocation();
 
   useEffect(() => {
     if (activeDashboard !== undefined) {
@@ -64,24 +61,25 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     }
   }, [activeTitle]);
 
-  const contextValue = useMemo(
-    () => ({
-      activeDashboard,
-      setActiveDashboard,
-      isCreateByMe,
-      setIsCreateByMe,
-      activeTitle,
-      setActiveTitle,
-    }),
-    [
-      activeDashboard,
-      setActiveDashboard,
-      isCreateByMe,
-      setIsCreateByMe,
-      activeTitle,
-      setActiveTitle,
-    ],
-  );
+  useEffect(() => {
+    if (location.pathname === '/mydashboard' || location.pathname === '/mypage') {
+      setActiveDashboard(undefined);
+      setActiveTitle(undefined);
+      setIsCreateByMe(undefined);
+      localStorage.removeItem('activeDashboard');
+      localStorage.removeItem('isCreatedByMe');
+      localStorage.removeItem('activeTitle');
+    }
+  }, [location.pathname]);
+
+  const contextValue = useMemo(() => ({
+    activeDashboard,
+    setActiveDashboard,
+    isCreateByMe,
+    setIsCreateByMe,
+    activeTitle,
+    setActiveTitle,
+  }), [activeDashboard, isCreateByMe, activeTitle]);
 
   return (
     <DashboardContext.Provider value={contextValue}>

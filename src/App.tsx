@@ -10,6 +10,7 @@ import SignUp from './pages/login-signup/signup/SignUp';
 import MyPage from './pages/mypage/MyPage';
 import { DashboardProvider } from './contexts/DashboardContext';
 import { UserProvider } from './contexts/UserContext';
+import NotFound from './pages/NotFound/NotFound';
 
 /*
 페이지 라우팅 분리,
@@ -23,6 +24,7 @@ function AppLayout() {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
@@ -42,6 +44,7 @@ function App() {
             </UserProvider>
           )}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

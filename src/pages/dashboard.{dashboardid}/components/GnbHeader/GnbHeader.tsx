@@ -17,7 +17,7 @@ function ProfileKebab() {
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const {setUserInfo} = context;
+  const { setUserInfo } = context;
 
   const navigate = useNavigate();
 
@@ -82,7 +82,7 @@ function GnbHeader() {
       </div>
       <div className={styles.HandleAndProfile}>
         <div className={styles.BtnContainer}>
-          {isCreateByMe ? <SettingBtn /> : <div></div>}
+          {isCreateByMe ? <SettingBtn /> : <div />}
           <InviteBtn />
         </div>
         <div className={styles.MembersAndProfile}>
@@ -95,7 +95,7 @@ function GnbHeader() {
                 profileImageUrl="#A3C4A2"
                 nickname={userInfo?.nickname}
               /> */}
-              <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl}/>
+              <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl} />
               <div className={styles.nickName}>{userInfo?.nickname}</div>
             </div>
             {ProfileKebabOpen && <ProfileKebab />}

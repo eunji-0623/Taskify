@@ -25,14 +25,14 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
   const [colorValue, setColorValue] = useState('');
   const [inputValue, setInputValue] = useState('');
   const context = useContext(DashboardContext);
-    if (!context) {
-      throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
-    }
-    const {setActiveTitle, setActiveDashboard, setIsCreateByMe} = context;
+  if (!context) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+  const { setActiveTitle, setActiveDashboard, setIsCreateByMe } = context;
 
   // /dashboard/{dashboardid}로 이동
   const goDashboard = (id: number, title : string, createdByMe : boolean) => {
-    setActiveDashboard(id)
+    setActiveDashboard(id);
     setActiveTitle(title);
     setIsCreateByMe(createdByMe);
     localStorage.setItem('currentPage', '1');

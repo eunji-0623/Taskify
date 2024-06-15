@@ -12,7 +12,7 @@ function ProfileKebab() {
   if (!context) {
     throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
   }
-  const {setUserInfo} = context;
+  const { setUserInfo } = context;
 
   const navigate = useNavigate();
 

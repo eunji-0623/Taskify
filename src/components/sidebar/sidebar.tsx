@@ -56,7 +56,7 @@ function SideBar() {
     const savedPage = localStorage.getItem('currentPage');
     return savedPage ? Number(savedPage) : 1;
   });
-  const [prevPage, setPrevPage] = useState(() => {
+  const [prevBtnPage, setprevBtnPage] = useState(() => {
     const savedPage = localStorage.getItem('currentPage');
     return savedPage ? Number(savedPage) : 1;
   });
@@ -82,7 +82,7 @@ function SideBar() {
     };
 
     fetchData();
-  }, [itemsPerPage, currentPage, prevPage]);
+  }, [itemsPerPage, currentPage, prevBtnPage]);
 
   useEffect(() => {
     localStorage.setItem('currentPage', currentPage.toString());
@@ -90,18 +90,17 @@ function SideBar() {
 
   useEffect(() => {
     const isMobileSetPage = () => {
-      if(isMobile) {
+      if (isMobile) {
         localStorage.setItem('currentPage', '1');
         setCurrentPage(1);
+      } else {
+        localStorage.setItem('currentPage', prevBtnPage.toString());
+        setCurrentPage(prevBtnPage);
       }
-      else {
-        localStorage.setItem('currentPage', prevPage.toString());
-        setCurrentPage(prevPage);
-      }
-    }
+    };
 
     isMobileSetPage();
-  }, [prevPage, isMobile])
+  }, [prevBtnPage, isMobile]);
 
   const fetchPageData = async (page: number) => {
     try {
@@ -118,7 +117,7 @@ function SideBar() {
       const prevPage = currentPage - 1;
       fetchPageData(prevPage);
       setCurrentPage(prevPage);
-      setPrevPage(prevPage);
+      setprevBtnPage(prevPage);
     }
   };
 
@@ -127,7 +126,7 @@ function SideBar() {
       const nextPage = currentPage + 1;
       fetchPageData(nextPage);
       setCurrentPage(nextPage);
-      setPrevPage(nextPage);
+      setprevBtnPage(nextPage);
     }
   };
 

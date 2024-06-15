@@ -38,10 +38,14 @@
 
 @include mobile {
   .container {
-    width: 260px;
+    width: max(100%, 260px);
   }
 
   .title {
-    width: 228px;
+    width: max(100%, 228px);
+  }
+
+  .tableContainer {
+    width: 100%;
   }
 }

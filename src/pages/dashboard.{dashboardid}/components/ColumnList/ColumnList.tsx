@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import Column from '../Column/Column';
 import ColumnContainer from '../Column/ColumnContainer';
@@ -20,6 +20,8 @@ function ColumnList() {
 
   const { id: dashboardId } = useParams<{ id: string }>();
 
+  const navigate = useNavigate();
+
   // 대시보드 목록 조회
   async function getColumnList(id: number) {
     try {
@@ -32,6 +34,7 @@ function ColumnList() {
       const axiosError = error as AxiosError;
       setErrorState(axiosError.message);
       setColumnList([]);
+      navigate('/404');
     }
   }
 

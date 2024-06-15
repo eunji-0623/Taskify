@@ -1,0 +1,25 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  gap: 8px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
+}
+
+.checkboxLabel {
+  color: $black_333236;
+  font-size: 16px;
+  font-weight: 400;
+}

@@ -1,0 +1,14 @@
+@import '../../../../styles/media.scss';
+
+.Members {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 38px;
+
+    @include tablet {
+        width: 100px;
+    }
+}

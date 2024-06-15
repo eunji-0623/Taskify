@@ -1,0 +1,92 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+// 공통 스타일
+::placeholder {
+  color: $gray_9FA6B2;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+@mixin InputSection {
+  display: flex;
+  width: 520px;
+  height: 50px;
+
+  border-radius: 8px;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
+
+  &:focus {
+    border: 1px solid $violet_5534DA;
+  }
+
+  @include mobile {
+    width: 350px;
+  }
+}
+
+.inputText {
+  color: $black_333236;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+// InputEmail styles
+.emailInputSection {
+  padding: 15px 16px;
+  align-items: center;
+  gap: 10px;
+
+  @include InputSection;
+}
+
+// InputPassword styles
+.passwordInputContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.passwordInputSection {
+  padding: 12px 16px;
+  justify-content: space-between;
+  align-items: center;
+
+  @include InputSection;
+}
+
+.toggleButton {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  .toggleButtonImage {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+}
+
+// 에러
+.errorInput {
+  border: 1px solid $red_D6173A;
+}
+
+.errorText {
+  color: $red_D6173A;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.hide {
+  display: none;
+}

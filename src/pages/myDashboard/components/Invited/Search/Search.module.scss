@@ -1,0 +1,40 @@
+@use '/src/styles/global.scss' as colors;
+@import '/src/styles/utils.scss';
+
+.container {
+  width: 966px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 15px;
+  border-radius: 6px;
+  border: 1px solid colors.$gray_D9D9D9;
+  background-color: colors.$white_FFFFFF;
+}
+
+.searchInput {
+  height: 38px;
+  flex-grow: 1;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@include tablet {
+  .container {
+    width: 448px;
+  }
+}
+
+@include mobile {
+  .container {
+    width: max(100%, 228px);
+  }
+
+  .searchInput {
+    width: 178px;
+  }
+}

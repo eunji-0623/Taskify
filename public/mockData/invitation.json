@@ -1,0 +1,425 @@
+{
+  "cursorId": 0,
+  "invitations": [
+    {
+      "id": 1,
+      "inviter": {
+        "nickname": "Inviter 1",
+        "email": "inviter1@example.com",
+        "id": 1
+      },
+      "teamId": "team1",
+      "dashboard": {
+        "title": "Dashboard 1",
+        "id": 1
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:31:19.669Z",
+      "updatedAt": "2024-06-05T03:31:19.669Z"
+    },
+    {
+      "id": 2,
+      "inviter": {
+        "nickname": "Inviter 2",
+        "email": "inviter2@example.com",
+        "id": 2
+      },
+      "teamId": "team2",
+      "dashboard": {
+        "title": "Dashboard 2",
+        "id": 2
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:32:19.669Z",
+      "updatedAt": "2024-06-05T03:32:19.669Z"
+    },
+    {
+      "id": 3,
+      "inviter": {
+        "nickname": "Inviter 3",
+        "email": "inviter3@example.com",
+        "id": 3
+      },
+      "teamId": "team3",
+      "dashboard": {
+        "title": "Dashboard 3",
+        "id": 3
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:33:19.669Z",
+      "updatedAt": "2024-06-05T03:33:19.669Z"
+    },
+    {
+      "id": 4,
+      "inviter": {
+        "nickname": "Inviter 4",
+        "email": "inviter4@example.com",
+        "id": 4
+      },
+      "teamId": "team4",
+      "dashboard": {
+        "title": "Dashboard 4",
+        "id": 4
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:34:19.669Z",
+      "updatedAt": "2024-06-05T03:34:19.669Z"
+    },
+    {
+      "id": 5,
+      "inviter": {
+        "nickname": "Inviter 5",
+        "email": "inviter5@example.com",
+        "id": 5
+      },
+      "teamId": "team5",
+      "dashboard": {
+        "title": "Dashboard 5",
+        "id": 5
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:35:19.669Z",
+      "updatedAt": "2024-06-05T03:35:19.669Z"
+    },
+    {
+      "id": 6,
+      "inviter": {
+        "nickname": "Inviter 6",
+        "email": "inviter6@example.com",
+        "id": 6
+      },
+      "teamId": "team6",
+      "dashboard": {
+        "title": "Dashboard 6",
+        "id": 6
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:36:19.669Z",
+      "updatedAt": "2024-06-05T03:36:19.669Z"
+    },
+    {
+      "id": 7,
+      "inviter": {
+        "nickname": "Inviter 7",
+        "email": "inviter7@example.com",
+        "id": 7
+      },
+      "teamId": "team7",
+      "dashboard": {
+        "title": "Dashboard 7",
+        "id": 7
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:37:19.669Z",
+      "updatedAt": "2024-06-05T03:37:19.669Z"
+    },
+    {
+      "id": 8,
+      "inviter": {
+        "nickname": "Inviter 8",
+        "email": "inviter8@example.com",
+        "id": 8
+      },
+      "teamId": "team8",
+      "dashboard": {
+        "title": "Dashboard 8",
+        "id": 8
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:38:19.669Z",
+      "updatedAt": "2024-06-05T03:38:19.669Z"
+    },
+    {
+      "id": 9,
+      "inviter": {
+        "nickname": "Inviter 9",
+        "email": "inviter9@example.com",
+        "id": 9
+      },
+      "teamId": "team9",
+      "dashboard": {
+        "title": "Dashboard 9",
+        "id": 9
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:39:19.669Z",
+      "updatedAt": "2024-06-05T03:39:19.669Z"
+    },
+    {
+      "id": 10,
+      "inviter": {
+        "nickname": "Inviter 10",
+        "email": "inviter10@example.com",
+        "id": 10
+      },
+      "teamId": "team10",
+      "dashboard": {
+        "title": "Dashboard 10",
+        "id": 10
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:40:19.669Z",
+      "updatedAt": "2024-06-05T03:40:19.669Z"
+    },
+    {
+      "id": 11,
+      "inviter": {
+        "nickname": "Inviter 11",
+        "email": "inviter11@example.com",
+        "id": 11
+      },
+      "teamId": "team11",
+      "dashboard": {
+        "title": "Dashboard 11",
+        "id": 11
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:41:19.669Z",
+      "updatedAt": "2024-06-05T03:41:19.669Z"
+    },
+    {
+      "id": 12,
+      "inviter": {
+        "nickname": "Inviter 12",
+        "email": "inviter12@example.com",
+        "id": 12
+      },
+      "teamId": "team12",
+      "dashboard": {
+        "title": "Dashboard 12",
+        "id": 12
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:42:19.669Z",
+      "updatedAt": "2024-06-05T03:42:19.669Z"
+    },
+    {
+      "id": 13,
+      "inviter": {
+        "nickname": "Inviter 13",
+        "email": "inviter13@example.com",
+        "id": 13
+      },
+      "teamId": "team13",
+      "dashboard": {
+        "title": "Dashboard 13",
+        "id": 13
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:43:19.669Z",
+      "updatedAt": "2024-06-05T03:43:19.669Z"
+    },
+    {
+      "id": 14,
+      "inviter": {
+        "nickname": "Inviter 14",
+        "email": "inviter14@example.com",
+        "id": 14
+      },
+      "teamId": "team14",
+      "dashboard": {
+        "title": "Dashboard 14",
+        "id": 14
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:44:19.669Z",
+      "updatedAt": "2024-06-05T03:44:19.669Z"
+    },
+    {
+      "id": 15,
+      "inviter": {
+        "nickname": "Inviter 15",
+        "email": "inviter15@example.com",
+        "id": 15
+      },
+      "teamId": "team15",
+      "dashboard": {
+        "title": "Dashboard 15",
+        "id": 15
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:45:19.669Z",
+      "updatedAt": "2024-06-05T03:45:19.669Z"
+    },
+    {
+      "id": 16,
+      "inviter": {
+        "nickname": "Inviter 16",
+        "email": "inviter16@example.com",
+        "id": 16
+      },
+      "teamId": "team16",
+      "dashboard": {
+        "title": "Dashboard 16",
+        "id": 16
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:46:19.669Z",
+      "updatedAt": "2024-06-05T03:46:19.669Z"
+    },
+    {
+      "id": 17,
+      "inviter": {
+        "nickname": "Inviter 17",
+        "email": "inviter17@example.com",
+        "id": 17
+      },
+      "teamId": "team17",
+      "dashboard": {
+        "title": "Dashboard 17",
+        "id": 17
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:47:19.669Z",
+      "updatedAt": "2024-06-05T03:47:19.669Z"
+    },
+    {
+      "id": 18,
+      "inviter": {
+        "nickname": "Inviter 18",
+        "email": "inviter18@example.com",
+        "id": 18
+      },
+      "teamId": "team18",
+      "dashboard": {
+        "title": "Dashboard 18",
+        "id": 18
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:48:19.669Z",
+      "updatedAt": "2024-06-05T03:48:19.669Z"
+    },
+    {
+      "id": 19,
+      "inviter": {
+        "nickname": "Inviter 19",
+        "email": "inviter19@example.com",
+        "id": 19
+      },
+      "teamId": "team19",
+      "dashboard": {
+        "title": "Dashboard 19",
+        "id": 19
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:49:19.669Z",
+      "updatedAt": "2024-06-05T03:49:19.669Z"
+    },
+    {
+      "id": 20,
+      "inviter": {
+        "nickname": "Inviter 20",
+        "email": "inviter20@example.com",
+        "id": 20
+      },
+      "teamId": "team20",
+      "dashboard": {
+        "title": "Dashboard 20",
+        "id": 20
+      },
+      "invitee": {
+        "nickname": "me",
+        "email": "me@example.com",
+        "id": 50
+      },
+      "inviteAccepted": false,
+      "createdAt": "2024-06-05T03:50:19.669Z",
+      "updatedAt": "2024-06-05T03:50:19.669Z"
+    }
+  ]
+}

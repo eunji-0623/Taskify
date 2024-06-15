@@ -1,0 +1,55 @@
+@use '/src/styles/global.scss' as *;
+@use '/src/styles/media.scss' as *;
+
+.table {
+  width: 935px;
+}
+
+.head {
+  color: $gray_9FA6B2;
+  height: 30px;
+}
+
+.body {
+  height: 60px;
+  border-bottom: 1px solid $gray_EEEEEE;
+
+  td {
+    vertical-align: middle;
+  }
+
+  .name {
+    width: 250px;
+  }
+
+  .button {
+    width: 350px;
+  }
+}
+
+@include tablet {
+  .table {
+    width: 448px;
+  }
+
+  .body {
+    .name {
+      width: 100px;
+    }
+
+    .button {
+      width: 80px;
+    }
+  }
+}
+
+@include mobile {
+  .table {
+    width: max(100%, 228px);
+  }
+
+  .head {
+    width: 75px;
+    height: 35px;
+  }
+}

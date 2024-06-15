@@ -52,7 +52,6 @@ export async function apiUploadImage(
   const res = await instance.post<EditImageResponse>('/users/me/image', body, {
     headers: {
       'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer ${localStorage.getItem('Token')}`, // 토큰 설정 추가
     },
   });
   return handleResponse(res);

@@ -4,6 +4,10 @@ import styles from './DropdownMenu.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
 
+/*
+  상태를 드롭다운 메뉴로 볼 수 있습니다.
+*/
+
 interface DropdownProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
@@ -40,6 +44,7 @@ function DropdownMenu({
     setIsOpen(!isOpen);
   };
 
+  // 메뉴 중 클릭한 경우
   const handleItemClick = (choice: string, index: number) => {
     setValue(choice);
     setColumnId(columnListId[index]);

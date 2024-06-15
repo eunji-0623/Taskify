@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
-import styles from './ManagerDropdown.module.scss';
+import styles from './EditManagerDropdown.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
-import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
+import UserProfileImg, { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 
 /*
   관리자를 드롭다운 메뉴로 볼 수 있습니다.
@@ -21,7 +21,7 @@ interface Member {
 
 interface DropdownProps {
   value: string | undefined
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<string | undefined>>
   profile: string | undefined;
   setProfile: React.Dispatch<React.SetStateAction<string | undefined>>;
   members: Member[];
@@ -29,7 +29,7 @@ interface DropdownProps {
   setClickManagerId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function ManagerDropdown({
+function EditManagerDropdown({
   value,
   setValue,
   members,
@@ -82,18 +82,17 @@ function ManagerDropdown({
       <button className={styles.searchBlock} onClick={toggleDropdown} type="button">
         <div className={styles.searchCenter}>
           {
-            // profile ? (
-            //   <UserProfileImgSvg
-            //     profileImageUrl={profile}
-            //   />
-            // ) : (
-            //   <UserProfileImg
-            //     isImg={false}
-            //     profileImageUrl=""
-            //     nickname={value}
-            //   />
-            // )
-            profile && <UserProfileImgSvg profileImageUrl={profile} />
+            profile ? (
+              <UserProfileImgSvg
+                profileImageUrl={profile}
+              />
+            ) : (
+              <UserProfileImg
+                isImg={false}
+                profileImageUrl=""
+                nickname={value}
+              />
+            )
           }
           <input
             className={styles.searchInput}
@@ -132,18 +131,19 @@ function ManagerDropdown({
                     )}
                     <div className={styles.item}>
                       {
-                        // profile ? (
-                        //   <UserProfileImgSvg
-                        //     profileImageUrl={member.profileImageUrl}
-                        //   />
-                        // ) : (
-                        //   <UserProfileImg
-                        //     isImg={false}
-                        //     profileImageUrl=""
-                        //     nickname={member.nickname}
-                        //   />
-                        // )
-                        profile && <UserProfileImgSvg profileImageUrl={profile} />
+                        profile ? (
+                          <UserProfileImg
+                            isImg
+                            profileImageUrl={member.profileImageUrl}
+                            nickname={member.nickname}
+                          />
+                        ) : (
+                          <UserProfileImg
+                            isImg={false}
+                            profileImageUrl=""
+                            nickname={member.nickname}
+                          />
+                        )
                       }
                       {member.nickname}
                     </div>
@@ -158,4 +158,4 @@ function ManagerDropdown({
   );
 }
 
-export default ManagerDropdown;
+export default EditManagerDropdown;

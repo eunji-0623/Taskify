@@ -1,3 +1,4 @@
+@use '/src/styles/global.scss' as *;
 @import '../../../../styles/media.scss';
 
 .MyDashboardHeader {
@@ -9,6 +10,7 @@
   align-items: center;
   padding: 0 80px 0 40px;
   background: white;
+  z-index: 10;
   @include tablet {
     padding: 0 40px 0 40px;
   }

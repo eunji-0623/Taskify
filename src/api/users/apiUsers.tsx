@@ -51,7 +51,7 @@ export async function apiUploadImage(
 ): Promise<EditImageResponse> {
   const res = await instance.post<EditImageResponse>('/users/me/image', body, {
     headers: {
-      'Content-Type': 'multipart/form-data', // 변경된 부분
+      'Content-Type': 'multipart/form-data',
     },
   });
   return handleResponse(res);

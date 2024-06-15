@@ -74,7 +74,11 @@ function Invited() {
 
     try {
       const newInvitations = await fetchInvitations(cursor, title);
-      if (hasNext && newInvitations.invitations.length === 0) {
+      if (
+        hasNext
+        && newInvitations.invitations.length === 0
+        && invitations.length === 0
+      ) {
         setEmpty(true);
       }
 

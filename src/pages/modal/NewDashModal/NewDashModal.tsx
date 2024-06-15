@@ -27,7 +27,6 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
   // /dashboard/{dashboardid}로 이동
   const goDashboard = (id: number) => {
     navigate(`/dashboard/${id}`);
-    window.location.reload();
   };
 
   const close = useCallback(() => {

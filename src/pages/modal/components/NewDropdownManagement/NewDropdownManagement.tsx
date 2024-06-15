@@ -1,7 +1,9 @@
-// NewDropdownManagement.tsx
-
 import ManagerDropdown from '../ManagerDropdown/ManagerDropdown';
 import styles from './NewDropdownManagement.module.scss';
+
+/*
+  할 일 생성 모달의 상태와 담당자 드롭다운 메뉴를 관리합니다.
+*/
 
 interface Member {
   id: number;
@@ -15,7 +17,7 @@ interface Member {
 }
 
 interface ModalProps {
-  manager: string | null;
+  manager: string;
   setManager: React.Dispatch<React.SetStateAction<string>>;
   managerImg: string | undefined;
   setManagerImg: React.Dispatch<React.SetStateAction<string | undefined>>;

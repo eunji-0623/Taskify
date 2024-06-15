@@ -49,7 +49,7 @@ function EditTodoModal({
   afterSubmit,
 }: ModalProps) {
   const [cardState, setCardState] = useState<string>('');
-  const [manager, setManager] = useState<string>('');
+  const [manager, setManager] = useState<string | undefined>(undefined);
   const [managerImg, setManagerImg] = useState<string | undefined>(undefined);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -63,7 +63,7 @@ function EditTodoModal({
   const [columnListId, setColumnListId] = useState<number[]>([]);
   const [clickColumnId, setClickColumnId] = useState<number>(columnId);
 
-  // 멤버 목록 조회
+  // 대시보드 멤버 목록 조회
   useEffect(() => {
     const fetchMembers = async () => {
       try {
@@ -143,13 +143,12 @@ function EditTodoModal({
       description,
       dueDate,
       tags,
-      // imageUrl,
+      imageUrl,
     };
 
     try {
       await apiUpdateCard(updateCard, cardId);
       setIsOpen(false);
-      window.location.reload();
     } catch (error) {
       throw new Error('error');
     }
@@ -197,7 +196,7 @@ function EditTodoModal({
 
             <InputTag tags={tags} setTags={setTags} />
 
-            <EditInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
+            <EditInputImage imageUrl={imageUrl} setImageUrl={setImageUrl} columnId={columnId} />
           </div>
 
           <div className={styles.buttonBlock}>

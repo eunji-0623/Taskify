@@ -44,7 +44,6 @@
   }
 }
 
-// 스크롤
 ::-webkit-scrollbar {
   width: 4px;
   height: 0;
@@ -55,12 +54,6 @@
   border: 0;
   border-radius: 12px;
 }
-
-// // 스크롤 투명
-// ::-webkit-scrollbar {
-//   display: none
-// }
-
 
 .buttonBlock {
   display: flex;
@@ -106,8 +99,8 @@
   width: 10rem;
   height: 2.5rem;
   border-radius: 0.5rem;
-  background: var(--gray-gray_9FA6B2, #9FA6B2);
-  color: var(--white, #FFF);
+  background: $gray_9FA6B2;
+  color: $white_FFFFFF;
   text-align: center;
   font-family: Pretendard;
   font-size: 0.875rem;

@@ -15,15 +15,15 @@ const instance = axios.create({
 // 요청 인터셉터를 추가하여 매 요청 시마다 토큰을 헤더에 추가
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('Token');
+    const newConfig = Object.assign({}, config); // 기존 config 객체를 복사
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+      newConfig.headers = Object.assign({}, config.headers, {
+        Authorization: `Bearer ${token}`, // Authorization 필드 추가
+      });
     }
-    return config;
+    return newConfig;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 export default instance;

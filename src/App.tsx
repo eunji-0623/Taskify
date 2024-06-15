@@ -34,13 +34,13 @@ function App() {
         <Route index element={<Home />} />
         <Route
           path="/*"
-          element={
+          element={(
             <UserProvider>
               <DashboardProvider>
                 <AppLayout />
               </DashboardProvider>
             </UserProvider>
-          }
+          )}
         />
       </Routes>
     </BrowserRouter>

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
-import { UserContext } from '../../../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../../contexts/UserContext';
 import {
   apiSignUp,
   apiUploadImage,

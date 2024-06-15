@@ -14,6 +14,7 @@ import useProfileChange from '../../utils/useProfileChange';
 function ProfileEdit() {
   const {
     nickname,
+    profileImageUrl,
     isModalOpen,
     isErrorModalOpen,
     closeModal,
@@ -39,7 +40,10 @@ function ProfileEdit() {
         <>
           <span className={styles.profileText}>프로필</span>
           <div className={styles.profileSection}>
-            <ImageButton onChange={handleImageChange} />
+            <ImageButton
+              onChange={handleImageChange}
+              currentImageUrl={profileImageUrl}
+            />
             <div className={styles.inputLayout}>
               <InputLayout
                 labelText="이메일"
@@ -63,7 +67,7 @@ function ProfileEdit() {
                 type="text"
                 placeholder="닉네임 입력"
                 isProfile={isProfile}
-                topMargin={!topMargin}
+                topMargin={topMargin}
                 value={nickname}
                 onChange={handleNicknameChange}
                 readOnly={false}
@@ -82,7 +86,7 @@ function ProfileEdit() {
       )}
       {isModalOpen && (
         <AlertModal isOpen={isModalOpen} setIsOpen={closeSuccessModalAndReload}>
-          <p>닉네임이 변경되었습니다.</p>
+          <p>변경되었습니다.</p>
           <button type="button" onClick={closeSuccessModalAndReload}>
             확인
           </button>
@@ -90,7 +94,7 @@ function ProfileEdit() {
       )}
       {isErrorModalOpen && (
         <AlertModal isOpen={isErrorModalOpen} setIsOpen={setIsErrorModalOpen}>
-          <p>닉네임 변경에 실패했습니다.</p>
+          <p>변경에 실패했습니다.</p>
           <button type="button" onClick={closeModal}>
             확인
           </button>

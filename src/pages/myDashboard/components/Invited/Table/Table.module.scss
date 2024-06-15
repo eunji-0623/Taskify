@@ -45,7 +45,7 @@
 
 @include mobile {
   .table {
-    width: 228px;
+    width: max(100%, 228px);
   }
 
   .head {

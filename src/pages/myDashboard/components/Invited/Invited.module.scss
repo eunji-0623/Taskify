@@ -1,0 +1,51 @@
+@use '/src/styles/global.scss' as *;
+@use '/src/styles/media.scss' as *;
+
+.container {
+  width: 1024px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  background-color: $white_FFFFFF;
+  border-radius: 8px;
+  padding: 28px 28px 0;
+  margin-top: 22px;
+  margin-bottom: 20px;
+}
+
+.title {
+  width: 966px;
+  font-size: 24px;
+  color: $black_333236;
+}
+
+.tableContainer {
+  overflow-y: auto;
+}
+
+@include tablet {
+  .container {
+    width: 504px;
+    height: 530px;
+  }
+
+  .title {
+    width: 448px;
+  }
+}
+
+@include mobile {
+  .container {
+    width: max(100%, 260px);
+  }
+
+  .title {
+    width: max(100%, 228px);
+  }
+
+  .tableContainer {
+    width: 100%;
+  }
+}

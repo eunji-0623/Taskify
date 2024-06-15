@@ -1,0 +1,29 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.LogoImage {
+  display: flex;
+  width: 200px;
+  height: 279px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 140px;
+    height: 195px;
+  }
+}
+
+.HelloText {
+  color: $black_333236;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+
+  @include mobile {
+    margin-top: 8px;
+  }
+}

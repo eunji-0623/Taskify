@@ -1,0 +1,83 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+@mixin inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.topInputContainer {
+  @include inputContainer;
+  margin-top: 0;
+}
+
+.normalInputContainer {
+  @include inputContainer;
+  margin-top: 16px;
+}
+
+.inputLabel {
+  color: $black_333236;
+  font-size: 18px;
+  font-weight: 500;
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+@mixin inputSection {
+  height: 50px;
+  flex-shrink: 0;
+  padding: 15px;
+
+  border-radius: 6px;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
+
+  &:focus {
+    border: 1px solid $violet_5534DA;
+  }
+
+  &:disabled {
+    color: $gray_9FA6B2;
+  }
+}
+
+.profileInputSection {
+  @include inputSection;
+  width: 366px;
+
+  @include mobile {
+    width: 244px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+}
+
+.passwordInputSection {
+  @include inputSection;
+  width: 564px;
+
+  @include mobile {
+    width: 244px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+}
+
+.error {
+  border: 1px solid $red_D6173A;
+}
+
+.errorMessage {
+  color: $red_D6173A;
+  font-size: 14px;
+  font-weight: 400;
+
+  margin-top: 5px;
+}

@@ -1,0 +1,14 @@
+.desktop {
+  display: flex;
+  flex-flow: row;
+}
+
+.tablet {
+  display: flex;
+  flex-flow: column;
+}
+
+.mobile {
+  display: flex;
+  flex-flow: column;
+}

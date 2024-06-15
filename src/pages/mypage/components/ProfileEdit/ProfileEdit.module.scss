@@ -1,0 +1,95 @@
+@import '/src/styles/global.scss';
+@import '/src/styles/media.scss';
+
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  width: 620px;
+  height: 355px;
+  flex-shrink: 0;
+
+  border-radius: 8px;
+  background: $white_FFFFFF;
+
+  margin-top: 25px;
+  padding: 30px;
+
+  @include mobile {
+    width: 284px;
+    height: 422px;
+  }
+}
+
+.profileText {
+  color: $black_333236;
+  font-size: 24px;
+  font-weight: 700;
+
+  @include mobile {
+    font-size: 20px;
+  }
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  margin-top: 30px;
+  gap: 16px;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.inputLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include mobile {
+    gap: 14px;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputLabel {
+  color: $black_333236;
+  font-size: 18px;
+  font-weight: 500;
+
+  @include mobile {
+    font-size: 16px;
+  }
+}
+
+.inputSection {
+  width: 366px;
+  height: 48px;
+  flex-shrink: 0;
+
+  border-radius: 6px;
+  border: 1px solid $gray_D9D9D9;
+  background: $white_FFFFFF;
+
+  &:focus {
+    border: 1px solid $violet_5534DA;
+  }
+}
+
+.doneButton {
+  width: 85px;
+  height: 35px;
+  flex-shrink: 0;
+
+  border-radius: 4px;
+  background: $violet_5534DA;
+
+  margin-top: 24px;
+}

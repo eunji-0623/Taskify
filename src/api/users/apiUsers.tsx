@@ -47,12 +47,17 @@ export async function apiEditMyInfo(
 
 // 프로필 이미지 업로드 api
 export async function apiUploadImage(
+<<<<<<< HEAD
   body: FormData // FormData로 받아오도록
+=======
+  body: FormData,
+>>>>>>> 9ca940bfde7c5cef0d3201940e2ebed752c92d74
 ): Promise<EditImageResponse> {
+  const token = localStorage.getItem('Token'); // 저장된 토큰을 가져옴
   const res = await instance.post<EditImageResponse>('/users/me/image', body, {
     headers: {
       'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer ${localStorage.getItem('Token')}`, // 토큰 설정 추가
+      Authorization: `Bearer ${token}`, // 토큰 사용
     },
   });
   return handleResponse(res);

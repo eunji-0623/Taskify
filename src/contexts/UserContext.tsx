@@ -1,9 +1,5 @@
 import {
-  createContext,
-  useState,
-  useEffect,
-  ReactNode,
-  useMemo,
+  createContext, useState, useEffect, ReactNode, useMemo,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { apiInquireMyInfo } from '../api/apiModule';
@@ -45,6 +41,10 @@ export function UserProvider({ children }: UserProviderProps) {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
+      if (window.location.pathname === '/signup') {
+        return; // 회원가입 페이지에서는 사용자 정보를 가져오지 않음
+      }
+
       try {
         const info = await apiInquireMyInfo();
         setUserInfo(info);
@@ -77,9 +77,5 @@ export function UserProvider({ children }: UserProviderProps) {
     [userInfo],
   );
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }

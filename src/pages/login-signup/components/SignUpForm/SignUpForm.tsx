@@ -1,6 +1,6 @@
 import styles from './SignUpForm.module.scss';
 import AlertModal from '../../../modal/AlertModal/AlertModal';
-import { InputType } from '../utils/constants';
+import InputType from '../utils/constants';
 import InputEmail from '../Input/InputEmail';
 import InputPassword from '../Input/InputPassword';
 import Checkbox from '../CheckBox/CheckBox';

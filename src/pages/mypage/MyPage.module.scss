@@ -1,9 +1,10 @@
 @import '../../styles/utils.scss';
+@import '../../styles/global.scss';
 
 .myPageLayout {
   display: grid;
   height: 100vh;
-  background-color: var(--gray-gray_FAFAFA, #fafafa);
+  background-color: $gray_FAFAFA;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
 
@@ -23,5 +24,31 @@
     grid-row: 2 / span 1;
     grid-column: 2 / span 2;
     overflow-x: auto;
+  }
+
+  .backButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: auto;
+    height: auto;
+    gap: 6px;
+  }
+
+  .pageBackIcon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .pageBackText {
+    color: $black_333236;
+    font-size: 20px;
+    font-weight: 500;
+
+    @include mobile {
+      font-size: 14px;
+    }
   }
 }

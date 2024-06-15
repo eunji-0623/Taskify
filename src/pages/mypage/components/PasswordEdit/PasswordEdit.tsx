@@ -100,7 +100,7 @@ function PasswordEdit() {
       )}
       {isErrorModalOpen && (
         <AlertModal isOpen={isErrorModalOpen} setIsOpen={setIsErrorModalOpen}>
-          <p>비밀번호 변경에 실패했습니다.</p>
+          <p>현재 비밀번호가 다릅니다.</p>
           <button type="button" onClick={closeModal}>
             확인
           </button>

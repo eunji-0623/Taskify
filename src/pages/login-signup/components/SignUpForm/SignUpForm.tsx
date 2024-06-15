@@ -22,8 +22,8 @@ function SignUpForm() {
     isErrorModalOpen,
     handleSubmit,
     closeModal,
-    setIsModalOpen,
     setIsErrorModalOpen,
+    closeSuccessModalAndReload,
     emailError,
     nameError,
     passwordError,
@@ -130,9 +130,9 @@ function SignUpForm() {
       </form>
       {/* 회원가입 성공 모달 */}
       {isModalOpen && (
-        <AlertModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
+        <AlertModal isOpen={isModalOpen} setIsOpen={closeSuccessModalAndReload}>
           <p>가입이 완료되었습니다!</p>
-          <button type="button" onClick={closeModal}>
+          <button type="button" onClick={closeSuccessModalAndReload}>
             확인
           </button>
         </AlertModal>

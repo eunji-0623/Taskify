@@ -13,12 +13,21 @@
 
   margin-top: 25px;
   padding: 30px;
+
+  @include mobile {
+    width: 284px;
+    height: 422px;
+  }
 }
 
 .profileText {
   color: $black_333236;
   font-size: 24px;
   font-weight: 700;
+
+  @include mobile {
+    font-size: 20px;
+  }
 }
 
 .profileSection {
@@ -28,12 +37,20 @@
 
   margin-top: 30px;
   gap: 16px;
+
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .inputLayout {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @include mobile {
+    gap: 14px;
+  }
 }
 
 .inputContainer {
@@ -46,6 +63,10 @@
   color: $black_333236;
   font-size: 18px;
   font-weight: 500;
+
+  @include mobile {
+    font-size: 16px;
+  }
 }
 
 .inputSection {

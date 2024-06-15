@@ -12,6 +12,23 @@
 
   border-radius: 6px;
   background: #f5f5f5;
+
+  @include mobile {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.profileImage {
+  width: 182px;
+  height: 182px;
+  object-fit: cover;
+  cursor: pointer;
+
+  @include mobile {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .plusImage {

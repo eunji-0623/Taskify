@@ -3,7 +3,7 @@ import ModalContainer from '../ModalContainer/ModalContainer';
 import { apiInviteDashboards } from '../../../api/apiModule';
 import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 /*
   초대하기 모달입니다.

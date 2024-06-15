@@ -66,12 +66,17 @@ function Invited() {
 
   const loadMoreInvitations = useCallback(async () => {
     if (!hasNext) {
-      setEmpty(true);
+      if (invitations.length === 0) {
+        setEmpty(true);
+      }
       return;
     }
 
     try {
       const newInvitations = await fetchInvitations(cursor, title);
+      if (hasNext && newInvitations.invitations.length === 0) {
+        setEmpty(true);
+      }
 
       // 중복 초대 필터링
       const filteredInvitations = newInvitations.invitations.filter(
@@ -164,6 +169,7 @@ function Invited() {
             )
         )
       );
+      window.location.reload();
     }
 
     setInvitations((prev) => prev.filter((invitation) => invitation.id !== id));

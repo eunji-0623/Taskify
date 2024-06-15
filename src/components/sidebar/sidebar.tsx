@@ -26,7 +26,7 @@ const ITEMS_PER_PAGE_MOBILE = 100;
 
 const fetchDashboards = async (
   page: number,
-  itemsPerPage: number,
+  itemsPerPage: number
 ): Promise<{ items: DashboardDetail[]; totalCount: number }> => {
   const data = await apiDashboardsList({
     navigationMethod: 'pagination',
@@ -65,7 +65,10 @@ function SideBar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { items: dashboards, totalCount } = await fetchDashboards(1, itemsPerPage);
+        const { items: dashboards, totalCount } = await fetchDashboards(
+          1,
+          itemsPerPage
+        );
         setDashboardItems(dashboards);
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
       } catch (error) {
@@ -135,11 +138,7 @@ function SideBar() {
         </button>
         <NewDashModal />
       </div>
-      {isError && (
-        <div className={styles.ErrorMessage}>
-          {errorMessage}
-        </div>
-      )}
+      {isError && <div className={styles.ErrorMessage}>{errorMessage}</div>}
       <div className={styles.DashboardsList}>
         {dashboardItems.map((dashboard) => (
           <SideDashBoard
@@ -148,11 +147,13 @@ function SideBar() {
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() => ClickDashboard(
-              dashboard.id,
-              dashboard.createdByMe,
-              dashboard.title,
-            )}
+            onClick={() =>
+              ClickDashboard(
+                dashboard.id,
+                dashboard.createdByMe,
+                dashboard.title
+              )
+            }
           />
         ))}
       </div>

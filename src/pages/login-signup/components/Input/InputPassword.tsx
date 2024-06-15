@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './Input.module.scss';
-import InputType from '../utils/constants';
+import { InputType } from '../utils/constants';
 import EyeOn from '../../../../../public/icon/eye_on.svg';
 import EyeOff from '../../../../../public/icon/eye_off.svg';
 

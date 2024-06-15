@@ -40,10 +40,6 @@ export function UserProvider({ children }: UserProviderProps) {
 
   useEffect(() => {
     const fetchUserInfo = async () => {
-      if (window.location.pathname === '/signup') {
-        return; // 회원가입 페이지에서는 사용자 정보를 가져오지 않음
-      }
-
       try {
         const Info = await apiInquireMyInfo();
         setUserInfo(Info);

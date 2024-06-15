@@ -24,10 +24,15 @@ module.exports = {
         'import/no-absolute-path': 'off',
 
         // jsx-a11y label-has-associated-control 규칙 설정
-        "jsx-a11y/label-has-associated-control": [ 2, {
-          "some": [ "nesting", "id" ]
-        }],
-      }
-    }
-  ]
-}
+        'jsx-a11y/label-has-associated-control': [
+          2,
+          {
+            some: ['nesting', 'id'],
+          },
+        ],
+
+        'no-param-reassign': ['error', { props: false }],
+      },
+    },
+  ],
+};

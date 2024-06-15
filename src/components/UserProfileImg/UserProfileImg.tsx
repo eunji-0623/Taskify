@@ -44,7 +44,7 @@ export function MembersProfileImg({
     <div
       className={styles.MembersProfileImg}
       style={{
-        backgroundColor: profileImageUrl ? profileImageUrl : '#fff',
+        backgroundColor: profileImageUrl || '#fff',
       }}
     >
       {isImg ? (
@@ -62,7 +62,7 @@ svg 생성기가 있으면, 사용할 프로필 이미지 컴포넌트
 props로 url 하나만 받아옵니다.
 */
 interface UserProfileImgSvgProps {
-  profileImageUrl?: string | undefined;
+  profileImageUrl: string | undefined;
 }
 
 export function UserProfileImgSvg({ profileImageUrl }: UserProfileImgSvgProps) {

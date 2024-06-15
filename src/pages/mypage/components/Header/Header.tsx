@@ -63,8 +63,6 @@ function MyPageHeader() {
   }
 
   const { userInfo } = userContext;
-  const profileImageUrl = userInfo?.profileImageUrl || '#A3C4A2';
-
   return (
     <header className={styles.MyDashboardHeader}>
       <div className={styles.DashboardTitle}>계정 관리</div>
@@ -79,7 +77,7 @@ function MyPageHeader() {
           profileImageUrl={profileImageUrl}
           nickname={userInfo?.nickname}
         /> */}
-        <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl}/>
+        <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl} />
         <div className={styles.userName}>{userInfo?.nickname}</div>
         {ProfileKebabOpen && <ProfileKebab />}
         {' '}

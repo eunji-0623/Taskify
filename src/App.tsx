@@ -22,7 +22,7 @@ function AppLayout() {
       <Route path="/dashboard/:id/edit" element={<DashboardEdit />} />
       <Route path="/dashboard/:id" element={<DashboardForId />} />
       <Route path="/mypage" element={<MyPage />} />
-      <Route path="*" element={<NotFound />} /> {/* 추가된 404 경로 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
@@ -44,7 +44,7 @@ function App() {
             </UserProvider>
           )}
         />
-        <Route path="*" element={<NotFound />} /> {/* 추가된 404 경로 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

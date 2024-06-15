@@ -40,10 +40,6 @@
     outline: none; 
     border: 1px solid $violet_5534DA;
   }
-
-  @include mobile {
-    height: 2.2rem;
-  }
 }
 
 .dropdownBlock {
@@ -60,7 +56,7 @@
 .items {
   position: relative;
   width: 100%;
-  margin-top: 0.12rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: start;

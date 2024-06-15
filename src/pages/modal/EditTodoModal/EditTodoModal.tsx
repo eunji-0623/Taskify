@@ -55,7 +55,7 @@ function EditTodoModal({
   const [description, setDescription] = useState<string>('');
   const [dueDate, setDueDate] = useState<string>('');
   const [tags, setTags] = useState<string[]>([]);
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [members, setMembers] = useState<Member[]>([]);
   const [memberIdList, setMemberIdList] = useState<number[]>([]);
   const [clickManagerId, setClickManagerId] = useState<number>(userId);
@@ -120,7 +120,7 @@ function EditTodoModal({
       setDescription(cardData.description);
       setDueDate(cardData.dueDate);
       setTags(cardData.tags);
-      setImageUrl(cardData.imageUrl || '');
+      setImageUrl(cardData.imageUrl || undefined);
     }
   }, [cardData]);
 

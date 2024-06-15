@@ -1,4 +1,5 @@
 import styles from './UserProfileImg.module.scss';
+import DefaultImg from '/img/Avatar.png';
 /*
 유저의 프로필 이미지 컴포넌트입니다.
 프로필 이미지를 설정하지 않은 유저는 프로필 이미지가 없으므로,
@@ -34,12 +35,13 @@ function UserProfileImg({
 }
 
 // 대시보드 멤버들 표현에 사용되는 프로필 이미지
+interface MembersProfileImgprops {
+  profileImageUrl : string | null;
+}
 
 export function MembersProfileImg({
-  isImg,
   profileImageUrl,
-  nickname,
-}: UserProfileImgProps) {
+}: MembersProfileImgprops) {
   return (
     <div
       className={styles.MembersProfileImg}
@@ -47,10 +49,10 @@ export function MembersProfileImg({
         backgroundColor: profileImageUrl || '#fff',
       }}
     >
-      {isImg ? (
+      {profileImageUrl ? (
         <img src={profileImageUrl} alt="프로필 이미지" className={styles.Img} />
       ) : (
-        <div className={styles.FirstName}>{nickname?.[0].toUpperCase()}</div>
+        <img src={DefaultImg} alt="프로필 기본 이미지" className={styles.Img} />
       )}
     </div>
   );
@@ -65,10 +67,10 @@ interface UserProfileImgSvgProps {
   profileImageUrl: string | undefined;
 }
 
-export function UserProfileImgSvg({ profileImageUrl }: UserProfileImgSvgProps) {
+export function UserProfileImgSvg({ profileImageUrl = DefaultImg }: UserProfileImgSvgProps) {
   return (
     <img
-      src={profileImageUrl}
+      src={profileImageUrl || DefaultImg}
       alt="프로필 이미지"
       className={styles.UserProfileImgSvg}
     />

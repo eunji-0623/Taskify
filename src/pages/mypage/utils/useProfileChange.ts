@@ -66,6 +66,15 @@ function useProfileChange() {
       const file = e.target.files[0];
       setProfileImage(file);
 
+      // 파일 형식 검사
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
+      if (!validImageTypes.includes(file.type)) {
+        // alert('Unsupported file type. Only JPEG, PNG, and SVG are allowed.');
+        return;
+      }
+
+      setProfileImage(file);
+
       // URL.createObjectURL을 사용하여 새로운 이미지 URL 생성
       const imageUrl = URL.createObjectURL(file);
       setProfileImageUrl(imageUrl);

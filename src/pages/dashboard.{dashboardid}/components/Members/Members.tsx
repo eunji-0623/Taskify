@@ -106,9 +106,9 @@ function Members({ dashboardId }: { dashboardId: number | undefined }) {
       {members.slice(0, maxMembersToShow).map((member) => (
         <MembersProfileImg
           key={member.id}
-          isImg={false}
+          isImg={member.profileImageUrl !== null}
           nickname={member.nickname}
-          profileImageUrl="#f0f0f0"
+          profileImageUrl={member.profileImageUrl}
         />
       ))}
       {extraMembersCount > 0 && (

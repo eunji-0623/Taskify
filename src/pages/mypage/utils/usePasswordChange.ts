@@ -92,7 +92,7 @@ function usePasswordChange() {
       await apiChangePassword({ password, newPassword }); // 비밀번호 변경 api 호출
       setIsModalOpen(true); // 성공 시 성공 모달
     } catch (error) {
-      setIsErrorModalOpen(true); // 실패 시 실패 모달(어차피 버튼 활성화 안되서 의미 없음?)
+      setIsErrorModalOpen(true); // 실패 시 실패 모달
     }
   };
 

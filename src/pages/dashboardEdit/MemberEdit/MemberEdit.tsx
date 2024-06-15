@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { apiMemberList } from '../../../api/apiModule';
 import usePagination from '../../../hooks/pagination/usePagination';
 import EditHeader from './EditHeader';
@@ -28,6 +28,8 @@ interface MemberResponse {
 }
 
 function MemberEdit({ dashboardId }: Props) {
+  const [reload, setReload] = useState(false);
+
   const fetchMembers = async (
     id: number,
   ): Promise<{ items: MemberResponse[]; totalCount: number }> => {
@@ -40,7 +42,8 @@ function MemberEdit({ dashboardId }: Props) {
 
   const fetchDataCallback = useCallback(
     () => fetchMembers(dashboardId),
-    [dashboardId],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [dashboardId, reload],
   );
 
   const {
@@ -56,6 +59,10 @@ function MemberEdit({ dashboardId }: Props) {
     itemsPerPage: ITEMS_PER_PAGE,
   });
 
+  const handleReload = () => {
+    setReload(!reload);
+  };
+
   return (
     <div className={styles.container}>
       <EditHeader
@@ -66,6 +73,7 @@ function MemberEdit({ dashboardId }: Props) {
         totalPages={totalPages}
         handlePrevClick={handlePrevClick}
         handleNextClick={handleNextClick}
+        dashboardId={dashboardId}
       />
       <table>
         <thead className={styles.table_head}>
@@ -81,6 +89,7 @@ function MemberEdit({ dashboardId }: Props) {
               name={member.nickname}
               profile={member.profileImageUrl}
               isOwner={member.isOwner}
+              handleReload={handleReload}
             />
           ))}
         </tbody>

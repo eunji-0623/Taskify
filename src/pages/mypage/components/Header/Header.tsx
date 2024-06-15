@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
-import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
+import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 import { UserContext } from '../../../../contexts/UserContext';
 
 /*
-/mydashboard 에서 사용되는 헤더 컴포넌트입니다.
+/mypage 에서 사용되는 헤더 컴포넌트입니다.
 */
+
 function ProfileKebab() {
   const context = useContext(UserContext);
   if (!context) {
@@ -62,6 +63,7 @@ function MyPageHeader() {
   }
 
   const { userInfo } = userContext;
+  const profileImageUrl = userInfo?.profileImageUrl || '#A3C4A2';
 
   return (
     <header className={styles.MyDashboardHeader}>
@@ -72,11 +74,12 @@ function MyPageHeader() {
         onMouseLeave={ProfileLeave}
         onFocus={profileOver}
       >
-        <UserProfileImg
-          isImg={false}
-          profileImageUrl="#A3C4A2"
+        {/* <UserProfileImg
+          isImg={isImg}
+          profileImageUrl={profileImageUrl}
           nickname={userInfo?.nickname}
-        />
+        /> */}
+        <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl}/>
         <div className={styles.userName}>{userInfo?.nickname}</div>
         {ProfileKebabOpen && <ProfileKebab />}
         {' '}

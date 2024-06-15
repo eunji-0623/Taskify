@@ -69,7 +69,6 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
       localStorage.removeItem('activeDashboard');
       localStorage.removeItem('isCreatedByMe');
       localStorage.removeItem('activeTitle');
-      localStorage.setItem('currentPage', '1');
     }
   }, [location.pathname]);
 

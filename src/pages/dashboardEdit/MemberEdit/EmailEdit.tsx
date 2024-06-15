@@ -82,6 +82,7 @@ function EmailEdit({ dashboardId }: Props) {
         totalPages={totalPages}
         handlePrevClick={handlePrevClick}
         handleNextClick={handleNextClick}
+        dashboardId={dashboardId}
       />
       <table>
         <thead className={styles.table_head}>

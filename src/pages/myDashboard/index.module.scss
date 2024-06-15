@@ -1,5 +1,6 @@
+@use '/src/styles/global.scss' as *;
 @import '../../styles/utils.scss';
-@import '../../styles//global.scss';
+@import '../../styles/global.scss';
 
 .container {
   display: grid;
@@ -32,5 +33,9 @@
     grid-row: 2 / span 1;
     grid-column: 2 / span 2;
     overflow-x: auto;
+
+    @include mobile {
+      margin: 40px;
+    }
   }
 }

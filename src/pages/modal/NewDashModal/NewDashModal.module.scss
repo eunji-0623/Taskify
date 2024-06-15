@@ -49,7 +49,6 @@
     background: $white_FFFFFF;
 
     &:focus {
-      // 클릭 시 생기는 기본 테두리 변경
       outline: none; 
       border: 1px solid $violet_5534DA
     }
@@ -127,8 +126,8 @@
   width: 10rem;
   height: 2.5rem;
   border-radius: 0.5rem;
-  background: var(--gray-gray_9FA6B2, #9FA6B2);
-  color: var(--white, #FFF);
+  background: $gray_9FA6B2;
+  color: $white_FFFFFF;
   text-align: center;
   font-family: Pretendard;
   font-size: 0.875rem;
@@ -140,8 +139,8 @@
 }
 
 .activeButton {
-  background: var(--violet-violet_5534DA, #5534da);
+  background: $violet_5534DA;
   border-radius: 4px;
   border: 0px;
-  color: #ffffff;
+  color: $white_FFFFFF;
 }

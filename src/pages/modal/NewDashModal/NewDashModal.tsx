@@ -37,7 +37,6 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
     setIsCreateByMe(createdByMe);
     localStorage.setItem('currentPage', '1');
     navigate(`/dashboard/${id}`);
-    window.location.reload();
   };
 
   const close = useCallback(() => {

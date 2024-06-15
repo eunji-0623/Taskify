@@ -91,9 +91,9 @@ function Comment({
   };
 
   // 맨 위로 올리기 버튼
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // const scrollToTop = () => {
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -171,12 +171,11 @@ function Comment({
               commentId={item.id}
               apiCommentList={apiCommentList}
               cardId={cardId}
+              setComments={setComments}
             />
           ))
         )}
       </div>
-      <button type="button" className={styles.scrollToTopButton} onClick={scrollToTop}>▲</button>
-
       {loading && <div className={styles.loadingText}>로딩 중...</div>}
     </div>
   );

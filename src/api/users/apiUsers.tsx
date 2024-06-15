@@ -12,10 +12,6 @@ interface EditMyInfoBody {
   profileImageUrl: string;
 }
 
-interface UploadImage {
-  image: string;
-}
-
 interface UserResponse {
   id: number;
   email: string;
@@ -51,8 +47,12 @@ export async function apiEditMyInfo(
 
 // 프로필 이미지 업로드 api
 export async function apiUploadImage(
-  body: UploadImage
+  body: FormData // FormData로 받아오도록
 ): Promise<EditImageResponse> {
-  const res = await instance.post<EditImageResponse>('/users/me/image', body);
+  const res = await instance.post<EditImageResponse>('/users/me/image', body, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return handleResponse(res);
 }

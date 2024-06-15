@@ -10,13 +10,15 @@ interface Props {
   profile: string;
   name: string;
   isOwner: boolean;
+  handleReload: () => void;
 }
 
 function Member({
-  memberId, name, profile, isOwner,
+  memberId, name, profile, isOwner, handleReload,
 }: Props) {
   const handleDeleteButton = async () => {
     await apiDeleteMemeber({ memberId });
+    handleReload();
   };
 
   return (

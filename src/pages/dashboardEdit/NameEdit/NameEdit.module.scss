@@ -83,7 +83,7 @@
 
 @include mobile {
   .container {
-    width: 284px;
+    width: max(284px, 100%);
     gap: 25px;
   }
 
@@ -97,7 +97,7 @@
 
   .change {
     .newNameInput {
-      width: 244px;
+      width: max(100%, 244px);
       height: 42px;
     }
 

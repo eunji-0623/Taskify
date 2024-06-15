@@ -5,8 +5,9 @@ import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg
 import { UserContext } from '../../../../contexts/UserContext';
 
 /*
-/mydashboard 에서 사용되는 헤더 컴포넌트입니다.
+/mypage 에서 사용되는 헤더 컴포넌트입니다.
 */
+
 function ProfileKebab() {
   const navigate = useNavigate();
 
@@ -55,6 +56,8 @@ function MyPageHeader() {
   }
 
   const { userInfo } = userContext;
+  const profileImageUrl = userInfo?.profileImageUrl || '#A3C4A2';
+  const isImg = Boolean(userInfo?.profileImageUrl);
 
   return (
     <header className={styles.MyDashboardHeader}>
@@ -66,8 +69,8 @@ function MyPageHeader() {
         onFocus={profileOver}
       >
         <UserProfileImg
-          isImg={false}
-          profileImageUrl="#A3C4A2"
+          isImg={isImg}
+          profileImageUrl={profileImageUrl}
           nickname={userInfo?.nickname}
         />
         <div className={styles.userName}>{userInfo?.nickname}</div>

@@ -44,7 +44,7 @@ const PAGE_SIZE = 6;
 
 const fetchInvitations = async (
   cursor: number,
-  title: string,
+  title: string
 ): Promise<InvitationsListResponse> => {
   const data = await apiMyInvitationsList({
     size: PAGE_SIZE,
@@ -75,10 +75,12 @@ function Invited() {
 
       // 중복 초대 필터링
       const filteredInvitations = newInvitations.invitations.filter(
-        (invitation) => !invitations.some(
-          (existingInvitation) => existingInvitation.inviter.id === invitation.inviter.id
-              && existingInvitation.dashboard.id === invitation.dashboard.id,
-        ),
+        (invitation) =>
+          !invitations.some(
+            (existingInvitation) =>
+              existingInvitation.inviter.id === invitation.inviter.id &&
+              existingInvitation.dashboard.id === invitation.dashboard.id
+          )
       );
 
       if (cursor === 0) {
@@ -115,7 +117,7 @@ function Invited() {
       setEmpty(false);
       loadMoreInvitations();
     },
-    [loadMoreInvitations],
+    [loadMoreInvitations]
   );
 
   const handleInvitation = async (
@@ -123,41 +125,45 @@ function Invited() {
     inviterId: number,
     dashboardId: number,
     dashboardName: string,
-    isAccept: boolean,
+    isAccept: boolean
   ) => {
     await apiInvitationAccept(
       { invitationId: id },
-      { inviteAccepted: isAccept },
+      { inviteAccepted: isAccept }
     );
 
-    // 중복 초대 중 하나 수락 시 나머지 초대 모두 거절로 처리
+    // 초대 수락 시
     if (isAccept) {
       const response = await apiMyInvitationsList({
         cursorId: 0,
         title: dashboardName,
         size: 100,
       });
+      // 중복 초대 중 하나 수락 시 나머지 초대 모두 거절로 처리
       const promises = response.invitations.map(async (invitation) => {
         if (
-          invitation.inviter.id === inviterId
-          && invitation.dashboard.id === dashboardId
+          invitation.inviter.id === inviterId &&
+          invitation.dashboard.id === dashboardId
         ) {
           await apiInvitationAccept(
             { invitationId: invitation.id },
-            { inviteAccepted: false },
+            { inviteAccepted: false }
           );
         }
       });
 
       await Promise.all(promises);
 
-      setInvitations((prev) => prev.filter((invitation) => (
-        invitation.id !== id
-            && !(
-              invitation.inviter.id === inviterId
-              && invitation.dashboard.id === dashboardId
+      setInvitations((prev) =>
+        prev.filter(
+          (invitation) =>
+            invitation.id !== id &&
+            !(
+              invitation.inviter.id === inviterId &&
+              invitation.dashboard.id === dashboardId
             )
-      )));
+        )
+      );
     }
 
     setInvitations((prev) => prev.filter((invitation) => invitation.id !== id));

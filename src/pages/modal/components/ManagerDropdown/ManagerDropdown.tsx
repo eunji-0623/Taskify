@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import styles from './ManagerDropdown.module.scss';
 import ArrowDropDown from '/icon/arrow_drop_down.svg';
 import checked from '/icon/checked_gray.svg';
-import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
+import UserProfileImg, { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 
 /*
   관리자를 드롭다운 메뉴로 볼 수 있습니다.
@@ -132,18 +132,18 @@ function ManagerDropdown({
                     )}
                     <div className={styles.item}>
                       {
-                        // profile ? (
-                        //   <UserProfileImgSvg
-                        //     profileImageUrl={member.profileImageUrl}
-                        //   />
-                        // ) : (
-                        //   <UserProfileImg
-                        //     isImg={false}
-                        //     profileImageUrl=""
-                        //     nickname={member.nickname}
-                        //   />
-                        // )
-                        profile && <UserProfileImgSvg profileImageUrl={profile} />
+                        member.profileImageUrl ? (
+                          <UserProfileImgSvg
+                            profileImageUrl={member.profileImageUrl}
+                          />
+                        ) : (
+                          <UserProfileImg
+                            isImg={false}
+                            profileImageUrl=""
+                            nickname={member.nickname}
+                          />
+                        )
+                        // profile && <UserProfileImgSvg profileImageUrl={profile} />
                       }
                       {member.nickname}
                     </div>

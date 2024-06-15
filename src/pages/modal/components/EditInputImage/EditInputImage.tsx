@@ -1,9 +1,8 @@
 import { useRef, useEffect, ChangeEvent } from 'react';
-import styles from './EditInputImage.module.scss';
-import PencilIcon from '/icon/pencil.svg';
-import AddIcon from '/icon/add_image_box.svg';
 import { apiUploadCardImage } from '../../../../api/apiModule';
-import AddImageIcon from '/icon/add_image_box.svg';
+import styles from './EditInputImage.module.scss';
+import AddIcon from '/icon/add_image_box.svg';
+import PencilIcon from '/icon/pencil.svg';
 
 /*
   할 일 수정 모달에서 이미지를 첨부할 때 apiUploadCardImage로 카드 이미지를 업로드합니다.
@@ -60,7 +59,7 @@ function EditInputImage({
           alt="img"
         /> */}
         {imageUrl === undefined
-          ? <img className={styles.contentImage2} src={AddImageIcon} alt="img" />
+          ? <img className={styles.contentImage2} src={AddIcon} alt="img" />
           : (
             <>
               <img className={styles.contentImage} src={imageUrl} alt="img" />

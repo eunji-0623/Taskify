@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './LoginForm.module.scss';
 import { useCombinedLoginForm } from '../utils/useCombinedForm';
 import AlertModal from '../../../modal/AlertModal/AlertModal';
-import { InputType } from '../utils/constants';
+import InputType from '../utils/constants';
 import InputEmail from '../Input/InputEmail';
 import InputPassword from '../Input/InputPassword';
 import Button from '../Button/Button';

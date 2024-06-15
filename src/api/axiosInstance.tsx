@@ -12,4 +12,15 @@ const instance = axios.create({
   },
 });
 
+// 요청 인터셉터를 추가하여 매 요청 시마다 토큰을 헤더에 추가
+instance.interceptors.request.use(
+  (config) => {
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
 export default instance;

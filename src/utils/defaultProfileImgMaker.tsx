@@ -60,7 +60,7 @@ function defaultProfileImgMaker({ name, size = 38 }: SvgMakerProps) {
 
   // 이미지 Url 생성
   const ImgUrl = toSvgImg({ initial, size, color });
-  
+
   return ImgUrl;
 }
 

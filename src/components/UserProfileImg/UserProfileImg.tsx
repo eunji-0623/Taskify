@@ -40,7 +40,7 @@ interface MembersProfileImgprops {
 }
 
 export function MembersProfileImg({
-  profileImageUrl
+  profileImageUrl,
 }: MembersProfileImgprops) {
   return (
     <div
@@ -64,10 +64,10 @@ svg 생성기가 있으면, 사용할 프로필 이미지 컴포넌트
 props로 url 하나만 받아옵니다.
 */
 interface UserProfileImgSvgProps {
-  profileImageUrl?: string | null;
+  profileImageUrl: string | undefined;
 }
 
-export function UserProfileImgSvg({ profileImageUrl }: UserProfileImgSvgProps) {
+export function UserProfileImgSvg({ profileImageUrl = DefaultImg }: UserProfileImgSvgProps) {
   return (
     <img
       src={profileImageUrl || DefaultImg}

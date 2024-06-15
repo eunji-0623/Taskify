@@ -78,7 +78,9 @@ export function UserProvider({ children }: UserProviderProps) {
   }, [location.pathname, userInfo, navigate]);
 
   const value = useMemo(
-    () => ({ userInfo, setUserInfo, userProfile, setUserProfile }), // userProfile과 setUserProfile 추가
+    () => ({
+      userInfo, setUserInfo, userProfile, setUserProfile,
+    }), // userProfile과 setUserProfile 추가
     [userInfo, userProfile],
   );
 

@@ -2,7 +2,8 @@
 @use '/src/styles/media.scss' as *;
 
 .container {
-  width: 1024px;
+  width: auto;
+  max-width: 1024px;
 }
 
 .dashboardList {

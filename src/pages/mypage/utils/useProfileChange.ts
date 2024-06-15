@@ -69,7 +69,7 @@ function useProfileChange() {
       // 파일 형식 검사
       const validImageTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
       if (!validImageTypes.includes(file.type)) {
-        alert('Unsupported file type. Only JPEG, PNG, and SVG are allowed.');
+        // alert('Unsupported file type. Only JPEG, PNG, and SVG are allowed.');
         return;
       }
 

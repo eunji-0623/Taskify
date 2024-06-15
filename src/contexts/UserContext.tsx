@@ -3,6 +3,7 @@ import {
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { apiInquireMyInfo } from '../api/apiModule';
+import DefaultImg from '/img/Avatar.png'; // 이미지를 import
 
 /*
 현재 로그인된 유저의 정보를 가져오는 Context입니다.
@@ -24,6 +25,8 @@ export interface UserInfo {
 interface UserContextProps {
   userInfo: UserInfo | null;
   setUserInfo: (info: UserInfo | null) => void;
+  userProfile: string;
+  setUserProfile: (url: string) => void;
 }
 
 interface UserProviderProps {
@@ -36,6 +39,7 @@ export const UserContext = createContext<UserContextProps | null>(null);
 // UserProvider 컴포넌트
 export function UserProvider({ children }: UserProviderProps) {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [userProfile, setUserProfile] = useState<string>(DefaultImg); // DefaultImg를 초기값으로 설정
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -59,6 +63,11 @@ export function UserProvider({ children }: UserProviderProps) {
         try {
           const info = await apiInquireMyInfo();
           setUserInfo(info);
+          if (info.profileImageUrl === null) {
+            setUserProfile(DefaultImg);
+          } else {
+            setUserProfile(info.profileImageUrl);
+          }
         } catch (error) {
           navigate('/login');
         }
@@ -69,8 +78,10 @@ export function UserProvider({ children }: UserProviderProps) {
   }, [location.pathname, userInfo, navigate]);
 
   const value = useMemo(
-    () => ({ userInfo, setUserInfo }),
-    [userInfo],
+    () => ({
+      userInfo, setUserInfo, userProfile, setUserProfile,
+    }), // userProfile과 setUserProfile 추가
+    [userInfo, userProfile],
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

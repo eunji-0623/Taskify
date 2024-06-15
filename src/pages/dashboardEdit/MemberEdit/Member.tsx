@@ -24,7 +24,7 @@ function Member({
   return (
     <tr className={styles.table_row}>
       <td className={styles.profile}>
-        <img src={profile} alt="프로필" />
+        <img className={styles.profileImage} src={profile} alt="프로필" />
       </td>
       <td className={styles.name}>
         {name}

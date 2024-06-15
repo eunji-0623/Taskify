@@ -65,7 +65,10 @@ function SideBar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { items: dashboards, totalCount } = await fetchDashboards(1, itemsPerPage);
+        const { items: dashboards, totalCount } = await fetchDashboards(
+          1,
+          itemsPerPage,
+        );
         setDashboardItems(dashboards);
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
       } catch (error) {
@@ -135,11 +138,7 @@ function SideBar() {
         </button>
         <NewDashModal />
       </div>
-      {isError && (
-        <div className={styles.ErrorMessage}>
-          {errorMessage}
-        </div>
-      )}
+      {isError && <div className={styles.ErrorMessage}>{errorMessage}</div>}
       <div className={styles.DashboardsList}>
         {dashboardItems.map((dashboard) => (
           <SideDashBoard

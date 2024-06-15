@@ -66,12 +66,21 @@ function Invited() {
 
   const loadMoreInvitations = useCallback(async () => {
     if (!hasNext) {
-      setEmpty(true);
+      if (invitations.length === 0) {
+        setEmpty(true);
+      }
       return;
     }
 
     try {
       const newInvitations = await fetchInvitations(cursor, title);
+      if (
+        hasNext
+        && newInvitations.invitations.length === 0
+        && invitations.length === 0
+      ) {
+        setEmpty(true);
+      }
 
       // 중복 초대 필터링
       const filteredInvitations = newInvitations.invitations.filter(
@@ -130,13 +139,14 @@ function Invited() {
       { inviteAccepted: isAccept },
     );
 
-    // 중복 초대 중 하나 수락 시 나머지 초대 모두 거절로 처리
+    // 초대 수락 시
     if (isAccept) {
       const response = await apiMyInvitationsList({
         cursorId: 0,
         title: dashboardName,
         size: 100,
       });
+      // 중복 초대 중 하나 수락 시 나머지 초대 모두 거절로 처리
       const promises = response.invitations.map(async (invitation) => {
         if (
           invitation.inviter.id === inviterId
@@ -151,13 +161,14 @@ function Invited() {
 
       await Promise.all(promises);
 
-      setInvitations((prev) => prev.filter((invitation) => (
-        invitation.id !== id
+      setInvitations((prev) => prev.filter(
+        (invitation) => invitation.id !== id
             && !(
               invitation.inviter.id === inviterId
               && invitation.dashboard.id === dashboardId
-            )
-      )));
+            ),
+      ));
+      window.location.reload();
     }
 
     setInvitations((prev) => prev.filter((invitation) => invitation.id !== id));

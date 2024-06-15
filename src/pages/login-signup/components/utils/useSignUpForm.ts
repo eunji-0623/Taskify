@@ -34,19 +34,6 @@ function useSignUpForm() {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  // 모달 창 닫는 함수
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setIsErrorModalOpen(false);
-  };
-
-  // 변경 성공 시 모달을 닫으면 자동으로 로그인 페이지로 이동
-  const closeSuccessModalAndReload = () => {
-    setIsModalOpen(false);
-    navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
-  };
-
-  // 회원가입 폼 제출
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true); // 회원가입 시도 중에는 버튼 비활성화
@@ -57,15 +44,21 @@ function useSignUpForm() {
     try {
       await apiSignUp({ email, nickname, password }); // 회원가입 API 호출
 
-      defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
-
+      const profileImgUrl = defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
       setIsModalOpen(true); // 성공 시 모달 창 띄우기
+      navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
     } catch (error) {
       setIsErrorModalOpen(true);
       setError('중복된 이메일입니다.');
     } finally {
       setLoading(false); // 회원가입 시도가 끝나면 버튼 활성화
     }
+  };
+
+  // 모달 창 닫는 함수
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsErrorModalOpen(false);
   };
 
   // 사용할 값 리턴
@@ -79,7 +72,6 @@ function useSignUpForm() {
     closeModal,
     setIsModalOpen,
     setIsErrorModalOpen,
-    closeSuccessModalAndReload,
   };
 }
 

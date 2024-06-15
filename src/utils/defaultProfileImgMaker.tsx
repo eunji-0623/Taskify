@@ -51,7 +51,7 @@ export function RandomColorPicker() {
 // 현재 프로젝트에서 사용할 수 있도록 만든 프로필 이미지 생성기입니다.
 // 이름(전체), size(필수 아님)을 prop으로 받습니다.
 // 약 0.6kb정도의 svg 이미지 url이 나옵니다.
-function defaultProfileImgMaker({ name, size = 50 }: SvgMakerProps) {
+function defaultProfileImgMaker({ name, size = 38 }: SvgMakerProps) {
   // 이름 첫글자
   const initial = name.charAt(0).toUpperCase();
 
@@ -60,7 +60,7 @@ function defaultProfileImgMaker({ name, size = 50 }: SvgMakerProps) {
 
   // 이미지 Url 생성
   const ImgUrl = toSvgImg({ initial, size, color });
-
+  
   return ImgUrl;
 }
 

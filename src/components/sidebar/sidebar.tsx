@@ -162,11 +162,7 @@ function SideBar() {
         </button>
         <NewDashModal />
       </div>
-      {isError && (
-        <div className={styles.ErrorMessage}>
-          {errorMessage}
-        </div>
-      )}
+      {isError && <div className={styles.ErrorMessage}>{errorMessage}</div>}
       <div className={styles.DashboardsList}>
         {dashboardItems.map((dashboard) => (
           <SideDashBoard

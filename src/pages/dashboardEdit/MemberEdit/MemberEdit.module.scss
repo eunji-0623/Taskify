@@ -52,6 +52,12 @@
     width: 38px;
     height: 38px;
     margin-right: 12px;
+
+    .profileImage {
+      width: 38px;
+      height: 38px;
+      object-fit: cover;
+    }
   }
 
   .email {

@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  apiSignUp,
-  apiLoginRequest,
-  apiUploadImage,
-} from '../../../../api/apiModule';
-import defaultProfileImg from '../../../../../public/img/default.png';
+import { apiSignUp } from '../../../../api/apiModule';
+import defaultProfileImgMaker from '../../../../utils/defaultProfileImgMaker';
 
 // 회원가입 폼 제출 기능을 수행하는 함수입니다.
 // useNavigate를 사용하여 폼 제출 시 다른 페이지로 이동하도록 구현했습니다.
@@ -33,6 +29,7 @@ function useSignUpForm() {
 
   // 이외의 상태 관리
   const [loading, setLoading] = useState(false);
+  const [, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -49,40 +46,23 @@ function useSignUpForm() {
     navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
   };
 
-  // 기본 이미지를 Blob으로 변환하는 함수
-  const getDefaultImageBlob = async (): Promise<Blob> => {
-    const response = await fetch(defaultProfileImg);
-    const blob = await response.blob();
-    return blob;
-  };
-
   // 회원가입 폼 제출
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true); // 회원가입 시도 중에는 버튼 비활성화
+    setError(null);
 
     const { email, nickname, password } = values;
 
     try {
-      await apiSignUp({
-        email,
-        nickname,
-        password,
-      }); // 회원가입 API 호출
+      await apiSignUp({ email, nickname, password }); // 회원가입 API 호출
 
-      // 회원가입 후 바로 로그인
-      await apiLoginRequest({ email, password });
-
-      // 기본 이미지를 Blob으로 변환하여 업로드
-      const defaultImageBlob = await getDefaultImageBlob();
-      const formData = new FormData();
-      formData.append('image', defaultImageBlob, 'default.png');
-
-      await apiUploadImage(formData); // 기본 프로필 이미지 업로드
+      defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
 
       setIsModalOpen(true); // 성공 시 모달 창 띄우기
     } catch (error) {
       setIsErrorModalOpen(true);
+      setError('중복된 이메일입니다.');
     } finally {
       setLoading(false); // 회원가입 시도가 끝나면 버튼 활성화
     }

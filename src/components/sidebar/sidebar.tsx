@@ -52,23 +52,27 @@ function SideBar() {
 
   // 상태 관리
   const [dashboardItems, setDashboardItems] = useState<DashboardDetail[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const savedPage = localStorage.getItem('currentPage');
+    return savedPage ? Number(savedPage) : 1;
+  });
+  const [prevBtnPage, setprevBtnPage] = useState(() => {
+    const savedPage = localStorage.getItem('currentPage');
+    return savedPage ? Number(savedPage) : 1;
+  });
   const [totalPages, setTotalPages] = useState(1);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   // 화면 크기에 따라 한 페이지당 보여줄 대시보드 수를 결정
-  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const itemsPerPage = isMobile ? ITEMS_PER_PAGE_MOBILE : ITEMS_PER_PAGE;
 
   // 데이터 로드 및 페이지 설정
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { items: dashboards, totalCount } = await fetchDashboards(
-          1,
-          itemsPerPage,
-        );
+        const { items: dashboards, totalCount } = await fetchDashboards(currentPage, itemsPerPage);
         setDashboardItems(dashboards);
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
       } catch (error) {
@@ -78,7 +82,25 @@ function SideBar() {
     };
 
     fetchData();
-  }, [itemsPerPage]);
+  }, [itemsPerPage, currentPage, prevBtnPage]);
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage.toString());
+  }, [currentPage]);
+
+  useEffect(() => {
+    const isMobileSetPage = () => {
+      if (isMobile) {
+        localStorage.setItem('currentPage', '1');
+        setCurrentPage(1);
+      } else {
+        localStorage.setItem('currentPage', prevBtnPage.toString());
+        setCurrentPage(prevBtnPage);
+      }
+    };
+
+    isMobileSetPage();
+  }, [prevBtnPage, isMobile]);
 
   const fetchPageData = async (page: number) => {
     try {
@@ -95,6 +117,7 @@ function SideBar() {
       const prevPage = currentPage - 1;
       fetchPageData(prevPage);
       setCurrentPage(prevPage);
+      setprevBtnPage(prevPage);
     }
   };
 
@@ -103,6 +126,7 @@ function SideBar() {
       const nextPage = currentPage + 1;
       fetchPageData(nextPage);
       setCurrentPage(nextPage);
+      setprevBtnPage(nextPage);
     }
   };
 

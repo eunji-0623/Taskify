@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import { DeleteBtn } from '../../../components/Btn/Btn';
@@ -6,6 +6,7 @@ import ColorCircle from '../../../components/chip/ColorCircle/ColorCircle';
 import { apiCreateDashboards } from '../../../api/apiModule';
 import CheckedIcon from '/icon/checked.svg';
 import styles from './NewDashModal.module.scss';
+import { DashboardContext } from '../../../contexts/DashboardContext';
 
 /*
   대시보드 이름, 색을 선택해서 생성 버튼을 클릭하면 `/dashboard/${id}` 페이지로 이동합니다.
@@ -23,9 +24,18 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
   const [colorId, setColorId] = useState<number | null>(null);
   const [colorValue, setColorValue] = useState('');
   const [inputValue, setInputValue] = useState('');
+  const context = useContext(DashboardContext);
+  if (!context) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+  const { setActiveTitle, setActiveDashboard, setIsCreateByMe } = context;
 
   // /dashboard/{dashboardid}로 이동
-  const goDashboard = (id: number) => {
+  const goDashboard = (id: number, title : string, createdByMe : boolean) => {
+    setActiveDashboard(id);
+    setActiveTitle(title);
+    setIsCreateByMe(createdByMe);
+    localStorage.setItem('currentPage', '1');
     navigate(`/dashboard/${id}`);
   };
 
@@ -43,14 +53,14 @@ function NewDashModal({ isOpen, setIsOpen }: ModalProps) {
 
     try {
       const response = await apiCreateDashboards(newDashboard);
-      const { id } = response;
+      const { id, title, createdByMe } = response;
 
       if (response) {
         setIsOpen(false);
       }
 
       if (id) {
-        goDashboard(id);
+        goDashboard(id, title, createdByMe);
       }
     } catch (error) {
       throw new Error('error');

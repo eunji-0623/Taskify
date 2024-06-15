@@ -1,5 +1,6 @@
 import { apiDeleteMemeber } from '../../../api/apiModule';
 import { DeleteBtn } from '../../../components/Btn/Btn';
+import { UserProfileImgSvg } from '../../../components/UserProfileImg/UserProfileImg';
 import styles from './MemberEdit.module.scss';
 
 /*  각각의 멤버 정보입니다
@@ -24,7 +25,10 @@ function Member({
   return (
     <tr className={styles.table_row}>
       <td className={styles.profile}>
-        <img src={profile} alt="프로필" />
+        <UserProfileImgSvg
+          profileImageUrl={profile}
+          aria-label={`${name}의 프로필 이미지`}
+        />
       </td>
       <td className={styles.name}>
         {name}

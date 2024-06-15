@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
-import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
+import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 import { UserContext } from '../../../../contexts/UserContext';
 
 /*
@@ -65,11 +65,12 @@ function MyDashboardHeader() {
         onMouseLeave={ProfileLeave}
         onFocus={profileOver}
       >
-        <UserProfileImg
+        {/* <UserProfileImg
           isImg={false}
           profileImageUrl="#A3C4A2"
           nickname={userInfo?.nickname}
-        />
+        /> */}
+        <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl} />
         <div className={styles.userName}>{userInfo?.nickname}</div>
         {ProfileKebabOpen && <ProfileKebab />}
         {' '}

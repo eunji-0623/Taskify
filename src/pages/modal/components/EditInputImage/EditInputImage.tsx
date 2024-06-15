@@ -1,16 +1,16 @@
 import { useRef, useEffect, ChangeEvent } from 'react';
-import styles from './EditInputImage.module.scss';
-import PencilIcon from '/icon/pencil.svg';
-import AddIcon from '/icon/add_image_box.svg';
 import { apiUploadCardImage } from '../../../../api/apiModule';
+import styles from './EditInputImage.module.scss';
+import AddIcon from '/icon/add_image_box.svg';
+import PencilIcon from '/icon/pencil.svg';
 
 /*
   할 일 수정 모달에서 이미지를 첨부할 때 apiUploadCardImage로 카드 이미지를 업로드합니다.
 */
 
 interface InputImageProps {
-  imageUrl: string | null;
-  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+  imageUrl: string | undefined;
+  setImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
   columnId: number;
 }
 
@@ -53,16 +53,19 @@ function EditInputImage({
     <div className={styles.contentBlock}>
       <label htmlFor="image">이미지</label>
       <button className={styles.imageBlock} onClick={onClickImage} type="button">
-        <img
+        {/* <img
           className={styles.contentImage}
           src={typeof imageUrl === 'string' ? imageUrl : ''}
           alt="img"
-        />
-        <img
-          className={styles.pencilIcon}
-          src={PencilIcon}
-          alt="img"
-        />
+        /> */}
+        {imageUrl === undefined
+          ? <img className={styles.contentImage2} src={AddIcon} alt="img" />
+          : (
+            <>
+              <img className={styles.contentImage} src={imageUrl} alt="img" />
+              <img className={styles.pencilIcon} src={PencilIcon} alt="img" />
+            </>
+          )}
       </button>
 
       <input

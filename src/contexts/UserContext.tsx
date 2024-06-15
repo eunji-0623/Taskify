@@ -5,7 +5,7 @@ import {
   ReactNode,
   useMemo,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { apiInquireMyInfo } from '../api/apiModule';
 
 /*
@@ -27,7 +27,7 @@ export interface UserInfo {
 
 interface UserContextProps {
   userInfo: UserInfo | null;
-  setUserInfo: (info: UserInfo) => void;
+  setUserInfo: (info: UserInfo | null) => void;
 }
 
 interface UserProviderProps {
@@ -41,12 +41,13 @@ export const UserContext = createContext<UserContextProps | null>(null);
 export function UserProvider({ children }: UserProviderProps) {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const Info = await apiInquireMyInfo();
-        setUserInfo(Info);
+        const info = await apiInquireMyInfo();
+        setUserInfo(info);
       } catch (error) {
         setUserInfo(null);
         navigate('/login');
@@ -55,6 +56,21 @@ export function UserProvider({ children }: UserProviderProps) {
 
     fetchUserInfo();
   }, [navigate]);
+
+  useEffect(() => {
+    const checkAuthOnUrlChange = async () => {
+      if (userInfo === null) {
+        try {
+          const info = await apiInquireMyInfo();
+          setUserInfo(info);
+        } catch (error) {
+          navigate('/login');
+        }
+      }
+    };
+
+    checkAuthOnUrlChange();
+  }, [location.pathname, userInfo, navigate]);
 
   const value = useMemo(
     () => ({ userInfo, setUserInfo }),

@@ -9,6 +9,7 @@ import NameEdit from './NameEdit/NameEdit';
 import styles from './index.module.scss';
 import { DeleteDashBoardBtn } from '../../components/Btn/Btn';
 import DeleteDashboardModal from '../modal/DeleteDashboardModal/DeleteDashboardModal';
+// import { DashboardContext } from '../../contexts/DashboardContext';
 
 /*  대시보드 수정 페이지
     - 전체적인 레이아웃  */
@@ -29,11 +30,14 @@ function DashboardEdit() {
         setDashboardId(+id);
         setDashboardName(data.title);
         setDashboardColor(data.color);
+        if (!data.createdByMe) {
+          navigate('/404');
+        }
       }
     };
 
     fetchDashboards();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleBackButton = () => {
     navigate(`/dashboard/${id}`);

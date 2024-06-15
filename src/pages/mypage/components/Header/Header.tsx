@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
-import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
+import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 import { UserContext } from '../../../../contexts/UserContext';
 
 /*
@@ -9,6 +9,12 @@ import { UserContext } from '../../../../contexts/UserContext';
 */
 
 function ProfileKebab() {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+  const { setUserInfo } = context;
+
   const navigate = useNavigate();
 
   const myPageClick = () => {
@@ -16,6 +22,7 @@ function ProfileKebab() {
   };
 
   const logoutClick = () => {
+    setUserInfo(null);
     localStorage.clear(); // 모든 localStorage 항목을 제거
     navigate('/login'); // 페이지 새로고침
   };
@@ -56,9 +63,6 @@ function MyPageHeader() {
   }
 
   const { userInfo } = userContext;
-  const profileImageUrl = userInfo?.profileImageUrl || '#A3C4A2';
-  const isImg = Boolean(userInfo?.profileImageUrl);
-
   return (
     <header className={styles.MyDashboardHeader}>
       <div className={styles.DashboardTitle}>계정 관리</div>
@@ -68,11 +72,12 @@ function MyPageHeader() {
         onMouseLeave={ProfileLeave}
         onFocus={profileOver}
       >
-        <UserProfileImg
+        {/* <UserProfileImg
           isImg={isImg}
           profileImageUrl={profileImageUrl}
           nickname={userInfo?.nickname}
-        />
+        /> */}
+        <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl} />
         <div className={styles.userName}>{userInfo?.nickname}</div>
         {ProfileKebabOpen && <ProfileKebab />}
         {' '}

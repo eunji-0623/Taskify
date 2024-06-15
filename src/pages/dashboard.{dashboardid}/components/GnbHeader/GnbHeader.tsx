@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './GnbHeader.module.scss';
 import { DashboardContext } from '../../../../contexts/DashboardContext';
 import { UserContext } from '../../../../contexts/UserContext';
-import UserProfileImg from '../../../../components/UserProfileImg/UserProfileImg';
+import { UserProfileImgSvg } from '../../../../components/UserProfileImg/UserProfileImg';
 import CrownImg from '/icon/crown.svg';
 import { InviteBtn, SettingBtn } from '../Btn/Btn';
 import Members from '../Members/Members';
@@ -13,6 +13,12 @@ import Members from '../Members/Members';
 */
 
 function ProfileKebab() {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
+  const { setUserInfo } = context;
+
   const navigate = useNavigate();
 
   const myPageClick = () => {
@@ -20,6 +26,7 @@ function ProfileKebab() {
   };
 
   const logoutClick = () => {
+    setUserInfo(null);
     localStorage.clear(); // 모든 localStorage 항목을 제거
     navigate('/login'); // 페이지 새로고침
   };
@@ -75,20 +82,20 @@ function GnbHeader() {
       </div>
       <div className={styles.HandleAndProfile}>
         <div className={styles.BtnContainer}>
-          <SettingBtn />
+          {isCreateByMe ? <SettingBtn /> : <div />}
           <InviteBtn />
         </div>
         <div className={styles.MembersAndProfile}>
           <Members dashboardId={activeDashboard} />
-          {/* 대시보드 id 가져와야 함. */}
           <div className={styles.VerticalLine} />
           <div onMouseLeave={ProfileLeave} onMouseOver={profileOver} onFocus={profileOver}>
             <div className={styles.Profile}>
-              <UserProfileImg
+              {/* <UserProfileImg
                 isImg={false}
                 profileImageUrl="#A3C4A2"
                 nickname={userInfo?.nickname}
-              />
+              /> */}
+              <UserProfileImgSvg profileImageUrl={userInfo?.profileImageUrl} />
               <div className={styles.nickName}>{userInfo?.nickname}</div>
             </div>
             {ProfileKebabOpen && <ProfileKebab />}

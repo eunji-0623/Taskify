@@ -77,6 +77,7 @@ function useLoginForm() {
       window.location.reload();
 
       navigate('/mydashboard'); // 로그인 성공 시 mydashboard 페이지로 이동
+      window.location.reload();
     } catch (error) {
       setIsModalOpen(true); // 로그인 실패 시 모달 창 띄우기
     } finally {

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import Column from '../Column/Column';
 import ColumnContainer from '../Column/ColumnContainer';
@@ -20,8 +20,10 @@ function ColumnList() {
 
   const { id: dashboardId } = useParams<{ id: string }>();
 
+  const navigate = useNavigate();
+
   // 대시보드 목록 조회
-  async function getColumnList(id: number) {
+  const getColumnList = useCallback(async (id: number) => {
     try {
       const res = await apiGetColumnList(id);
       const list = res.data;
@@ -32,16 +34,16 @@ function ColumnList() {
       const axiosError = error as AxiosError;
       setErrorState(axiosError.message);
       setColumnList([]);
+      navigate('/404');
     }
-  }
+  }, [navigate]);
 
   useEffect(() => {
     getColumnList(Number(dashboardId));
-  }, [dashboardId]);
+  }, [dashboardId, getColumnList]);
 
-  // 테스트 아이디 apiLoginRequest({ email: 'test333@codeit.kr', password: 'test1234' });
   // 유저 아이디 조회
-  async function getUserId() {
+  const getUserId = useCallback(async () => {
     try {
       const res = await apiInquireMyInfo();
       setUserId(res.id);
@@ -50,10 +52,11 @@ function ColumnList() {
       setErrorState(axiosError.message);
       setUserId(0);
     }
-  }
+  }, []);
+
   useEffect(() => {
     getUserId();
-  }, [dashboardId]);
+  }, [dashboardId, getUserId]);
 
   // 버튼 이벤트 핸들러
   const handleAddNewColumn = () => {
@@ -61,9 +64,9 @@ function ColumnList() {
   };
 
   // 모달에서 응답이 올 시
-  const afterSubmit = (): void => {
+  const afterSubmit = useCallback(() => {
     getColumnList(Number(dashboardId));
-  };
+  }, [dashboardId, getColumnList]);
 
   // 컴포넌트 출력
   return (

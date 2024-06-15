@@ -39,7 +39,7 @@ export async function apiInquireMyInfo(): Promise<UserResponse> {
 
 // 내 정보 수정 api
 export async function apiEditMyInfo(
-  body: EditMyInfoBody
+  body: EditMyInfoBody,
 ): Promise<UserResponse> {
   const res = await instance.put<UserResponse>('/users/me', body);
   return handleResponse(res);
@@ -47,11 +47,7 @@ export async function apiEditMyInfo(
 
 // 프로필 이미지 업로드 api
 export async function apiUploadImage(
-<<<<<<< HEAD
-  body: FormData // FormData로 받아오도록
-=======
   body: FormData,
->>>>>>> 9ca940bfde7c5cef0d3201940e2ebed752c92d74
 ): Promise<EditImageResponse> {
   const token = localStorage.getItem('Token'); // 저장된 토큰을 가져옴
   const res = await instance.post<EditImageResponse>('/users/me/image', body, {

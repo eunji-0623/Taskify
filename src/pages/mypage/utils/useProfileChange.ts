@@ -28,7 +28,7 @@ function useProfileChange() {
   const [nickname, setNickname] = useState('');
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(
-    userInfo?.profileImageUrl || defaultProfileImg
+    userInfo?.profileImageUrl || defaultProfileImg,
   );
 
   // 모달 상태 관리

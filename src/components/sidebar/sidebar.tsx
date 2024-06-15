@@ -26,7 +26,7 @@ const ITEMS_PER_PAGE_MOBILE = 100;
 
 const fetchDashboards = async (
   page: number,
-  itemsPerPage: number
+  itemsPerPage: number,
 ): Promise<{ items: DashboardDetail[]; totalCount: number }> => {
   const data = await apiDashboardsList({
     navigationMethod: 'pagination',
@@ -67,7 +67,7 @@ function SideBar() {
       try {
         const { items: dashboards, totalCount } = await fetchDashboards(
           1,
-          itemsPerPage
+          itemsPerPage,
         );
         setDashboardItems(dashboards);
         setTotalPages(Math.ceil(totalCount / itemsPerPage));
@@ -147,13 +147,11 @@ function SideBar() {
             title={dashboard.title}
             createdByMe={dashboard.createdByMe}
             selectedId={dashboard.id}
-            onClick={() =>
-              ClickDashboard(
-                dashboard.id,
-                dashboard.createdByMe,
-                dashboard.title
-              )
-            }
+            onClick={() => ClickDashboard(
+              dashboard.id,
+              dashboard.createdByMe,
+              dashboard.title,
+            )}
           />
         ))}
       </div>

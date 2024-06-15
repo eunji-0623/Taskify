@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
+import axios from 'axios';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import { apiInviteDashboards } from '../../../api/apiModule';
 import { DeleteBtn } from '../../../components/Btn/Btn';
 import styles from './InviteModal.module.scss';
-import axios from 'axios';
 
 /*
   초대하기 모달입니다.
@@ -34,9 +34,9 @@ function InviteModal({ isOpen, setIsOpen, dashboardId }: ModalProps) {
       if (response) {
         setIsOpen(false);
       }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const errorResponse = error.response?.status;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const errorResponse = e.response?.status;
         if (errorResponse === 404) {
           setError('이메일을 다시 한번 확인해주세요');
         } else if (errorResponse === 403) {

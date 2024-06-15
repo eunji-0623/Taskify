@@ -117,7 +117,6 @@ function useSignUpForm() {
       localStorage.removeItem('Token');
 
       setIsModalOpen(true); // 성공 시 모달 창 띄우기
-      navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
     } catch (error) {
       setIsErrorModalOpen(true);
     } finally {

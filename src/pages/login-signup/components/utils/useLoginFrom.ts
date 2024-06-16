@@ -16,6 +16,7 @@ interface LoginFormInputs {
   password: string;
   passwordCheck: string;
 }
+
 function useLoginForm() {
   // Input value 값 상태 관리
   const [values, setValues] = useState<LoginFormInputs>({
@@ -37,6 +38,7 @@ function useLoginForm() {
     setIsModalOpen(false);
   };
 
+  // 로그인 버튼 클릭 시 실행
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true); // 로그인 시도 중에는 버튼 비활성화
@@ -48,6 +50,8 @@ function useLoginForm() {
       const response = await apiLoginRequest({ email, password });
       setUser(response.user ?? null);
       navigate('/mydashboard'); // 로그인 성공 시 mydashboard 페이지로 이동
+
+      // 페이지 새로고침
       window.location.reload();
     } catch (error) {
       setIsModalOpen(true); // 로그인 실패 시 모달 창 띄우기

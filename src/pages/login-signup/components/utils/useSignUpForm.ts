@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../../contexts/UserContext';
 import { apiSignUp } from '../../../../api/apiModule';
-import defaultProfileImgMaker from '../../../../utils/defaultProfileImgMaker';
 
 // 회원가입 폼 제출 기능을 수행하는 함수입니다.
 // useNavigate를 사용하여 폼 제출 시 다른 페이지로 이동하도록 구현했습니다.
@@ -43,8 +43,19 @@ function useSignUpForm() {
   // 변경 성공 시 모달을 닫으면 자동으로 로그인 페이지로 이동
   const closeSuccessModalAndReload = () => {
     setIsModalOpen(false);
+    setValues({
+      email: '',
+      nickname: '',
+      password: '',
+      passwordCheck: '',
+    }); // 폼 값을 초기화
     navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
   };
+
+  const userContext = useContext(UserContext);
+  if (!userContext) {
+    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
+  }
 
   // 회원가입 폼 제출
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -56,9 +67,6 @@ function useSignUpForm() {
 
     try {
       await apiSignUp({ email, nickname, password }); // 회원가입 API 호출
-
-      defaultProfileImgMaker({ name: nickname }); // 프로필 이미지 생성
-
       setIsModalOpen(true); // 성공 시 모달 창 띄우기
     } catch (error) {
       setIsErrorModalOpen(true);

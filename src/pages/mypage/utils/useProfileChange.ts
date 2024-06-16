@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
 import { apiEditMyInfo, apiUploadImage } from '../../../api/apiModule';
-import defaultProfileImg from '../../../../public/img/test_img.png';
+import defaultProfileImg from '../../../../public/img/Avatar.png';
 
 // 닉네임과 프로필을 변경하는 함수입니다.
 // 닉네임은 기존 값을 먼저 보여주며, 변경하고 변경 버튼을 누르면 닉네임이 변경됩니다.
@@ -64,6 +64,15 @@ function useProfileChange() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      setProfileImage(file);
+
+      // 파일 형식 검사
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
+      if (!validImageTypes.includes(file.type)) {
+        // alert('Unsupported file type. Only JPEG, PNG, and SVG are allowed.');
+        return;
+      }
+
       setProfileImage(file);
 
       // URL.createObjectURL을 사용하여 새로운 이미지 URL 생성

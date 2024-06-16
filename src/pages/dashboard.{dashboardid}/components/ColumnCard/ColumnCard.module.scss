@@ -39,7 +39,7 @@
     height: 5.813rem;
     padding-left: 0;
     grid-template-areas:
-      'img  title title title'
+      'img  title title avatar'
       'img  tag   date  avatar';
     grid-template-columns: auto auto 1fr auto;
     grid-template-rows: auto;
@@ -106,5 +106,8 @@
 
 .avatar {
   grid-area: avatar;
+  display: flex;
+  justify-content: center;
+  align-items: end;
   margin-left: auto;
 }

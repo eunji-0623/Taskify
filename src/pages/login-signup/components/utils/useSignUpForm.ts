@@ -29,6 +29,7 @@ function useSignUpForm() {
 
   // 이외의 상태 관리
   const [loading, setLoading] = useState(false);
+  const [, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -60,19 +61,16 @@ function useSignUpForm() {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true); // 회원가입 시도 중에는 버튼 비활성화
+    setError(null);
 
     const { email, nickname, password } = values;
 
     try {
-      await apiSignUp({
-        email,
-        nickname,
-        password,
-      }); // 회원가입 API 호출
-
+      await apiSignUp({ email, nickname, password }); // 회원가입 API 호출
       setIsModalOpen(true); // 성공 시 모달 창 띄우기
     } catch (error) {
       setIsErrorModalOpen(true);
+      setError('중복된 이메일입니다.');
     } finally {
       setLoading(false); // 회원가입 시도가 끝나면 버튼 활성화
     }

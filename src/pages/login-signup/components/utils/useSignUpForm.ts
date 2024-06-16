@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../../../contexts/UserContext';
 import { apiSignUp } from '../../../../api/apiModule';
 
 // 회원가입 폼 제출 기능을 수행하는 함수입니다.
@@ -50,11 +49,6 @@ function useSignUpForm() {
     }); // 폼 값을 초기화
     navigate('/login'); // 회원가입 성공 시 로그인 페이지로 이동
   };
-
-  const userContext = useContext(UserContext);
-  if (!userContext) {
-    throw new Error('반드시 DashboardProvider 안에서 사용해야 합니다.');
-  }
 
   // 회원가입 폼 제출
   const handleSubmit = async (e: { preventDefault: () => void }) => {

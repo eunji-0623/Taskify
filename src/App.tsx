@@ -22,8 +22,6 @@ function AppLayout() {
       <Route path="/dashboard/:id/edit" element={<DashboardEdit />} />
       <Route path="/dashboard/:id" element={<DashboardForId />} />
       <Route path="/mypage" element={<MyPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -34,6 +32,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route
           path="/*"
           element={(
